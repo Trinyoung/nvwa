@@ -67,7 +67,6 @@
           </div>
         </div>
     </form>
-  <!-- </div> -->
 </template>
 <style scoped>
 .loginForm {
