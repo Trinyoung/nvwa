@@ -25,6 +25,9 @@ export default {
   width: 100%;
   position: absolute;
 }
+body {
+  font-size: .975rem;
+}
 * {
   margin: 0;
   padding: 0;

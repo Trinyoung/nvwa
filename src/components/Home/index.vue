@@ -2,10 +2,10 @@
   <div>
       <v-header></v-header>
       <div class="container-fluid">
-    <div class="row">
-        <v-broadside></v-broadside>
-        <v-main></v-main>
-    </div>
+        <div class="row">
+            <v-broadside></v-broadside>
+            <v-main></v-main>
+        </div>
       </div>
   </div>
 </template>
@@ -20,8 +20,11 @@ export default {
     'v-main': main
   }
 }
-</script>>
+</script>
 <style scoped>
+body {
+  font-size: .875rem;
+}
 .bd-placeholder-img {
       font-size: 1.125rem;
       text-anchor: middle;
