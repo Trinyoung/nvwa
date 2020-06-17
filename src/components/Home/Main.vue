@@ -1,6 +1,7 @@
 <template>
-     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" id="main-content">
-        <!-- <h2>Section title</h2>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" id="main-content">
+    <v-editor></v-editor>
+    <!-- <h2>Section title</h2>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
                 <thead>
@@ -127,14 +128,23 @@
                 </tr>
                 </tbody>
             </table>
-        </div> -->
-        <div class="content">
-
-        </div>
-    </main>
+    </div>-->
+    <div class="content"></div>
+  </main>
 </template>
+<script>
+import { quillEditor } from 'vue-quill-editor'
+import {mavonEditor} from 'mavon-editor'
+export default {
+  components: {
+    'v-editor': mavonEditor
+  }
+  //   data: function () {}
+}
+</script>
 <style scoped>
 #main-content {
-    border: 1px solid green;
+  border: 1px solid red;
+  background: rosybrown;
 }
 </style>

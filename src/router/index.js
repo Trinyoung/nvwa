@@ -4,7 +4,10 @@ import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Home from '@/components/Home'
-
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+import 'mavon-editor/dist/css/index.css'
 Vue.use(Router)
 
 export default new Router({
