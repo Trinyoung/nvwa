@@ -5,6 +5,7 @@
         <div class="row">
             <v-broadside></v-broadside>
             <v-main></v-main>
+            <v-rightside></v-rightside>
         </div>
       </div>
   </div>
@@ -13,13 +14,15 @@
 import header from './Header'
 import broadside from './Broadside'
 import main from './Main'
+import rightSide from './rightside'
 // import header2 from './Header2'
 // import header3 from './Header3'
 export default {
   components: {
     'v-header': header,
     'v-broadside': broadside,
-    'v-main': main
+    'v-main': main,
+    'v-rightside': rightSide
   }
 }
 </script>
