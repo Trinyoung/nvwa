@@ -1,19 +1,16 @@
 <template>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Trinyoung</a>
+        <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Company name</a>
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
         data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2 form-control-dark" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
         <div class="dropdown navbar-nav px-3">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Dropdown
             </button>
-            <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
+            <div class="dropdown-menu" id= 'dropdownMenu2' aria-labelledby="dropdown02">
               <a class="dropdown-item" href="#">Setting</a>
               <a class="dropdown-item" href="#">Sign Out</a>
             </div>
@@ -27,7 +24,7 @@
   height: calc(100vh - 48px);
   padding-top: 0.5rem;
   overflow-x: hidden;
-  overflow-y: auto;/* Scrollable contents if viewport is shorter than content. */
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
 
 @supports ((position: -webkit-sticky) or (position: sticky)) {
@@ -79,6 +76,7 @@
   border-width: 0;
   border-radius: 0;
 }
+
 .form-control-dark {
   color: #fff;
   background-color: rgba(255, 255, 255, 0.1);

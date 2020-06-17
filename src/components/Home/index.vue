@@ -1,6 +1,6 @@
 <template>
   <div>
-      <v-header2></v-header2>
+      <v-header></v-header>
       <div class="container-fluid">
         <div class="row">
             <v-broadside></v-broadside>
@@ -13,13 +13,13 @@
 import header from './Header'
 import broadside from './Broadside'
 import main from './Main'
-import header2 from './Header2'
+// import header2 from './Header2'
+// import header3 from './Header3'
 export default {
   components: {
     'v-header': header,
     'v-broadside': broadside,
-    'v-main': main,
-    'v-header2': header2
+    'v-main': main
   }
 }
 </script>

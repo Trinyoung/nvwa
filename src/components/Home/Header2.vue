@@ -17,26 +17,28 @@
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <!-- <form class="form-inline my-2 my-lg-0">
+          <div>
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+          </div>
+        </form> -->
         <div class="dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown02">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+            <!-- <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a> -->
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </button>
+            <div class="dropdown-menu" id= 'dropdownMenu2' aria-labelledby="dropdown02">
+              <a class="dropdown-item" href="#">Setting</a>
+              <a class="dropdown-item" href="#">Sign Out</a>
             </div>
         </div>
       </div>
     </nav>
 </template>
 <style scoped>
-    .setControl {
-        width: 4rem;
-        background: cadetblue;
-        border: 1px solid green;
-        height: 50px;
-    }
+#dropdownMenu2 {
+  right: 0!important;
+  left: auto;
+}
 </style>
