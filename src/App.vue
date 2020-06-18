@@ -27,6 +27,7 @@ export default {
 }
 body {
   font-size: .975rem;
+  height: 100%;
 }
 * {
   margin: 0;
