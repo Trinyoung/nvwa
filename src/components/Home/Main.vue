@@ -63,9 +63,4 @@ export default {
 .titleInput {
   height: inherit!important;
 }
-.sidebar-row {
-  /* b
-  order: 1px solid green; */
-}
-
 </style>
