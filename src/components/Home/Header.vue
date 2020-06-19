@@ -7,9 +7,8 @@
         </button>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2 form-control-dark" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>
-        <div class="dropdown navbar-nav px-3">
+        <div class="dropdown navbar-nav">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Dropdown
             </button>
@@ -91,7 +90,6 @@
 }
 #dropdownMenu2 {
     position: absolute;
-    /* z-index: 100000; */
     right: 0!important;
     left: auto;
 }
