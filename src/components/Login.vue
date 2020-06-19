@@ -1,30 +1,6 @@
 <template>
   <!-- <div class="container"> -->
     <form class="loginForm">
-        <!-- <table class="loginTable">
-            <tbody>
-            <tr>
-              <th colSpan="2" class="loginHead"><span>LOGIN</span></th>
-            </tr>
-            <tr>
-              <td><label class="labeltitle">Account</label></td>
-              <td><input class='form-control inputType' type="username" placeholder="Enter account" /></td>
-            </tr>
-            <tr>
-              <td><label class="labeltitle">Password</label></td>
-              <td><input class="form-control inputType" type="password" placeholder="Password" /></td>
-            </tr>
-            <tr>
-              <td colSpan="2"><input type="checkbox" label="rememer password" /> 记住我</td>
-            </tr>
-            <tr>
-              <td class="formBottom" colSpan="2">
-                <Button  type='submit' class='button-left btn-primary btn' >Login</Button>
-                <Button  type="button" class="button-right btn-primary btn">Register</Button>
-              </td>
-            </tr>
-          </tbody>
-        </table> -->
         <div class="container">
           <div class="form-group row loginHead">
             <div class="col-sm-12"><span class="loginTitle">LOGIN</span></div>
@@ -65,6 +41,19 @@
         </div>
     </form>
 </template>
+<script>
+import axios from 'axios'
+export default {
+  data: function () {
+
+  },
+  methods: {
+    login: function (username, password) {
+      axios.post('/')
+    }
+  }
+}
+</script>>
 <style scoped>
 .loginForm {
   background-color: white;
