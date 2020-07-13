@@ -33,7 +33,9 @@
               <Button type='submit' class='button-left btn-primary btn line-input-button' >Login</Button>
             </div>
             <div class="col-sm-4">
-              <Button  type="submit" class="button-right btn-primary btn line-input-button">Register</Button>
+              <router-link to="/register">
+                <Button  type="submit" class="button-right btn-primary btn line-input-button">Register</Button>
+              </router-link>
             </div>
               <div class="col-sm-2">
             </div>

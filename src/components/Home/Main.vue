@@ -27,11 +27,8 @@ export default {
   },
   data: function () {
     return {
-      isMarkdown: false
+      isMarkdown: true
     }
-  },
-  mounted: function () {
-
   }
 }
 </script>
