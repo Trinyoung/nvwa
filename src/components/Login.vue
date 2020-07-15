@@ -7,19 +7,19 @@
           </div>
           <div class="form-group row">
             <div class="col-md-3 col-sm-0"><label for="username" class="line-text-middle labeltitle">Account</label></div>
-            <div class="col-md-9 col-sm-12"><input class='form-control line-input-middle' type="text" id="username" placeholder="Enter account" /></div>
+            <div class="col-md-9 col-sm-12"><input class='form-control line-input-middle' type="text" id="username" v-model="username" placeholder="Enter account" /></div>
           </div>
           <div class="row form-group">
             <div class="col-md-3 col-sm-0"><label for="password" class="line-text-middle labeltitle">password</label></div>
             <div class="col-md-9 col-sm-12">
-              <input class='form-control line-input-middle' type="password" id="password" placeholder="Enter password" />
+              <input class='form-control line-input-middle' type="password" id="password" v-model="password" placeholder="Enter password" />
             </div>
           </div>
           <div class="row form-group">
             <div class="col-sm-3"></div>
             <div class='col-sm-6'>
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="">remember me</label>
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" v-model="rememberMe">
+              <label class="form-check-label" for="exampleCheck1">remember me</label>
             </div>
             <div class="col-sm-3">
             </div>
@@ -30,7 +30,7 @@
 
             </div>
             <div class="col-sm-4">
-              <Button type='submit' class='button-left btn-primary btn line-input-button' >Login</Button>
+              <Button type='submit' class='button-left btn-primary btn line-input-button' v-on:click="login">Login</Button>
             </div>
             <div class="col-sm-4">
               <router-link to="/register">
@@ -44,14 +44,31 @@
     </form>
 </template>
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 export default {
-  data: function () {
+  computed: {
 
   },
+  data: function () {
+    return {
+      username: '',
+      password: '',
+      rememberMe: ''
+    }
+  },
   methods: {
-    login: function (username, password) {
-      axios.post('/')
+    login: function () {
+      console.log(this.username, this.password, this.rememberMe)
+      // console.log(username, password, '------------>')
+      console.log(this.$route.params.username, '---------->')
+      this.$router.push('/home')
+      // this.$router.go('/home')
+      // axios.post('/api/user/login', {
+      //   username,
+      //   password
+      // }).then(function (result) {
+      //   return this.$router
+      // })
     }
   }
 }
