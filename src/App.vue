@@ -19,7 +19,7 @@ export default {
   color: #2c3e50;
   /* margin-top: auto; */
   margin: auto;
-  background: darkturquoise;
+  /* background: darkturquoise; */
   /* height: 1100px; */
   height: 100%;
   width: 100%;

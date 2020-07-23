@@ -2,18 +2,20 @@
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" id="main-content">
     <div class="editor-container container-fluid">
       <div class="row">
-        <div class="col-md-1 col-lg-1 col-sm-0 sidebar-row"></div>
-        <div class="col-md-10 col-lg-10 col-sm-12 titileInput">
+        <!-- <div class="col-md-1 col-lg-1 col-sm-0 sidebar-row"></div> -->
+        <div class="col-md-12 col-lg-12 col-sm-12 titileInput">
           <input type="text" class='form-control' id="#title" name="title">
         </div>
       </div>
       <div class="row row-container">
-        <div class="col-md-1 col-lg-1 col-sm-0 sidebar-row"></div>
-        <div class="col-md-10 col-lg-10 col-sm-12 content-container">
-          <v-markdownEditor v-if="isMarkdown" class='mavonEditor'></v-markdownEditor>
+        <!-- <div class="col-md-1 col-lg-1 col-sm-0 sidebar-row"></div> -->
+        <div class="col-md-12 col-lg-12 col-sm-12 content-container">
+          <v-markdownEditor v-if="isMarkdown" class='mavonEditor' v-model="content" @save="saveMavon"
+          ></v-markdownEditor>
           <v-editor v-if="!isMarkdown" class="quillEditor"></v-editor>
         </div>
       </div>
+      <button class="btn primary" @click="publish">publish</button>
     </div>
   </main>
 </template>
@@ -27,7 +29,22 @@ export default {
   },
   data: function () {
     return {
-      isMarkdown: true
+      isMarkdown: true,
+      content: '## 我们不一样' + '好样的'
+    }
+  },
+  methods: {
+    submit: function () {
+      console.log('submit')
+    },
+    publish: function () {
+      console.log(this.content, '------->')
+      console.log(this.html)
+      console.log('publish')
+    },
+    saveMavon: function (value, render) {
+      console.log(value)
+      console.log(render)
     }
   }
 }

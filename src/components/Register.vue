@@ -8,15 +8,16 @@
       </div>
       <div class="form-group row">
         <div class="col-sm-4">
-          <label for="username" class="line-text-middle labeltitle">Email</label>
+          <label for="email" class="line-text-middle labeltitle">Email</label>
           <span>*</span>
         </div>
         <div class="col-sm-7">
           <input
             class="form-control line-input-middle"
             type="text"
-            id="username"
+            id="email"
             placeholder="Enter email"
+            v-model="userInfo.email"
           />
         </div>
         <div class="col-sm-1"></div>
@@ -30,7 +31,8 @@
           <input
             class="form-control line-input-middle"
             type="text"
-            id="username"
+            v-model="userInfo.phone"
+            id="phone"
             placeholder="Enter Your Phone"
           />
         </div>
@@ -46,6 +48,7 @@
             class="form-control line-input-middle"
             type="text"
             id="username"
+            v-model="userInfo.username"
             placeholder="Enter account"
           />
         </div>
@@ -60,7 +63,8 @@
           <input
             class="form-control line-input-middle"
             type="text"
-            id="username"
+            v-model="userInfo.realname"
+            id="realname"
             placeholder="Enter real name"
           />
         </div>
@@ -75,6 +79,7 @@
           <input
             class="form-control line-input-middle"
             type="password"
+            v-model="userInfo.password"
             id="password"
             placeholder="Enter password"
           />
@@ -100,21 +105,22 @@
           <label for="username" class="labeltitle text-font">gender</label>
         </div>
         <div class="col-sm-3">
-          <input type="radio" name="gender" /> male
+          <input type="radio" name="gender" v-model="userInfo.gender"/> male
         </div>
         <div class="col-sm-3">
-          <input type="radio" name="gender" /> female
+          <input type="radio" name="gender" v-model="userInfo.gender"/> female
         </div>
       </div>
       <div class="row form-group">
         <div class="col-sm-4">
-          <label for="password" class="line-text-middle labeltitle">Job</label>
+          <label for="job" class="line-text-middle labeltitle">Job</label>
         </div>
         <div class="col-sm-7">
           <input
             class="form-control line-input-middle"
-            type="password"
-            id="password"
+            type="text"
+            id="job"
+            v-model="userInfo.job"
             placeholder="Enter Your Job"
           />
         </div>
@@ -122,7 +128,7 @@
       <div class="row form-group">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-          <Button type="submit" class="button-right btn-primary btn line-input-button">Register</Button>
+          <Button type="submit" class="button-right btn-primary btn line-input-button" @click="register">Register</Button>
         </div>
         <div class="col-sm-3"></div>
       </div>
@@ -135,19 +141,21 @@ import axios from 'axios'
 export default {
   data: function () {
     return {
-      email: '',
-      phone: '',
-      username: '',
-      birthday: '',
-      gender: 0,
-      password: '',
-      confirmPassword: ''
+      userInfo: {
+        email: '',
+        phone: '',
+        username: '',
+        realName: '',
+        birthday: '',
+        gender: 0,
+        password: '',
+        confirmPassword: ''
+      }
     }
   },
   methods: {
     register: function () {
-      // if ($data.email){}
-      const userInfo = this.data
+      const userInfo = this.userInfo
       if (!userInfo.username) {
         alert('缺少用户名')
         return
@@ -172,12 +180,16 @@ export default {
         return
       }
 
-      if (userInfo.phone) {
+      if (!userInfo.phone) {
         alert('请填写手机号码')
         return
       }
-      axios.post('localhost:3000/api/user/register', userInfo).then((result) => {
-        window.location('/')
+      axios.post('/api/user/register', userInfo).then((result) => {
+        console.log(result, 'result+++++++++++>')
+        if (result.code !== '000') {
+          alert('注册失败，请填写正确的注册信息！')
+        }
+        return this.$router.push('/login')
       })
     }
   }
@@ -185,13 +197,13 @@ export default {
 </script>>
 <style scoped>
 .loginForm {
-  background-color: white;
+  /* background-color: white; */
   border-radius: 0.5rem;
   margin: auto;
-  top: 50%;
+  /* top: 50%; */
   position: relative;
   width: 40rem;
-  margin-top: -20rem;
+  /* margin-top: -20rem; */
   padding-bottom: 2rem;
 }
 

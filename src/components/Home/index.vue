@@ -13,7 +13,7 @@
 <script>
 import header from './Header'
 import broadside from './Broadside'
-import main from './Main'
+import editor from './editor'
 import rightSide from './rightside'
 // import header2 from './Header2'
 // import header3 from './Header3'
@@ -21,7 +21,7 @@ export default {
   components: {
     'v-header': header,
     'v-broadside': broadside,
-    'v-main': main,
+    'v-main': editor,
     'v-rightside': rightSide
   }
 }
