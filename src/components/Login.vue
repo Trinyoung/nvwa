@@ -44,7 +44,7 @@
     </form>
 </template>
 <script>
-// import axios from 'axios'
+import axios from 'axios'
 export default {
   computed: {
 
@@ -58,17 +58,14 @@ export default {
   },
   methods: {
     login: function () {
-      console.log(this.username, this.password, this.rememberMe)
-      // console.log(username, password, '------------>')
-      console.log(this.$route.params.username, '---------->')
-      this.$router.push('/home')
-      // this.$router.go('/home')
-      // axios.post('/api/user/login', {
-      //   username,
-      //   password
-      // }).then(function (result) {
-      //   return this.$router
-      // })
+      axios.post('localhost:3000/api/user/login',
+        {username: this.username, password: this.password}
+      ).then(function (result) {
+        if (result.code !== '000') {
+          alert('登录失败, 请检查用户名和密码')
+        }
+        window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/home')
+      })
     }
   }
 }

@@ -2,11 +2,15 @@
   <div>
       <v-header></v-header>
       <div class="container-fluid">
-        <div class="row">
+        <div class="row" v-if="!home">
             <v-broadside></v-broadside>
             <v-main></v-main>
             <v-rightside></v-rightside>
         </div>
+        <div class="row" v-if="home">
+          <v-home></v-home>
+        </div>
+        <div></div>
       </div>
   </div>
 </template>
@@ -15,14 +19,28 @@ import header from './Header'
 import broadside from './Broadside'
 import main from './Main'
 import rightSide from './rightside'
+import home from './home'
+// import axios from 'axios'
 // import header2 from './Header2'
 // import header3 from './Header3'
 export default {
   components: {
     'v-header': header,
+    'v-home': home,
     'v-broadside': broadside,
     'v-main': main,
     'v-rightside': rightSide
+  },
+  data: function () {
+    return {
+      home: true,
+      category: ''
+    }
+  },
+  methods: {
+    getAticleTypes: function () {
+      this.home = false
+    }
   }
 }
 </script>
