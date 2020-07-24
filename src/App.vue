@@ -24,10 +24,14 @@ export default {
   height: 100%;
   width: 100%;
   position: absolute;
+  background: url('../static/暗夜背景.jpg') no-repeat;
+  background-repeat: no-repeat;
+  background-size:100% 100%;
 }
 body {
-  font-size: .975rem;
+  font-size: 0.95rem;
   height: 100%;
+  /* background-size: 100% 100%; */
 }
 * {
   margin: 0;

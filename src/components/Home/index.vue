@@ -1,12 +1,12 @@
 <template>
   <div>
     <v-header></v-header>
-    <div class="container">
+    <main role="main" class="container">
         <div class="row">
             <v-broadside class="col-md-3"></v-broadside>
             <v-main class="col-md-9"></v-main>
         </div>
-    </div>
+    </main>
   </div>
 </template>
 <script>
@@ -19,7 +19,13 @@ export default {
     'v-broadside': broadside,
     'v-main': main,
     'v-header': header
-    // 'v-bottom': bottom
   }
 }
 </script>
+<style scoped>
+  @media (min-width: 1600px) {
+    .main-container：{
+      width: 1500px;
+    }
+  }
+</style>
