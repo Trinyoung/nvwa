@@ -17,21 +17,17 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  /* margin-top: auto; */
   margin: auto;
   /* background: darkturquoise; */
   /* height: 1100px; */
   height: 100%;
   width: 100%;
   position: absolute;
-  background: url('../static/暗夜背景.jpg') no-repeat;
-  background-repeat: no-repeat;
-  background-size:100% 100%;
 }
 body {
   font-size: 0.95rem;
   height: 100%;
-  /* background-size: 100% 100%; */
+  background: url('../static/暗夜背景.jpg');
 }
 * {
   margin: 0;

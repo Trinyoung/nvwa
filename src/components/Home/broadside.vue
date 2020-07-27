@@ -77,9 +77,9 @@
           </router-link>
         </li>
       </ul>
-      <div class="broadside-bottom">
+      <!-- <div class="broadside-bottom">
 
-      </div>
+      </div> -->
     </nav>
   </div>
 </template>
