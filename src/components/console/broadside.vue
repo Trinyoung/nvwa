@@ -128,8 +128,12 @@ export default {
   list-style-type: none;
 }
 
-.broadside-bottom {
-  height: 2rem;
-}
-
+/* .broadside-bottom {
+  height: 5rem;
+} */
+/* .broadSide {
+  background: cadetblue;
+  border: 1px solid green;
+  height: 150px;
+} */
 </style>
