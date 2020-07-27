@@ -4,6 +4,7 @@ import Login from '@/components/Login'
 import Register from '@/components/Register'
 import editor from '@/components/Editor'
 import home from '@/components/Home'
+import console from '@/components/Console'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
@@ -36,6 +37,11 @@ export default new Router({
       path: '/editor',
       name: 'Editor',
       component: editor
+    },
+    {
+      path: '/console',
+      name: 'Console',
+      component: console
     }
   ]
 })

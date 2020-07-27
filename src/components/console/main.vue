@@ -1,7 +1,21 @@
 <template>
     <main role="main" class="container">
-      <!-- <div class="d-flex align-items-center p-3 my-3  bg-purple rounded shadow-sm"> -->
-        <ul class="nav justify-content-center d-flex align-items-center p-3 my-3  bg-purple rounded shadow-sm">
+      <div class="my-3">
+         <div class="row">
+           <div class="col-md-9">
+              <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="搜索" aria-label="Recipient's username" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary" id="basic-addon2">搜   索</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <button class="btn" id="add-button"> </button>
+          </div>
+        </div>
+      </div>
+      <ul class="nav justify-content-center d-flex align-items-center p-3 my-3  bg-purple rounded shadow-sm">
           <li class="nav-item">
             <a class="nav-link active item-title" href="#">文章</a>
           </li>
@@ -15,8 +29,6 @@
             <a class="nav-link item-title" href="#">相册</a>
           </li>
         </ul>
-      <!-- </div> -->
-
       <div class="my-3 p-3 bg-white rounded shadow-sm">
         <h6 class="border-bottom border-gray pb-2 mb-0 col-title">Recent updates</h6>
         <div class="media text-muted pt-3">
@@ -118,5 +130,12 @@ export default {
   .item-title {
     color: white;
     font-size: 1.1rem;
+  }
+  #search-input {
+    display: inline-block;
+  }
+
+  #add-button:hover {
+    background: ;
   }
 </style>
