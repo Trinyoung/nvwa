@@ -3,24 +3,22 @@
       <v-header></v-header>
       <div class="container-fluid">
         <div class="row">
-            <v-broadside></v-broadside>
-            <v-main></v-main>
-            <v-rightside></v-rightside>
+          <v-main></v-main>
         </div>
       </div>
   </div>
 </template>
 <script>
 import header from './Header'
-import broadside from './Broadside'
 import editor from './editor'
 import rightSide from './rightside'
+// import Broadside from './Broadside'
 export default {
   components: {
     'v-header': header,
-    'v-broadside': broadside,
     'v-main': editor,
     'v-rightside': rightSide
+    // 'v-broadside': Broadside
   }
 }
 </script>

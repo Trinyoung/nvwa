@@ -5,9 +5,6 @@
         data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2 form-control-dark" type="text" placeholder="Search" aria-label="Search">
-        </form>
         <div class="dropdown navbar-nav">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Dropdown

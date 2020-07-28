@@ -59,15 +59,6 @@
                     <router-link to="/">上传资源</router-link>
                   </li>
                 </ul>
-                <!-- <a class="dropdown-item" href="#">新建文章</a> -->
-                <!-- <a class="dropdown-item" href="#">日志</a>
-                <router-link >
-                  <span class="dropdown-item">新建文章 </span>
-                </router-link>
-                <router-link class="dropdown-item">系列</router-link>
-                <router-link class="dropdown-item">系列</router-link>
-                <router-link class="dropdown-item">系列</router-link>
-                <router-link class="dropdown-item">系列</router-link> -->
               </div>
           </div>
         </div>
