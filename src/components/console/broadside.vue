@@ -1,5 +1,5 @@
 <template>
-  <div class="broadSide">
+  <div class="broadSide my-3">
     <nav id="sidebarMenu" class="d-md-block sidebar collapse">
       <div class="avatar-head">
         <router-link to="/register">
@@ -127,13 +127,4 @@ export default {
 .list-info {
   list-style-type: none;
 }
-
-/* .broadside-bottom {
-  height: 5rem;
-} */
-/* .broadSide {
-  background: cadetblue;
-  border: 1px solid green;
-  height: 150px;
-} */
 </style>

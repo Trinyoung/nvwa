@@ -33,4 +33,7 @@ body {
   margin: 0;
   padding: 0;
 }
+.broadSide {
+  border-radius: 5px 5px 5px 5px;
+}
 </style>
