@@ -2,7 +2,7 @@
   <div class="broadSide my-3">
     <nav id="sidebarMenu" class="d-md-block sidebar collapse">
       <div class="avatar-head">
-        <router-link to="/register">
+        <router-link to="/console">
           <img class='avatar' src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
         </router-link>
         <p>Trinyoung</p>

@@ -41,7 +41,7 @@
               <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
                 <ul>
                   <li class="dropdown-item">
-                    <router-link to="/">新建文章</router-link>
+                    <router-link to="/editor">新建文章</router-link>
                   </li>
                   <li class="dropdown-item">
                     <router-link to="/">新建日志</router-link>
