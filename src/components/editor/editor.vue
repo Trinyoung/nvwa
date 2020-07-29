@@ -1,19 +1,21 @@
 <template>
     <div class="editor-container container col-md-9" id="main-content">
       <div class="row my-2">
-        <div class="col-md-10 col-lg-10 col-sm-10 titileInput">
+        <div class="col-md-11 col-lg-11 col-sm-11 titileInput">
           <div class="input-group flex-nowrap">
             <div class="input-group-prepend">
               <span class="input-group-text" id="addon-wrapping">标 题</span>
             </div>
             <input type="text" class="form-control" placeholder="请输入标题" aria-label="title" aria-describedby="addon-wrapping">
+            <div class="input-group-append">
+              <button class="btn btn-secondary">
+                添加副标题
+              </button>
+            </div>
           </div>
         </div>
-        <div class="col-md-2 col-lg-2 col-sm-2 article-setting">
-          <button class="btn btn-primary title-add" data-toggle="dropdown"  id="add-button">
-            +
-          </button>
-          <button class="btn btn-primary" data-toggle="dropdown" >
+        <div class="col-md-1 col-lg-1 col-sm-1 publish-col">
+          <button class="btn btn-primary publish-button">
             发布
           </button>
         </div>
@@ -26,7 +28,7 @@
         </div>
         <div class="col-md-1 right-side ">
           <div class="sidebar">
-            <div class="my-3 sidebar-item">
+            <div class="my-3 sidebar-item dropdown">
               <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-tags" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M3 2v4.586l7 7L14.586 9l-7-7H3zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2z"/>
                 <path fill-rule="evenodd" d="M5.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
@@ -153,8 +155,12 @@ export default {
 #add-button {
   font-weight: bold;
 }
-.article-setting {
-  background: gray;
+
+.publish-button {
+  width: 100%;
+}
+.publish-col {
+  background: #007bff;
   border-radius: 1rem;
 }
 </style>
