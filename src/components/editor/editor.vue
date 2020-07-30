@@ -28,28 +28,28 @@
         </div>
         <div class="col-md-1 right-side ">
           <div class="sidebar">
-            <div class="my-3 sidebar-item dropdown">
+            <!-- <div class="my-3 sidebar-item dropdown">
               <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-tags" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M3 2v4.586l7 7L14.586 9l-7-7H3zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2z"/>
                 <path fill-rule="evenodd" d="M5.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
                 <path d="M1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z"/>
               </svg>
-            </div>
-            <div class="my-3 sidebar-item dropdown navbar-nav">
-              <!-- <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+            </div> -->
+            <div class="my-3 tag-item">
+              <div>
                 <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-tags dropdown-toggle"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M3 2v4.586l7 7L14.586 9l-7-7H3zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2z"/>
                   <path fill-rule="evenodd" d="M5.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
                   <path d="M1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z"/>
                 </svg>
-              <!-- </button> -->
-              <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
-                <a class="dropdown-item" href="#">Setting</a>
-                <a class="dropdown-item" href="#">Sign Out</a>
+                <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
+                  <a class="dropdown-item" href="#">小说</a>
+                  <a class="dropdown-item" href="#">散文</a>
+                </div>
               </div>
             </div>
             <div class="my-3 sidebar-item">
-              <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-trash " fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                 <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
               </svg>
@@ -71,6 +71,28 @@
               </svg>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div id="reffer" class="col-md-10">
+          <input type="text" class="form-control">
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-primary publish-button">
+            文献引用
+          </button>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col-md-12">
+          <ul class="list-group list-group-container">
+            <li class="list-item">
+              <b>1.</b> <span>我们的人阿斯顿发生</span>
+            </li>
+            <li class="list-item">
+              <b>1.</b> <span>我们的人阿斯顿发生</span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -127,7 +149,7 @@ export default {
   height: 100%;
 }
 .row-container {
-  height: 90%;
+  height: 85%;
   padding-top: 0.1rem;
 }
 .titleInput {
@@ -159,6 +181,27 @@ export default {
   margin: 0 auto;
   cursor: pointer;
 }
+
+.tag-item {
+  background: wheat;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50% 50% 50% 50%;
+  margin: 0 auto;
+}
+#dropdownMenu2 {
+  left: 1.4rem!important;
+  top: 0.5rem!important;
+}
+
+#dropdownMenu2 :hover{
+  cursor: pointer;
+}
+
+.reffer-container {
+  background: cadetblue;
+}
+
 .bi {
   margin-top: 0.5rem;
 }
@@ -175,5 +218,16 @@ export default {
 .publish-col {
   background: #007bff;
   border-radius: 1rem;
+}
+
+.list-item {
+  position: relative;
+  display: block;
+  /* background:darkseagreen; */
+  padding: 0.2rem 1.25rem;
+  text-align: left;
+}
+.list-group-container {
+  background: lemonchiffon;
 }
 </style>
