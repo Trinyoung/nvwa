@@ -4,8 +4,8 @@
     <main role="main" class="container">
         <div class="row">
             <v-broadside class="col-md-2"></v-broadside>
-            <v-main class="col-md-8"></v-main>
-            <v-rightside class="col-md-2"></v-rightside>
+            <v-main class="col-md-9"></v-main>
+            <v-rightside class="col-md-1"></v-rightside>
         </div>
     </main>
   </div>

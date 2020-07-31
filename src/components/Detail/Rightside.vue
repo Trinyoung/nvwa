@@ -1,5 +1,5 @@
 <template>
-  <div class="broadSide my-3">
+  <div class="broadSide my-3 sticky">
   </div>
 </template>
 <script>
@@ -19,9 +19,7 @@ export default {
 }
 .broadSide {
   color: aliceblue;
-  background-image: url('../../../static/侧边栏背景.jpeg');
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-color: aliceblue;
 }
 .broadSide .text-muted {
   font-size: 1.1rem;

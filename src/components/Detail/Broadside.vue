@@ -100,9 +100,6 @@ export default {
 }
 .broadSide {
   color: aliceblue;
-  background-image: url('../../../static/侧边栏背景.jpeg');
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
 }
 .broadSide .text-muted {
   font-size: 1.1rem;
@@ -118,18 +115,17 @@ export default {
 
 #sidebarMenu {
   padding-top: 1rem;
+  background-image: url('../../../static/侧边栏背景.jpeg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: sticky;
+  border-radius: 1rem;
+  left: 0;
+  top: 0;
 }
 
 .list-info {
   list-style-type: none;
 }
 
-/* .broadside-bottom {
-  height: 5rem;
-} */
-/* .broadSide {
-  background: cadetblue;
-  border: 1px solid green;
-  height: 150px;
-} */
 </style>
