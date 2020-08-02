@@ -200,4 +200,7 @@ export default {
   #page-list {
     margin-top: 0.5rem;
   }
+  .pagination {
+    margin: 0 auto;
+  }
 </style>

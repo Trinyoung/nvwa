@@ -5,8 +5,7 @@
         data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <form class="form-inline my-2 my-lg-0">
-          <!-- <input class="form-control mr-sm-2 form-control-dark" type="text" placeholder="Search" aria-label="Search"> -->
+        <form class="form-inline my-lg-0">
           <div class="input-group mr-sm-2">
             <input type="text" class="form-control" id="search-input" placeholder="搜 索" >
             <div class="input-group-append">

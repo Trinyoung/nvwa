@@ -28,14 +28,10 @@
         </div>
         <div class="col-md-1 right-side ">
           <div class="sidebar">
-            <!-- <div class="my-3 sidebar-item dropdown">
-              <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-tags" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M3 2v4.586l7 7L14.586 9l-7-7H3zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2z"/>
-                <path fill-rule="evenodd" d="M5.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
-                <path d="M1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z"/>
-              </svg>
-            </div> -->
-            <div class="my-3 tag-item">
+            <div class="my-3 tag-item" title="Tooltip on right">
+              <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on right">
+  Tooltip on top
+</button>
               <div>
                 <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-tags dropdown-toggle"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M3 2v4.586l7 7L14.586 9l-7-7H3zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2z"/>
@@ -86,11 +82,11 @@
       <div class="row my-2">
         <div class="col-md-12">
           <ul class="list-group list-group-container">
-            <li class="list-item">
+            <li class="list-group-item">
               <b>1.</b> <span>我们的人阿斯顿发生</span>
             </li>
-            <li class="list-item">
-              <b>1.</b> <span>我们的人阿斯顿发生</span>
+            <li class="list-group-item">
+              <b>2.</b> <span>我们的人阿斯顿发生</span>
             </li>
           </ul>
         </div>
@@ -223,11 +219,16 @@ export default {
 .list-item {
   position: relative;
   display: block;
-  /* background:darkseagreen; */
   padding: 0.2rem 1.25rem;
   text-align: left;
 }
 .list-group-container {
   background: lemonchiffon;
+}
+.list-group-item {
+  border: none;
+  text-align: left;
+  padding: 0.4rem 0.75rem;
+  background: none;
 }
 </style>

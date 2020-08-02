@@ -8,10 +8,10 @@ import router from './router'
 // import $ from 'jquery'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min'
-// import 'bootstrap/dist/css/bootstrap-icons'
+import $ from 'jquery'
 
 Vue.config.productionTip = false
-
+$()
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
