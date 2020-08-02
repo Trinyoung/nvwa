@@ -120,10 +120,6 @@ export default {
   padding-top: 1rem;
 }
 
-#githubIcon {
-
-}
-
 .list-info {
   list-style-type: none;
 }
