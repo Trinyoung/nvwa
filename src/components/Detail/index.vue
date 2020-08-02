@@ -15,6 +15,10 @@ import header from './Header'
 import broadside from './Broadside'
 import main from './Content'
 import rightside from './Rightside'
+import $ from 'jquery'
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 export default {
   components: {
     'v-broadside': broadside,

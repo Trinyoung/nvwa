@@ -12,6 +12,10 @@
 import header from './Header'
 import editor from './editor'
 import rightSide from './rightside'
+import $ from 'jquery'
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 // import Broadside from './Broadside'
 export default {
   components: {
