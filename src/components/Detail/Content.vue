@@ -40,7 +40,6 @@
           </ul>
         </div>
         <div class="reffer-container pt-3">
-          <!-- <div class="border-gray border-bottom"> -->
           <h4 class="border-bottom border-gray pb-2 mb-0">评论 (10)</h4>
           <form class="my-2 border-bottom border-gray">
             <div class="form-row align-items-center">
