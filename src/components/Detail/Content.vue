@@ -1,6 +1,15 @@
 <template>
     <main role="main" class="container">
       <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <div class="row border-gray">
+          <div class="col-sm-5">
+            <b>上一篇：</b><a href="#">龙的传人</a>
+          </div>
+          <div class="col-sm-2"></div>
+          <div class="col-sm-5">
+            <b>下一篇：</b><a href="#">龙的传人</a>
+          </div>
+        </div>
         <h1 class="border-bottom border-gray pb-2 mb-0 col-title">大中国</h1>
         <div class="text-muted article-tip">
           <ul class="list-group list-group-horizontal">
@@ -14,7 +23,7 @@
             </li>
           </ul>
         </div>
-        <div class="content-container pt-3">
+        <div class="content-container pt-3 border-gray">
           <p class="media-body pb-3 mb-0 lh-125">
             我们的人阿斯顿发生，名字叫中国， 兄弟姐妹都很多， 景色也不错！阿斯顿发手动阀撒打发斯蒂芬撒地方手动阀撒打发斯蒂芬阿斯顿发送到撒打发斯蒂芬阿斯顿发阿法士大夫。
             <code>
@@ -63,6 +72,15 @@
           <p class="media-body pb-3 mb-0 lh-125">
             我们的人阿斯顿发生，名字叫中国， 兄弟姐妹都很多， 景色也不错！
           </p>
+        </div>
+        <div class="row border-gray">
+          <div class="col-sm-5">
+            <b>上一篇：</b><a href="#">龙的传人</a>
+          </div>
+          <div class="col-sm-2"></div>
+          <div class="col-sm-5">
+            <b>下一篇：</b><a href="#">龙的传人</a>
+          </div>
         </div>
         <div class="reffer-container pt-3">
           <h4 class="border-bottom border-gray pb-2 mb-0">文献引用</h4>
