@@ -13,9 +13,6 @@ import header from './Header'
 import editor from './editor'
 import rightSide from './rightside'
 import $ from 'jquery'
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
 // import Broadside from './Broadside'
 export default {
   components: {
@@ -23,6 +20,11 @@ export default {
     'v-main': editor,
     'v-rightside': rightSide
     // 'v-broadside': Broadside
+  },
+  created: function () {
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
   }
 }
 </script>
@@ -50,10 +52,6 @@ body {
   height: 16px;
   vertical-align: text-bottom;
 }
-
-/*
- * Sidebar
- */
 
 .sidebar {
   position: fixed;

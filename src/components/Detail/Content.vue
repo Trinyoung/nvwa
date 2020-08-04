@@ -27,6 +27,42 @@
           <p class="media-body pb-3 mb-0 lh-125">
             我们的人阿斯顿发生，名字叫中国， 兄弟姐妹都很多， 景色也不错！
           </p>
+          <p class="media-body pb-3 mb-0 lh-125">
+            我们的人阿斯顿发生，名字叫中国， 兄弟姐妹都很多， 景色也不错！阿斯顿发手动阀撒打发斯蒂芬撒地方手动阀撒打发斯蒂芬阿斯顿发送到撒打发斯蒂芬阿斯顿发阿法士大夫。
+            <code>
+              const green = 'a'
+            </code>
+
+            <br/>
+            家里盘着两条龙啊， 是长江与黄河！
+          </p>
+          <p class="media-body pb-3 mb-0 lh-125">
+            我们的人阿斯顿发生，名字叫中国， 兄弟姐妹都很多， 景色也不错！
+          </p>
+          <p class="media-body pb-3 mb-0 lh-125">
+            我们的人阿斯顿发生，名字叫中国， 兄弟姐妹都很多， 景色也不错！阿斯顿发手动阀撒打发斯蒂芬撒地方手动阀撒打发斯蒂芬阿斯顿发送到撒打发斯蒂芬阿斯顿发阿法士大夫。
+            <code>
+              const green = 'a'
+            </code>
+
+            <br/>
+            家里盘着两条龙啊， 是长江与黄河！
+          </p>
+          <p class="media-body pb-3 mb-0 lh-125">
+            我们的人阿斯顿发生，名字叫中国， 兄弟姐妹都很多， 景色也不错！
+          </p>
+          <p class="media-body pb-3 mb-0 lh-125">
+            我们的人阿斯顿发生，名字叫中国， 兄弟姐妹都很多， 景色也不错！阿斯顿发手动阀撒打发斯蒂芬撒地方手动阀撒打发斯蒂芬阿斯顿发送到撒打发斯蒂芬阿斯顿发阿法士大夫。
+            <code>
+              const green = 'a'
+            </code>
+
+            <br/>
+            家里盘着两条龙啊， 是长江与黄河！
+          </p>
+          <p class="media-body pb-3 mb-0 lh-125">
+            我们的人阿斯顿发生，名字叫中国， 兄弟姐妹都很多， 景色也不错！
+          </p>
         </div>
         <div class="reffer-container pt-3">
           <h4 class="border-bottom border-gray pb-2 mb-0">文献引用</h4>
@@ -39,57 +75,16 @@
             </li>
           </ul>
         </div>
-        <div class="reffer-container pt-3">
-          <h4 class="border-bottom border-gray pb-2 mb-0">评论 (10)</h4>
-          <form class="my-2 border-bottom border-gray">
-            <div class="form-row align-items-center">
-              <div class="col-sm-10 my-1">
-                <label class="sr-only" for="inlineFormInputName">Name</label>
-                <textarea type="text" class="form-control" id="inlineFormInputName" placeholder="添加评论"></textarea>
-              </div>
-              <div class="col-sm-2">
-                <button type="submit" class="btn btn-primary">提 交</button>
-              </div>
-            </div>
-          </form>
-          <ul class="list-group list-group-container">
-            <li class="list-group-item">
-              <div>
-                <b class="margin-auto">
-                  trinyoung
-                </b>
-                <span class="reply-container small">
-                  回复
-                </span>
-              </div>
-              <div class="comment-body">
-                <span>我们的人阿斯顿发生</span>
-              </div>
-              <div class="comment-bottom">
-                <span>2020-08-02</span>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div>
-                <b>
-                  trinyoung
-                </b>
-                <span class="reply-container"></span>
-              </div>
-              <div class="comment-body">
-                <span>我们的人阿斯顿发生</span>
-              </div>
-              <div class="comment-bottom">
-                <span>2020-08-02</span>
-              </div>
-            </li>
-          </ul>
-        </div>
+        <v-bottom></v-bottom>
       </div>
   </main>
 </template>
 <script>
+import Bottom from './Bottom'
 export default {
+  components: {
+    'v-bottom': Bottom
+  },
   data: function () {
     return {
       newestList: [],
@@ -138,16 +133,5 @@ export default {
   .list-group-item {
     border: none;
     padding: 0.35rem 0.25rem;
-  }
-  .reply-container {
-    margin-right: 0rem;
-  }
-  .comment-body {
-    margin-left: 1rem;
-  }
-  .comment-bottom {
-    margin-left: 1rem;
-    font-size: 0.8rem;
-    color: darkgrey;
   }
 </style>
