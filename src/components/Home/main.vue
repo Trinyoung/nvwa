@@ -3,6 +3,9 @@
       <!-- <div class="d-flex align-items-center p-3 my-3  bg-purple rounded shadow-sm"> -->
         <ul class="nav justify-content-center d-flex align-items-center p-3 my-3  bg-purple rounded shadow-sm">
           <li class="nav-item">
+            <a class="nav-link active item-title" href="#/home">首页</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link active item-title" href="#">文章</a>
           </li>
           <li class="nav-item">
