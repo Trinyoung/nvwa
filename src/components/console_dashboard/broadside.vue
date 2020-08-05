@@ -14,10 +14,18 @@
           <div id="githubIcon"></div>
         </router-link>
       </div>
-      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-        <span>常用标签</span>
-      </h6>
-
+      <div class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <strong class="d-inline-box">常用标签</strong>
+        <!-- <span class="inline-button">
+          +
+        </span> -->
+      </div>
+      <select name="tags" id="" class="selectpicker" placeholder="添加标签" data-live-search="true" multiple>
+        <option value="">angular</option>
+        <option value="">react</option>
+        <option value="">vue</option>
+        <option value="">js</option>
+      </select>
       <ul class="nav flex-column">
         <li class="nav-item">
           <router-link class="nav-link" to="#">
@@ -84,11 +92,15 @@
   </div>
 </template>
 <script>
+import $ from 'jquery'
 export default {
   data: function () {
     return {
       listItems: ['星辰大海', '人间百态', '车水马龙', '小桥流水', '大漠孤烟']
     }
+  },
+  mounted: function () {
+    $('.selectpicker').selectpicker()
   }
 }
 </script>
@@ -122,5 +134,17 @@ export default {
 
 .list-info {
   list-style-type: none;
+}
+.d-inline-box {
+  display: inline-block;
+  width: 85%;
+  text-align: left;
+}
+.inline-button {
+  display: inline-block;
+  background:darkgrey;
+  width: 15%;
+  color: aliceblue;
+  border-radius: 50%;
 }
 </style>
