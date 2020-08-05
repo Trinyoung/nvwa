@@ -1,6 +1,6 @@
 <template>
     <main role="main" class="container">
-      <ul class="nav justify-content-center d-flex align-items-center p-3 my-3  bg-purple rounded shadow-sm">
+      <ul class="nav justify-content-center d-flex align-items-center p-3 my-3  bg-purple rounded shadow-sm header">
           <li class="nav-item">
             <a class="nav-link active item-title" href="#">文章</a>
           </li>
@@ -85,19 +85,25 @@
         </div>
       </div>
       <nav aria-label="Page navigation example" id="page-list">
-        <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
           </li>
+          <!-- <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a> -->
           <li class="page-item"><a class="page-link" href="#">1</a></li>
           <li class="page-item"><a class="page-link" href="#">2</a></li>
           <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">4</a></li>
+          <li class="page-item"><a class="page-link" href="#">5</a></li>
+          <li class="page-item"><a class="page-link" href="#">6</a></li>
+          <li class="page-item"><a class="page-link" href="#">7</a></li>
+          <li class="page-item"><a class="page-link" href="#">8</a></li>
+          <li class="page-item"><a class="page-link" href="#">...</a></li>
+          <li class="page-item"><a class="page-link" href="#">10</a></li>
           <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
+            <a class="page-link" href="#"><span aria-hidden="true">&raquo;</span></a>
           </li>
         </ul>
       </nav>
@@ -128,7 +134,7 @@ export default {
   .col-title {
     text-align: left;
   }
-  .justify-content-center {
+  .header {
     /* background-image: image('../../static/首页标题栏.jpg'); */
     background-image: url('../../../static/首页标题栏.jpg');
     background-repeat: no-repeat;
@@ -154,5 +160,12 @@ export default {
   }
   .list-group-item {
     border: none
+  }
+  .row {
+    margin-left:0;
+    margin-right: 0;
+  }
+  .pagination {
+    width: 300px;
   }
 </style>
