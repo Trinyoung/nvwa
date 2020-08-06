@@ -184,7 +184,7 @@ export default {
         alert('请填写手机号码')
         return
       }
-      axios.post('/api/user/register', userInfo).then((result) => {
+      axios.post('http://trinyoung.com/api/user/register', userInfo).then((result) => {
         console.log(result, 'result+++++++++++>')
         if (result.code !== '000') {
           alert('注册失败，请填写正确的注册信息！')

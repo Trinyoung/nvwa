@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     login: function () {
-      axios.post('localhost:3000/api/user/login',
+      axios.post('http://trinyoung.com/api/user/login',
         {username: this.username, password: this.password}
       ).then(function (result) {
         if (result.code !== '000') {
