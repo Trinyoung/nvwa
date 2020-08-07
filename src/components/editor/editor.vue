@@ -6,7 +6,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="addon-wrapping">标 题</span>
             </div>
-            <input type="text" class="form-control" placeholder="请输入标题" aria-label="title" aria-describedby="addon-wrapping">
+            <input type="text" class="form-control" placeholder="请输入标题" v-model="title" aria-label="title" aria-describedby="addon-wrapping">
             <div class="input-group-append">
               <button class="btn btn-secondary">
                 添加副标题
@@ -22,8 +22,7 @@
       </div>
       <div class="row row-container">
         <div class="col-md-11 col-lg-11 col-sm-11 content-container">
-          <v-markdownEditor v-if="isMarkdown" class='mavonEditor' v-model="content" @save="saveMavon"
-          ></v-markdownEditor>
+          <v-markdownEditor v-if="isMarkdown" class='mavonEditor' v-model="content" @save="saveMavon"></v-markdownEditor>
           <v-editor v-if="!isMarkdown" class="quillEditor"></v-editor>
         </div>
         <div class="col-md-1 right-side ">
@@ -101,7 +100,11 @@ export default {
   data: function () {
     return {
       isMarkdown: true,
-      content: '## 我们不一样' + '好样的'
+      content: '## 我们不一样' + '好样的',
+      title: '',
+      subTitle: '',
+      tags: [],
+      reffers: []
     }
   },
   methods: {

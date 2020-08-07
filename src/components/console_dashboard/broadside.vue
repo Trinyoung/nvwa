@@ -10,9 +10,9 @@
           <li>文章数: 0</li>
           <li>浏览量：0</li>
         </ul>
-        <router-link>
-          <div id="githubIcon"></div>
-        </router-link>
+        <a href="#">
+
+        </a>
       </div>
       <div class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
         <strong class="d-inline-box">常用标签</strong>

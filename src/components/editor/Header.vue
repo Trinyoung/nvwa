@@ -3,8 +3,8 @@
         <!-- <img src="../../../static/女娲补天.jpg" alt="logo" col>
         <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">
           <img src="" alt="logo" class="logo-img">Trinyoung</a> -->
-        <div class="navbar-brand">
-          <img src="../../../static/女娲补天.jpg" alt="logo" class="logo-img"/>
+        <div class="navbar-brand col-md-3 col-lg-2 mr-0 px-3">
+          <!-- <img src="../../../static/女娲补天.jpg" alt="logo" class="logo-img"/> -->
           nvwa
         </div>
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
