@@ -1,7 +1,66 @@
 <template>
     <div class="editor-container container col-md-9" id="main-content">
+      <!-- <div class="row my-2"> -->
+      <div class="category-container my-3">
+        <form class="category-form my-1">
+          <div class="form-check-inline"> 分类：</div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="inlineCheckbox1" value="1" v-model="category" name="category">
+            <label class="form-check-label" for="inlineCheckbox1">日志</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="inlineCheckbox2" value="2" v-model="category" name="category">
+            <label class="form-check-label" for="inlineCheckbox2">文章</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="inlineCheckbox3" value="3" v-model="category" name="category">
+            <label class="form-check-label" for="inlineCheckbox3">连载</label>
+          </div>
+        </form>
+        <div class="type-container my-1" v-show="category==2">
+          主题：
+          <select name="tags" id="" class="selectpicker" title="添加标签" data-live-search="true">
+            <option value="">angular</option>
+            <option value="">react</option>
+            <option value="">vue</option>
+            <option value="">js</option>
+          </select>
+        </div>
+        <div class="type-container my-1">
+          标签：
+          <select name="tags" id="" class="selectpicker" title="添加标签" data-live-search="true">
+            <option value="">angular</option>
+            <option value="">react</option>
+            <option value="">vue</option>
+            <option value="">js</option>
+          </select>
+          <div class="tags-container">
+            <ul class="list-group list-group-horizontal">
+              <li class="list-group-item">
+                <span class="tag-icon">
+                  angular
+                </span>
+                <span> x</span>
+              </li>
+              <li class="list-group-item">
+                <span class="tag-icon">
+                  angular
+                </span>
+                <span> x</span>
+              </li>
+              <li class="list-group-item">
+                <span class="tag-icon">
+                  angular
+                </span>
+                <span> x</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
       <div class="row my-2">
-        <div class="col-md-11 col-lg-11 col-sm-11 titileInput">
+        <div class="col-md-10 col-lg-11 col-sm-10 titileInput">
           <div class="input-group flex-nowrap">
             <div class="input-group-prepend">
               <span class="input-group-text" id="addon-wrapping">标 题</span>
@@ -14,8 +73,8 @@
             </div>
           </div>
         </div>
-        <div class="col-md-1 col-lg-1 col-sm-1 publish-col">
-          <button class="btn btn-primary publish-button">
+        <div class="col-md-2 col-lg-1 col-sm-2 publish-col">
+          <button class="btn btn-primary publish-button" @click="publish">
             发布
           </button>
         </div>
@@ -25,7 +84,7 @@
           <v-markdownEditor v-if="isMarkdown" class='mavonEditor' v-model="content" @save="saveMavon"></v-markdownEditor>
           <v-editor v-if="!isMarkdown" class="quillEditor"></v-editor>
         </div>
-        <div class="col-md-1 right-side ">
+        <div class="col-md-1 right-side col-sm-0">
           <div class="sidebar">
             <div class="my-3 tag-item" title="Tooltip on right">
               <div data-toggle="tooltip" data-placement="right" title="标签">
@@ -92,17 +151,24 @@
 <script>
 import { quillEditor } from 'vue-quill-editor'
 import { mavonEditor } from 'mavon-editor'
+import axios from 'axios'
+import $ from 'jquery'
 export default {
   components: {
     'v-markdownEditor': mavonEditor,
     'v-editor': quillEditor
   },
+  mounted: function () {
+    $('.selectpicker').selectpicker()
+  },
   data: function () {
     return {
       isMarkdown: true,
       content: '## 我们不一样' + '好样的',
+      category: '1',
       title: '',
       subTitle: '',
+      render: '',
       tags: [],
       reffers: []
     }
@@ -112,13 +178,16 @@ export default {
       console.log('submit')
     },
     publish: function () {
-      console.log(this.content, '------->')
-      console.log(this.html)
-      console.log('publish')
+      this.render = $('.v-note-read-content').html()
+      console.log(this.$data, '------------>')
+      axios.post('http://localhost:3000/api/article', function (result) {
+        console.log(result, 'result---------------->')
+      })
+      // this.saveMavon()
     },
     saveMavon: function (value, render) {
-      console.log(value)
-      console.log(render)
+      this.render = render
+      this.content = value
     }
   }
 }
@@ -130,6 +199,37 @@ export default {
 .editor-container {
   height: 99.5%;
   margin-top: 0.5%;
+}
+.tag-icon {
+  background-color: greenyellow;
+  border-radius: 50% 0 0 50%;
+  padding-left: 30px;
+  padding-right: 15px;
+  font-size: 0.5rem;
+}
+.category-container {
+  background: sandybrown;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-radius: 1rem;
+  text-align: left;
+}
+.type-container {
+  text-align: left;
+  /* background: #007bff; */
+  border-radius: 1rem;
+}
+.circle {
+  border-radius: 50% 50% 50% 50%;
+  background: white;
+}
+.form-inline {
+  display: inline-block;
+}
+.form-check-inline {
+  height: 100%;
 }
 .v-note-wrapper {
   z-index: inherit;
