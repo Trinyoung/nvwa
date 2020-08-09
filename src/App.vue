@@ -27,7 +27,7 @@ export default {
 body {
   font-size: 0.95rem;
   height: 100%;
-  background: url('../static/暗夜背景.jpg');
+  background-color:turquoise;
 }
 * {
   margin: 0;

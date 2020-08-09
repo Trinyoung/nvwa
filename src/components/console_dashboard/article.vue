@@ -13,6 +13,9 @@
           <li class="nav-item">
             <a class="nav-link item-title" href="#">相册</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link item-title" href="#">标签</a>
+          </li>
       </ul>
       <div class="row">
           <div class="col-sm-0 col-md-3"></div>

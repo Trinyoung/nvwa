@@ -2,7 +2,7 @@
   <!-- <div class="container"> -->
     <form class="loginForm">
         <div class="container">
-          <div class="form-group row loginHead">
+          <div class="form-group row loginHead pd-3">
             <div class="col-sm-12"><span class="loginTitle">LOGIN</span></div>
           </div>
           <div class="form-group row">
@@ -18,7 +18,7 @@
           <div class="row form-group">
             <div class="col-sm-3"></div>
             <div class='col-sm-6'>
-              <input type="checkbox" class="form-check-input" id="exampleCheck1" v-model="rememberMe">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" v-model="rememberMe" value=true>
               <label class="form-check-label" for="exampleCheck1">remember me</label>
             </div>
             <div class="col-sm-3">
@@ -58,11 +58,13 @@ export default {
   },
   methods: {
     login: function () {
-      axios.post('http://trinyoung.com/api/user/login',
-        {username: this.username, password: this.password}
+      console.log(this.username, this.password, this.rememberMe, '信息的啥所发生的')
+      axios.post('http://localhost:3000/api/user/login',
+        {username: this.username, password: this.password, rememberMe: this.rememberMe}
       ).then(function (result) {
-        if (result.code !== '000') {
-          alert('登录失败, 请检查用户名和密码')
+        console.log(result, 'result -------------> result')
+        if (result.status !== 200 || result.data.code !== '000') {
+          return alert('登录失败, 请检查用户名和密码')
         }
         window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/home')
       })
@@ -77,7 +79,7 @@ export default {
   margin: auto;
   top: 50%;
   position: relative;
-  width: 25rem;
+  width: 30rem;
   margin-top: -10rem;
   padding-bottom: 0.5rem;
 }
@@ -92,14 +94,11 @@ export default {
   text-align: center;
   color: blue;
   background: wheat;
-  height: 2.5rem;
-  display: inline-box;
-  line-height: 100%;
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 .button-left {
   margin-right: 0.5rem;
   width: 6rem;
-  /* margin-bottom: 0.5rem; */
 }
 
 .button-right {
@@ -109,33 +108,28 @@ export default {
 }
 
 .line-text-middle {
-  display: inline-box;
+  display: inline-block;
   line-height: 2.5rem;
   height: 100%;
   font-size:1.1rem;
   font-weight: bold;
 }
 .line-input-middle {
-  display: inline-box;
-  line-height: 1.5rem;
+  display: inline-block;
+  line-height: 1.2rem;
   height: 100%;
   font-size:1.1rem;
-}
-
-.text-font {
-  font-size: 20px;
 }
 
 .loginTitle {
   font-size: 1.5rem;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  display: inline-box;
-  line-height: 2.5rem;
-  height: 100%;
+  display: inline-block;
+  line-height: 3.2rem;
 }
 
 .line-input-button {
-  display: inline-box;
+  display: inline-block;
   line-height: 1.5rem;
   height: 100%;
   font-size:1.2rem;

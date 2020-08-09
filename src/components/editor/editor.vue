@@ -1,6 +1,5 @@
 <template>
     <div class="editor-container container col-md-9" id="main-content">
-      <!-- <div class="row my-2"> -->
       <div class="category-container my-3">
         <form class="category-form my-1">
           <div class="form-check-inline"> 分类：</div>
@@ -180,7 +179,11 @@ export default {
     publish: function () {
       this.render = $('.v-note-read-content').html()
       console.log(this.$data, '------------>')
-      axios.post('http://localhost:3000/api/article', function (result) {
+      const {title, category, subTitle, render, tags, reffers} = this
+      const data = {
+        title, category, subTitle, render, tags, reffers
+      }
+      axios.post('http://localhost:3000/api/article', data, function (result) {
         console.log(result, 'result---------------->')
       })
       // this.saveMavon()

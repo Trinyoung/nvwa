@@ -12,7 +12,7 @@
 <script>
 import header from './Header'
 import broadside from './broadside'
-import main from './main'
+import main from './article'
 // import bottom from './bottom'
 export default {
   components: {
