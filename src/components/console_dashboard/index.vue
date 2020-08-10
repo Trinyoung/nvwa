@@ -7,18 +7,20 @@
             <v-main class="col-md-9"></v-main>
         </div>
     </main>
+    <v-bottom></v-bottom>
   </div>
 </template>
 <script>
 import header from './Header'
 import broadside from './broadside'
 import main from './article'
-// import bottom from './bottom'
+import bottom from '../bottom'
 export default {
   components: {
     'v-broadside': broadside,
     'v-main': main,
-    'v-header': header
+    'v-header': header,
+    'v-bottom': bottom
   }
 }
 </script>

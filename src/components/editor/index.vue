@@ -6,6 +6,7 @@
           <v-main></v-main>
         </div>
       </div>
+      <v-bottom></v-bottom>
   </div>
 </template>
 <script>
