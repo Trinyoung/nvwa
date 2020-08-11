@@ -2,10 +2,10 @@
   <div>
     <v-header></v-header>
     <main role="main" class="container">
-        <div class="row">
-            <v-broadside class="col-md-3"></v-broadside>
-            <v-main class="col-md-9"></v-main>
-        </div>
+      <div class="row">
+        <v-broadside class="col-md-2"></v-broadside>
+        <v-main class="col-md-10"></v-main>
+      </div>
     </main>
     <v-bottom></v-bottom>
   </div>

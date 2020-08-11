@@ -1,6 +1,6 @@
 <template>
     <main role="main" class="container">
-      <ul class="nav justify-content-center d-flex align-items-center p-3 my-3  bg-purple rounded shadow-sm header">
+      <ul class="nav justify-content-center d-flex align-items-center p-2 my-3 bg-primary rounded shadow-sm header">
           <li class="nav-item">
             <a class="nav-link active item-title" href="#">文章</a>
           </li>
@@ -10,27 +10,24 @@
           <li class="nav-item">
             <a class="nav-link item-title" href="#">连载</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link item-title" href="#">相册</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link item-title" href="#">标签</a>
-          </li>
       </ul>
-      <div class="row">
-          <div class="col-sm-0 col-md-3"></div>
-          <div class="col-md-6">
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="搜索" aria-label="Recipient's username" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" id="basic-addon2">
-                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
-                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-                  </svg>
-                </button>
-              </div>
+      <!-- <div class="row"> -->
+        <!-- <div class="col-sm-0 col-md-3">
+          <label for=""></label>
+          <select name="" id=""></select>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="搜索" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-primary" id="basic-addon2">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                  <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                </svg>
+              </button>
             </div>
+          </div>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-2">
@@ -64,16 +61,62 @@
                 </ul>
               </div>
           </div>
-        </div>
-      </div>
+        </div> -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <!-- <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button> -->
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <select name="" id="" class="selectpicker" multiple data-live-search="true" title="选择分类">
+                  <option value="">Angular</option>
+                  <option value="">Angular</option>
+                  <option value="">Angular</option>
+                  <option value="">Angular</option>
+                </select>
+              </li>
+              <li class="nav-item">
+                <select name="" id="" class="selectpicker" multiple data-live-search="true" title="选择标签">
+                  <option value="">Angular</option>
+                  <option value="">Angular</option>
+                  <option value="">Angular</option>
+                  <option value="">Angular</option>
+                </select>
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
+      <!-- </div> -->
       <div class="my-0 p-3 bg-white rounded shadow-sm" id="main-content">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="#">音乐</a>
+            </li>
+            <li class="breadcrumb-item"><a href="#">流行音乐</a></li>
+            <li class="breadcrumb-item active" aria-current="page">大中国</li>
+          </ol>
+        </nav>
         <div class="text-muted border-bottom border-gray row d-table">
-          <div class="media-body small col-sm-12 col-md-11 d-table-cell">
+          <div class="media-body small col-sm-11 col-md-11 d-table-cell">
             <strong class="text-gray-dark my-2 d-block">@username</strong>
             <p class="my-2">Donec id elit non mi porta asdfasdfasdfasf到发送到阿斯顿发送dfsgsdfgdsfgdsfgdsfg中文是个我们多看的代码撒打发斯蒂芬大法师的法师打发大水发撒地方撒发大水，到发送到gfsfgsfdgsdfgsdfgfgdsgsdfgdfgsdfgfsgfghdfghdgfhgsdfgsdfgsdfgdsfgdf发阿</p>
             <strong class="text-gray-dark d-block my-2">2020-08-05</strong>
           </div>
-          <div class="media-body d-table-cell col-sm-0">
+          <div class="media-body d-table-cell col-sm-1">
+            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bd-placeholder-img mr-2 rounded d-vertical-center" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+            </svg>
+          </div>
+          <div class="media-body d-table-cell col-sm-1">
             <svg width="2em" height="2em" viewBox="0 0 16 16" class="bd-placeholder-img mr-2 rounded d-vertical-center" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
               <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
@@ -100,6 +143,7 @@
             <a class="page-link" href="#"><span aria-hidden="true">&raquo;</span></a>
           </li>
         </ul>
+        共 10 页
       </nav>
   </main>
 </template>
@@ -129,10 +173,11 @@ export default {
     text-align: left;
   }
   .header {
+    /* margin-bottom: 0rem!important; */
     /* background-image: image('../../static/首页标题栏.jpg'); */
-    background-image: url('../../../static/首页标题栏.jpg');
+    /* background-image: url('../../../static/首页标题栏.jpg');
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: 100% 100%; */
     /* opacity: 0.5; */
   }
   .item-title {
