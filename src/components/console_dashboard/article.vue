@@ -103,6 +103,10 @@
             <li class="breadcrumb-item"><a href="#">流行音乐</a></li>
             <li class="breadcrumb-item active" aria-current="page">大中国</li>
           </ol>
+          <div class="date-picker">
+            <date-picker v-model="date" :config="options"></date-picker>
+            <date-picker v-model="date" :config="options"></date-picker>
+          </div>
         </nav>
         <div class="text-muted border-bottom border-gray row d-table">
           <div class="media-body small col-sm-11 col-md-11 d-table-cell">
@@ -148,11 +152,22 @@
   </main>
 </template>
 <script>
+// import 'bootstrap-datetimepicker/src/less/bootstrap-datetimepicker.less'
+import datePicker from 'vue-bootstrap-datetimepicker'
+import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
 export default {
+  components: {
+    datePicker
+  },
   data: function () {
     return {
       newestList: [],
-      hotList: []
+      hotList: [],
+      date: new Date(),
+      options: {
+        format: 'DD/MM/YYYY',
+        useCurrent: false
+      }
     }
   },
   methods: {
@@ -165,9 +180,13 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style scoped lang="less">
+
   .media-body {
     text-align: left;
+    // a {
+    //   color: red;
+    // }
   }
   .col-title {
     text-align: left;
