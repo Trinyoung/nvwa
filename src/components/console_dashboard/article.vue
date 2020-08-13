@@ -31,83 +31,88 @@
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-2">
-          <div class="dropdown">
-              <button class="btn btn-secondary" data-toggle="dropdown"  id="add-button">
-                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
-                  <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
-                </svg>
-              </button>
-              <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
-                <ul>
-                  <li class="dropdown-item">
-                    <router-link to="/editor">新建文章</router-link>
-                  </li>
-                  <li class="dropdown-item">
-                    <router-link to="/">新建日志</router-link>
-                  </li>
-                  <li class="dropdown-item">
-                    <router-link to="/">新建系列</router-link>
-                  </li>
-                  <li class="dropdown-item">
-                    <router-link to="/">新建相册</router-link>
-                  </li>
-                  <li class="dropdown-item">
-                    <router-link to="/">新建标签</router-link>
-                  </li>
-                  <li class="dropdown-item">
-                    <router-link to="/">上传资源</router-link>
-                  </li>
-                </ul>
-              </div>
-          </div>
         </div> -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <!-- <a class="navbar-brand" href="#">Navbar</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button> -->
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <select name="" id="" class="selectpicker" multiple data-live-search="true" title="选择分类">
-                  <option value="">Angular</option>
-                  <option value="">Angular</option>
-                  <option value="">Angular</option>
-                  <option value="">Angular</option>
-                </select>
-              </li>
-              <li class="nav-item">
-                <select name="" id="" class="selectpicker" multiple data-live-search="true" title="选择标签">
-                  <option value="">Angular</option>
-                  <option value="">Angular</option>
-                  <option value="">Angular</option>
-                  <option value="">Angular</option>
-                </select>
-              </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+      <form class="bg-white pd-2 form-container my-1 rounded">
+        <div class="form-row my-2">
+          <div class="col-3 form-inline border-gray">
+            <select name="" id="" class="selectpicker" multiple data-live-search="true" title="选择分类">
+              <option value="">Angular</option>
+              <option value="">Angular</option>
+              <option value="">Angular</option>
+              <option value="">Angular</option>
+            </select>
           </div>
-        </nav>
-      <!-- </div> -->
+          <div class="col-3 form-inline">
+            <select name="" id="" class="selectpicker" multiple data-live-search="true" title="选择标签">
+              <option value="">Angular</option>
+              <option value="">Angular</option>
+              <option value="">Angular</option>
+              <option value="">Angular</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row my-2">
+          <div class="col form-inline">
+            <date-picker v-model="date" :config="options"></date-picker>
+            <span id="split-icon" class="justify-center">至</span>
+            <date-picker v-model="date" :config="options"></date-picker>
+          </div>
+          <div class="col-5 form-inline justify-content-center">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </div>
+        </div>
+      </form>
       <div class="my-0 p-3 bg-white rounded shadow-sm" id="main-content">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="#">音乐</a>
-            </li>
-            <li class="breadcrumb-item"><a href="#">流行音乐</a></li>
-            <li class="breadcrumb-item active" aria-current="page">大中国</li>
-          </ol>
-          <div class="date-picker">
-            <date-picker v-model="date" :config="options"></date-picker>
-            <date-picker v-model="date" :config="options"></date-picker>
+        <div class="align-left ">
+          <nav aria-label="breadcrumb" class="d-inline-block type-level">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="#">音乐</a>
+              </li>
+              <li class="breadcrumb-item">
+                <!-- <a href="#">流行音乐</a> -->
+                <div class="dropdown">
+                  <a  data-toggle="dropdown"  id="add-button">
+                    流行音乐
+                  </a>
+
+                  <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
+                    <ul>
+                      <li class="dropdown-item">
+                        <router-link to="/editor">新建文章</router-link>
+                      </li>
+                      <li class="dropdown-item">
+                        <router-link to="/">新建日志</router-link>
+                      </li>
+                      <li class="dropdown-item">
+                        <router-link to="/">新建系列</router-link>
+                      </li>
+                      <li class="dropdown-item">
+                        <router-link to="/">新建相册</router-link>
+                      </li>
+                      <li class="dropdown-item">
+                        <router-link to="/">新建标签</router-link>
+                      </li>
+                      <li class="dropdown-item">
+                        <router-link to="/">上传资源</router-link>
+                      </li>
+                    </ul>
+                  </div>
+              </div>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">大中国</li>
+            </ol>
+          </nav>
+          <div class="d-inline-block">
+            <button class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="新建"  id="add-button">
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+              </svg>
+            </button>
           </div>
-        </nav>
+        </div>
         <div class="text-muted border-bottom border-gray row d-table">
           <div class="media-body small col-sm-11 col-md-11 d-table-cell">
             <strong class="text-gray-dark my-2 d-block">@username</strong>
@@ -155,6 +160,7 @@
 // import 'bootstrap-datetimepicker/src/less/bootstrap-datetimepicker.less'
 import datePicker from 'vue-bootstrap-datetimepicker'
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
+import $ from 'jquery'
 export default {
   components: {
     datePicker
@@ -165,10 +171,16 @@ export default {
       hotList: [],
       date: new Date(),
       options: {
-        format: 'DD/MM/YYYY',
+        format: 'YYYY-MM-DD HH:mm:ss',
         useCurrent: false
       }
     }
+  },
+  created: function () {
+    // $('#datetimepicker').datetimepicker('show')
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
   },
   methods: {
     getNewestList: function () {
@@ -180,15 +192,27 @@ export default {
   }
 }
 </script>
-<style scoped lang="less">
-
+<style scoped>
+  .type-level {
+    width: 90%;
+  }
+  #split-icon {
+    display: inline-block;
+    width: 30px;
+  }
+  .border-gray {
+    border:gray;
+  }
+  .form-container {
+    padding: 5px;
+  }
   .media-body {
     text-align: left;
-    // a {
-    //   color: red;
-    // }
   }
   .col-title {
+    text-align: left;
+  }
+  .align-left {
     text-align: left;
   }
   .header {
@@ -242,5 +266,8 @@ export default {
   }
   .d-inline-block {
     display: inline-block;
+  }
+  #add-button:hover {
+
   }
 </style>
