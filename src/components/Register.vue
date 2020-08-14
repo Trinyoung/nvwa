@@ -74,7 +74,7 @@
           <!-- <span class="line-text-middle labeltitle text-warning">*</span> -->
         </div>
       </div>
-      <div class="row form-group">
+      <div class="form-group row">
         <div class="col-sm-3 line-text-right">
           <label for="password" class="line-text-middle labeltitle">密码</label>
         </div>
@@ -134,6 +134,14 @@
         </div>
       </div>
       <div class="row form-group">
+        <div class="col-sm-3 line-text-right">
+          <label for="birthday" class="line-text-middle labeltitle">生日</label>
+        </div>
+        <div class="col-sm-7">
+          <date-picker v-model="userInfo.birthday" :config="options" id="birthday"></date-picker>
+        </div>
+      </div>
+      <div class="row form-group">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
           <Button type="submit" class="button-right btn-primary btn line-input-button" @click="register">注 册</Button>
@@ -145,7 +153,13 @@
 </template>
 <script>
 import axios from 'axios'
+import datePicker from 'vue-bootstrap-datetimepicker'
+import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
+import '@fortawesome/fontawesome-free/css/all.css'
 export default {
+  components: {
+    datePicker
+  },
   data: function () {
     return {
       userInfo: {
@@ -153,10 +167,15 @@ export default {
         mobile: '',
         username: '',
         realName: '',
-        birthday: '',
+        birthday: new Date(),
         gender: 0,
         password: '',
         confirmPassword: ''
+      },
+      options: {
+        format: 'YYYY-MM-DD',
+        useCurrent: false,
+        locale: 'zh-cn'
       }
     }
   },

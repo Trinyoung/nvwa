@@ -34,7 +34,7 @@
             </li>
           </ul>
         </div>
-        <div class="content-container pt-3 border-bottom border-gray">
+        <div class="content-container pt-3 ">
           <p class="media-body pb-3 mb-0 lh-125">
             我们的人阿斯顿发生，名字叫中国， 兄弟姐妹都很多， 景色也不错！阿斯顿发手动阀撒打发斯蒂芬撒地方手动阀撒打发斯蒂芬阿斯顿发送到撒打发斯蒂芬阿斯顿发阿法士大夫。
             <code>
@@ -83,6 +83,17 @@
           <p class="media-body pb-3 mb-0 lh-125">
             我们的人阿斯顿发生，名字叫中国， 兄弟姐妹都很多， 景色也不错！
           </p>
+        </div>
+        <div class="reffer-container pt-3">
+          <h4 class="border-bottom border-gray pb-2 mb-0">文献引用</h4>
+          <ul class="list-group list-group-container">
+            <li class="list-group-item">
+              <b>1.</b> <span>我们的人阿斯顿发生</span>
+            </li>
+            <li class="list-group-item">
+              <b>2.</b> <span>我们的人阿斯顿发生</span>
+            </li>
+          </ul>
         </div>
         <div class="row my-3">
           <div class="col-sm-4">
@@ -99,17 +110,6 @@
           <div class="col-sm-4">
             <b>下一篇：</b><a href="#">黄河大合唱</a>
           </div>
-        </div>
-        <div class="reffer-container pt-3">
-          <h4 class="border-bottom border-gray pb-2 mb-0">文献引用</h4>
-          <ul class="list-group list-group-container">
-            <li class="list-group-item">
-              <b>1.</b> <span>我们的人阿斯顿发生</span>
-            </li>
-            <li class="list-group-item">
-              <b>2.</b> <span>我们的人阿斯顿发生</span>
-            </li>
-          </ul>
         </div>
         <v-bottom></v-bottom>
       </div>

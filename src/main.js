@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min'
 import 'bootstrap-select/dist/css/bootstrap-select.min.css'
 import 'bootstrap-select/dist/js/bootstrap-select'
-import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
+
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({

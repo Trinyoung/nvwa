@@ -13,32 +13,37 @@
       </ul>
       <form class="bg-white pd-2 form-container my-1 rounded">
         <div class="form-row my-2">
-          <div class="col-3 form-inline">
-            <select name="" id="" class="selectpicker border border-dark"  data-live-search="true" title="选择分类">
-              <option value="">Angular</option>
-              <option value="">Angular</option>
-              <option value="">Angular</option>
-              <option value="">Angular</option>
-            </select>
+          <div class="col form-inline">
+            <strong> 起止日期：</strong>
+            <date-picker v-model="searchInfo.startDate" :config="options" @dp-hide="showDatePickResult"></date-picker>
+            <span id="split-icon" class="justify-center">至</span>
+            <date-picker v-model="searchInfo.endDate" :config="options"></date-picker>
           </div>
-          <div class="col-3 form-inline">
-            <select name="" id="" class="selectpicker" multiple data-live-search="true" title="选择标签">
-              <option value="">Angular</option>
-              <option value="">Angular</option>
-              <option value="">Angular</option>
-              <option value="">Angular</option>
-            </select>
+          <div class="col-4 form-inline">
+            <strong>发布状态：</strong>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value =0 v-model="searchInfo.published">
+              <label class="form-check-label" for="inlineCheckbox1">已发布</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value =1 v-model="searchInfo.published">
+              <label class="form-check-label" for="inlineCheckbox2">未发布</label>
+            </div>
           </div>
         </div>
         <div class="form-row my-2">
           <div class="col form-inline">
-            <date-picker v-model="date" :config="options"></date-picker>
-            <span id="split-icon" class="justify-center">至</span>
-            <date-picker v-model="date" :config="options"></date-picker>
+            <label for=""><strong>标签选择：</strong> </label>
+            <select name="" id="" class="selectpicker border border-gray rounded" multiple data-live-search="true" title="选择标签">
+              <option value="">Angular</option>
+              <option value="">Angular</option>
+              <option value="">Angular</option>
+              <option value="">Angular</option>
+            </select>
           </div>
-          <div class="col-5 form-inline justify-content-center">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <div class="col-5 d-align-right">
+            <input class="form-control mr-sm-2 search-input" type="search" placeholder="Search" aria-label="Search" v-model="searchInfo.keyword">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
           </div>
         </div>
       </form>
@@ -54,7 +59,6 @@
                   <a  data-toggle="dropdown"  id="add-button">
                     流行音乐
                   </a>
-
                   <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
                     <ul>
                       <li class="dropdown-item">
@@ -83,6 +87,14 @@
             </ol>
           </nav>
           <div class="d-inline-block">
+            <router-link to="/editor">
+              <button class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="新建"  id="add-button">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+                  <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+                </svg>
+              </button>
+            </router-link>
             <router-link to="/editor">
               <button class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="新建"  id="add-button">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -140,6 +152,7 @@
 // import 'bootstrap-datetimepicker/src/less/bootstrap-datetimepicker.less'
 import datePicker from 'vue-bootstrap-datetimepicker'
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
+import '@fortawesome/fontawesome-free/css/all.css'
 import $ from 'jquery'
 export default {
   components: {
@@ -149,17 +162,36 @@ export default {
     return {
       newestList: [],
       hotList: [],
-      date: new Date(),
+      searchInfo: {
+        startDate: new Date(),
+        endDate: new Date(),
+        tags: [],
+        published: '',
+        keyword: ''
+      },
       options: {
         format: 'YYYY-MM-DD HH:mm:ss',
-        useCurrent: false
+        useCurrent: false,
+        locale: 'zh-cn'
       }
     }
   },
   created: function () {
-    // $('#datetimepicker').datetimepicker('show')
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
+      $.extend(true, $.fn.datetimepicker.defaults, {
+        icons: {
+          time: 'far fa-clock',
+          date: 'far fa-calendar',
+          p: 'fas fa-arrow-up',
+          down: 'fas fa-arrow-down',
+          previous: 'fas fa-chevron-left',
+          next: 'fas fa-chevron-right',
+          today: 'fas fa-calendar-check',
+          clear: 'far fa-trash-alt',
+          close: 'far fa-times-circle'
+        }
+      })
     })
   },
   methods: {
@@ -168,13 +200,16 @@ export default {
     },
     getHotList: function () {
       return ''
+    },
+    showDatePickResult: function () {
+      console.log(this.searchInfo.date)
     }
   }
 }
 </script>
 <style scoped>
   .type-level {
-    width: 90%;
+    width: 85%;
   }
   #split-icon {
     display: inline-block;
@@ -195,13 +230,8 @@ export default {
   .align-left {
     text-align: left;
   }
-  .header {
-    /* margin-bottom: 0rem!important; */
-    /* background-image: image('../../static/首页标题栏.jpg'); */
-    /* background-image: url('../../../static/首页标题栏.jpg');
-    background-repeat: no-repeat;
-    background-size: 100% 100%; */
-    /* opacity: 0.5; */
+  .form-check-label {
+    font-size: 0.8rem;
   }
   .item-title {
     color: white;
@@ -245,7 +275,11 @@ export default {
     text-align: right;
   }
   .d-inline-block {
+    display: inline-block!important;
+  }
+  .search-input {
     display: inline-block;
+    width: auto;
   }
   #add-button:hover {
 
