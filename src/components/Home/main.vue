@@ -1,42 +1,38 @@
 <template>
     <main role="main" class="container">
-      <!-- <div class="d-flex align-items-center p-3 my-3  bg-purple rounded shadow-sm"> -->
-        <ul class="nav justify-content-center d-flex align-items-center p-3 my-3  bg-purple rounded shadow-sm">
-          <li class="nav-item">
-            <span class="nav-link active item-title"  @click="changeView('home')">首页</span>
-          </li>
-          <li class="nav-item">
-            <span class="nav-link active item-title"  @click="changeView('article')">文章</span>
-          </li>
-          <li class="nav-item">
-            <span class="nav-link item-title" @click="changeView('logger')">日志</span>
-          </li>
-          <li class="nav-item">
-            <span class="nav-link item-title" @click="changeView('series')">连载</span>
-          </li>
-          <li class="nav-item">
-            <span class="nav-link item-title" @click="changeView('albumn')">相册</span>
-          </li>
-        </ul>
-        <v-home v-show="view === 'home'"></v-home>
-        <v-article v-show="view === 'article'"></v-article>
-        <v-logger v-show="view === 'logger'"></v-logger>
-        <v-albumn v-show="view === 'albumn'"></v-albumn>
-  </main>
+      <ul class="nav justify-content-center d-flex align-items-center p-3 my-3  bg-purple rounded shadow-sm">
+        <li class="nav-item">
+          <router-link to="/home">
+            <span class="nav-link active item-title">首页</span>
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/home/articles">
+            <span class="nav-link active item-title">文章</span>
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/home/logger">
+            <span class="nav-link item-title">日志</span>
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/home/logger">
+            <span class="nav-link item-title">连载</span>
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/home/logger">
+            <span class="nav-link item-title">相册</span>
+          </router-link>
+        </li>
+      </ul>
+      <router-view/>
+    </main>
 </template>
 <script>
-import home from './home'
-import article from './article'
-import albumn from './albumn'
-import logger from './logger'
 import $ from 'jquery'
 export default {
-  components: {
-    'v-home': home,
-    'v-article': article,
-    'v-albumn': albumn,
-    'v-logger': logger
-  },
   data: function () {
     return {
       view: 'home',

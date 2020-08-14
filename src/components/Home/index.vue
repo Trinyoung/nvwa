@@ -15,7 +15,7 @@ import header from './Header'
 import broadside from './broadside'
 import main from './main'
 import bottom from '../bottom'
-import article from './article'
+// import article from './article'
 import albumn from './albumn'
 import logger from './logger'
 export default {
@@ -24,7 +24,7 @@ export default {
     'v-main': main,
     'v-header': header,
     'v-bottom': bottom,
-    'v-article': article,
+    // 'v-article': article,
     'v-albumn': albumn,
     'v-logger': logger
   }

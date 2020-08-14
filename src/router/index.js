@@ -3,9 +3,10 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
 import editor from '@/components/Editor'
-import home from '@/components/Home'
-import Console from '@/components/Console_dashboard'
+// import Console from '@/components/Console_dashboard'
 import Detail from '@/components/Detail'
+import homeRouter from '@/components/Home/router'
+import consoleRouter from '@/components/Console_dashboard/router'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
@@ -29,21 +30,13 @@ export default new Router({
       name: 'Register',
       component: Register
     },
-    {
-      path: '/home',
-      name: 'Home',
-      component: home
-    },
+    homeRouter,
     {
       path: '/editor',
       name: 'Editor',
       component: editor
     },
-    {
-      path: '/console',
-      name: 'Console',
-      component: Console
-    },
+    consoleRouter,
     {
       path: '/article',
       name: 'Article',

@@ -13,7 +13,7 @@
 <script>
 import header from './Header'
 import broadside from './broadside'
-import main from './article'
+import main from './main'
 import bottom from '../bottom'
 export default {
   components: {
