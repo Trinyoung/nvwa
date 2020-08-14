@@ -11,31 +11,10 @@
             <a class="nav-link item-title" href="#">连载</a>
           </li>
       </ul>
-      <!-- <div class="row"> -->
-        <!-- <div class="col-sm-0 col-md-3">
-          <label for=""></label>
-          <select name="" id=""></select>
-        </div>
-        <div class="col-md-6">
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="搜索" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-primary" id="basic-addon2">
-                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
-                  <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-2">
-        </div> -->
       <form class="bg-white pd-2 form-container my-1 rounded">
         <div class="form-row my-2">
-          <div class="col-3 form-inline border-gray">
-            <select name="" id="" class="selectpicker" multiple data-live-search="true" title="选择分类">
+          <div class="col-3 form-inline">
+            <select name="" id="" class="selectpicker border border-dark"  data-live-search="true" title="选择分类">
               <option value="">Angular</option>
               <option value="">Angular</option>
               <option value="">Angular</option>
@@ -71,7 +50,6 @@
                 <a href="#">音乐</a>
               </li>
               <li class="breadcrumb-item">
-                <!-- <a href="#">流行音乐</a> -->
                 <div class="dropdown">
                   <a  data-toggle="dropdown"  id="add-button">
                     流行音乐
@@ -105,19 +83,21 @@
             </ol>
           </nav>
           <div class="d-inline-block">
-            <button class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="新建"  id="add-button">
-              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
-                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
-              </svg>
-            </button>
+            <router-link to="/editor">
+              <button class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="新建"  id="add-button">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+                  <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+                </svg>
+              </button>
+            </router-link>
           </div>
         </div>
         <div class="text-muted border-bottom border-gray row d-table">
           <div class="media-body small col-sm-11 col-md-11 d-table-cell">
-            <strong class="text-gray-dark my-2 d-block">@username</strong>
+            <h6 class="text-gray-dark my-2 d-block">大中国</h6>
             <p class="my-2">Donec id elit non mi porta asdfasdfasdfasf到发送到阿斯顿发送dfsgsdfgdsfgdsfgdsfg中文是个我们多看的代码撒打发斯蒂芬大法师的法师打发大水发撒地方撒发大水，到发送到gfsfgsfdgsdfgsdfgfgdsgsdfgdfgsdfgfsgfghdfghdgfhgsdfgsdfgsdfgdsfgdf发阿</p>
-            <strong class="text-gray-dark d-block my-2">2020-08-05</strong>
+            <strong class="text-gray-dark d-block my-2">@Trinyoung 2020-08-05</strong>
           </div>
           <div class="media-body d-table-cell col-sm-1">
             <svg width="2em" height="2em" viewBox="0 0 16 16" class="bd-placeholder-img mr-2 rounded d-vertical-center" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -132,28 +112,28 @@
             </svg>
           </div>
         </div>
+        <nav aria-label="Page navigation example" id="page-list">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>
+            <li class="page-item"><a class="page-link" href="#">6</a></li>
+            <li class="page-item"><a class="page-link" href="#">7</a></li>
+            <li class="page-item"><a class="page-link" href="#">8</a></li>
+            <li class="page-item"><a class="page-link" href="#">...</a></li>
+            <li class="page-item"><a class="page-link" href="#">10</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#"><span aria-hidden="true">&raquo;</span></a>
+            </li>
+          </ul>
+          共 10 页
+        </nav>
       </div>
-      <nav aria-label="Page navigation example" id="page-list">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">4</a></li>
-          <li class="page-item"><a class="page-link" href="#">5</a></li>
-          <li class="page-item"><a class="page-link" href="#">6</a></li>
-          <li class="page-item"><a class="page-link" href="#">7</a></li>
-          <li class="page-item"><a class="page-link" href="#">8</a></li>
-          <li class="page-item"><a class="page-link" href="#">...</a></li>
-          <li class="page-item"><a class="page-link" href="#">10</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#"><span aria-hidden="true">&raquo;</span></a>
-          </li>
-        </ul>
-        共 10 页
-      </nav>
   </main>
 </template>
 <script>

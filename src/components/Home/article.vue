@@ -91,7 +91,7 @@
             </div>
           </div>
         </div>
-        <nav aria-label="Page navigation example" id="page-list" class="my-3">
+        <nav aria-label="Page navigation example" id="page-list" class="my-2">
           <ul class="pagination justify-content-center">
             <li class="page-item disabled">
               <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
@@ -110,6 +110,7 @@
               <a class="page-link" href="#"><span aria-hidden="true">&raquo;</span></a>
             </li>
           </ul>
+          <span>共10页</span>
         </nav>
       </div>
     </div>
