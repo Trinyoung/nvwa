@@ -36,9 +36,9 @@
             <label for=""><strong>标签选择：</strong> </label>
             <select name="" id="" class="selectpicker border border-gray rounded" multiple data-live-search="true" title="选择标签">
               <option value="">Angular</option>
-              <option value="">Angular</option>
-              <option value="">Angular</option>
-              <option value="">Angular</option>
+              <option value="">React</option>
+              <option value="">Vue</option>
+              <option value="">Nodejs</option>
             </select>
           </div>
           <div class="col-5 d-align-right">

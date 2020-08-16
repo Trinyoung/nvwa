@@ -6,6 +6,7 @@ import editor from '@/components/Editor'
 import home from '@/components/Home'
 import Console from '@/components/Console_dashboard'
 import Detail from '@/components/Detail'
+import ForgetPassword from '@/components/forgetPassword'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
@@ -48,6 +49,11 @@ export default new Router({
       path: '/article',
       name: 'Article',
       component: Detail
+    },
+    {
+      path: '/forgetPassword',
+      name: 'ForgetPassword',
+      component: ForgetPassword
     }
   ]
 })
