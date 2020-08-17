@@ -1,6 +1,7 @@
 import article from '@/components/console_dashboard/article'
-import console from '@/components/console_dashboard'
 import logger from '@/components/console_dashboard/logger'
+import console from '@/components/console_dashboard'
+
 const obj = {
   path: '/console',
   name: 'console',

@@ -1,7 +1,7 @@
 import home from '@/components/Home'
 import article from '@/components/home/article'
 import homePage from '@/components/home/home'
-import logger from '@/components/home/logger'
+import Loggers from '@/components/home/Loggers'
 const obj = {
   path: '/home',
   name: 'Home',
@@ -17,7 +17,7 @@ const obj = {
   }, {
     path: 'logger',
     name: 'logger',
-    component: logger
+    component: Loggers
   }]
 }
 export default obj
