@@ -13,6 +13,15 @@
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value =0 v-model="searchInfo.published">
             <label class="form-check-label" for="inlineCheckbox1">已发布</label>
+        <div class="form-row my-2">
+          <div class="col form-inline">
+            <label for=""><strong>标签选择：</strong> </label>
+            <select name="" id="" class="selectpicker border border-gray rounded" multiple data-live-search="true" title="选择标签">
+              <option value="">Angular</option>
+              <option value="">React</option>
+              <option value="">Vue</option>
+              <option value="">Nodejs</option>
+            </select>
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value =1 v-model="searchInfo.published">
