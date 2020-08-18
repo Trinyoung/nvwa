@@ -154,6 +154,7 @@
 <script>
 import axios from 'axios'
 import datePicker from 'vue-bootstrap-datetimepicker'
+import moment from 'moment'
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 export default {
@@ -181,7 +182,8 @@ export default {
   },
   methods: {
     register: function () {
-      const userInfo = this.userInfo
+      const userInfo = Object.assign({}, this.userInfo)
+      userInfo.birthday = moment(userInfo.birthday).unix()
       console.log(userInfo, 'userInfo-------------->')
       if (!userInfo.username) {
         alert('缺少用户名')

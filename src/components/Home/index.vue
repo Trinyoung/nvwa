@@ -16,17 +16,14 @@ import broadside from './broadside'
 import main from './main'
 import bottom from '../bottom'
 // import article from './article'
-import albumn from './albumn'
-import logger from './logger'
+// import albumn from './albumn'
+// import logger from './Loggers'
 export default {
   components: {
     'v-broadside': broadside,
     'v-main': main,
     'v-header': header,
-    'v-bottom': bottom,
-    // 'v-article': article,
-    'v-albumn': albumn,
-    'v-logger': logger
+    'v-bottom': bottom
   }
 }
 </script>
