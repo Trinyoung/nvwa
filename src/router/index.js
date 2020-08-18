@@ -8,6 +8,7 @@ import Detail from '@/components/Detail'
 import homeRouter from '@/components/Home/router'
 import consoleRouter from '@/components/Console_dashboard/router'
 import ForgetPassword from '@/components/forgetPassword'
+import updatePassword from '@/components/updatePassword'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
@@ -47,6 +48,11 @@ export default new Router({
       path: '/forgetPassword',
       name: 'ForgetPassword',
       component: ForgetPassword
+    }, {
+      path: '/:username/updatePassword',
+      name: 'updatePassword',
+      component: updatePassword,
+      props: true
     }
   ]
 })

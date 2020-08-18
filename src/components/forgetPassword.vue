@@ -45,7 +45,7 @@
                     </svg>
                 </span>
               </div>
-              <input type="text" class="form-control" placeholder="请输入验证码" aria-label="password" aria-describedby="basic-addon1" v-model="inputInfo.confirmCode">
+              <input type="text" class="form-control" placeholder="请输入验证码" aria-label="confirmCode" aria-describedby="basic-addon1" v-model="inputInfo.confirmCode">
               <div class="input-group-append">
                 <button class="btn btn-outline-success" id="basic-addon2" @click="cutdown">{{buttonInfo.confirmCodeDesc}}</button>
               </div>
@@ -55,9 +55,7 @@
           <div class="col-sm-4">
           </div>
           <div class="col-sm-4">
-              <router-link to="/register">
-              <Button  type="submit" class="button-right btn-primary btn line-input-button">下一步</Button>
-              </router-link>
+            <Button  type="submit" class="button-right btn-primary btn line-input-button" @click="next">下一步</Button>
           </div>
         </div>
       </div>
@@ -86,9 +84,12 @@ export default {
   methods: {
     cutdown: function () {
       const { username, email } = this.$data.inputInfo
-      axios.post('http://localhost:3000/api/user/confirmCode', { username, email }, this.$data.inputInfo).then(function (res) {
+      if (!username || !email) {
+        return alert('请填写用户名或者邮箱！')
+      }
+      axios.post('http://localhost:9220/api/user/confirmCode', { username, email }).then((res) => {
         if (res.status !== 200 || res.data.code !== '000') {
-          return alert('登录失败, 请检查用户名和密码')
+          return alert('请求失败, 请检查用户名和邮箱！')
         } else {
           $('.toast').toast('show')
           this.$data.buttonInfo.confirmCodeDesc = --this.$data.buttonInfo.time + '秒'
@@ -105,14 +106,16 @@ export default {
       })
     },
     next: function () {
-      console.log(this.username, this.password, this.rememberMe, '信息的啥所发生的')
-      axios.post('http://localhost:3000/api/user/confirmCode',
-        {username: this.username, password: this.password, rememberMe: this.rememberMe}
-      ).then(function (result) {
+      const params = Object.assign({}, this.inputInfo)
+      const username = this.inputInfo.username
+      localStorage.setItem('confirmCode', this.inputInfo.confirmCode)
+      console.log(params, '参数在这里呢------------->')
+      axios.put('http://localhost:9220/api/user/confirmCode', params).then((result) => {
+        console.log(result, 'result')
         if (result.status !== 200 || result.data.code !== '000') {
-          return alert('登录失败, 请检查用户名和密码')
+          return alert('验证码、邮箱或者用户名输入错误')
         }
-        window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/home')
+        this.$router.push(`/updatePassword?username=${username}`)
       })
     }
   }
@@ -122,8 +125,6 @@ export default {
 .forget-container {
   position: relative;
   height: 100%;
-  /* top: 10rem; */
-  /* background-color: aliceblue; */
 }
 .loginForm {
   background-color: white;
