@@ -2,11 +2,11 @@
   <div>
     <v-header></v-header>
     <main role="main" class="container">
-        <div class="row">
-            <v-broadside class="col-md-2 broadside"></v-broadside>
-            <v-main class="col-md-9"></v-main>
-            <v-rightside class="col-md-1"></v-rightside>
-        </div>
+      <div class="row">
+        <v-broadside class="col-md-2 broadside"></v-broadside>
+        <v-main class="col-md-9"></v-main>
+        <v-rightside class="col-md-1"></v-rightside>
+      </div>
     </main>
     <v-bottom></v-bottom>
   </div>
@@ -34,9 +34,9 @@ export default {
 }
 </script>
 <style scoped>
-  @media (min-width: 1600px) {
-    .main-container：{
-      width: 1500px;
+  @media (min-width: 1400px) {
+    .container {
+      max-width: 1300px;
     }
   }
 

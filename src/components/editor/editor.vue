@@ -1,7 +1,7 @@
 <template>
     <div class="editor-container container col-md-9" id="main-content">
-      <div class="category-container my-3">
-        <form class="category-form my-1">
+      <div class="category-container my-1">
+        <form class="category-form">
           <div class="form-check-inline"> 分类：</div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" id="inlineCheckbox1" value="1" v-model="category" name="category">
@@ -27,34 +27,12 @@
         </div>
         <div class="type-container my-1">
           标签：
-          <select name="tags" id="" class="selectpicker" title="添加标签" data-live-search="true">
-            <option value="">angular</option>
-            <option value="">react</option>
-            <option value="">vue</option>
-            <option value="">js</option>
+          <select name="tags" id="" class="selectpicker" title="添加标签" data-live-search="true" multiple>
+            <option value="" data-content="<span class='badge badge-success'>angular</span>">angular</option>
+            <option value="" data-content="<span class='badge badge-success'>react</span>">react</option>
+            <option value="" data-content="<span class='badge badge-success'>vue</span>">vue</option>
+            <option value="" data-content="<span class='badge badge-success'>javascript</span>">js</option>
           </select>
-          <div class="tags-container">
-            <ul class="list-group list-group-horizontal">
-              <li class="list-group-item">
-                <span class="tag-icon">
-                  angular
-                </span>
-                <span> x</span>
-              </li>
-              <li class="list-group-item">
-                <span class="tag-icon">
-                  angular
-                </span>
-                <span> x</span>
-              </li>
-              <li class="list-group-item">
-                <span class="tag-icon">
-                  angular
-                </span>
-                <span> x</span>
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
 
@@ -85,19 +63,6 @@
         </div>
         <div class="col-md-1 right-side col-sm-0">
           <div class="sidebar">
-            <div class="my-3 tag-item" title="Tooltip on right">
-              <div data-toggle="tooltip" data-placement="right" title="标签">
-                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-tags dropdown-toggle"  data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M3 2v4.586l7 7L14.586 9l-7-7H3zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2z"/>
-                  <path fill-rule="evenodd" d="M5.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
-                  <path d="M1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z"/>
-                </svg>
-                <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
-                  <a class="dropdown-item" href="#">小说</a>
-                  <a class="dropdown-item" href="#">散文</a>
-                </div>
-              </div>
-            </div>
             <div class="my-3 sidebar-item" data-toggle="tooltip" data-placement="right" title="删除">
               <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-trash " fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>

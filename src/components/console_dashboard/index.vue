@@ -26,8 +26,8 @@ export default {
 </script>
 <style scoped>
   @media (min-width: 1600px) {
-    .main-container：{
-      width: 1500px;
+    .container {
+      max-width: 1440px;
     }
   }
 </style>
