@@ -14,7 +14,7 @@
                   </svg>
                 </span>
               </div>
-              <input type="text" class="form-control" placeholder="请输入用户名/手机/邮箱" aria-label="Username" aria-describedby="basic-addon1">
+              <input type="text" class="form-control" placeholder="请输入用户名/手机/邮箱" aria-label="Username" aria-describedby="basic-addon1" v-model="username">
             </div>
           </div>
           <div class="row form-group login-item">
@@ -26,7 +26,7 @@
                   </svg>
                 </span>
               </div>
-              <input type="password" class="form-control" placeholder="请输入密码" aria-label="password" aria-describedby="basic-addon1">
+              <input type="password" class="form-control" placeholder="请输入密码" aria-label="password" aria-describedby="basic-addon1" v-model="password">
             </div>
           </div>
           <div class="row form-group width-8 mb-3">
@@ -74,14 +74,14 @@ export default {
   methods: {
     login: function () {
       console.log(this.username, this.password, this.rememberMe, '信息的啥所发生的')
-      axios.post('http://localhost:3000/api/user/login',
+      axios.post('http://localhost:9220/api/user/login',
         {username: this.username, password: this.password, rememberMe: this.rememberMe}
-      ).then(function (result) {
+      ).then((result) => {
         console.log(result, 'result -------------> result')
         if (result.status !== 200 || result.data.code !== '000') {
           return alert('登录失败, 请检查用户名和密码')
         }
-        window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/home')
+        window.history.length > 1 ? this.$router.push('/home') : this.$router.go(-1)
       })
     }
   }

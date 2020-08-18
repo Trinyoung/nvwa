@@ -115,7 +115,7 @@ export default {
         if (result.status !== 200 || result.data.code !== '000') {
           return alert('验证码、邮箱或者用户名输入错误')
         }
-        this.$router.push(`/updatePassword?username=${username}`)
+        this.$router.push(`/${username}/updatePassword`)
       })
     }
   }

@@ -49,7 +49,6 @@
 </template>
 <script>
 import axios from 'axios'
-import $ from 'jquery'
 export default {
   data: function () {
     return {
@@ -73,20 +72,11 @@ export default {
         return alert('请填写用户名或者邮箱！')
       }
       axios.put('http://localhost:9220/api/user/password', { password, username, confirmCode }).then((res) => {
+        console.log(res, 'res----------->')
         if (res.status !== 200 || res.data.code !== '000') {
           return alert('请求失败, 请检查用户名和邮箱！')
         } else {
-          $('.toast').toast('show')
-          this.$data.buttonInfo.confirmCodeDesc = --this.$data.buttonInfo.time + '秒'
-          setInterval(() => {
-            if (this.$data.buttonInfo.time > 0) {
-              this.$data.buttonInfo.time--
-              this.$data.buttonInfo.confirmCodeDesc = this.$data.buttonInfo.time + '秒'
-            } else {
-              this.$data.buttonInfo.confirmCodeDesc = '获取验证码'
-              clearInterval()
-            }
-          }, 1000)
+          return this.$router.push('/login')
         }
       })
     }
