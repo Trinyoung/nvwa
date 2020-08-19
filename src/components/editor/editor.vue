@@ -1,41 +1,40 @@
 <template>
     <div class="editor-container container col-md-9" id="main-content">
-      <div class="category-container my-1">
-        <form class="category-form">
-          <div class="form-check-inline"> 分类：</div>
-          <div class="form-check form-check-inline">
+      <form class="form category-container row">
+        <div class="col-sm-4 col-md-4 my-2">
+          <label class="font-weight-bold d-inline-block height-100"> 分类：</label>
+          <div class="form-check d-inline-block height-100">
             <input class="form-check-input" type="radio" id="inlineCheckbox1" value="1" v-model="category" name="category">
             <label class="form-check-label" for="inlineCheckbox1">日志</label>
           </div>
-          <div class="form-check form-check-inline">
+          <div class="form-check d-inline-block height-100">
             <input class="form-check-input" type="radio" id="inlineCheckbox2" value="2" v-model="category" name="category">
             <label class="form-check-label" for="inlineCheckbox2">文章</label>
           </div>
-          <div class="form-check form-check-inline">
+          <div class="form-check d-inline-block height-100">
             <input class="form-check-input" type="radio" id="inlineCheckbox3" value="3" v-model="category" name="category">
             <label class="form-check-label" for="inlineCheckbox3">连载</label>
           </div>
-        </form>
-        <div class="type-container my-1" v-show="category==2">
-          主题：
-          <select name="tags" id="" class="selectpicker" title="添加标签" data-live-search="true">
-            <option value="">angular</option>
-            <option value="">react</option>
-            <option value="">vue</option>
-            <option value="">js</option>
-          </select>
         </div>
-        <div class="type-container my-1">
-          标签：
-          <select name="tags" id="" class="selectpicker" title="添加标签" data-live-search="true" multiple>
-            <option value="" data-content="<span class='badge badge-success'>angular</span>">angular</option>
-            <option value="" data-content="<span class='badge badge-success'>react</span>">react</option>
-            <option value="" data-content="<span class='badge badge-success'>vue</span>">vue</option>
-            <option value="" data-content="<span class='badge badge-success'>javascript</span>">js</option>
-          </select>
+        <div class="col-sm-6 col-md-6 my-2 d-flex algin-middle">
+          <label for="tags-picker" class="font-weight-bold d-inline-block height-100">标签：</label>
+          <div class="form-group picker-container d-inline-block">
+            <select name="tags" id="tags-picker" class="selectpicker form-control" title="添加标签" data-live-search="true" multiple>
+              <option value="" data-content="<span class='badge badge-success'>angular</span>">angular</option>
+              <option value="" data-content="<span class='badge badge-success'>react</span>">react</option>
+              <option value="" data-content="<span class='badge badge-success'>vue</span>">vue</option>
+              <option value="" data-content="<span class='badge badge-success'>javascript</span>">js</option>
+            </select>
+          </div>
         </div>
-      </div>
-
+        <!-- <div class="col-md-2 col-lg-1 col-sm-2 my-2">
+          <div class="d-inline">
+            <button class="btn btn-primary publish-button" @click="publish">
+              发布
+            </button>
+          </div>
+        </div> -->
+      </form>
       <div class="row my-2">
         <div class="col-md-10 col-lg-11 col-sm-10 titileInput">
           <div class="input-group flex-nowrap">
@@ -49,11 +48,6 @@
               </button>
             </div>
           </div>
-        </div>
-        <div class="col-md-2 col-lg-1 col-sm-2 publish-col">
-          <button class="btn btn-primary publish-button" @click="publish">
-            发布
-          </button>
         </div>
       </div>
       <div class="row row-container">
@@ -161,6 +155,14 @@ export default {
 }
 </script>
 <style scoped>
+.hegith-100 {
+  height: 100%;
+  line-height: 100%;
+  vertical-align: middle;
+}
+#tags-picker {
+  width: auto;
+}
 #main-content {
   height: calc(100vh - 48px);
 }
@@ -177,16 +179,7 @@ export default {
 }
 .category-container {
   background: sandybrown;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  border-radius: 1rem;
-  text-align: left;
-}
-.type-container {
-  text-align: left;
-  /* background: #007bff; */
+  margin-left: 0;
   border-radius: 1rem;
 }
 .circle {
@@ -276,8 +269,12 @@ export default {
   font-weight: bold;
 }
 
-.publish-button {
+/* .publish-button {
   width: 100%;
+} */
+.picker-container {
+  margin-bottom: 0;
+  flex:1;
 }
 .publish-col {
   background: #007bff;
