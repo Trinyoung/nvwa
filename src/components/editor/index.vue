@@ -1,11 +1,11 @@
 <template>
   <div>
       <v-header></v-header>
-      <div class="container-fluid">
-        <div class="row">
-          <v-main></v-main>
-        </div>
-      </div>
+      <!-- <div class="container-fluid"> -->
+        <!-- <div class="row"> -->
+      <v-main></v-main>
+        <!-- </div> -->
+      <!-- </div> -->
       <v-bottom></v-bottom>
   </div>
 </template>
