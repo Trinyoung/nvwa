@@ -1,24 +1,24 @@
 <template>
     <div class="editor-container container col-md-9" id="main-content">
-      <form class="form category-container row">
-        <div class="col-sm-4 col-md-4 my-2">
-          <label class="font-weight-bold d-inline-block height-100"> 分类：</label>
-          <div class="form-check d-inline-block height-100">
+      <form class="form category-container row text-sm-left text-md-center">
+        <div class="col-sm-12 col-md-4 my-2">
+          <label class="font-weight-bold form-check-inline"> 分类：</label>
+          <div class="form-check-inline">
             <input class="form-check-input" type="radio" id="inlineCheckbox1" value="1" v-model="category" name="category">
             <label class="form-check-label" for="inlineCheckbox1">日志</label>
           </div>
-          <div class="form-check d-inline-block height-100">
+          <div class="form-check-inline">
             <input class="form-check-input" type="radio" id="inlineCheckbox2" value="2" v-model="category" name="category">
             <label class="form-check-label" for="inlineCheckbox2">文章</label>
           </div>
-          <div class="form-check d-inline-block height-100">
+          <div class="form-check-inline">
             <input class="form-check-input" type="radio" id="inlineCheckbox3" value="3" v-model="category" name="category">
             <label class="form-check-label" for="inlineCheckbox3">连载</label>
           </div>
         </div>
-        <div class="col-sm-6 col-md-6 my-2 d-flex algin-middle">
-          <label for="tags-picker" class="font-weight-bold d-inline-block height-100">标签：</label>
-          <div class="form-group picker-container d-inline-block">
+        <div class="col-sm-12 col-md-5 my-2 d-flex">
+          <label for="tags-picker" class="font-weight-bold form-check-inline">标签：</label>
+          <div class="form-group picker-container">
             <select name="tags" id="tags-picker" class="selectpicker form-control" title="添加标签" data-live-search="true" multiple>
               <option value="" data-content="<span class='badge badge-success'>angular</span>">angular</option>
               <option value="" data-content="<span class='badge badge-success'>react</span>">react</option>
@@ -27,13 +27,11 @@
             </select>
           </div>
         </div>
-        <!-- <div class="col-md-2 col-lg-1 col-sm-2 my-2">
-          <div class="d-inline">
-            <button class="btn btn-primary publish-button" @click="publish">
-              发布
-            </button>
-          </div>
-        </div> -->
+        <div class="col-md-3 col-lg-3 col-sm-12 my-2">
+          <button class="btn btn-primary publish-button" @click="publish">
+            发布
+          </button>
+        </div>
       </form>
       <div class="row my-2">
         <div class="col-md-10 col-lg-11 col-sm-10 titileInput">
@@ -87,7 +85,7 @@
           <input type="text" class="form-control">
         </div>
         <div class="col-md-2">
-          <button class="btn btn-primary publish-button">
+          <button class="btn btn-primary add-button">
             文献引用
           </button>
         </div>
@@ -122,7 +120,7 @@ export default {
   data: function () {
     return {
       isMarkdown: true,
-      content: '## 我们不一样' + '好样的',
+      content: '',
       category: '1',
       title: '',
       subTitle: '',
@@ -138,14 +136,15 @@ export default {
     publish: function () {
       this.render = $('.v-note-read-content').html()
       console.log(this.$data, '------------>')
-      const {title, category, subTitle, render, tags, reffers} = this
+      const { title, category, subTitle, render, tags, content, reffers } = this
       const data = {
-        title, category, subTitle, render, tags, reffers
+        title, category, subTitle, render, tags, reffers, content
       }
-      axios.post('http://localhost:3000/api/article', data, function (result) {
+      const Authorization = `Bearer ${localStorage.getItem('token')}`
+      console.log(Authorization, '---------------------authorization')
+      axios.post('/api/article', data, { headers: {Authorization} }, function (result) {
         console.log(result, 'result---------------->')
       })
-      // this.saveMavon()
     },
     saveMavon: function (value, render) {
       this.render = render
@@ -158,7 +157,7 @@ export default {
 .hegith-100 {
   height: 100%;
   line-height: 100%;
-  vertical-align: middle;
+  /* vertical-align: middle; */
 }
 #tags-picker {
   width: auto;
@@ -186,9 +185,7 @@ export default {
   border-radius: 50% 50% 50% 50%;
   background: white;
 }
-.form-inline {
-  display: inline-block;
-}
+
 .form-check-inline {
   height: 100%;
 }
@@ -267,11 +264,12 @@ export default {
 }
 #add-button {
   font-weight: bold;
+  width: 80%;
 }
 
-/* .publish-button {
-  width: 100%;
-} */
+.publish-button {
+  width: 70%;
+}
 .picker-container {
   margin-bottom: 0;
   flex:1;

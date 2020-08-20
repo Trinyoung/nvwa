@@ -74,14 +74,18 @@ export default {
   methods: {
     login: function () {
       console.log(this.username, this.password, this.rememberMe, '信息的啥所发生的')
-      axios.post('http://localhost:9220/api/user/login',
+      axios.post('/api/user/login',
         {username: this.username, password: this.password, rememberMe: this.rememberMe}
       ).then((result) => {
         console.log(result, 'result -------------> result')
         if (result.status !== 200 || result.data.code !== '000') {
           return alert('登录失败, 请检查用户名和密码')
         }
-        window.history.length > 1 ? this.$router.push('/home') : this.$router.go(-1)
+        console.log(result.data, '----------data')
+        localStorage.setItem('userInfo', result.data.userInfo)
+        localStorage.setItem('token', result.data.token)
+        this.$router.push('/home')
+        // window.history.length > 1 ? this.$router.push('/home') : this.$router.go(-1)
       })
     }
   }
