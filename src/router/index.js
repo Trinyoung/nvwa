@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
-import editor from '@/components/Editor'
+// import editor from '@/components/Editor's
+import editorRouter from '@/components/editor/router'
 // import Console from '@/components/Console_dashboard'
 import Detail from '@/components/Detail'
 import homeRouter from '@/components/Home/router'
@@ -33,16 +34,19 @@ export default new Router({
       component: Register
     },
     homeRouter,
-    {
-      path: '/editor',
-      name: 'Editor',
-      component: editor
-    },
+    editorRouter,
+    // {
+    //   path: '/editor/:articleId',
+    //   name: 'Editor',
+    //   component: editor,
+    //   props: true
+    // },
     consoleRouter,
     {
-      path: '/article',
+      path: '/articles/:articleId',
       name: 'Article',
-      component: Detail
+      component: Detail,
+      props: true
     },
     {
       path: '/forgetPassword',

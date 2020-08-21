@@ -4,8 +4,8 @@
     <main role="main" class="container">
       <div class="row">
         <v-broadside class="col-md-2 broadside"></v-broadside>
-        <v-main class="col-md-9"></v-main>
-        <v-rightside class="col-md-1"></v-rightside>
+        <v-main class="col-md-9" :articleId="articleId"></v-main>
+        <v-rightside class="col-md-1" :articleId="articleId"></v-rightside>
       </div>
     </main>
     <v-bottom></v-bottom>
@@ -26,7 +26,9 @@ export default {
     'v-rightside': rightside,
     'v-bottom': bottom
   },
+  props: ['articleId'],
   created: function () {
+    console.log(this.articleId, '------------>')
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
     })

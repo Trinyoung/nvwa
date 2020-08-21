@@ -1,3 +1,4 @@
+/* eslint-disable vue/valid-v-model */
 <template>
     <div class="editor-container container col-md-9" id="main-content">
       <form class="form category-container row text-sm-left text-md-center">
@@ -28,9 +29,10 @@
           </div>
         </div>
         <div class="col-md-3 col-lg-3 col-sm-12 my-2">
-          <button class="btn btn-primary publish-button" @click="publish">
-            发布
-          </button>
+          <label class="form-check-label font-weight-bold" for="inlineCheckbox1">是否公开:</label>
+          <div class="form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" v-model="public" value=1 name="public">
+          </div>
         </div>
       </form>
       <div class="row my-2">
@@ -46,6 +48,11 @@
               </button>
             </div>
           </div>
+        </div>
+        <div class="col-md-2 col-lg-1 col-sm-2">
+          <button class="btn btn-primary publish-button" @click="publish">
+            发布
+          </button>
         </div>
       </div>
       <div class="row row-container">
@@ -126,22 +133,25 @@ export default {
       subTitle: '',
       render: '',
       tags: [],
-      reffers: []
+      reffers: [],
+      public: true
     }
   },
+  created: function () {
+    this.getAticle()
+  },
+  props: ['articleId'],
   methods: {
     submit: function () {
       console.log('submit')
     },
     publish: function () {
       this.render = $('.v-note-read-content').html()
-      console.log(this.$data, '------------>')
-      const { title, category, subTitle, render, tags, content, reffers } = this
+      const { title, category, subTitle, render, tags, content, reffers, articleId } = this
       const data = {
-        title, category, subTitle, render, tags, reffers, content
+        _id: articleId, title, category, subTitle, content_html: render, tags, reffers, content, published: true
       }
       const Authorization = `Bearer ${localStorage.getItem('token')}`
-      console.log(Authorization, '---------------------authorization')
       axios.post('/api/article', data, { headers: {Authorization} }, function (result) {
         console.log(result, 'result---------------->')
       })
@@ -149,6 +159,14 @@ export default {
     saveMavon: function (value, render) {
       this.render = render
       this.content = value
+    },
+    getAticle: function () {
+      const id = this.articleId
+      axios.get(`/api/articles/${id}`).then((result) => {
+        const { content, title } = result.data.data
+        this.title = title
+        this.content = content
+      })
     }
   }
 }

@@ -3,7 +3,7 @@
       <v-header></v-header>
       <!-- <div class="container-fluid"> -->
         <!-- <div class="row"> -->
-      <v-main></v-main>
+      <v-main :articleId="articleId"></v-main>
         <!-- </div> -->
       <!-- </div> -->
       <v-bottom></v-bottom>
@@ -14,14 +14,13 @@ import header from './Header'
 import editor from './editor'
 import rightSide from './rightside'
 import $ from 'jquery'
-// import Broadside from './Broadside'
 export default {
   components: {
     'v-header': header,
     'v-main': editor,
     'v-rightside': rightSide
-    // 'v-broadside': Broadside
   },
+  props: ['articleId'],
   created: function () {
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
@@ -109,10 +108,6 @@ body {
   font-size: 0.75rem;
   text-transform: uppercase;
 }
-
-/*
- * Navbar
- */
 
 .navbar-brand {
   padding-top: 0.75rem;

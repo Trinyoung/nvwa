@@ -1,137 +1,102 @@
 <template>
-    <main role="main" class="container">
-      <div class="container p-3 rounded my-3 shadow-sm content-header justify-content-center">
-        <div class="row my-1">
-          <div class="col-sm-5">
-            <b>上一篇：</b><a href="#">龙的传人</a>
-          </div>
-          <div class="col-sm-2"></div>
-          <div class="col-sm-5">
-            <b>下一篇：</b><a href="#">黄河大合唱</a>
-          </div>
+  <main role="main" class="container">
+    <div class="container p-3 rounded my-3 shadow-sm content-header justify-content-center">
+      <div class="row my-1">
+        <div class="col-sm-5">
+          <b>上一篇：</b><a href="#">龙的传人</a>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-5">
+          <b>下一篇：</b><a href="#">黄河大合唱</a>
         </div>
       </div>
-      <div class="my-3 p-3 bg-white rounded shadow-sm">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="#">音乐</a>
-            </li>
-            <li class="breadcrumb-item"><a href="#">流行音乐</a></li>
-            <li class="breadcrumb-item active" aria-current="page">大中国</li>
-          </ol>
-        </nav>
-        <h1 class="border-bottom border-gray pb-2 mb-0 col-title">大中国</h1>
-        <div class="text-muted article-tip">
-          <ul class="list-group list-group-horizontal">
-            <li class="list-group-item"><b>作者：</b> Trinyoung</li>
-            <li class="list-group-item"><b>更新时间:</b> 2020-08-02</li>
-            <li class="list-group-item">
-              <b>字数：</b> 2000
-            </li>
-            <li class="list-group-item">
-              <b>阅读数：</b> 2000
-            </li>
-          </ul>
-        </div>
-        <div class="content-container pt-3 ">
-          <p class="media-body pb-3 mb-0 lh-125">
-            我们的人阿斯顿发生，名字叫中国， 兄弟姐妹都很多， 景色也不错！阿斯顿发手动阀撒打发斯蒂芬撒地方手动阀撒打发斯蒂芬阿斯顿发送到撒打发斯蒂芬阿斯顿发阿法士大夫。
-            <code>
-              const green = 'a'
-            </code>
-
-            <br/>
-            家里盘着两条龙啊， 是长江与黄河！
-          </p>
-          <p class="media-body pb-3 mb-0 lh-125">
-            我们的人阿斯顿发生，名字叫中国， 兄弟姐妹都很多， 景色也不错！
-          </p>
-          <p class="media-body pb-3 mb-0 lh-125">
-            我们的人阿斯顿发生，名字叫中国， 兄弟姐妹都很多， 景色也不错！阿斯顿发手动阀撒打发斯蒂芬撒地方手动阀撒打发斯蒂芬阿斯顿发送到撒打发斯蒂芬阿斯顿发阿法士大夫。
-            <code>
-              const green = 'a'
-            </code>
-
-            <br/>
-            家里盘着两条龙啊， 是长江与黄河！
-          </p>
-          <p class="media-body pb-3 mb-0 lh-125">
-            我们的人阿斯顿发生，名字叫中国， 兄弟姐妹都很多， 景色也不错！
-          </p>
-          <p class="media-body pb-3 mb-0 lh-125">
-            我们的人阿斯顿发生，名字叫中国， 兄弟姐妹都很多， 景色也不错！阿斯顿发手动阀撒打发斯蒂芬撒地方手动阀撒打发斯蒂芬阿斯顿发送到撒打发斯蒂芬阿斯顿发阿法士大夫。
-            <code>
-              const green = 'a'
-            </code>
-
-            <br/>
-            家里盘着两条龙啊， 是长江与黄河！
-          </p>
-          <p class="media-body pb-3 mb-0 lh-125">
-            我们的人阿斯顿发生，名字叫中国， 兄弟姐妹都很多， 景色也不错！
-          </p>
-          <p class="media-body pb-3 mb-0 lh-125">
-            我们的人阿斯顿发生，名字叫中国， 兄弟姐妹都很多， 景色也不错！阿斯顿发手动阀撒打发斯蒂芬撒地方手动阀撒打发斯蒂芬阿斯顿发送到撒打发斯蒂芬阿斯顿发阿法士大夫。
-            <code>
-              const green = 'a'
-            </code>
-
-            <br/>
-            家里盘着两条龙啊， 是长江与黄河！
-          </p>
-          <p class="media-body pb-3 mb-0 lh-125">
-            我们的人阿斯顿发生，名字叫中国， 兄弟姐妹都很多， 景色也不错！
-          </p>
-        </div>
-        <div class="reffer-container pt-3">
-          <h4 class="border-bottom border-gray pb-2 mb-0">文献引用</h4>
-          <ul class="list-group list-group-container">
-            <li class="list-group-item">
-              <b>1.</b> <span>我们的人阿斯顿发生</span>
-            </li>
-            <li class="list-group-item">
-              <b>2.</b> <span>我们的人阿斯顿发生</span>
-            </li>
-          </ul>
-        </div>
-        <div class="row my-3">
-          <div class="col-sm-4">
-            <b>上一篇：</b><a href="#">龙的传人</a>
-          </div>
-          <div class="col-sm-4">
-            <div class="favorite-icon">
-              <svg  width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-hand-thumbs-up favorite-icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16v-1c.563 0 .901-.272 1.066-.56a.865.865 0 0 0 .121-.416c0-.12-.035-.165-.04-.17l-.354-.354.353-.354c.202-.201.407-.511.505-.804.104-.312.043-.441-.005-.488l-.353-.354.353-.354c.043-.042.105-.14.154-.315.048-.167.075-.37.075-.581 0-.211-.027-.414-.075-.581-.05-.174-.111-.273-.154-.315L12.793 9l.353-.354c.353-.352.373-.713.267-1.02-.122-.35-.396-.593-.571-.652-.653-.217-1.447-.224-2.11-.164a8.907 8.907 0 0 0-1.094.171l-.014.003-.003.001a.5.5 0 0 1-.595-.643 8.34 8.34 0 0 0 .145-4.726c-.03-.111-.128-.215-.288-.255l-.262-.065c-.306-.077-.642.156-.667.518-.075 1.082-.239 2.15-.482 2.85-.174.502-.603 1.268-1.238 1.977-.637.712-1.519 1.41-2.614 1.708-.394.108-.62.396-.62.65v4.002c0 .26.22.515.553.55 1.293.137 1.936.53 2.491.868l.04.025c.27.164.495.296.776.393.277.095.63.163 1.14.163h3.5v1H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
-              </svg>
-            </div>
-            <span class="favorite-num">16</span>
-          </div>
-          <div class="col-sm-4">
-            <b>下一篇：</b><a href="#">黄河大合唱</a>
-          </div>
-        </div>
-        <v-bottom></v-bottom>
+    </div>
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">音乐</a>
+          </li>
+          <li class="breadcrumb-item"><a href="#">流行音乐</a></li>
+          <li class="breadcrumb-item active" aria-current="page">大中国</li>
+        </ol>
+      </nav>
+      <h1 class="border-bottom border-gray pb-2 mb-0 col-title">{{title}}</h1>
+      <div class="text-muted article-tip">
+        <ul class="list-group list-group-horizontal">
+          <li class="list-group-item"><b>作者：</b> Trinyoung</li>
+          <li class="list-group-item"><b>更新时间:</b> 2020-08-02</li>
+          <li class="list-group-item">
+            <b>字数：</b> 2000
+          </li>
+          <li class="list-group-item">
+            <b>阅读数：</b> 2000
+          </li>
+        </ul>
       </div>
+      <div class="content-container pt-3 ">
+        {{ contentHtml }}
+      </div>
+      <div class="reffer-container pt-3">
+        <h4 class="border-bottom border-gray pb-2 mb-0">文献引用</h4>
+        <ul class="list-group list-group-container">
+          <li class="list-group-item">
+            <b>1.</b> <span>我们的人阿斯顿发生</span>
+          </li>
+          <li class="list-group-item">
+            <b>2.</b> <span>我们的人阿斯顿发生</span>
+          </li>
+        </ul>
+      </div>
+      <div class="row my-3">
+        <div class="col-sm-4">
+          <b>上一篇：</b><a href="#">龙的传人</a>
+        </div>
+        <div class="col-sm-4">
+          <div class="favorite-icon">
+            <svg  width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-hand-thumbs-up favorite-icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16v-1c.563 0 .901-.272 1.066-.56a.865.865 0 0 0 .121-.416c0-.12-.035-.165-.04-.17l-.354-.354.353-.354c.202-.201.407-.511.505-.804.104-.312.043-.441-.005-.488l-.353-.354.353-.354c.043-.042.105-.14.154-.315.048-.167.075-.37.075-.581 0-.211-.027-.414-.075-.581-.05-.174-.111-.273-.154-.315L12.793 9l.353-.354c.353-.352.373-.713.267-1.02-.122-.35-.396-.593-.571-.652-.653-.217-1.447-.224-2.11-.164a8.907 8.907 0 0 0-1.094.171l-.014.003-.003.001a.5.5 0 0 1-.595-.643 8.34 8.34 0 0 0 .145-4.726c-.03-.111-.128-.215-.288-.255l-.262-.065c-.306-.077-.642.156-.667.518-.075 1.082-.239 2.15-.482 2.85-.174.502-.603 1.268-1.238 1.977-.637.712-1.519 1.41-2.614 1.708-.394.108-.62.396-.62.65v4.002c0 .26.22.515.553.55 1.293.137 1.936.53 2.491.868l.04.025c.27.164.495.296.776.393.277.095.63.163 1.14.163h3.5v1H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+            </svg>
+          </div>
+          <span class="favorite-num">16</span>
+        </div>
+        <div class="col-sm-4">
+          <b>下一篇：</b><a href="#">黄河大合唱</a>
+        </div>
+      </div>
+      <v-bottom></v-bottom>
+    </div>
   </main>
 </template>
 <script>
 import Bottom from './Bottom'
+import Axios from 'axios'
 export default {
   components: {
     'v-bottom': Bottom
   },
   data: function () {
     return {
-      newestList: [],
-      hotList: []
+      contentHtml: '',
+      title: '',
+      author: ''
     }
   },
+  props: ['articleId'],
+  created: function () {
+    this.getArticleDetail()
+  },
   methods: {
-    getNewestList: function () {
-      return ''
+    getArticleDetail: function () {
+      const id = this.articleId
+      Axios.get(`/api/articles/${id}`).then((result) => {
+        const { content, title } = result.data.data
+        const contentHtml = result.data.data.content_html
+        this.contentHtml = contentHtml || content
+        this.title = title
+      })
     },
-    getHotList: function () {
+    getComments: function () {
       return ''
     }
   }
