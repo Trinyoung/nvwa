@@ -31,7 +31,7 @@
         <div class="col-md-3 col-lg-3 col-sm-12 my-2">
           <label class="form-check-label font-weight-bold" for="inlineCheckbox1">是否公开:</label>
           <div class="form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" v-model="public" value=1 name="public">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="public">
           </div>
         </div>
       </form>
@@ -149,10 +149,10 @@ export default {
       this.render = $('.v-note-read-content').html()
       const { title, category, subTitle, render, tags, content, reffers, articleId } = this
       const data = {
-        _id: articleId, title, category, subTitle, content_html: render, tags, reffers, content, published: true
+        title, category, subTitle, content_html: render, tags, reffers, content, published: 1
       }
       const Authorization = `Bearer ${localStorage.getItem('token')}`
-      axios.post('/api/article', data, { headers: {Authorization} }, function (result) {
+      axios.put(`/api/articles/${articleId}`, data, { headers: {Authorization} }, function (result) {
         console.log(result, 'result---------------->')
       })
     },

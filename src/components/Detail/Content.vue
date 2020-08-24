@@ -34,8 +34,7 @@
           </li>
         </ul>
       </div>
-      <div class="content-container pt-3 ">
-        {{ contentHtml }}
+      <div class="content-container pt-3 " v-html="contentHtml">
       </div>
       <div class="reffer-container pt-3">
         <h4 class="border-bottom border-gray pb-2 mb-0">文献引用</h4>
@@ -148,5 +147,8 @@ export default {
   .favorite-icon:hover {
     cursor: pointer;
     color: red;
+  }
+  .content-container {
+    text-align: left;
   }
 </style>

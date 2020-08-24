@@ -2,9 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
-// import editor from '@/components/Editor's
 import editorRouter from '@/components/editor/router'
-// import Console from '@/components/Console_dashboard'
 import Detail from '@/components/Detail'
 import homeRouter from '@/components/Home/router'
 import consoleRouter from '@/components/Console_dashboard/router'
@@ -35,12 +33,6 @@ export default new Router({
     },
     homeRouter,
     editorRouter,
-    // {
-    //   path: '/editor/:articleId',
-    //   name: 'Editor',
-    //   component: editor,
-    //   props: true
-    // },
     consoleRouter,
     {
       path: '/articles/:articleId',
