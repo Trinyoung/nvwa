@@ -34,7 +34,7 @@
           </li>
         </ul>
       </div>
-      <div class="content-container pt-3 " v-html="contentHtml">
+      <div class="content-container" v-html="contentHtml">
       </div>
       <div class="reffer-container pt-3">
         <h4 class="border-bottom border-gray pb-2 mb-0">文献引用</h4>
@@ -135,7 +135,6 @@ export default {
     padding: 0.35rem 0.25rem;
   }
   .content-header {
-    /* background: darkgrey; */
     margin-left: 0;
     margin-right: 0;
     font-size: 1rem;
@@ -150,5 +149,32 @@ export default {
   }
   .content-container {
     text-align: left;
+    font-size: 0.9rem;
+  }
+  h1 {
+    font-size:1.5rem!important;
+    font-weight: bold;
+  }
+  .content-container >>> pre {
+    background: rgb(246,248,250);
+    padding: 1rem 1rem 1rem 1rem;
+    font-size: 85%;
+
+  }
+
+  .content-container >>> h2 {
+    font-size:1.5rem!important;
+    font-weight: bold;
+    border-bottom: 1px solid gainsboro;
+    margin-top: 2rem;
+  }
+
+  .content-container >>> h3 {
+    font-size: 1.25rem!important;
+    font-weight: bold;
+  }
+  .content-container >>> h4 {
+    font-size: 1.15rem!important;
+    font-weight: bold;
   }
 </style>
