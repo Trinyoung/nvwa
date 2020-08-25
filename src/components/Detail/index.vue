@@ -28,7 +28,6 @@ export default {
   },
   props: ['articleId'],
   created: function () {
-    console.log(this.articleId, '------------>')
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
     })

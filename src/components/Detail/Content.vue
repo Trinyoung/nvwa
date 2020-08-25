@@ -127,9 +127,6 @@ export default {
     margin-top: 1rem;
     text-align: left;
   }
-  .content-container {
-    font-size: 1rem;
-  }
   .list-group-item {
     border: none;
     padding: 0.35rem 0.25rem;
