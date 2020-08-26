@@ -3,8 +3,8 @@
     <v-header></v-header>
     <main role="main" class="container">
       <div class="row">
-          <v-broadside class="col-md-2"></v-broadside>
-          <v-main class="col-md-10"></v-main>
+        <v-broadside class="col-md-2"></v-broadside>
+        <v-main class="col-md-10"></v-main>
       </div>
     </main>
     <v-bottom></v-bottom>
@@ -15,9 +15,6 @@ import header from './Header'
 import broadside from './broadside'
 import main from './main'
 import bottom from '../bottom'
-// import article from './article'
-// import albumn from './albumn'
-// import logger from './Loggers'
 export default {
   components: {
     'v-broadside': broadside,

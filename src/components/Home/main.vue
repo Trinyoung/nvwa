@@ -1,6 +1,6 @@
 <template>
     <main role="main" class="container">
-      <ul class="nav justify-content-center d-flex align-items-center p-3 my-3  bg-purple rounded shadow-sm">
+      <ul class="nav justify-content-center d-flex align-items-center p-3 my-2  bg-purple rounded shadow-sm">
         <li class="nav-item">
           <router-link to="/home">
             <span class="nav-link active item-title">首页</span>

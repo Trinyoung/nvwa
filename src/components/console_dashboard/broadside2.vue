@@ -1,91 +1,94 @@
 <template>
-  <div class="broadSide my-2">
+  <div class="broadSide my-3">
     <nav id="sidebarMenu" class="d-md-block sidebar collapse">
       <div class="avatar-head">
-        <router-link to="/console">
+        <router-link to="/register">
           <img class='avatar' src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
         </router-link>
         <p>Trinyoung</p>
-        <ul class="list-info">
-          <li>文章数: 0</li>
-          <li>浏览量：0</li>
-        </ul>
       </div>
-      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-        <span>常用标签</span>
-      </h6>
-
+      <div class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <strong class="d-inline-box">常用设置</strong>
+      </div>
       <ul class="nav flex-column">
         <li class="nav-item">
           <router-link class="nav-link" to="#">
-            <span data-feather="file-text"></span>
-            Current month
+            文章管理
           </router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" to="#">
-            <span data-feather="file-text"></span>
-            Current month
+            分类管理
           </router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" to="#">
-            <span data-feather="file-text"></span>
-            Current month
+            相册管理
           </router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" to="#">
-            <span data-feather="file-text"></span>
-            Current month
+            标签管理
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" to="#">
+            用户管理
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" to="#">
+            归档管理
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" to="#">
+            大文件管理
           </router-link>
         </li>
       </ul>
 
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-        <span>热门文章</span>
-        <!-- <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-          <span data-feather="plus-circle"></span>
-        </a> -->
+        <span>读者设置</span>
       </h6>
       <ul class="nav flex-column">
         <li class="nav-item">
           <router-link class="nav-link" to="#">
-            <span data-feather="file-text"></span>
-            Current month
+            读者管理
           </router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" to="#">
-            <span data-feather="file-text"></span>
-            Current month
+            黑名单管理
           </router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" to="#">
-            <span data-feather="file-text"></span>
-            Current month
+            白名单管理
           </router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" to="#">
-            <span data-feather="file-text"></span>
-            Current month
+            归档管理
           </router-link>
         </li>
       </ul>
-      <!-- <div class="broadside-bottom">
+      <div class="broadside-bottom">
 
-      </div> -->
+      </div>
     </nav>
   </div>
 </template>
 <script>
+import $ from 'jquery'
 export default {
   data: function () {
     return {
       listItems: ['星辰大海', '人间百态', '车水马龙', '小桥流水', '大漠孤烟']
     }
+  },
+  mounted: function () {
+    $('.selectpicker').selectpicker()
   }
 }
 </script>
@@ -120,13 +123,16 @@ export default {
 .list-info {
   list-style-type: none;
 }
-
-/* .broadside-bottom {
-  height: 5rem;
-} */
-/* .broadSide {
-  background: cadetblue;
-  border: 1px solid green;
-  height: 150px;
-} */
+.d-inline-box {
+  display: inline-block;
+  width: 85%;
+  text-align: left;
+}
+.inline-button {
+  display: inline-block;
+  background:darkgrey;
+  width: 15%;
+  color: aliceblue;
+  border-radius: 50%;
+}
 </style>

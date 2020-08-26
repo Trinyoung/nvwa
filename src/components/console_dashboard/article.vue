@@ -130,51 +130,81 @@
           </router-link>
         </div>
       </div>
-      <div class="text-muted border-bottom border-gray row d-table">
-        <div class="media-body small col-sm-11 col-md-11 d-table-cell">
-          <h6 class="text-gray-dark my-2 d-block">大中国</h6>
-          <p
-            class="my-2"
-          >Donec id elit non mi porta asdfasdfasdfasf到发送到阿斯顿发送dfsgsdfgdsfgdsfgdsfg中文是个我们多看的代码撒打发斯蒂芬大法师的法师打发大水发撒地方撒发大水，到发送到gfsfgsfdgsdfgsdfgfgdsgsdfgdfgsdfgfsgfghdfghdgfhgsdfgsdfgsdfgdsfgdf发阿</p>
-          <strong class="text-gray-dark d-block my-2">@Trinyoung 2020-08-05</strong>
-        </div>
-        <div class="media-body d-table-cell col-sm-1">
-          <svg
-            width="2em"
-            height="2em"
-            viewBox="0 0 16 16"
-            class="bd-placeholder-img mr-2 rounded d-vertical-center"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-            />
-            <path
-              fill-rule="evenodd"
-              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-            />
-          </svg>
-        </div>
-        <div class="media-body d-table-cell col-sm-1">
-          <svg
-            width="2em"
-            height="2em"
-            viewBox="0 0 16 16"
-            class="bd-placeholder-img mr-2 rounded d-vertical-center"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-            />
-            <path
-              fill-rule="evenodd"
-              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-            />
-          </svg>
-        </div>
-      </div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">标题</th>
+            <th scope="col">分类</th>
+            <th scope="col">作者</th>
+            <th scope="col">发布时间</th>
+            <th scope="col">标签</th>
+            <th scope="col">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Markasdfasdfasdfasdfasdfasdfsadfasdfdsfasddfas</td>
+            <td>Markasdfasdfasdfasdfasdfasdfsadfasdfdsfasddfas</td>
+            <td>一江春水向东流</td>
+            <td>2020-08-26 12:30:30</td>
+            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
+            <td class="handle-cell">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary">详情</button>
+                <button type="button" class="btn btn-secondary">编辑</button>
+                <button type="button" class="btn btn-secondary">删除</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+        </tbody>
+      </table>
       <nav aria-label="Page navigation example" id="page-list">
         <ul class="pagination justify-content-center">
           <li class="page-item disabled">
@@ -354,6 +384,22 @@ export default {
   display: inline-block;
   width: auto;
 }
-#add-button:hover {
+
+.table td, th {
+  vertical-align: middle;
+  padding: 0.25rem;
 }
+.table thead {
+  background-color: antiquewhite;
+}
+.table th {
+  padding: 0.75rem;
+}
+.table .btn {
+  height: 2.4rem;
+}
+.table .handle-cell {
+  width: 200px;
+}
+/* .table  */
 </style>

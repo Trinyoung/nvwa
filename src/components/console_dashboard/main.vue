@@ -1,6 +1,6 @@
 <template>
-  <main role="main" class="container">
-    <ul class="nav justify-content-center d-flex align-items-center p-2 my-3 bg-primary rounded shadow-sm header">
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10">
+    <ul class="nav justify-content-center d-flex align-items-center p-2 my-1 bg-primary rounded shadow-sm header">
       <li class="nav-item">
           <router-link to="/console/articles">
             <span class="nav-link active item-title">文章</span>
@@ -18,16 +18,19 @@
         </li>
     </ul>
     <router-view/>
+    <v-bottom></v-bottom>
   </main>
 </template>
 <script>
 import datePicker from 'vue-bootstrap-datetimepicker'
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
 import '@fortawesome/fontawesome-free/css/all.css'
+import bottom from '../bottom'
 import $ from 'jquery'
 export default {
   components: {
-    datePicker
+    datePicker,
+    'v-bottom': bottom
   },
   data: function () {
     return {
@@ -151,7 +154,5 @@ export default {
 .search-input {
   display: inline-block;
   width: auto;
-}
-#add-button:hover {
 }
 </style>
