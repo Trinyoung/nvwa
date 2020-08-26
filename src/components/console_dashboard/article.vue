@@ -1,6 +1,6 @@
 <template>
   <main>
-    <form class="bg-white pd-2 form-container my-1 rounded">
+    <form class="bg-white pd-2 form-container">
       <div class="form-row my-2">
         <div class="col form-inline">
           <strong> 起止日期：</strong>
@@ -36,7 +36,7 @@
         </div>
       </div>
     </form>
-    <div class="my-0 p-3 bg-white rounded shadow-sm" id="main-content">
+    <div class="my-0 p-3 bg-white shadow-sm" id="main-content">
       <div class="align-left">
         <nav aria-label="breadcrumb" class="d-inline-block type-level">
           <ol class="breadcrumb">
@@ -401,5 +401,4 @@ export default {
 .table .handle-cell {
   width: 200px;
 }
-/* .table  */
 </style>
