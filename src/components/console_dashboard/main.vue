@@ -1,6 +1,6 @@
 <template>
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10">
-    <ul class="nav justify-content-center d-flex align-items-center p-2 my-1 bg-primary rounded shadow-sm header">
+    <!-- <ul class="nav justify-content-center d-flex align-items-center p-2 my-1 bg-primary rounded shadow-sm header">
       <li class="nav-item">
           <router-link to="/console/articles">
             <span class="nav-link active item-title">文章</span>
@@ -16,7 +16,7 @@
             <span class="nav-link item-title">连载</span>
           </router-link>
         </li>
-    </ul>
+    </ul> -->
     <router-view/>
     <v-bottom></v-bottom>
   </main>

@@ -1,6 +1,14 @@
 <template>
-  <main>
-    <form class="bg-white pd-2 form-container">
+  <main class="my-1 shadow-lg bg-white ">
+    <nav aria-label="breadcrumb" class="title-nav border-bottom">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          文档管理
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">文章</li>
+      </ol>
+    </nav>
+    <form class="p-3 form-container border-bottom">
       <div class="form-row my-2">
         <div class="col form-inline">
           <strong> 起止日期：</strong>
@@ -8,7 +16,7 @@
           <span id="split-icon" class="justify-center">至</span>
           <date-picker v-model="searchInfo.endDate" :config="options"></date-picker>
         </div>
-        <div class="col-4 form-inline">
+        <div class="col-5 form-inline">
           <strong>发布状态：</strong>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value =0 v-model="searchInfo.published">
@@ -30,13 +38,13 @@
             <option value="">Angular</option>
           </select>
         </div>
-        <div class="col-5 d-align-right">
-          <input class="form-control mr-sm-2 search-input" type="search" placeholder="Search" aria-label="Search" v-model="searchInfo.keyword">
+        <div class="col-5 align-left">
+          <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search" v-model="searchInfo.keyword">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
         </div>
       </div>
     </form>
-    <div class="my-0 p-3 bg-white shadow-sm" id="main-content">
+    <div class="my-0 p-3 shadow-sm" id="main-content">
       <div class="align-left">
         <nav aria-label="breadcrumb" class="d-inline-block type-level">
           <ol class="breadcrumb">
@@ -72,66 +80,66 @@
             </li>
             <li class="breadcrumb-item active" aria-current="page">大中国</li>
           </ol>
+          <div class="d-inline-block">
+            <router-link to="/editor">
+              <button
+                class="btn btn-secondary"
+                data-toggle="tooltip"
+                data-placement="right"
+                title="新建"
+                id="add-button"
+              >
+                <svg
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 16 16"
+                  class="bi bi-plus"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"
+                  />
+                </svg>
+              </button>
+            </router-link>
+            <router-link to="/editor">
+              <button
+                class="btn btn-secondary"
+                data-toggle="tooltip"
+                data-placement="right"
+                title="新建"
+                id="add-button"
+              >
+                <svg
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 16 16"
+                  class="bi bi-plus"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"
+                  />
+                </svg>
+              </button>
+            </router-link>
+          </div>
         </nav>
-        <div class="d-inline-block">
-          <router-link to="/editor">
-            <button
-              class="btn btn-secondary"
-              data-toggle="tooltip"
-              data-placement="right"
-              title="新建"
-              id="add-button"
-            >
-              <svg
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                class="bi bi-plus"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"
-                />
-              </svg>
-            </button>
-          </router-link>
-          <router-link to="/editor">
-            <button
-              class="btn btn-secondary"
-              data-toggle="tooltip"
-              data-placement="right"
-              title="新建"
-              id="add-button"
-            >
-              <svg
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                class="bi bi-plus"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"
-                />
-              </svg>
-            </button>
-          </router-link>
-        </div>
       </div>
       <table class="table table-bordered">
-        <thead>
+        <thead class="thead-light">
           <tr>
             <th scope="col">#</th>
             <th scope="col">标题</th>
@@ -145,8 +153,8 @@
         <tbody>
           <tr>
             <th scope="row">1</th>
-            <td>Markasdfasdfasdfasdfasdfasdfsadfasdfdsfasddfas</td>
-            <td>Markasdfasdfasdfasdfasdfasdfsadfasdfdsfasddfas</td>
+            <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
+            <td>音乐/流行音乐/大中国</td>
             <td>一江春水向东流</td>
             <td>2020-08-26 12:30:30</td>
             <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
@@ -177,7 +185,7 @@
             <td>@mdo</td>
           </tr>
           <tr>
-            <th scope="row">1</th>
+            <th scope="row">4</th>
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
@@ -186,7 +194,7 @@
             <td>@mdo</td>
           </tr>
           <tr>
-            <th scope="row">2</th>
+            <th scope="row">5</th>
             <td>Jacob</td>
             <td>Thornton</td>
             <td>@fat</td>
@@ -195,13 +203,73 @@
             <td>@mdo</td>
           </tr>
           <tr>
-            <th scope="row">3</th>
+            <th scope="row">6</th>
             <td>Larry</td>
             <td>the Bird</td>
             <td>@twitter</td>
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">7</th>
+            <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
+            <td>音乐/流行音乐/大中国</td>
+            <td>一江春水向东流</td>
+            <td>2020-08-26 12:30:30</td>
+            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
+            <td class="handle-cell">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary">详情</button>
+                <button type="button" class="btn btn-secondary">编辑</button>
+                <button type="button" class="btn btn-secondary">删除</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">8</th>
+            <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
+            <td>音乐/流行音乐/大中国</td>
+            <td>一江春水向东流</td>
+            <td>2020-08-26 12:30:30</td>
+            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
+            <td class="handle-cell">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary">详情</button>
+                <button type="button" class="btn btn-secondary">编辑</button>
+                <button type="button" class="btn btn-secondary">删除</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">9</th>
+            <td>windows子系统ubuntu 配置node开发环境</td>
+            <td>音乐/流行音乐/大中国</td>
+            <td>一江春水向东流</td>
+            <td>2020-08-26 12:30:30</td>
+            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
+            <td class="handle-cell">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary">详情</button>
+                <button type="button" class="btn btn-secondary">编辑</button>
+                <button type="button" class="btn btn-secondary">删除</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">10</th>
+            <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
+            <td>音乐/流行音乐/大中国</td>
+            <td>一江春水向东流</td>
+            <td>2020-08-26 12:30:30</td>
+            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
+            <td class="handle-cell">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary">详情</button>
+                <button type="button" class="btn btn-secondary">编辑</button>
+                <button type="button" class="btn btn-secondary">删除</button>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -311,6 +379,16 @@ export default {
 }
 </script>
 <style scoped>
+.title {
+  text-align: left;
+}
+.title-nav .breadcrumb-item {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.title-nav .breadcrumb {
+  
+}
 .type-level {
   width: 85%;
 }
@@ -389,9 +467,9 @@ export default {
   vertical-align: middle;
   padding: 0.25rem;
 }
-.table thead {
+/* .table thead {
   background-color: antiquewhite;
-}
+} */
 .table th {
   padding: 0.75rem;
 }
