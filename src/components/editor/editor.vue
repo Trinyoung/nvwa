@@ -31,7 +31,7 @@
     <div class="row row-container">
       <div class="col-md-11 col-lg-11 col-sm-11 content-container">
         <v-markdownEditor v-if="isMarkdown" class='mavonEditor' v-model="content" @save="saveMavon"></v-markdownEditor>
-        <v-editor v-if="!isMarkdown" class="quillEditor shadow border-0" v-model="content"></v-editor>
+        <v-editor v-if="!isMarkdown" class="quillEditor shadow border-0" v-model="articleObj.content"></v-editor>
       </div>
       <div class="col-md-1 right-side col-sm-0">
         <div class="sidebar">
@@ -182,8 +182,8 @@ export default {
       const id = this.articleId
       axios.get(`/api/articles/${id}`).then((result) => {
         const { content, title } = result.data.data
-        this.title = title
-        this.content = content
+        this.articleObj.title = title
+        this.articleObj.content = content
       })
     },
     addReffer () {
@@ -248,8 +248,6 @@ export default {
 }
 .quillEditor {
   height: inherit;
-  /* height:500px; */
-  /* background: #e9ecef; */
 }
 .titleInput {
   height: inherit!important;

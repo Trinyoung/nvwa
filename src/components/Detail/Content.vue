@@ -36,7 +36,6 @@
       </div>
       <div class="content-container" v-html="contentHtml">
       </div>
-      <div></div>
       <div class="reffer-container pt-3">
         <h5 class="border-bottom border-gray pb-2 mb-0">文献引用</h5>
         <ul class="list-group list-group-container">
@@ -48,7 +47,17 @@
           </li>
         </ul>
       </div>
-      <div class="row my-3">
+      <div class="tags-container my-3">
+        <h5 class="border-bottom border-gray pb-2 mb-0 text-left">标签 ({{tags.length}})</h5>
+        <ul class="list-group list-group-horizontal mt-1">
+          <li class="list-group-item" v-for="item in tags" :key="item.id">
+            <span class="tag-icon d-inline-block">
+              {{item}}
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div class="row my-2">
         <div class="col-sm-4">
           <b>上一篇：</b><a href="#">龙的传人</a>
         </div>
@@ -79,7 +88,8 @@ export default {
     return {
       contentHtml: '',
       title: '',
-      author: ''
+      author: '',
+      tags: ['前端', 'vue', 'nodejs']
     }
   },
   props: ['articleId'],
@@ -93,6 +103,7 @@ export default {
         const { content, title } = result.data.data
         const contentHtml = result.data.data.content_html
         this.contentHtml = contentHtml || content
+        // this.
         this.title = title
       })
     },
@@ -148,6 +159,12 @@ export default {
   .content-container {
     text-align: left;
     font-size: 0.9rem;
+  }
+  .tag-icon {
+    padding: 2px 15px 2px 15px;
+    background: green;
+    border-radius: 5px;
+    color: aliceblue;
   }
   h1 {
     font-size:1.5rem!important;
