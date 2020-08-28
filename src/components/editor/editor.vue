@@ -1,4 +1,3 @@
-/* eslint-disable vue/valid-v-model */
 <template>
   <div class="editor-container container col-md-9 my-1 p-3 bg-white" id="main-content">
     <nav aria-label="breadcrumb" class="title-nav border-bottom">

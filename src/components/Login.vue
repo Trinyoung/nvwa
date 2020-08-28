@@ -2,7 +2,7 @@
   <form class="loginForm">
     <div class="container">
       <div class="form-group row loginHead pd-3">
-        <div class="col-sm-12"><span class="loginTitle">登录</span></div>
+        <div class="col-sm-12"><span class="loginTitle">登 录</span></div>
       </div>
       <div class="form-group row login-item">
         <div class="input-group mb-3">
@@ -28,7 +28,7 @@
           <input type="password" class="form-control" placeholder="请输入密码" aria-label="password" aria-describedby="basic-addon1" v-model="password">
         </div>
       </div>
-      <div class="row form-group width-8 mb-3">
+      <div class="row form-group width-8 mb-2">
         <div class='col-sm-6'>
           <input type="checkbox" class="form-check-input" id="exampleCheck1" v-model="rememberMe" value=true>
           <label class="form-check-label" for="exampleCheck1">记住我</label>
@@ -39,19 +39,21 @@
           </router-link>
         </div>
       </div>
-      <div class="row form-group">
+      <div class="row form-group mb-1">
         <div class="col-sm-2">
 
         </div>
-        <div class="col-sm-4">
-          <Button type='submit' class='button-left btn-primary btn line-input-button' v-on:click="login">Login</Button>
+        <div class="col-sm-8">
+          <Button type='submit' class='button-left btn-primary btn line-input-button width-8' v-on:click="login">登录</Button>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-2">
+        </div>
+      </div>
+      <div class="row form-group mb-0">
+        <div class="col-sm-12 font-8">
           <router-link to="/register">
-            <Button  type="submit" class="button-right btn-primary btn line-input-button">Register</Button>
+            还没有注册？ 申请注册
           </router-link>
-        </div>
-          <div class="col-sm-2">
         </div>
       </div>
     </div>
@@ -91,82 +93,85 @@ export default {
 }
 </script>>
 <style scoped>
-.loginForm {
-  background-color: white;
-  border-radius: .5rem;
-  margin: auto;
-  top: 50%;
-  position: relative;
-  width: 30rem;
-  margin-top: -10rem;
-  padding-bottom: 0.5rem;
-}
+  .font-8 {
+    font-size: .8rem;
+  }
+  .loginForm {
+    background-color: white;
+    border-radius: .5rem;
+    margin: auto;
+    top: 50%;
+    position: relative;
+    width: 30rem;
+    margin-top: -10rem;
+    padding-bottom: 0.5rem;
+  }
 
-.labeltitle {
-  font-size: 1rem;
-  color: green;
-  margin-right: 0.2rem;
-}
-.loginHead {
-  text-align: center;
-  color: blue;
-  background: wheat;
-  border-radius: 0.5rem 0.5rem 0 0;
-}
-.button-left {
-  margin-right: 0.5rem;
-  width: 6rem;
-}
+  .labeltitle {
+    font-size: 1rem;
+    color: green;
+    margin-right: 0.2rem;
+  }
+  .loginHead {
+    text-align: center;
+    color: blue;
+    background: wheat;
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+  .button-left {
+    margin-right: 0.5rem;
+    width: 6rem;
+  }
 
-.button-right {
-  width: 6rem;
-  background: rgb(96, 96, 167);
-  /* margin-bottom: 0.5rem; */
-}
-.login-item {
-  /* display: inline-block; */
-  margin: 0 auto;
-  width: 80%;
-  font-size: 1.1rem;
+  .button-right {
+    width: 6rem;
+    background: rgb(96, 96, 167);
+    /* margin-bottom: 0.5rem; */
+  }
+  .login-item {
+    /* display: inline-block; */
+    margin: 0 auto;
+    width: 80%;
+    font-size: 1.1rem;
 
-}
-.width-8 {
-  width: 80%;
-  margin: 0 auto;
-  /* font-size: 0.8rem; */
-}
-.input-group-text {
-  background-color: none;
-}
-.line-text-middle {
-  display: inline-block;
-  line-height: 2.5rem;
-  height: 100%;
-  font-size:1.1rem;
-  font-weight: bold;
-}
-.line-input-middle {
-  display: inline-block;
-  line-height: 1.2rem;
-  height: 100%;
-  font-size:1.1rem;
-}
+  }
+  .width-8 {
+    width: 80%;
+    margin: 0 auto;
+    /* font-size: 0.8rem; */
+  }
+  .input-group-text {
+    background-color: none;
+  }
+  .line-text-middle {
+    display: inline-block;
+    line-height: 2.5rem;
+    height: 100%;
+    font-size:1.1rem;
+    font-weight: bold;
+  }
+  .line-input-middle {
+    display: inline-block;
+    line-height: 1.2rem;
+    height: 100%;
+    font-size:1.1rem;
+  }
 
-.loginTitle {
-  font-size: 1.5rem;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  display: inline-block;
-  line-height: 3.2rem;
-}
+  .loginTitle {
+    font-size: 1.5rem;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: inline-block;
+    line-height: 3.2rem;
+  }
 
-.line-input-button {
-  display: inline-block;
-  line-height: 1.5rem;
-  height: 100%;
-  font-size:1.2rem;
-}
-#rememberMe {
-  border: 1px solid green;
-  margin-bottom: 2px;
-}
+  .line-input-button {
+    display: inline-block;
+    line-height: 1.5rem;
+    height: 100%;
+    font-size:1.2rem;
+  }
+  #rememberMe {
+    border: 1px solid green;
+    margin-bottom: 2px;
+  }
 </style>
