@@ -12,8 +12,8 @@
   </div>
 </template>
 <script>
-import header from './Header'
-import broadside from './Broadside'
+import header from '../Header'
+import broadside from '../Broadside'
 import main from './Content'
 import rightside from './Rightside'
 import bottom from '../bottom'

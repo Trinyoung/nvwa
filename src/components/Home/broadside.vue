@@ -100,6 +100,7 @@ export default {
   background-image: url('../../../static/侧边栏背景.jpeg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  /* min-height: calc(100vh -48px); */
 }
 .broadSide .text-muted {
   font-size: 1.1rem;

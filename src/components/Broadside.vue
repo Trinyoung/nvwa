@@ -1,5 +1,5 @@
 <template>
-  <div class="broadSide my-3">
+  <div class="broadSide my-1">
     <nav id="sidebarMenu" class="d-md-block sidebar collapse">
       <div class="avatar-head">
         <router-link to="/console">
@@ -100,6 +100,7 @@ export default {
 }
 .broadSide {
   color: aliceblue;
+  min-height: calc(100vh -48px);
 }
 .broadSide .text-muted {
   font-size: 1.1rem;
@@ -115,13 +116,16 @@ export default {
 
 #sidebarMenu {
   padding-top: 1rem;
-  background-image: url('../../../static/侧边栏背景.jpeg');
+  /* background-image: url('../../../static/侧边栏背景.jpeg'); */
+  background-color: #033553;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   position: sticky;
   border-radius: 1rem;
   left: 0;
   top: 0;
+  min-height: calc(100vh - 48px);
+  /* max-height: calc(100vh -48px); */
 }
 
 .list-info {

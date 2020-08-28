@@ -15,6 +15,8 @@
             <li class="media pt-2">
               <p class="media-body pb-2 mb-0 lh-125 border-bottom border-gray pl-1">
                 <strong class="d-block text-gray-dark">
+                  <div class="d-inline-block new-icon">新</div>
+                  <div class="d-inline-block hot-icon">热</div>
                   掌上吉祥2.0 jssdk 功能清单
                 </strong>
                 <span class="d-block text-muted">
@@ -56,7 +58,10 @@
             </li>
             <li class="media pt-2">
               <p class="media-body pb-2 mb-0 lh-125 border-bottom border-gray pl-1">
-                <strong class="d-block text-gray-dark">掌上吉祥2.0 jssdk 功能清单</strong>
+                <strong class="d-block text-gray-dark">
+                  <div class="d-inline-block hot-icon">热</div>
+                  掌上吉祥2.0 jssdk 功能清单
+                </strong>
                 <span class="d-block text-muted">
                   Donec id elit non mi porta gravida at eget metus.每个人得到的阿是大法师的发送撒的发生的阿阿斯顿发斯顿发生阿阿斯顿发送到阿斯顿发生...
                 </span>
@@ -153,5 +158,17 @@ export default {
   .item-title {
     color: white;
     font-size: 1.1rem;
+  }
+  .new-icon {
+    border:1px solid green;
+    color: green;
+    font-weight: 100;
+    padding: 0 5px 0 5px;
+  }
+  .hot-icon {
+    border: 1px solid red;
+    color: red;
+    font-weight: 100;
+    padding: 0 5px 0 5px;
   }
 </style>

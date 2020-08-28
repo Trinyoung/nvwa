@@ -1,6 +1,6 @@
 <template>
   <main role="main" class="container">
-    <div class="container p-3 rounded my-3 shadow-sm content-header justify-content-center">
+    <div class="container p-3 rounded my-1 shadow-sm content-header justify-content-center">
       <div class="row my-1">
         <div class="col-sm-5">
           <b>上一篇：</b><a href="#">龙的传人</a>
@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <div class="my-1 pt-0 p-3 bg-white rounded shadow-sm">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
@@ -23,21 +23,22 @@
       </nav>
       <h1 class="border-bottom border-gray pb-2 mb-0 col-title">{{title}}</h1>
       <div class="text-muted article-tip">
-        <ul class="list-group list-group-horizontal">
-          <li class="list-group-item"><b>作者：</b> Trinyoung</li>
-          <li class="list-group-item"><b>更新时间:</b> 2020-08-02</li>
-          <li class="list-group-item">
-            <b>字数：</b> 2000
+        <ul class="list-group list-group-horizontal mt-1">
+          <li class="list-group-item border-right"><b>作者：</b>Trinyoung</li>
+          <li class="list-group-item border-right"><b>更新时间：</b>2020-08-02</li>
+          <li class="list-group-item border-right">
+            <b>字数：</b>2000
           </li>
           <li class="list-group-item">
-            <b>阅读数：</b> 2000
+            <b>阅读数：</b>2000
           </li>
         </ul>
       </div>
       <div class="content-container" v-html="contentHtml">
       </div>
+      <div></div>
       <div class="reffer-container pt-3">
-        <h4 class="border-bottom border-gray pb-2 mb-0">文献引用</h4>
+        <h5 class="border-bottom border-gray pb-2 mb-0">文献引用</h5>
         <ul class="list-group list-group-container">
           <li class="list-group-item">
             <b>1.</b> <span>我们的人阿斯顿发生</span>

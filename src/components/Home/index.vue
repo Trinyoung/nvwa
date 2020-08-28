@@ -3,7 +3,7 @@
     <v-header></v-header>
     <main role="main" class="container">
       <div class="row">
-        <v-broadside class="col-md-2"></v-broadside>
+        <v-broadside class="col-md-2 broadside"></v-broadside>
         <v-main class="col-md-10"></v-main>
       </div>
     </main>
@@ -11,8 +11,8 @@
   </div>
 </template>
 <script>
-import header from './Header'
-import broadside from './broadside'
+import header from '../Header'
+import broadside from '../broadside'
 import main from './main'
 import bottom from '../bottom'
 export default {
@@ -29,5 +29,16 @@ export default {
     .main-container：{
       width: 1500px;
     }
+  }
+  @media (min-width: 1400px) {
+    .container {
+      max-width: 1300px;
+    }
+  }
+
+  .broadside {
+    padding: 0;
+    position: sticky;
+    top: 0
   }
 </style>
