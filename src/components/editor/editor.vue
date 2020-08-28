@@ -10,7 +10,7 @@
       </ol>
     </nav>
     <div class="row my-2">
-      <div class="col-md-10 col-lg-11 col-sm-10 titileInput">
+      <div class="col-md-10 col-lg-10 col-sm-10 titileInput">
         <div class="input-group flex-nowrap">
           <div class="input-group-prepend">
             <span class="input-group-text" id="addon-wrapping">标 题</span>
@@ -23,7 +23,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-2 col-lg-1 col-sm-2">
+      <div class="col-md-2 col-lg-2 col-sm-2">
         <button class="btn btn-primary publish-button" @click="publish">
           发布
         </button>
@@ -32,7 +32,7 @@
     <div class="row row-container">
       <div class="col-md-11 col-lg-11 col-sm-11 content-container">
         <v-markdownEditor v-if="isMarkdown" class='mavonEditor' v-model="content" @save="saveMavon"></v-markdownEditor>
-        <v-editor v-if="!isMarkdown" class="quillEditor"></v-editor>
+        <v-editor v-if="!isMarkdown" class="quillEditor shadow border-0" v-model="content"></v-editor>
       </div>
       <div class="col-md-1 right-side col-sm-0">
         <div class="sidebar">
@@ -79,31 +79,49 @@
           <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="public">
         </div>
       </div>
-      <div class="col-md-2 col-lg-1 my-2">
-        <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">文献</button>
-      </div>
     </form>
-    <div class="collapse container" id="collapseExample">
-      <form class="border">
-        <div class="form-group row my-1">
-          <label for="link" class="col-sm-2 col-form-label">描 述：</label>
-          <div class="col-sm-10">
-            <input type="password" class="form-control" id="link" placeholder="请输入描述">
-          </div>
+    <div class="form row text-sm-left other-set">
+      <div class="col-sm-12 col-md-12 col-lg-12 my-2 d-flex">
+        <label for="reffer-input" class="font-weight-bold form-check-inline">文献：</label>
+        <div class="form-group d-flex mb-0 pr-3">
+          <input type="text" class="form-control" placeholder="请输入文献标题" id="reffer-input" v-model="refferEdit.refferValue">
         </div>
-        <div class="form-group row my-1">
-          <label for="link" class="col-sm-2 col-form-label">链 接：</label>
-          <div class="col-sm-10">
-            <input type="password" class="form-control" id="link" placeholder="请输入链接">
-          </div>
+        <div class="form-group d-flex mb-0 pr-3">
+          <input type="text" class="form-control" placeholder="请输入文献链接" v-model="refferEdit.refferLink">
         </div>
-        <div class="form-group row my-1">
-          <div class="col-sm-12">
-            <button class="btn btn-primary">确 认</button>
-          </div>
+        <div class="form-group mb-0">
+          <button class="btn btn-primary" @click="addReffer"> 添 加 </button>
         </div>
-      </form>
+      </div>
     </div>
+    <ul class="list-group">
+      <li class="list-group-item" v-for="(item, index) in articleObj.reffers" :key="item.value">
+        <div v-if="!item.status" class="row">
+          <div class="col">
+            <a :href= item.link class="d-inline-block">{{index + 1}}. {{item.value}}</a>
+          </div>
+          <div>
+            <div class="btn-group mr-2" role="group" aria-label="First group">
+              <button type="button" class="btn btn-secondary" @click="refferStatusChange(item)">编辑</button>
+              <button type="button" class="btn btn-secondary">删除</button>
+            </div>
+          </div>
+        </div>
+        <form v-if ="item.status">
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="请输入文献名称" v-model="item.value">
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="请输入文献链接" v-model="item.link">
+            </div>
+            <div class="col-1">
+              <button class="btn btn-primary" @click="refferChange(index, item.value, item.link)">确定</button>
+            </div>
+          </div>
+        </form>
+      </li>
+    </ul>
   </div>
 </template>
 <script>
@@ -122,14 +140,20 @@ export default {
   data: function () {
     return {
       isMarkdown: true,
-      content: '',
-      category: '1',
-      title: '',
-      subTitle: '',
-      render: '',
-      tags: [],
-      reffers: [],
-      public: true
+      articleObj: {
+        content: '',
+        category: '1',
+        title: '',
+        subTitle: '',
+        render: '',
+        tags: [],
+        reffers: [],
+        public: true
+      },
+      refferEdit: {
+        refferValue: '',
+        refferLink: ''
+      }
     }
   },
   created: function () {
@@ -142,7 +166,7 @@ export default {
     },
     publish: function () {
       this.render = $('.v-note-read-content').html()
-      const { title, category, subTitle, render, tags, content, reffers, articleId } = this
+      const { title, category, subTitle, render, tags, content, reffers, articleId } = this.articleObj
       const data = {
         title, category, subTitle, content_html: render, tags, reffers, content, published: 1
       }
@@ -155,22 +179,47 @@ export default {
       this.render = render
       this.content = value
     },
-    getAticle: function () {
+    getAticle () {
       const id = this.articleId
       axios.get(`/api/articles/${id}`).then((result) => {
         const { content, title } = result.data.data
         this.title = title
         this.content = content
       })
+    },
+    addReffer () {
+      if (!this.refferEdit.refferValue) {
+        return alert('请填写文献名称')
+      }
+      const obj = {
+        value: this.refferEdit.refferValue,
+        link: this.refferEdit.refferLink,
+        status: false
+      }
+      this.articleObj.reffers.push(obj)
+      this.refferEdit.refferValue = ''
+      this.refferEdit.refferLink = ''
+    },
+    refferStatusChange (item) {
+      return (() => {
+        console.log(this.articleObj.reffers)
+        item.status = !item.status
+      })()
+    },
+    refferChange (index, value, link) {
+      return (() => {
+        this.articleObj.reffers[index].value = value
+        this.articleObj.reffers[index].link = link
+        this.articleObj.reffers[index].status = false
+      })()
     }
   }
 }
 </script>
 <style scoped>
-/* .hegith-100 {
+.height-100 {
   height: 100%;
-  line-height: 100%;
-} */
+}
 .row {
   margin-right: 0;
 }
@@ -179,18 +228,14 @@ export default {
 }
 #main-content {
   min-height: calc(100vh - 48px);
-  /* background-color:; */
 }
-
+.content-container {
+  height:calc(100vh - 200px);
+}
 .other-set {
   background: #e9ecef;
   margin-left: 0;
 }
-/* .category-container {
-  background: sandybrown;
-  margin-left: 0;
-  border-radius: 1rem;
-} */
 
 .form-check-inline {
   height: 100%;
@@ -198,19 +243,14 @@ export default {
 .v-note-wrapper {
   z-index: inherit;
 }
-.quillEditor {
-  /* background: white; */
-  /* height: inherit; */
-}
+
 .mavonEditor {
   height: inherit;
 }
-.content-container {
-  height: 100%;
-}
-.row-container {
-  height: 100%;
-  /* padding-top: 0.1rem; */
+.quillEditor {
+  height: inherit;
+  /* height:500px; */
+  /* background: #e9ecef; */
 }
 .titleInput {
   height: inherit!important;
@@ -265,7 +305,6 @@ export default {
   font-weight: bold;
   width: 80%;
 }
-
 .publish-button {
   width: 100%;
 }
@@ -273,7 +312,10 @@ export default {
   margin-bottom: 0;
   flex:1;
 }
-
+.d-flex {
+  flex:1;
+  margin-bottom: 0;
+}
 .list-item {
   position: relative;
   display: block;
