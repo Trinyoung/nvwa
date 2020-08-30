@@ -386,9 +386,9 @@ export default {
   font-weight: bold;
   font-size: 1.5rem;
 }
-.title-nav .breadcrumb {
-  
-}
+/* .title-nav .breadcrumb {
+
+} */
 .type-level {
   width: 85%;
 }

@@ -116,7 +116,6 @@ export default {
 
 #sidebarMenu {
   padding-top: 1rem;
-  /* background-image: url('../../../static/侧边栏背景.jpeg'); */
   background-color: #033553;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -125,7 +124,6 @@ export default {
   left: 0;
   top: 0;
   min-height: calc(100vh - 48px);
-  /* max-height: calc(100vh -48px); */
 }
 
 .list-info {

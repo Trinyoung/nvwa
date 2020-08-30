@@ -7,7 +7,7 @@ const obj = {
   name: 'console',
   component: console,
   children: [{
-    path: '',
+    path: '/',
     name: 'home',
     component: article
   }, {
