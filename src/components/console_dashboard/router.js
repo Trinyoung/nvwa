@@ -1,6 +1,7 @@
 import article from '@/components/console_dashboard/article'
 import logger from '@/components/console_dashboard/logger'
 import console from '@/components/console_dashboard'
+import types from '@/components/console_dashboard/types'
 
 const obj = {
   path: '/console',
@@ -8,16 +9,20 @@ const obj = {
   component: console,
   children: [{
     path: '/',
-    name: 'home',
+    name: 'console_home',
     component: article
   }, {
     path: 'articles',
-    name: 'article',
+    name: 'console_article',
     component: article
   }, {
     path: 'logger',
-    name: 'logger',
+    name: 'console_logger',
     component: logger
+  }, {
+    path: 'types',
+    name: 'types',
+    component: types
   }]
 }
 export default obj

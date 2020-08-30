@@ -1,6 +1,6 @@
 <template>
   <main class="my-1 shadow-lg bg-white ">
-    <nav aria-label="breadcrumb" class="title-nav">
+    <nav aria-label="breadcrumb" class="title-nav border-bottom">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           文档管理
@@ -8,7 +8,7 @@
         <li class="breadcrumb-item active" aria-current="page">文章</li>
       </ol>
     </nav>
-    <form class="pb-2 pr-3 pl-3 pt-0 form-container border-bottom">
+    <form class="p-3 form-container border-bottom">
       <div class="form-row my-2">
         <div class="col form-inline">
           <strong> 起止日期：</strong>
@@ -43,45 +43,100 @@
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
         </div>
       </div>
-      <div class="form-row my-2">
-        <div class="col form-inline">
-          <label for="type-select"><strong>分类选择：</strong> </label>
-          <select name="" id="type-select" class="selectpicker border border-gray rounded" multiple data-live-search="true" title="一级分类">
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-          </select>
-          <select name="" id="type-select" class="selectpicker border border-gray rounded" multiple data-live-search="true" title="二级分类">
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-          </select>
-        </div>
-      </div>
     </form>
     <div class="my-0 p-3 shadow-sm" id="main-content">
-      <div class="btn-toolbar my-1 pb-1" role="toolbar" aria-label="Toolbar with button groups">
-        <div class="btn-group mr-2" role="group" aria-label="First group">
-          <div class="dropdown">
-            <div class="d-inline-block select-handle">
-              <input type="checkbox">
-              <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">             </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+      <div class="align-left">
+        <nav aria-label="breadcrumb" class="d-inline-block type-level">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="#">音乐</a>
+            </li>
+            <li class="breadcrumb-item">
+              <div class="dropdown">
+                <a data-toggle="dropdown" id="add-button">流行音乐</a>
+                <div class="dropdown-menu" id="dropdownMenu2" aria-labelledby="dropdown02">
+                  <ul>
+                    <li class="dropdown-item">
+                      <router-link to="/editor">新建文章</router-link>
+                    </li>
+                    <li class="dropdown-item">
+                      <router-link to="/">新建日志</router-link>
+                    </li>
+                    <li class="dropdown-item">
+                      <router-link to="/">新建系列</router-link>
+                    </li>
+                    <li class="dropdown-item">
+                      <router-link to="/">新建相册</router-link>
+                    </li>
+                    <li class="dropdown-item">
+                      <router-link to="/">新建标签</router-link>
+                    </li>
+                    <li class="dropdown-item">
+                      <router-link to="/">上传资源</router-link>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">大中国</li>
+          </ol>
+          <div class="d-inline-block">
+            <router-link to="/editor">
+              <button
+                class="btn btn-secondary"
+                data-toggle="tooltip"
+                data-placement="right"
+                title="新建"
+                id="add-button"
+              >
+                <svg
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 16 16"
+                  class="bi bi-plus"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"
+                  />
+                </svg>
+              </button>
+            </router-link>
+            <router-link to="/editor">
+              <button
+                class="btn btn-secondary"
+                data-toggle="tooltip"
+                data-placement="right"
+                title="新建"
+                id="add-button"
+              >
+                <svg
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 16 16"
+                  class="bi bi-plus"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"
+                  />
+                </svg>
+              </button>
+            </router-link>
           </div>
-        </div>
-        <div class="btn-group mr-2" role="group" aria-label="Second group">
-          <button type="button" class="btn btn-secondary">删除</button>
-        </div>
-        <div class="btn-group" role="group" aria-label="Third group">
-          <button type="button" class="btn btn-secondary">新增</button>
-        </div>
+        </nav>
       </div>
       <table class="table table-bordered">
         <thead class="thead-light">
@@ -324,12 +379,6 @@ export default {
 }
 </script>
 <style scoped>
-.select-handle {
-  background: cadetblue;
-  line-height: 100%;
-  height: 100%;
-  width: 50px;
-}
 .title {
   text-align: left;
 }
@@ -418,9 +467,7 @@ export default {
   vertical-align: middle;
   padding: 0.25rem;
 }
-/* .table thead {
-  background-color: antiquewhite;
-} */
+
 .table th {
   padding: 0.75rem;
 }

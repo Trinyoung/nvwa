@@ -31,7 +31,7 @@
     <div class="row row-container">
       <div class="col-md-11 col-lg-11 col-sm-11 content-container">
         <v-markdownEditor v-if="isMarkdown" class='mavonEditor' v-model="content" @save="saveMavon"></v-markdownEditor>
-        <v-editor v-if="!isMarkdown" class="quillEditor shadow border-0" v-model="articleObj.content"></v-editor>
+        <v-editor v-if="!isMarkdown" class="quillEditor border-0" v-model="articleObj.content"></v-editor>
       </div>
       <div class="col-md-1 right-side col-sm-0">
         <div class="sidebar">
