@@ -12,6 +12,11 @@
           </router-link>
         </li>
         <li class="nav-item">
+          <router-link to="/home/types">
+            <span class="nav-link active item-title">分类</span>
+          </router-link>
+        </li>
+        <li class="nav-item">
           <router-link to="/home/logger">
             <span class="nav-link item-title">日志</span>
           </router-link>

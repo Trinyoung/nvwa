@@ -2,6 +2,8 @@ import article from '@/components/console_dashboard/article'
 import logger from '@/components/console_dashboard/logger'
 import console from '@/components/console_dashboard'
 import types from '@/components/console_dashboard/types'
+import typeEdit from '@/components/console_dashboard/type_edit'
+import tags from '@/components/console_dashboard/tags'
 
 const obj = {
   path: '/console',
@@ -23,6 +25,14 @@ const obj = {
     path: 'types',
     name: 'types',
     component: types
+  }, {
+    path: ':types/articles',
+    name: 'console_article',
+    component: article
+  }, {
+    path: 'tags',
+    name: 'tags',
+    component: tags
   }]
 }
 export default obj

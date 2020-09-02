@@ -1,86 +1,55 @@
 <template>
-  <main class="my-1 shadow-lg bg-white ">
+  <main class="my-1 shadow-lg bg-white">
     <nav aria-label="breadcrumb" class="title-nav">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          文档管理
+          标签管理
         </li>
-        <li class="breadcrumb-item active" aria-current="page">文章</li>
       </ol>
     </nav>
     <form class="pb-2 pr-3 pl-3 pt-0 form-container border-bottom">
       <div class="form-row my-2">
         <div class="col form-inline">
-          <strong> 起止日期：</strong>
-          <date-picker v-model="searchInfo.startDate" :config="options" @dp-hide="showDatePickResult"></date-picker>
-          <span id="split-icon" class="justify-center">至</span>
-          <date-picker v-model="searchInfo.endDate" :config="options"></date-picker>
         </div>
-        <div class="col-5 form-inline">
-          <strong>发布状态：</strong>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value =0 v-model="searchInfo.published">
-            <label class="form-check-label" for="inlineCheckbox1">已发布</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value =1 v-model="searchInfo.published">
-            <label class="form-check-label" for="inlineCheckbox2">未发布</label>
-          </div>
-        </div>
-      </div>
-      <div class="form-row my-2">
-        <div class="col form-inline">
-          <label for=""><strong>标签选择：</strong> </label>
-          <select name="" id="" class="selectpicker border border-gray rounded" multiple data-live-search="true" title="选择标签">
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-          </select>
-        </div>
-        <div class="col-5 align-left">
+        <div class="col-5 form-inline align-left">
+          <!-- <div class="col align-left"> -->
           <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search" v-model="searchInfo.keyword">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
-        </div>
-      </div>
-      <div class="form-row my-2">
-        <div class="col form-inline">
-          <label for="type-select"><strong>分类选择：</strong> </label>
-          <select name="" id="type-select" class="selectpicker border border-gray rounded" multiple data-live-search="true" title="一级分类">
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-          </select>
-          <select name="" id="type-select" class="selectpicker border border-gray rounded" multiple data-live-search="true" title="二级分类">
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-          </select>
+          <button class="ml-2 btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
+          <button class="ml-2 btn btn-outline-primary my-2 my-sm-0" type="">新增</button>
+        <!-- </div> -->
         </div>
       </div>
     </form>
     <div class="my-0 p-3 shadow-sm" id="main-content">
-      <div class="btn-toolbar my-1 pb-1" role="toolbar" aria-label="Toolbar with button groups">
-        <div class="btn-group mr-2" role="group" aria-label="First group">
-          <div class="dropdown">
-            <div class="d-inline-block select-handle">
-              <input type="checkbox">
-              <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">             </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
+      <div class="breadcrumb">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#edit-type">新增</button>
+        <div class="modal fade" tabindex="-1" role="dialog" id="edit-type" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">分类管理</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
             </div>
+            <div class="modal-body">
+            <form>
+              <div class="form-group row">
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="recipient-name" placeholder="名称">
+                </div>
+              </div>
+              <div class="form-group row">
+                
+              </div>
+            </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary">提交</button>
+            </div>
+        </div>
           </div>
-        </div>
-        <div class="btn-group mr-2" role="group" aria-label="Second group">
-          <button type="button" class="btn btn-secondary">删除</button>
-        </div>
-        <div class="btn-group" role="group" aria-label="Third group">
-          <button type="button" class="btn btn-secondary">新增</button>
         </div>
       </div>
       <table class="table table-bordered">
@@ -89,8 +58,7 @@
             <th scope="col">#</th>
             <th scope="col">标题</th>
             <th scope="col">分类</th>
-            <th scope="col">作者</th>
-            <th scope="col">发布时间</th>
+            <th scope="col">创建时间</th>
             <th scope="col">标签</th>
             <th scope="col">操作</th>
           </tr>
@@ -100,12 +68,10 @@
             <th scope="row">1</th>
             <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
             <td>音乐/流行音乐/大中国</td>
-            <td>一江春水向东流</td>
             <td>2020-08-26 12:30:30</td>
             <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">详情</button>
                 <button type="button" class="btn btn-secondary">编辑</button>
                 <button type="button" class="btn btn-secondary">删除</button>
               </div>
@@ -115,7 +81,7 @@
             <th scope="row">2</th>
             <td>Jacob</td>
             <td>Thornton</td>
-            <td>@fat</td>
+            <!-- <td>@fat</td> -->
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
@@ -124,7 +90,7 @@
             <th scope="row">3</th>
             <td>Larry</td>
             <td>the Bird</td>
-            <td>@twitter</td>
+            <!-- <td>@twitter</td> -->
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
@@ -133,7 +99,7 @@
             <th scope="row">4</th>
             <td>Mark</td>
             <td>Otto</td>
-            <td>@mdo</td>
+            <!-- <td>@mdo</td> -->
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
@@ -142,7 +108,7 @@
             <th scope="row">5</th>
             <td>Jacob</td>
             <td>Thornton</td>
-            <td>@fat</td>
+            <!-- <td>@fat</td> -->
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
@@ -150,7 +116,7 @@
           <tr>
             <th scope="row">6</th>
             <td>Larry</td>
-            <td>the Bird</td>
+            <!-- <td>the Bird</td> -->
             <td>@twitter</td>
             <td>Mark</td>
             <td>Otto</td>
@@ -160,12 +126,12 @@
             <th scope="row">7</th>
             <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
             <td>音乐/流行音乐/大中国</td>
-            <td>一江春水向东流</td>
+            <!-- <td>一江春水向东流</td> -->
             <td>2020-08-26 12:30:30</td>
             <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">详情</button>
+                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
                 <button type="button" class="btn btn-secondary">编辑</button>
                 <button type="button" class="btn btn-secondary">删除</button>
               </div>
@@ -175,12 +141,12 @@
             <th scope="row">8</th>
             <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
             <td>音乐/流行音乐/大中国</td>
-            <td>一江春水向东流</td>
+            <!-- <td>一江春水向东流</td> -->
             <td>2020-08-26 12:30:30</td>
             <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">详情</button>
+                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
                 <button type="button" class="btn btn-secondary">编辑</button>
                 <button type="button" class="btn btn-secondary">删除</button>
               </div>
@@ -190,12 +156,12 @@
             <th scope="row">9</th>
             <td>windows子系统ubuntu 配置node开发环境</td>
             <td>音乐/流行音乐/大中国</td>
-            <td>一江春水向东流</td>
+            <!-- <td>一江春水向东流</td> -->
             <td>2020-08-26 12:30:30</td>
             <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">详情</button>
+                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
                 <button type="button" class="btn btn-secondary">编辑</button>
                 <button type="button" class="btn btn-secondary">删除</button>
               </div>
@@ -205,12 +171,12 @@
             <th scope="row">10</th>
             <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
             <td>音乐/流行音乐/大中国</td>
-            <td>一江春水向东流</td>
+            <!-- <td>一江春水向东流</td> -->
             <td>2020-08-26 12:30:30</td>
             <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">详情</button>
+                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
                 <button type="button" class="btn btn-secondary">编辑</button>
                 <button type="button" class="btn btn-secondary">删除</button>
               </div>
@@ -264,14 +230,15 @@
   </main>
 </template>
 <script>
-// import 'bootstrap-datetimepicker/src/less/bootstrap-datetimepicker.less'
 import datePicker from 'vue-bootstrap-datetimepicker'
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import $ from 'jquery'
+import typeEdit from './type_edit'
 export default {
   components: {
-    datePicker
+    datePicker,
+    typeEdit
   },
   data: function () {
     return {
@@ -324,12 +291,6 @@ export default {
 }
 </script>
 <style scoped>
-.select-handle {
-  background: cadetblue;
-  line-height: 100%;
-  height: 100%;
-  width: 50px;
-}
 .title {
   text-align: left;
 }
@@ -337,7 +298,9 @@ export default {
   font-weight: bold;
   font-size: 1.5rem;
 }
+/* .title-nav .breadcrumb {
 
+} */
 .type-level {
   width: 85%;
 }

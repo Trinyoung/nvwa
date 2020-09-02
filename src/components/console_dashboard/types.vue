@@ -1,14 +1,13 @@
 <template>
-  <main class="my-1 shadow-lg bg-white ">
-    <nav aria-label="breadcrumb" class="title-nav border-bottom">
+  <main class="my-1 shadow-lg bg-white">
+    <nav aria-label="breadcrumb" class="title-nav">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          文档管理
+          分类管理
         </li>
-        <li class="breadcrumb-item active" aria-current="page">文章</li>
       </ol>
     </nav>
-    <form class="p-3 form-container border-bottom">
+    <form class="pb-2 pr-3 pl-3 pt-0 form-container border-bottom">
       <div class="form-row my-2">
         <div class="col form-inline">
           <strong> 起止日期：</strong>
@@ -33,9 +32,9 @@
           <label for=""><strong>标签选择：</strong> </label>
           <select name="" id="" class="selectpicker border border-gray rounded" multiple data-live-search="true" title="选择标签">
             <option value="">Angular</option>
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-            <option value="">Angular</option>
+            <option value="">Vue</option>
+            <option value="">React</option>
+            <option value="">nodejs</option>
           </select>
         </div>
         <div class="col-5 align-left">
@@ -45,98 +44,37 @@
       </div>
     </form>
     <div class="my-0 p-3 shadow-sm" id="main-content">
-      <div class="align-left">
-        <nav aria-label="breadcrumb" class="d-inline-block type-level">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="#">音乐</a>
-            </li>
-            <li class="breadcrumb-item">
-              <div class="dropdown">
-                <a data-toggle="dropdown" id="add-button">流行音乐</a>
-                <div class="dropdown-menu" id="dropdownMenu2" aria-labelledby="dropdown02">
-                  <ul>
-                    <li class="dropdown-item">
-                      <router-link to="/editor">新建文章</router-link>
-                    </li>
-                    <li class="dropdown-item">
-                      <router-link to="/">新建日志</router-link>
-                    </li>
-                    <li class="dropdown-item">
-                      <router-link to="/">新建系列</router-link>
-                    </li>
-                    <li class="dropdown-item">
-                      <router-link to="/">新建相册</router-link>
-                    </li>
-                    <li class="dropdown-item">
-                      <router-link to="/">新建标签</router-link>
-                    </li>
-                    <li class="dropdown-item">
-                      <router-link to="/">上传资源</router-link>
-                    </li>
-                  </ul>
-                </div>
+      <div class="breadcrumb">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#edit-type">新增</button>
+        <div class="modal fade" tabindex="-1" role="dialog" id="edit-type" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <!-- <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">大中国</li>
-          </ol>
-          <div class="d-inline-block">
-            <router-link to="/editor">
-              <button
-                class="btn btn-secondary"
-                data-toggle="tooltip"
-                data-placement="right"
-                title="新建"
-                id="add-button"
-              >
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  class="bi bi-plus"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-                  />
-                  <path
-                    fill-rule="evenodd"
-                    d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"
-                  />
-                </svg>
-              </button>
-            </router-link>
-            <router-link to="/editor">
-              <button
-                class="btn btn-secondary"
-                data-toggle="tooltip"
-                data-placement="right"
-                title="新建"
-                id="add-button"
-              >
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  class="bi bi-plus"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"
-                  />
-                  <path
-                    fill-rule="evenodd"
-                    d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"
-                  />
-                </svg>
-              </button>
-            </router-link>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Recipient:</label>
+                    <input type="text" class="form-control" id="recipient-name">
+                  </div>
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Message:</label>
+                    <textarea class="form-control" id="message-text"></textarea>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+              </div>
+            </div> -->
+            <typeEdit/>
           </div>
-        </nav>
+        </div>
       </div>
       <table class="table table-bordered">
         <thead class="thead-light">
@@ -144,8 +82,7 @@
             <th scope="col">#</th>
             <th scope="col">标题</th>
             <th scope="col">分类</th>
-            <th scope="col">作者</th>
-            <th scope="col">发布时间</th>
+            <th scope="col">创建时间</th>
             <th scope="col">标签</th>
             <th scope="col">操作</th>
           </tr>
@@ -155,12 +92,10 @@
             <th scope="row">1</th>
             <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
             <td>音乐/流行音乐/大中国</td>
-            <td>一江春水向东流</td>
             <td>2020-08-26 12:30:30</td>
             <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">详情</button>
                 <button type="button" class="btn btn-secondary">编辑</button>
                 <button type="button" class="btn btn-secondary">删除</button>
               </div>
@@ -170,7 +105,7 @@
             <th scope="row">2</th>
             <td>Jacob</td>
             <td>Thornton</td>
-            <td>@fat</td>
+            <!-- <td>@fat</td> -->
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
@@ -179,7 +114,7 @@
             <th scope="row">3</th>
             <td>Larry</td>
             <td>the Bird</td>
-            <td>@twitter</td>
+            <!-- <td>@twitter</td> -->
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
@@ -188,7 +123,7 @@
             <th scope="row">4</th>
             <td>Mark</td>
             <td>Otto</td>
-            <td>@mdo</td>
+            <!-- <td>@mdo</td> -->
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
@@ -197,7 +132,7 @@
             <th scope="row">5</th>
             <td>Jacob</td>
             <td>Thornton</td>
-            <td>@fat</td>
+            <!-- <td>@fat</td> -->
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
@@ -205,7 +140,7 @@
           <tr>
             <th scope="row">6</th>
             <td>Larry</td>
-            <td>the Bird</td>
+            <!-- <td>the Bird</td> -->
             <td>@twitter</td>
             <td>Mark</td>
             <td>Otto</td>
@@ -215,12 +150,12 @@
             <th scope="row">7</th>
             <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
             <td>音乐/流行音乐/大中国</td>
-            <td>一江春水向东流</td>
+            <!-- <td>一江春水向东流</td> -->
             <td>2020-08-26 12:30:30</td>
             <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">详情</button>
+                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
                 <button type="button" class="btn btn-secondary">编辑</button>
                 <button type="button" class="btn btn-secondary">删除</button>
               </div>
@@ -230,12 +165,12 @@
             <th scope="row">8</th>
             <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
             <td>音乐/流行音乐/大中国</td>
-            <td>一江春水向东流</td>
+            <!-- <td>一江春水向东流</td> -->
             <td>2020-08-26 12:30:30</td>
             <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">详情</button>
+                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
                 <button type="button" class="btn btn-secondary">编辑</button>
                 <button type="button" class="btn btn-secondary">删除</button>
               </div>
@@ -245,12 +180,12 @@
             <th scope="row">9</th>
             <td>windows子系统ubuntu 配置node开发环境</td>
             <td>音乐/流行音乐/大中国</td>
-            <td>一江春水向东流</td>
+            <!-- <td>一江春水向东流</td> -->
             <td>2020-08-26 12:30:30</td>
             <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">详情</button>
+                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
                 <button type="button" class="btn btn-secondary">编辑</button>
                 <button type="button" class="btn btn-secondary">删除</button>
               </div>
@@ -260,12 +195,12 @@
             <th scope="row">10</th>
             <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
             <td>音乐/流行音乐/大中国</td>
-            <td>一江春水向东流</td>
+            <!-- <td>一江春水向东流</td> -->
             <td>2020-08-26 12:30:30</td>
             <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">详情</button>
+                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
                 <button type="button" class="btn btn-secondary">编辑</button>
                 <button type="button" class="btn btn-secondary">删除</button>
               </div>
@@ -319,14 +254,15 @@
   </main>
 </template>
 <script>
-// import 'bootstrap-datetimepicker/src/less/bootstrap-datetimepicker.less'
 import datePicker from 'vue-bootstrap-datetimepicker'
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import $ from 'jquery'
+import typeEdit from './type_edit'
 export default {
   components: {
-    datePicker
+    datePicker,
+    typeEdit
   },
   data: function () {
     return {

@@ -2,12 +2,13 @@ import home from '@/components/Home'
 import article from '@/components/home/article'
 import homePage from '@/components/home/home'
 import Loggers from '@/components/home/Loggers'
+import types from '@/components/home/types'
 const obj = {
   path: '/home',
   name: 'Home',
   component: home,
   children: [ {
-    path: '',
+    path: '/',
     name: 'main',
     component: homePage
   }, {
@@ -18,6 +19,10 @@ const obj = {
     path: 'logger',
     name: 'logger',
     component: Loggers
+  }, {
+    path: 'types',
+    name: 'type',
+    component: types
   }]
 }
 export default obj
