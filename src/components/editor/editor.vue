@@ -84,8 +84,15 @@
           <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="public">
         </div>
       </div>
+      <div class="col-md-2">
+        <div class="form-check-inline">
+          <button class="btn btn-success">
+            添加引用
+          </button>
+        </div>
+      </div>
     </form>
-    <div class="form row text-sm-left other-set">
+    <!-- <div class="form row text-sm-left other-set">
       <div class="col-sm-12 col-md-12 col-lg-12 my-2 d-flex">
         <label for="reffer-input" class="font-weight-bold form-check-inline">文献：</label>
         <div class="form-group d-flex mb-0 pr-3">
@@ -98,7 +105,7 @@
           <button class="btn btn-primary" @click="addReffer"> 添 加 </button>
         </div>
       </div>
-    </div>
+    </div> -->
     <ul class="list-group">
       <li class="list-group-item" v-for="(item, index) in articleObj.reffers" :key="item.value">
         <div v-if="!item.status" class="row">
