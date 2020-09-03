@@ -11,12 +11,31 @@
     <form class="pb-2 pr-3 pl-3 pt-0 form-container border-bottom">
       <div class="form-row my-2">
         <div class="col form-inline">
-          <strong> 起止日期：</strong>
+          <strong> 开始日期：</strong>
           <date-picker v-model="searchInfo.startDate" :config="options" @dp-hide="showDatePickResult"></date-picker>
-          <span id="split-icon" class="justify-center">至</span>
-          <date-picker v-model="searchInfo.endDate" :config="options"></date-picker>
         </div>
-        <div class="col-5 form-inline">
+        <div class="col form-inline">
+          <strong> 截止日期：</strong>
+          <date-picker v-model="searchInfo.startDate" :config="options" @dp-hide="showDatePickResult"></date-picker>
+        </div>
+      </div>
+      <div class="form-row my-2">
+        <div class="col form-inline">
+          <label for="type-select"><strong>分类选择：</strong> </label>
+          <select name="" id="type-select" class="selectpicker border border-gray rounded" multiple data-live-search="true" title="一级分类">
+            <option value="">Angular</option>
+            <option value="">Angular</option>
+            <option value="">Angular</option>
+            <option value="">Angular</option>
+          </select>
+          <select name="" id="type-select" class="selectpicker border border-gray rounded" multiple data-live-search="true" title="二级分类">
+            <option value="">Angular</option>
+            <option value="">Angular</option>
+            <option value="">Angular</option>
+            <option value="">Angular</option>
+          </select>
+        </div>
+        <div class="col form-inline">
           <strong>发布状态：</strong>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value =0 v-model="searchInfo.published">
@@ -38,26 +57,9 @@
             <option value="">Angular</option>
           </select>
         </div>
-        <div class="col-5 align-left">
+        <div class="col align-left">
           <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search" v-model="searchInfo.keyword">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
-        </div>
-      </div>
-      <div class="form-row my-2">
-        <div class="col form-inline">
-          <label for="type-select"><strong>分类选择：</strong> </label>
-          <select name="" id="type-select" class="selectpicker border border-gray rounded" multiple data-live-search="true" title="一级分类">
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-          </select>
-          <select name="" id="type-select" class="selectpicker border border-gray rounded" multiple data-live-search="true" title="二级分类">
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-            <option value="">Angular</option>
-          </select>
         </div>
       </div>
     </form>

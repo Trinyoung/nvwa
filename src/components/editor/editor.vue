@@ -35,6 +35,12 @@
       </div>
       <div class="col-md-1 right-side col-sm-0">
         <div class="sidebar">
+          <div class="my-3 sidebar-item" data-toggle="tooltip" data-placement="right" title="保存">
+            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-box-arrow-in-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z"/>
+              <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
+            </svg>
+          </div>
           <div class="my-3 sidebar-item" data-toggle="tooltip" data-placement="right" title="删除">
             <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-trash " fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
@@ -97,7 +103,8 @@
       <li class="list-group-item" v-for="(item, index) in articleObj.reffers" :key="item.value">
         <div v-if="!item.status" class="row">
           <div class="col">
-            <a :href= item.link class="d-inline-block">{{index + 1}}. {{item.value}}</a>
+            <a :href="item.link">{{index + 1}} .</a>
+            <a :href= item.link class="d-inline-block">{{item.value}}</a>
           </div>
           <div>
             <div class="btn-group mr-2" role="group" aria-label="First group">
@@ -106,18 +113,19 @@
             </div>
           </div>
         </div>
-        <form v-if ="item.status">
-          <div class="row">
+        <form v-if ="item.status" class="row">
+          <!-- <div class="row reffer-item"> -->
+            <div class="col-1">{{index + 1}} .</div>
             <div class="col">
-              <input type="text" class="form-control" placeholder="请输入文献名称" v-model="item.value">
+              <input type="text" class="form-control d-inline-block" placeholder="请输入文献名称" v-model="item.value">
             </div>
             <div class="col">
               <input type="text" class="form-control" placeholder="请输入文献链接" v-model="item.link">
             </div>
-            <div class="col-1">
+            <div class="col-2">
               <button class="btn btn-primary" @click="refferChange(index, item.value, item.link)">确定</button>
             </div>
-          </div>
+          <!-- </div> -->
         </form>
       </li>
     </ul>
@@ -271,11 +279,6 @@ export default {
   margin: 0 auto;
 }
 .sidebar-item :hover{
-  background: whitesmoke;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50% 50% 50% 50%;
-  margin: 0 auto;
   cursor: pointer;
 }
 

@@ -40,7 +40,6 @@
                 </div>
               </div>
               <div class="form-group row">
-                
               </div>
             </form>
             </div>
@@ -56,22 +55,19 @@
         <thead class="thead-light">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">标题</th>
-            <th scope="col">分类</th>
+            <th scope="col">名称</th>
             <th scope="col">创建时间</th>
-            <th scope="col">标签</th>
             <th scope="col">操作</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th scope="row">1</th>
-            <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
-            <td>音乐/流行音乐/大中国</td>
+            <td>vue</td>
             <td>2020-08-26 12:30:30</td>
-            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
+                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
                 <button type="button" class="btn btn-secondary">编辑</button>
                 <button type="button" class="btn btn-secondary">删除</button>
               </div>
@@ -79,101 +75,20 @@
           </tr>
           <tr>
             <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <!-- <td>@fat</td> -->
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <td>react</td>
+            <td>2020-08-26 12:30:30</td>
+            <td class="handle-cell">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
+                <button type="button" class="btn btn-secondary">编辑</button>
+                <button type="button" class="btn btn-secondary">删除</button>
+              </div>
+            </td>
           </tr>
           <tr>
             <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <!-- <td>@twitter</td> -->
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">4</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <!-- <td>@mdo</td> -->
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">5</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <!-- <td>@fat</td> -->
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">6</th>
-            <td>Larry</td>
-            <!-- <td>the Bird</td> -->
-            <td>@twitter</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">7</th>
-            <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
-            <td>音乐/流行音乐/大中国</td>
-            <!-- <td>一江春水向东流</td> -->
+            <td>Angular</td>
             <td>2020-08-26 12:30:30</td>
-            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
-            <td class="handle-cell">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
-                <button type="button" class="btn btn-secondary">编辑</button>
-                <button type="button" class="btn btn-secondary">删除</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">8</th>
-            <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
-            <td>音乐/流行音乐/大中国</td>
-            <!-- <td>一江春水向东流</td> -->
-            <td>2020-08-26 12:30:30</td>
-            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
-            <td class="handle-cell">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
-                <button type="button" class="btn btn-secondary">编辑</button>
-                <button type="button" class="btn btn-secondary">删除</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">9</th>
-            <td>windows子系统ubuntu 配置node开发环境</td>
-            <td>音乐/流行音乐/大中国</td>
-            <!-- <td>一江春水向东流</td> -->
-            <td>2020-08-26 12:30:30</td>
-            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
-            <td class="handle-cell">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
-                <button type="button" class="btn btn-secondary">编辑</button>
-                <button type="button" class="btn btn-secondary">删除</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">10</th>
-            <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
-            <td>音乐/流行音乐/大中国</td>
-            <!-- <td>一江春水向东流</td> -->
-            <td>2020-08-26 12:30:30</td>
-            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <!-- <button type="button" class="btn btn-secondary">详情</button> -->
