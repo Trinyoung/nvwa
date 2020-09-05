@@ -86,26 +86,41 @@
       </div>
       <div class="col-md-2">
         <div class="form-check-inline">
-          <button class="btn btn-success">
+          <button class="btn btn-success" data-toggle="modal" data-target="#referDialog">
             添加引用
           </button>
+          <div class="modal fade" id="referDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">文献引用</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">文献标题:</label>
+                      <input type="text" class="form-control" v-model="refferEdit.refferValue">
+                    </div>
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">文献链接:</label>
+                      <input type="text" class="form-control" v-model="refferEdit.refferLink">
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                  <button type="button" class="btn btn-primary" @click="addReffer()">提交</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </form>
-    <!-- <div class="form row text-sm-left other-set">
-      <div class="col-sm-12 col-md-12 col-lg-12 my-2 d-flex">
-        <label for="reffer-input" class="font-weight-bold form-check-inline">文献：</label>
-        <div class="form-group d-flex mb-0 pr-3">
-          <input type="text" class="form-control" placeholder="请输入文献标题" id="reffer-input" v-model="refferEdit.refferValue">
-        </div>
-        <div class="form-group d-flex mb-0 pr-3">
-          <input type="text" class="form-control" placeholder="请输入文献链接" v-model="refferEdit.refferLink">
-        </div>
-        <div class="form-group mb-0">
-          <button class="btn btn-primary" @click="addReffer"> 添 加 </button>
-        </div>
-      </div>
-    </div> -->
     <ul class="list-group">
       <li class="list-group-item" v-for="(item, index) in articleObj.reffers" :key="item.value">
         <div v-if="!item.status" class="row">
@@ -121,18 +136,16 @@
           </div>
         </div>
         <form v-if ="item.status" class="row">
-          <!-- <div class="row reffer-item"> -->
-            <div class="col-1">{{index + 1}} .</div>
-            <div class="col">
-              <input type="text" class="form-control d-inline-block" placeholder="请输入文献名称" v-model="item.value">
-            </div>
-            <div class="col">
-              <input type="text" class="form-control" placeholder="请输入文献链接" v-model="item.link">
-            </div>
-            <div class="col-2">
-              <button class="btn btn-primary" @click="refferChange(index, item.value, item.link)">确定</button>
-            </div>
-          <!-- </div> -->
+          <div class="col-1">{{index + 1}} .</div>
+          <div class="col">
+            <input type="text" class="form-control d-inline-block" placeholder="请输入文献名称" v-model="item.value">
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="请输入文献链接" v-model="item.link">
+          </div>
+          <div class="col-2">
+            <button class="btn btn-primary" @click="refferChange(index, item.value, item.link)">确定</button>
+          </div>
         </form>
       </li>
     </ul>
@@ -339,5 +352,7 @@ export default {
 .breadcrumb {
   margin-bottom: 0;
 }
-
+.modal-content {
+  text-align: left;
+}
 </style>
