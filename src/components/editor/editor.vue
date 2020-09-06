@@ -14,7 +14,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="addon-wrapping">标 题</span>
           </div>
-          <input type="text" class="form-control" placeholder="请输入标题" v-model="title" aria-label="title" aria-describedby="addon-wrapping">
+          <input type="text" class="form-control" placeholder="请输入标题" v-model="articleObj.title" aria-label="title" aria-describedby="addon-wrapping">
           <div class="input-group-append">
             <button class="btn btn-secondary">
               添加副标题
@@ -30,7 +30,7 @@
     </div>
     <div class="row row-container">
       <div class="col-md-11 col-lg-11 col-sm-11 content-container">
-        <v-markdownEditor v-if="isMarkdown" class='mavonEditor' v-model="content" @save="saveMavon"></v-markdownEditor>
+        <v-markdownEditor v-if="isMarkdown" class='mavonEditor' v-model="articleObj.content" @save="saveMavon"></v-markdownEditor>
         <v-editor v-if="!isMarkdown" class="quillEditor border-0" v-model="articleObj.content"></v-editor>
       </div>
       <div class="col-md-1 right-side col-sm-0">
@@ -192,15 +192,22 @@ export default {
       console.log('submit')
     },
     publish: function () {
-      this.render = $('.v-note-read-content').html()
-      const { title, category, subTitle, render, tags, content, reffers, articleId } = this.articleObj
+      const contentHtml = $('.v-note-read-content').html()
+      const { title, category, subTitle, tags, content, reffers } = this.articleObj
+      const articleId = this.articleId
       const data = {
-        title, category, subTitle, content_html: render, tags, reffers, content, published: 1
+        title, category, subTitle, content_html: contentHtml, tags, reffers, content, published: 1, articleId
       }
       const Authorization = `Bearer ${localStorage.getItem('token')}`
-      axios.put(`/api/articles/${articleId}`, data, { headers: {Authorization} }, function (result) {
-        console.log(result, 'result---------------->')
-      })
+      if (articleId) {
+        axios.put(`/api/articles/${articleId}`, data, { headers: {Authorization} }, function (result) {
+          console.log(result, 'result---------------->')
+        })
+      } else {
+        axios.post('/api/articles', data, { headers: { Authorization } }, function (result) {
+          console.log(result, 'result------------->')
+        })
+      }
     },
     saveMavon: function (value, render) {
       this.render = render

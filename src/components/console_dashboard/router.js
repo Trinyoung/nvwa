@@ -2,7 +2,6 @@ import article from '@/components/console_dashboard/article'
 import logger from '@/components/console_dashboard/logger'
 import console from '@/components/console_dashboard'
 import types from '@/components/console_dashboard/types'
-import typeEdit from '@/components/console_dashboard/type_edit'
 import tags from '@/components/console_dashboard/tags'
 
 const obj = {

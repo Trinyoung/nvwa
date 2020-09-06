@@ -4,7 +4,7 @@ const obj = {
   name: 'Editor',
   component: editor,
   props: true,
-  children: [ {
+  children: [{
     path: ':articleId',
     name: 'Editor_sub',
     component: editor,
