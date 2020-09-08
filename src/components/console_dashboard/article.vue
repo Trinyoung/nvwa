@@ -98,13 +98,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
-            <td>音乐/流行音乐/大中国</td>
-            <td>一江春水向东流</td>
-            <td>2020-08-26 12:30:30</td>
-            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
+          <tr v-for="(item, index) in list" :key="index">
+            <th scope="row">{{index + 1}}</th>
+            <td>{{item.title}}</td>
+            <td>{{item.type}}</td>
+            <td>{{item.createdBy}}</td>
+            <td>{{item.createdAt}}</td>
+            <td>{{item.tags}}</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-secondary">详情</button>
@@ -113,111 +113,7 @@
               </div>
             </td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">4</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">5</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">6</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">7</th>
-            <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
-            <td>音乐/流行音乐/大中国</td>
-            <td>一江春水向东流</td>
-            <td>2020-08-26 12:30:30</td>
-            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
-            <td class="handle-cell">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">详情</button>
-                <button type="button" class="btn btn-secondary">编辑</button>
-                <button type="button" class="btn btn-secondary">删除</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">8</th>
-            <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
-            <td>音乐/流行音乐/大中国</td>
-            <td>一江春水向东流</td>
-            <td>2020-08-26 12:30:30</td>
-            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
-            <td class="handle-cell">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">详情</button>
-                <button type="button" class="btn btn-secondary">编辑</button>
-                <button type="button" class="btn btn-secondary">删除</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">9</th>
-            <td>windows子系统ubuntu 配置node开发环境</td>
-            <td>音乐/流行音乐/大中国</td>
-            <td>一江春水向东流</td>
-            <td>2020-08-26 12:30:30</td>
-            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
-            <td class="handle-cell">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">详情</button>
-                <button type="button" class="btn btn-secondary">编辑</button>
-                <button type="button" class="btn btn-secondary">删除</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">10</th>
-            <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
-            <td>音乐/流行音乐/大中国</td>
-            <td>一江春水向东流</td>
-            <td>2020-08-26 12:30:30</td>
-            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
-            <td class="handle-cell">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">详情</button>
-                <button type="button" class="btn btn-secondary">编辑</button>
-                <button type="button" class="btn btn-secondary">删除</button>
-              </div>
-            </td>
-          </tr>
+
         </tbody>
       </table>
       <nav aria-label="Page navigation example" id="page-list">
@@ -226,59 +122,32 @@
             <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
           </li>
           <li class="page-item">
-            <a class="page-link" href="#">1</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">2</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">3</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">4</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">5</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">6</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">7</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">8</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">...</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">10</a>
+            <a class="page-link active" href="#" aria-current="page">1<span class="sr-only">(current)</span></a>
           </li>
           <li class="page-item">
             <a class="page-link" href="#">
               <span aria-hidden="true">&raquo;</span>
             </a>
           </li>
-        </ul>共 10 页
+        </ul>共 {{pages}} 页
       </nav>
     </div>
   </main>
 </template>
 <script>
-// import 'bootstrap-datetimepicker/src/less/bootstrap-datetimepicker.less'
 import datePicker from 'vue-bootstrap-datetimepicker'
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import $ from 'jquery'
+import Axios from 'axios'
 export default {
   components: {
     datePicker
   },
   data: function () {
     return {
-      newestList: [],
-      hotList: [],
+      list: [],
+      pages: 1,
       searchInfo: {
         startDate: new Date(),
         endDate: new Date(),
@@ -312,6 +181,9 @@ export default {
       $('.selectpicker').selectpicker()
     })
   },
+  mounted () {
+    this.getList()
+  },
   methods: {
     getNewestList: function () {
       return ''
@@ -321,6 +193,24 @@ export default {
     },
     showDatePickResult: function () {
       console.log(this.searchInfo.date)
+    },
+    getList () {
+      const { page = 1, keyword, type } = this.$data
+      console.log(page, keyword, type, ' ---------->')
+      let queryString = `page=${page}`
+      if (keyword) queryString += `&keyword=${keyword}`
+      if (type) queryString += `&type=${keyword}`
+      Axios.get(`/api/articles?${queryString}`).then((res) => {
+        console.log(res, 'res----------------->')
+        if (res.data.code !== '000') {
+          return alert('获取结果失败')
+        }
+        this.$data.list = res.data.result.docs
+        this.$data.pages = res.data.result.pages
+        this.$data.list.forEach((item) => {
+          console.log(item)
+        })
+      })
     }
   }
 }
@@ -343,13 +233,7 @@ export default {
 .type-level {
   width: 85%;
 }
-#split-icon {
-  display: inline-block;
-  width: 30px;
-}
-.border-gray {
-  border: gray;
-}
+
 .form-container {
   padding: 5px;
 }
@@ -369,9 +253,9 @@ export default {
   color: white;
   font-size: 1.1rem;
 }
-#search-input {
+/* #search-input {
   display: inline-block;
-}
+} */
 
 #basic-addon2 {
   width: 4rem;

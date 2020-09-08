@@ -48,30 +48,6 @@
         <button class="btn btn-primary" data-toggle="modal" data-target="#edit-type">新增</button>
         <div class="modal fade" tabindex="-1" role="dialog" id="edit-type" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
-            <!-- <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form>
-                  <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Recipient:</label>
-                    <input type="text" class="form-control" id="recipient-name">
-                  </div>
-                  <div class="form-group">
-                    <label for="message-text" class="col-form-label">Message:</label>
-                    <textarea class="form-control" id="message-text"></textarea>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message</button>
-              </div>
-            </div> -->
             <typeEdit/>
           </div>
         </div>
@@ -88,119 +64,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
-            <td>音乐/流行音乐/大中国</td>
-            <td>2020-08-26 12:30:30</td>
-            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
+          <tr v-for="(item, index) in list" :key="index">
+            <th scope="row">{{index + 1}}</th>
+            <td>{{item.title}}</td>
+            <td>{{item.types}}</td>
+            <td>{{item.createdAt}}</td>
+            <td>{{item.tags}}</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">编辑</button>
-                <button type="button" class="btn btn-secondary">删除</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <!-- <td>@fat</td> -->
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <!-- <td>@twitter</td> -->
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">4</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <!-- <td>@mdo</td> -->
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">5</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <!-- <td>@fat</td> -->
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">6</th>
-            <td>Larry</td>
-            <!-- <td>the Bird</td> -->
-            <td>@twitter</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">7</th>
-            <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
-            <td>音乐/流行音乐/大中国</td>
-            <!-- <td>一江春水向东流</td> -->
-            <td>2020-08-26 12:30:30</td>
-            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
-            <td class="handle-cell">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
-                <button type="button" class="btn btn-secondary">编辑</button>
-                <button type="button" class="btn btn-secondary">删除</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">8</th>
-            <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
-            <td>音乐/流行音乐/大中国</td>
-            <!-- <td>一江春水向东流</td> -->
-            <td>2020-08-26 12:30:30</td>
-            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
-            <td class="handle-cell">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
-                <button type="button" class="btn btn-secondary">编辑</button>
-                <button type="button" class="btn btn-secondary">删除</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">9</th>
-            <td>windows子系统ubuntu 配置node开发环境</td>
-            <td>音乐/流行音乐/大中国</td>
-            <!-- <td>一江春水向东流</td> -->
-            <td>2020-08-26 12:30:30</td>
-            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
-            <td class="handle-cell">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
-                <button type="button" class="btn btn-secondary">编辑</button>
-                <button type="button" class="btn btn-secondary">删除</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">10</th>
-            <td>wen jun neng you ji duo chou yi jiang chun shui xiang dong liu</td>
-            <td>音乐/流行音乐/大中国</td>
-            <!-- <td>一江春水向东流</td> -->
-            <td>2020-08-26 12:30:30</td>
-            <td>vue, Angular, react, nodejs, java, web前端, 知识进阶</td>
-            <td class="handle-cell">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
                 <button type="button" class="btn btn-secondary">编辑</button>
                 <button type="button" class="btn btn-secondary">删除</button>
               </div>
@@ -259,6 +130,7 @@ import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import $ from 'jquery'
 import typeEdit from './type_edit'
+import Axios from 'axios'
 export default {
   components: {
     datePicker,
@@ -266,8 +138,10 @@ export default {
   },
   data: function () {
     return {
-      newestList: [],
-      hotList: [],
+      list: [],
+      pages: 1,
+      page: 1,
+      total: 0,
       searchInfo: {
         startDate: new Date(),
         endDate: new Date(),
@@ -302,11 +176,14 @@ export default {
     })
   },
   methods: {
-    getNewestList: function () {
-      return ''
-    },
-    getHotList: function () {
-      return ''
+    getList () {
+      Axios.get('/api/types').then((res) => {
+        const { docs, pages, total, page } = res.result.data
+        this.list = docs
+        this.pages = pages
+        this.page = page
+        this.total = total
+      })
     },
     showDatePickResult: function () {
       console.log(this.searchInfo.date)
@@ -322,9 +199,7 @@ export default {
   font-weight: bold;
   font-size: 1.5rem;
 }
-/* .title-nav .breadcrumb {
 
-} */
 .type-level {
   width: 85%;
 }
