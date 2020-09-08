@@ -107,8 +107,8 @@ export default {
           return alert('获取结果失败')
         }
         this.$data.list = res.data.result.docs
-        this.$data.list.forEach((item)=> {
-          // 
+        this.$data.list.forEach((item) => {
+          console.log(item)
         })
       })
     }
