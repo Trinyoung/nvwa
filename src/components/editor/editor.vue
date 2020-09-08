@@ -166,7 +166,7 @@ export default {
   },
   data: function () {
     return {
-      isMarkdown: true,
+      isMarkdown: false,
       articleObj: {
         content: '',
         category: '1',
@@ -365,8 +365,11 @@ export default {
 </style>
 <style>
 .ql-container {
-  margin-bottom: 16px;
-  height:calc(100vh - 200px);
+  height:calc(100vh - 250px);
+  border: 1px solid #e9ecef!important;
+}
+.ql-toolbar {
+  border: 1px solid #e9ecef!important;
 }
 .v-note-wrapper {
   box-shadow: none!important;
