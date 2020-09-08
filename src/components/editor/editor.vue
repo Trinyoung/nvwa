@@ -264,7 +264,8 @@ export default {
   min-height: calc(100vh - 48px);
 }
 .content-container {
-  height:calc(100vh - 200px);
+  /* border: 1px solid gainsboro; */
+  /* height:calc(100vh - 200px); */
 }
 .other-set {
   background: #e9ecef;
@@ -279,11 +280,10 @@ export default {
 }
 
 .mavonEditor {
-  height: inherit;
+  height:calc(100vh - 200px);
+  /* height: inherit; */
 }
-.quillEditor {
-  height: inherit;
-}
+
 .titleInput {
   height: inherit!important;
 }
@@ -361,5 +361,15 @@ export default {
 }
 .modal-content {
   text-align: left;
+}
+</style>
+<style>
+.ql-container {
+  margin-bottom: 16px;
+  height:calc(100vh - 200px);
+}
+.v-note-wrapper {
+  box-shadow: none!important;
+  border: 1px solid #e9ecef!important;
 }
 </style>
