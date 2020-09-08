@@ -8,8 +8,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min'
 import 'bootstrap-select/dist/css/bootstrap-select.min.css'
 import 'bootstrap-select/dist/js/bootstrap-select'
-
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 Vue.config.productionTip = false
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
