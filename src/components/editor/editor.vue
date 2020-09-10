@@ -108,7 +108,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </form>
@@ -129,13 +128,13 @@
         <form v-if ="item.status" class="row">
           <div class="col-1">{{index + 1}} .</div>
           <div class="col">
-            <input type="text" class="form-control d-inline-block" placeholder="请输入文献名称" v-model="item.value">
+            <input type="text" class="form-control d-inline-block" placeholder="请输入文献名称" v-model="item.title">
           </div>
           <div class="col">
             <input type="text" class="form-control" placeholder="请输入文献链接" v-model="item.link">
           </div>
           <div class="col-2">
-            <button class="btn btn-primary" @click="refferChange(index, item.value, item.link)">确定</button>
+            <button class="btn btn-primary" @click="refferChange(index, item.title, item.link)">确定</button>
           </div>
         </form>
       </li>
@@ -157,7 +156,8 @@ export default {
   },
   data: function () {
     return {
-      isMarkdown: false,
+      isMarkdown: true,
+      tagList: [],
       articleObj: {
         content: '',
         category: '1',
@@ -166,12 +166,14 @@ export default {
         render: '',
         tags: [],
         reffers: [],
+        isMarkdown: false,
         public: true
       },
       refferEdit: {
         refferValue: '',
         refferLink: ''
-      }
+      },
+      tags: []
     }
   },
   created: function () {
@@ -209,11 +211,22 @@ export default {
     },
     getAticle () {
       const id = this.articleId
-      axios.get(`/api/articles/${id}`).then((result) => {
-        const { content, title } = result.data.data
-        this.articleObj.title = title
-        this.articleObj.content = content
-      })
+      if (id !== 'new') {
+        axios.get(`/api/articles/${id}`).then((result) => {
+          const { content, title, isMarkdown, isPublic, subTitle, abstract, tags, reffers } = result.data.data
+          this.articleObj = { title, content, isPublic, subTitle, abstract, tags, reffers }
+          this.isMarkdown = isMarkdown
+        })
+      }
+    },
+    getTags () {
+      let tags = localStorage.getItem('tags')
+      tags = tags.split(',')
+      if (!tags || tags.length === 0) {
+        axios.get('/api/tags').then(res => {
+          const result = res.result.data
+        })
+      }
     },
     addReffer () {
       if (!this.refferEdit.refferValue) {
@@ -234,11 +247,14 @@ export default {
         item.status = !item.status
       })()
     },
-    refferChange (index, value, link) {
+    refferChange (index, title, link) {
       return (() => {
-        this.articleObj.reffers[index].value = value
-        this.articleObj.reffers[index].link = link
-        this.articleObj.reffers[index].status = false
+        if (this.articleObj.reffers[index]._id) {
+          this.articleObj.reffers[index].title = title
+          this.articleObj.reffers[index].link = link
+        } else {
+          this.articleObj.reffers.push({ title, link })
+        }
       })()
     }
   }
@@ -261,10 +277,7 @@ export default {
   width: 2em;
   height: 2em;
 }
-.content-container {
-  /* border: 1px solid gainsboro; */
-  /* height:calc(100vh - 200px); */
-}
+
 .other-set {
   background: #e9ecef;
   margin-left: 0;
@@ -364,13 +377,13 @@ export default {
 <style>
 .ql-container {
   height:calc(100vh - 250px);
-  border: 1px solid #e9ecef!important;
+  border: 1px solid #b6d3f0!important;
 }
 .ql-toolbar {
-  border: 1px solid #e9ecef!important;
+  border: 1px solid #b6d3f0!important;
 }
 .v-note-wrapper {
   box-shadow: none!important;
-  border: 1px solid #e9ecef!important;
+  border: 1px solid #b6d3f0!important;
 }
 </style>

@@ -12,11 +12,9 @@
         <div class="col form-inline">
         </div>
         <div class="col-5 form-inline align-left">
-          <!-- <div class="col align-left"> -->
           <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search" v-model="searchInfo.keyword">
           <button class="ml-2 btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
           <button class="ml-2 btn btn-outline-primary my-2 my-sm-0" type="">新增</button>
-        <!-- </div> -->
         </div>
       </div>
     </form>
@@ -26,28 +24,30 @@
         <div class="modal fade" tabindex="-1" role="dialog" id="edit-type" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">分类管理</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <div class="modal-body">
-            <form>
-              <div class="form-group row">
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" id="recipient-name" placeholder="名称">
-                </div>
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">标签设置</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
-              <div class="form-group row">
+              <div class="modal-body">
+                <form>
+                  <div class="form-group row">
+                    <div class="col-sm-8">
+                      <input type="text"
+                        class="form-control"
+                        id="recipient-name"
+                        v-model="tagName"
+                        placeholder="名称">
+                    </div>
+                  </div>
+                </form>
               </div>
-            </form>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary">提交</button>
+              </div>
             </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-primary">提交</button>
-            </div>
-        </div>
           </div>
         </div>
       </div>
@@ -67,7 +67,6 @@
             <td>2020-08-26 12:30:30</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
                 <button type="button" class="btn btn-secondary">编辑</button>
                 <button type="button" class="btn btn-secondary">删除</button>
               </div>
@@ -79,7 +78,6 @@
             <td>2020-08-26 12:30:30</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
                 <button type="button" class="btn btn-secondary">编辑</button>
                 <button type="button" class="btn btn-secondary">删除</button>
               </div>
@@ -91,7 +89,6 @@
             <td>2020-08-26 12:30:30</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <!-- <button type="button" class="btn btn-secondary">详情</button> -->
                 <button type="button" class="btn btn-secondary">编辑</button>
                 <button type="button" class="btn btn-secondary">删除</button>
               </div>
@@ -150,6 +147,7 @@ import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import $ from 'jquery'
 import typeEdit from './type_edit'
+import Axios from 'axios'
 export default {
   components: {
     datePicker,
@@ -170,6 +168,9 @@ export default {
         format: 'YYYY-MM-DD HH:mm:ss',
         useCurrent: false,
         locale: 'zh-cn'
+      },
+      condition: {
+
       }
     }
   },
@@ -193,14 +194,19 @@ export default {
     })
   },
   methods: {
-    getNewestList: function () {
-      return ''
+    getList () {
+      Axios.get('/api/tags/list').then(res => {
+
+      })
     },
-    getHotList: function () {
-      return ''
+    create () {
+      Axios.post('/api/tags').then(res => {
+        //
+      })
     },
-    showDatePickResult: function () {
-      console.log(this.searchInfo.date)
+    update (id) {
+      const condition = {}
+      Axios.put(`/api/tags/${id}`)
     }
   }
 }

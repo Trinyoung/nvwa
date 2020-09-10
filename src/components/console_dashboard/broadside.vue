@@ -6,7 +6,7 @@
         <div class="dropdown-menu" id="dropdownMenu2" aria-labelledby="dropdown02">
           <ul>
             <li class="dropdown-item">
-              <router-link to="/editor">
+              <router-link to="/editor/new">
                 <b-icon-file-text></b-icon-file-text>
                 新建文章
               </router-link>

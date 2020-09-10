@@ -1,24 +1,18 @@
 <template>
   <div>
       <v-header></v-header>
-      <!-- <div class="container-fluid"> -->
-        <!-- <div class="row"> -->
       <v-main :articleId="articleId"></v-main>
-        <!-- </div> -->
-      <!-- </div> -->
       <v-bottom></v-bottom>
   </div>
 </template>
 <script>
 import header from './Header'
 import editor from './editor'
-import rightSide from './rightside'
 import $ from 'jquery'
 export default {
   components: {
     'v-header': header,
-    'v-main': editor,
-    'v-rightside': rightSide
+    'v-main': editor
   },
   props: ['articleId'],
   created: function () {

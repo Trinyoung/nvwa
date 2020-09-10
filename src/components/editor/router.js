@@ -1,14 +1,8 @@
 import editor from '@/components/editor'
 const obj = {
-  path: '/editor',
+  path: '/editor/:articleId',
   name: 'Editor',
   component: editor,
-  props: true,
-  children: [{
-    path: ':articleId',
-    name: 'Editor_sub',
-    component: editor,
-    props: true
-  }]
+  props: true
 }
 export default obj
