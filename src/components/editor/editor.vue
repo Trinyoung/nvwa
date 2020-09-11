@@ -248,14 +248,12 @@ export default {
       })()
     },
     refferChange (index, title, link) {
-      return (() => {
-        if (this.articleObj.reffers[index]._id) {
-          this.articleObj.reffers[index].title = title
-          this.articleObj.reffers[index].link = link
-        } else {
-          this.articleObj.reffers.push({ title, link })
-        }
-      })()
+      if (this.articleObj.reffers[index]._id) {
+        this.articleObj.reffers[index].title = title
+        this.articleObj.reffers[index].link = link
+      } else {
+        this.articleObj.reffers.push({ title, link })
+      }
     }
   }
 }

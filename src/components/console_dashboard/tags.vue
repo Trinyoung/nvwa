@@ -37,15 +37,18 @@
                       <input type="text"
                         class="form-control"
                         id="recipient-name"
-                        v-model="tagName"
+                        v-model="condition.name"
                         placeholder="名称">
                     </div>
                   </div>
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">提交</button>
+                <button type="button" class="btn btn-secondary"
+                data-toggle="modal" data-target="#edit-type"
+                data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary"
+                 @click="save">提交</button>
               </div>
             </div>
           </div>
@@ -61,35 +64,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>vue</td>
-            <td>2020-08-26 12:30:30</td>
+          <tr v-for="(item, index) in dataList" :key="index">
+            <th scope="row">{{index + 1}}</th>
+            <td>{{item.name}}</td>
+            <td>{{item.createdAt}}</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">编辑</button>
-                <button type="button" class="btn btn-secondary">删除</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>react</td>
-            <td>2020-08-26 12:30:30</td>
-            <td class="handle-cell">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">编辑</button>
-                <button type="button" class="btn btn-secondary">删除</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Angular</td>
-            <td>2020-08-26 12:30:30</td>
-            <td class="handle-cell">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">编辑</button>
+                <button type="button" class="btn btn-secondary"
+                data-toggle="modal" data-target="#edit-type"
+                @click="openDialog(index)">编辑</button>
                 <button type="button" class="btn btn-secondary">删除</button>
               </div>
             </td>
@@ -155,13 +138,7 @@ export default {
   },
   data: function () {
     return {
-      newestList: [],
-      hotList: [],
       searchInfo: {
-        startDate: new Date(),
-        endDate: new Date(),
-        tags: [],
-        published: '',
         keyword: ''
       },
       options: {
@@ -169,8 +146,9 @@ export default {
         useCurrent: false,
         locale: 'zh-cn'
       },
+      dataList: [],
       condition: {
-
+        name: ''
       }
     }
   },
@@ -199,14 +177,12 @@ export default {
 
       })
     },
-    create () {
-      Axios.post('/api/tags').then(res => {
+    save (id) {
+      const condition = this.condition
+      Axios.post('/api/tags', condition).then(res => {
+        console.log(res)
         //
       })
-    },
-    update (id) {
-      const condition = {}
-      Axios.put(`/api/tags/${id}`)
     }
   }
 }
