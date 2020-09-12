@@ -84,42 +84,15 @@
           <li class="page-item disabled">
             <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="#">1</a>
+          <li class="page-item" v-for=" n in pages" :key="n" :class="currentPage === n? 'active': ''"  >
+            <a class="page-link" href="#" @click="getList(n)">{{n}}</a>
           </li>
           <li class="page-item">
-            <a class="page-link" href="#">2</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">3</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">4</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">5</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">6</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">7</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">8</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">...</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">10</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
+            <a class="page-link" href="#" @click="pageAdd()">
               <span aria-hidden="true">&raquo;</span>
             </a>
           </li>
-        </ul>共 10 页
+        </ul>共 {{pages}}页
       </nav>
     </div>
   </main>
@@ -131,6 +104,7 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import $ from 'jquery'
 import typeEdit from './type_edit'
 import Axios from 'axios'
+import moment from 'moment'
 export default {
   components: {
     datePicker,
@@ -149,7 +123,10 @@ export default {
       dataList: [],
       condition: {
         name: ''
-      }
+      },
+      total: 0,
+      currentPage: 1,
+      pages: 1
     }
   },
   created: function () {
@@ -169,20 +146,49 @@ export default {
         }
       })
       $('.selectpicker').selectpicker()
+      this.getList()
     })
   },
+  mounted () {
+    this.getList(1)
+  },
   methods: {
-    getList () {
-      Axios.get('/api/tags/list').then(res => {
-
+    getList (page) {
+      let queryString = `page=${page}`
+      if (page) {
+        this.currentPage = page
+      }
+      if (this.searchInfo.keyword) {
+        queryString += `&keyword=${this.searchInfo.keyword}`
+      }
+      Axios.get(`/api/tags/list?${queryString}`).then(res => {
+        if (res.data && res.data.code === '000') {
+          const dataList = res.data.result.docs
+          this.total = res.data.result.total
+          this.pages = res.data.result.pages
+          dataList.forEach(item => { item.createdAt = moment().format('YYYY-MM-DD HH:mm:ss') })
+          this.dataList = dataList
+        }
       })
     },
     save (id) {
       const condition = this.condition
-      Axios.post('/api/tags', condition).then(res => {
+      const Authorization = `Bearer ${localStorage.getItem('token')}`
+      Axios.post('/api/tags', condition, { headers: {Authorization} }).then(res => {
         console.log(res)
-        //
       })
+    },
+    pageAdd () {
+      if (this.currentPage < this.pages) {
+        this.currentPage++
+        this.getList(this.currentPage)
+      }
+    },
+    pageDecline () {
+      if (this.currentPage > 1) {
+        this.currentPage--
+        this.getList(this.currentPage)
+      }
     }
   }
 }
@@ -195,9 +201,7 @@ export default {
   font-weight: bold;
   font-size: 1.5rem;
 }
-/* .title-nav .breadcrumb {
 
-} */
 .type-level {
   width: 85%;
 }
