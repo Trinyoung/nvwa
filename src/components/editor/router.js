@@ -1,6 +1,6 @@
 import editor from '@/components/editor'
 const obj = {
-  path: '/editor/:articleId',
+  path: '/console/editor/:articleId',
   name: 'Editor',
   component: editor,
   props: true

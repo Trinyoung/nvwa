@@ -224,7 +224,8 @@ export default {
       tags = tags.split(',')
       if (!tags || tags.length === 0) {
         axios.get('/api/tags').then(res => {
-          const result = res.result.data
+          const result = res.data.data
+          console.log(result, '--------------->')
         })
       }
     },

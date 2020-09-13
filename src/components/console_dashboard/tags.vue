@@ -14,7 +14,6 @@
         <div class="col-5 form-inline align-left">
           <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search" v-model="searchInfo.keyword">
           <button class="ml-2 btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
-          <button class="ml-2 btn btn-outline-primary my-2 my-sm-0" type="">新增</button>
         </div>
       </div>
     </form>
@@ -81,13 +80,13 @@
       </table>
       <nav aria-label="Page navigation example" id="page-list">
         <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
+          <li class="page-item" :class="currentPage === 1? 'disabled': ''">
+            <a class="page-link" href="#" tabindex="-1" >&laquo;</a>
           </li>
           <li class="page-item" v-for=" n in pages" :key="n" :class="currentPage === n? 'active': ''"  >
             <a class="page-link" href="#" @click="getList(n)">{{n}}</a>
           </li>
-          <li class="page-item">
+          <li class="page-item" :class="currentPage === pages? 'disabled': ''">
             <a class="page-link" href="#" @click="pageAdd()">
               <span aria-hidden="true">&raquo;</span>
             </a>
@@ -175,7 +174,14 @@ export default {
       const condition = this.condition
       const Authorization = `Bearer ${localStorage.getItem('token')}`
       Axios.post('/api/tags', condition, { headers: {Authorization} }).then(res => {
-        console.log(res)
+        if (res.data && res.data.code === '000') {
+          if (this.dataList.length < 10) {
+            res.data.result.createdAt = moment(res.data.result.createdAt).format('YYYY-MM-DD HH:mm:ss')
+            this.dataList.push(res.data.result)
+          } else {
+            this.getList()
+          }
+        }
       })
     },
     pageAdd () {

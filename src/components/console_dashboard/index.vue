@@ -20,6 +20,18 @@ export default {
     'v-main': main,
     'v-header': header,
     'v-bottom': bottom
+  },
+  created () {
+    this.init()
+  },
+  methods: {
+    init () {
+      const token = localStorage.getItem('token')
+      console.log(token, 'token and cookie is here')
+      if (!token) {
+        this.$router.push('/login')
+      }
+    }
   }
 }
 </script>

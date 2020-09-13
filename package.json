@@ -25,6 +25,7 @@
     "popper.js": "^1.16.1",
     "vue": "^2.5.2",
     "vue-bootstrap-datetimepicker": "^5.0.1",
+    "vue-cookie": "^1.1.4",
     "vue-feather-icons": "^5.1.0",
     "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.0.1",
