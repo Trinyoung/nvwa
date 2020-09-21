@@ -132,38 +132,38 @@
         </span>
       </h6>
       <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <router-link class="nav-link" to="#">
-              <span data-feather="file">
-                <b-icon-person></b-icon-person>
-              </span>
-              个人信息
-            </router-link>
-          </li>
-          <li class="nav-item">
-          <a class="nav-link" href="#">
-              <span data-feather="file-text">
-                <b-icon-people></b-icon-people>
-              </span>
-              用户管理
-          </a>
-          </li>
-          <li class="nav-item">
+        <li class="nav-item">
+          <router-link class="nav-link" to="#">
+            <span data-feather="file">
+              <b-icon-person></b-icon-person>
+            </span>
+            个人信息
+          </router-link>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">
+            <span data-feather="file-text">
+              <b-icon-people></b-icon-people>
+            </span>
+            用户管理
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="file-text">
+            <b-icon-shield-lock></b-icon-shield-lock>
+          </span>
+          权限管理
+        </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="#">
             <span data-feather="file-text">
-              <b-icon-shield-lock></b-icon-shield-lock>
+              <b-icon-graph-up></b-icon-graph-up>
             </span>
-            权限管理
+            统计信息
           </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text">
-                <b-icon-graph-up></b-icon-graph-up>
-              </span>
-              统计信息
-            </a>
-          </li>
+        </li>
       </ul>
     </div>
   </nav>

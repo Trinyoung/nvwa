@@ -21,6 +21,9 @@
         <el-form-item label="是否公开: ">
           <el-switch v-model="articleObj.public"></el-switch>
         </el-form-item>
+        <el-form-item label="Markdown: ">
+          <el-switch v-model="articleObj.isMarkdown"></el-switch>
+        </el-form-item>
       </el-form>
     </div>
     <div class="row my-2">
@@ -45,8 +48,8 @@
     </div>
     <div class="row row-container">
       <div class="col-md-11 col-lg-11 col-sm-11 content-container">
-        <v-markdownEditor v-if="isMarkdown" class='mavonEditor' v-model="articleObj.content" @save="saveMavon"></v-markdownEditor>
-        <v-editor v-if="!isMarkdown" class="quillEditor border-0" v-model="articleObj.content"></v-editor>
+        <v-markdownEditor v-if="articleObj.isMarkdown" class='mavonEditor' v-model="articleObj.content" @save="saveMavon"></v-markdownEditor>
+        <v-editor v-if="!articleObj.isMarkdown" class="quillEditor border-0" v-model="articleObj.content"></v-editor>
       </div>
       <div class="col-md-1 right-side col-sm-0">
         <div class="sidebar">
@@ -69,17 +72,18 @@
       </div>
     </div>
     <form class="form row text-sm-left text-md-center other-set my-2">
-      <div class="col-sm-12 col-md-5 col-lg-6 my-2 d-flex">
+      <div class="col-sm-12 col-md-10 col-lg-10 my-2 d-flex">
 
-      </div>
-      <div class="col-md-5 col-lg-5 col-sm-12 my-2">
       </div>
       <div class="col-md-2">
         <div class="form-check-inline">
           <button class="btn btn-success" data-toggle="modal" data-target="#referDialog">
             添加引用
           </button>
-          <div class="modal fade" id="referDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        </div>
+      </div>
+    </form>
+    <div class="modal fade" id="referDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
@@ -107,9 +111,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </form>
     <ul class="list-group">
       <li class="list-group-item" v-for="(item, index) in articleObj.reffers" :key="item.value">
         <div v-if="!item.status" class="row">
@@ -155,7 +156,6 @@ export default {
   },
   data: function () {
     return {
-      isMarkdown: true,
       tagList: [],
       articleObj: {
         content: '',
@@ -182,9 +182,6 @@ export default {
   methods: {
     submit: function () {
       console.log('submit')
-    },
-    changeEditor () {
-      this.isMarkdown = !this.isMarkdown
     },
     publish: function () {
       const contentHtml = $('.v-note-read-content').html()
