@@ -78,21 +78,7 @@
           </tr>
         </tbody>
       </table>
-      <nav aria-label="Page navigation example" id="page-list">
-        <ul class="pagination justify-content-center">
-          <li class="page-item" :class="currentPage === 1? 'disabled': ''">
-            <a class="page-link" href="#" tabindex="-1" >&laquo;</a>
-          </li>
-          <li class="page-item" v-for=" n in pages" :key="n" :class="currentPage === n? 'active': ''"  >
-            <a class="page-link" href="#" @click="getList(n)">{{n}}</a>
-          </li>
-          <li class="page-item" :class="currentPage === pages? 'disabled': ''">
-            <a class="page-link" href="#" @click="pageAdd()">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>共 {{pages}}页
-      </nav>
+      <pagination :getList="getList" :currentPage="currentPage" :pages ="pages"></pagination>
     </div>
   </main>
 </template>
@@ -104,10 +90,12 @@ import $ from 'jquery'
 import typeEdit from './type_edit'
 import Axios from 'axios'
 import moment from 'moment'
+import pagination from '../tools/pagination'
 export default {
   components: {
     datePicker,
-    typeEdit
+    typeEdit,
+    pagination
   },
   data: function () {
     return {

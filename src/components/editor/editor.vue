@@ -1,13 +1,28 @@
 <template>
   <div class="editor-container container col-md-9 my-1 p-3 bg-white" id="main-content">
-    <nav aria-label="breadcrumb" class="title-nav border-bottom">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          文档管理
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">文章</li>
-      </ol>
-    </nav>
+    <div class="header-container">
+      <el-form :inline="true" class="header-form">
+        <el-form-item label="分类: ">
+          <el-cascader
+          v-model="value"
+          :options="options"
+          @change="handleChange"></el-cascader>
+        </el-form-item>
+        <el-form-item label="标签: ">
+          <el-select v-model="articleObj.tag" filterable placeholder="请选择">
+            <el-option
+              v-for="item in tags"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="是否公开: ">
+          <el-switch v-model="articleObj.public"></el-switch>
+        </el-form-item>
+      </el-form>
+    </div>
     <div class="row my-2">
       <div class="col-md-10 col-lg-10 col-sm-10 titileInput">
         <div class="input-group flex-nowrap">
@@ -50,30 +65,14 @@
           <div class="my-3 sidebar-item" data-toggle="tooltip" data-placement="right" title="返回">
             <b-icon-reply class="size-2"></b-icon-reply>
           </div>
-          <div class="my-3 sidebar-item" data-toggle="tooltip" data-placement="right" title="markdown">
-            <b-icon-toggle-off class="size-2" v-if="isMarkdown" @click="changeEditor"></b-icon-toggle-off>
-            <b-icon-toggle-on class="size-2" v-if="!isMarkdown" @click="changeEditor"></b-icon-toggle-on>
-          </div>
         </div>
       </div>
     </div>
     <form class="form row text-sm-left text-md-center other-set my-2">
       <div class="col-sm-12 col-md-5 col-lg-6 my-2 d-flex">
-        <label for="tags-picker" class="font-weight-bold form-check-inline">标签：</label>
-        <div class="form-group picker-container">
-          <select name="tags" id="tags-picker" class="selectpicker form-control" title="添加标签" data-live-search="true" multiple>
-            <option value="" data-content="<span class='badge badge-success'>angular</span>">angular</option>
-            <option value="" data-content="<span class='badge badge-success'>react</span>">react</option>
-            <option value="" data-content="<span class='badge badge-success'>vue</span>">vue</option>
-            <option value="" data-content="<span class='badge badge-success'>javascript</span>">js</option>
-          </select>
-        </div>
+
       </div>
       <div class="col-md-5 col-lg-5 col-sm-12 my-2">
-        <label class="form-check-label font-weight-bold" for="inlineCheckbox1">是否公开:</label>
-        <div class="form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="public">
-        </div>
       </div>
       <div class="col-md-2">
         <div class="form-check-inline">
@@ -225,7 +224,10 @@ export default {
       if (!tags || tags.length === 0) {
         axios.get('/api/tags').then(res => {
           const result = res.data.data
-          console.log(result, '--------------->')
+          result.forEach(item => {
+            tags.push({name: item.name, value: item._id})
+          })
+          // console.log(result, '--------------->')
         })
       }
     },
@@ -307,7 +309,9 @@ export default {
   border-radius: 1rem;
   background: #e9ecef;
 }
-
+.header-container {
+  background: #e9ecef;
+}
 .sidebar-item {
   background: wheat;
   width: 3rem;
@@ -385,4 +389,20 @@ export default {
   box-shadow: none!important;
   border: 1px solid #b6d3f0!important;
 }
+</style>
+<style>
+  .header-container {
+    text-align: left;
+    padding:3px 15px;
+    border-radius: 5px;
+  }
+  .header-container .el-form-item {
+    margin-bottom: 0;
+    margin-top: 8px;
+    margin-right: 20px;
+  }
+  .header-container .el-form-item__label {
+    font-weight: bold;
+  }
+
 </style>

@@ -1,3 +1,12 @@
+<!--
+ * @Author: Trinyoung.Lu
+ * @Date: 2020-08-31 19:32:06
+ * @LastEditors: Trinyoung.Lu
+ * @LastEditTime: 2020-09-14 18:17:51
+ * @PageTitle: XXX页面
+ * @Description: XXX
+ * @FilePath: \nvwa\src\components\console_dashboard\type_edit.vue
+-->
 <template>
   <div class="modal-content">
     <div class="modal-header">
@@ -25,14 +34,8 @@
             </select>
           </div>
         </div>
+
         <div class="form-group row">
-          <div class="col-sm-8">
-            <input type="text" class="form-control" id="pre-type" readonly placeholder="分类ID">
-          </div>
-          <button class="btn btn-primary">生成ID</button>
-        </div>
-        <div class="form-group row">
-          <!-- <label for="tags" class="col-form-label">标签</label> -->
           <div class="col-sm-8">
             <select name="tags" id="tags-picker" class="selectpicker form-control" title="添加标签" data-live-search="true" multiple>
               <option value="" data-content="<span class='badge badge-success'>angular</span>">angular</option>
@@ -43,9 +46,6 @@
           </div>
         </div>
         <div class="form-group row">
-          <!-- <div class="col-sm-3">
-            <label for="description" class="col-form-label">描述</label>
-          </div> -->
           <div class="col-sm-8">
             <textarea class="form-control" id="description" placeholder="描述"></textarea>
           </div>
@@ -60,12 +60,26 @@
 </template>
 <script>
 import $ from 'jquery'
+import Axios from 'axios'
 export default {
   data () {
-    return {}
+    return {
+      typeName: '',
+      firstType: '',
+      secondType: '',
+      description: ''
+    }
   },
   mounted () {
     $('.selectpicker').selectpicker()
+  },
+  methods: {
+    save (id) {
+      const condition = {}
+      if (id) {
+
+      }
+    }
   }
 }
 </script>

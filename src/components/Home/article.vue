@@ -43,60 +43,43 @@
         </li>
       </ul>
     </div>
-    <nav aria-label="Page navigation example" id="page-list" class="my-2">
-      <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">4</a></li>
-        <li class="page-item"><a class="page-link" href="#">5</a></li>
-        <li class="page-item"><a class="page-link" href="#">6</a></li>
-        <li class="page-item"><a class="page-link" href="#">7</a></li>
-        <li class="page-item"><a class="page-link" href="#">8</a></li>
-        <li class="page-item"><a class="page-link" href="#">...</a></li>
-        <li class="page-item"><a class="page-link" href="#">10</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#"><span aria-hidden="true">&raquo;</span></a>
-        </li>
-      </ul>
-      <span>共10页</span>
-    </nav>
+    <pagination :currentPage="currentPage" :pages="pages" :getList="getList"></pagination>
   </div>
 </template>
 <script>
 import Axios from 'axios'
+import pagination from '../tools/pagination'
 // import $ from 'jquery'
 export default {
+  components: {
+    pagination
+  },
   data: function () {
     return {
-      list: []
+      list: [],
+      currentPage: 1,
+      pages: 1
     }
   },
   created: function () {
-    // this.getList()
-  },
-  mounted: function () {
     this.getList()
   },
+  mounted: function () {
+    // this.getList()
+  },
   methods: {
-    getList () {
-      const { page = 1, keyword, type } = this.$data
-      console.log(page, keyword, type, ' ---------->')
+    getList (page) {
+      if (page) this.currentPage = page
+      let { keyword, type } = this.$data
       let queryString = `page=${page}`
       if (keyword) queryString += `&keyword=${keyword}`
       if (type) queryString += `&type=${keyword}`
       Axios.get(`/api/articles?${queryString}`).then((res) => {
-        console.log(res, 'res----------------->')
         if (res.data.code !== '000') {
           return alert('获取结果失败')
         }
         this.$data.list = res.data.result.docs
-        this.$data.list.forEach(item => {
-          console.log(item)
-        })
+        this.pages = res.data.result.pages
       })
     }
   }

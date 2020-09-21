@@ -113,24 +113,9 @@
               </div>
             </td>
           </tr>
-
         </tbody>
       </table>
-      <nav aria-label="Page navigation example" id="page-list">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link active" href="#" aria-current="page">1<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>共 {{pages}} 页
-      </nav>
+      <pagination :pages = pages :getList = getList :currentPage = currentPage></pagination>
     </div>
   </main>
 </template>
@@ -140,14 +125,17 @@ import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import $ from 'jquery'
 import Axios from 'axios'
+import pagination from '../tools/pagination'
 export default {
   components: {
-    datePicker
+    datePicker,
+    pagination
   },
   data: function () {
     return {
       list: [],
       pages: 1,
+      currentPage: 1,
       searchInfo: {
         startDate: new Date(),
         endDate: new Date(),

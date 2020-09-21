@@ -79,48 +79,7 @@
           </tr>
         </tbody>
       </table>
-      <nav aria-label="Page navigation example" id="page-list">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">1</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">2</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">3</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">4</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">5</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">6</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">7</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">8</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">...</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">10</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>共 10 页
-      </nav>
+      <pagination :pages="pages" :currentPage="currentPage" :getList="getList"></pagination>
     </div>
   </main>
 </template>
@@ -131,16 +90,18 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import $ from 'jquery'
 import typeEdit from './type_edit'
 import Axios from 'axios'
+import pagination from '../tools/pagination'
 export default {
   components: {
     datePicker,
-    typeEdit
+    typeEdit,
+    pagination
   },
   data: function () {
     return {
       list: [],
       pages: 1,
-      page: 1,
+      currentPage: 1,
       total: 0,
       searchInfo: {
         startDate: new Date(),
