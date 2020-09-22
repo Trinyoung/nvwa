@@ -24,9 +24,9 @@
       <h1 class="border-bottom border-gray pb-2 mb-0 col-title">{{title}}</h1>
       <div class="text-muted article-tip">
         <ul class="list-group list-group-horizontal mt-1">
-          <li class="list-group-item border-right"><b>作者：</b>Trinyoung</li>
-          <li class="list-group-item border-right"><b>更新时间：</b>2020-08-02</li>
-          <li class="list-group-item border-right">
+          <li class="list-group-item "><b>作者：</b>{{author}}</li>
+          <li class="list-group-item "><b>更新时间：</b>{{formatTime(updatedAt * 1000)}}</li>
+          <li class="list-group-item ">
             <b>字数：</b>2000
           </li>
           <li class="list-group-item">
@@ -36,14 +36,12 @@
       </div>
       <div class="content-container" v-html="contentHtml">
       </div>
+      (完)
       <div class="reffer-container pt-3">
         <h5 class="border-bottom border-gray pb-2 mb-0">文献引用</h5>
         <ul class="list-group list-group-container">
-          <li class="list-group-item">
-            <b>1.</b> <span>我们的人阿斯顿发生</span>
-          </li>
-          <li class="list-group-item">
-            <b>2.</b> <span>我们的人阿斯顿发生</span>
+          <li class="list-group-item" v-for="(item, index) in refers" :key="index">
+            <b>{{index+1}}. </b> <span>{{item.title}}</span> <a :href="item.link">{{item.link}}</a>
           </li>
         </ul>
       </div>
@@ -64,7 +62,6 @@
         <div class="col-sm-4">
           <div class="favorite-icon">
             <b-icon-hand-thumbs-up class="size-2" @click="setFavorite"></b-icon-hand-thumbs-up>
-            <b-icon-hand-thumbs-up class="size-2" @click="setFavorite"></b-icon-hand-thumbs-up>
           </div>
           <span class="favorite-num">16</span>
         </div>
@@ -72,13 +69,14 @@
           <b>下一篇：</b><a href="#">黄河大合唱</a>
         </div>
       </div>
-      <v-bottom></v-bottom>
+      <v-bottom :refers="refers"></v-bottom>
     </div>
   </main>
 </template>
 <script>
 import Bottom from './Bottom'
 import Axios from 'axios'
+import moment from 'moment'
 export default {
   components: {
     'v-bottom': Bottom
@@ -88,7 +86,10 @@ export default {
       contentHtml: '',
       title: '',
       author: '',
-      tags: ['前端', 'vue', 'nodejs']
+      updatedBy: '',
+      updatedAt: '',
+      tags: ['前端', 'vue', 'nodejs'],
+      refers: []
     }
   },
   props: ['articleId'],
@@ -99,15 +100,26 @@ export default {
     getArticleDetail: function () {
       const id = this.articleId
       Axios.get(`/api/articles/${id}`).then((result) => {
-        const { content, title } = result.data.data
+        const { content, title, updatedBy, updatedAt, createdAt, createdBy, refers } = result.data.data
         const contentHtml = result.data.data.content_html
         this.contentHtml = contentHtml || content
-        // this.
         this.title = title
+        this.updatedBy = updatedBy
+        this.updatedAt = updatedAt || createdAt
+        console.log(refers, 'refers ==============>')
+        this.refers = refers
+        // eslint-disable-next-line no-mixed-operators
+        this.author = createdBy && createdBy.realName || ''
       })
     },
     getComments: function () {
       return ''
+    },
+    fomatTime: function (unix) {
+      return moment(unix).format('YYYY-MM-DD')
+    },
+    setFavorite () {
+
     }
   }
 }
@@ -179,23 +191,49 @@ export default {
     font-size: 85%;
 
   }
-
-  .content-container >>> h2 {
-    font-size:1.5rem!important;
+  .content-container >>> h1 {
+    font-size: 1.8rem!important;
     font-weight: bold;
     border-bottom: 1px solid gainsboro;
-    margin-top: 2rem;
+    padding-bottom: 2px;
+  }
+  .content-container >>> h2 {
+    font-size:1.4rem!important;
+    font-weight: bold;
+    border-bottom: 1px dashed gainsboro;
+    padding-bottom: 2px;
+    margin-top: 10px;
   }
 
   .content-container >>> h3 {
     font-size: 1.25rem!important;
-    font-weight: bold;
+    font-weight: 500;
   }
   .content-container >>> h4 {
     font-size: 1.15rem!important;
-    font-weight: bold;
+    font-weight: 500;
   }
-  svg {
-    margin-bottom: 2px;
+  .content-container >>> ul {
+    margin-left: 2rem!important;
+  }
+  .content-container >>> ol {
+    margin-left: 2rem!important;
+  }
+  .content-container >>> td {
+    border:1px solid gainsboro;
+    margin-left: 2rem!important;
+    padding: 2px;
+  }
+  .content-container >>> table {
+    width: 100%;
+    text-align: center;
+  }
+  .content-container >>> th {
+    border:1px solid gainsboro;
+    margin-left: 2rem!important;
+    padding: 5px;
+  }
+  .content-container >>> thead {
+    background: #e9ecef;
   }
 </style>

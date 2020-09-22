@@ -4,9 +4,8 @@
       <el-form :inline="true" class="header-form">
         <el-form-item label="分类: ">
           <el-cascader
-          v-model="value"
-          :options="options"
-          @change="handleChange"></el-cascader>
+          v-model="articleObj.type"
+          :options="types"></el-cascader>
         </el-form-item>
         <el-form-item label="标签: ">
           <el-select v-model="articleObj.tag" filterable placeholder="请选择">
@@ -32,7 +31,8 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="addon-wrapping">标 题</span>
           </div>
-          <input type="text" class="form-control" placeholder="请输入标题" v-model="articleObj.title" aria-label="title" aria-describedby="addon-wrapping">
+          <input type="text" class="form-control"
+            placeholder="请输入标题" v-model="articleObj.title" aria-label="title" aria-describedby="addon-wrapping">
           <div class="input-group-append">
             <button class="btn btn-secondary">
               添加副标题
@@ -41,14 +41,14 @@
         </div>
       </div>
       <div class="col-md-2 col-lg-2 col-sm-2">
-        <button class="btn btn-primary publish-button" @click="publish">
+        <button class="btn btn-primary publish-button" @click="save(1)">
           发布
         </button>
       </div>
     </div>
     <div class="row row-container">
       <div class="col-md-11 col-lg-11 col-sm-11 content-container">
-        <v-markdownEditor v-if="articleObj.isMarkdown" class='mavonEditor' v-model="articleObj.content" @save="saveMavon"></v-markdownEditor>
+        <v-markdownEditor v-if="articleObj.isMarkdown" class='mavonEditor' v-model="articleObj.content" @save="save(0)"></v-markdownEditor>
         <v-editor v-if="!articleObj.isMarkdown" class="quillEditor border-0" v-model="articleObj.content"></v-editor>
       </div>
       <div class="col-md-1 right-side col-sm-0">
@@ -84,39 +84,39 @@
       </div>
     </form>
     <div class="modal fade" id="referDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">文献引用</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="form-group">
-                      <label for="recipient-name" class="col-form-label">文献标题:</label>
-                      <input type="text" class="form-control" v-model="refferEdit.refferValue">
-                    </div>
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">文献链接:</label>
-                      <input type="text" class="form-control" v-model="refferEdit.refferLink">
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                  <button type="button" class="btn btn-primary" @click="addReffer()">提交</button>
-                </div>
-              </div>
-            </div>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">文献引用</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">文献标题:</label>
+                <input type="text" class="form-control" v-model="refferEdit.refferValue">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">文献链接:</label>
+                <input type="text" class="form-control" v-model="refferEdit.refferLink">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary" @click="addReffer()">提交</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <ul class="list-group">
-      <li class="list-group-item" v-for="(item, index) in articleObj.reffers" :key="item.value">
+      <li class="list-group-item" v-for="(item, index) in articleObj.refers" :key="item.title">
         <div v-if="!item.status" class="row">
           <div class="col">
             <a :href="item.link">{{index + 1}} .</a>
-            <a :href= item.link class="d-inline-block">{{item.value}}</a>
+            <a :href= item.link class="d-inline-block">{{item.title}}</a>
           </div>
           <div>
             <div class="btn-group mr-2" role="group" aria-label="First group">
@@ -164,15 +164,17 @@ export default {
         subTitle: '',
         render: '',
         tags: [],
-        reffers: [],
-        isMarkdown: false,
-        public: true
+        refers: [],
+        isMarkdown: true,
+        public: true,
+        type: undefined
       },
       refferEdit: {
         refferValue: '',
         refferLink: ''
       },
-      tags: []
+      tags: [],
+      types: []
     }
   },
   created: function () {
@@ -183,35 +185,42 @@ export default {
     submit: function () {
       console.log('submit')
     },
-    publish: function () {
+    save: function (published) {
       const contentHtml = $('.v-note-read-content').html()
-      const { title, category, subTitle, tags, content, reffers } = this.articleObj
       const articleId = this.articleId
-      const data = {
-        title, category, subTitle, content_html: contentHtml, tags, reffers, content, published: 1, articleId
-      }
+      const data = Object.assign({published, content_html: contentHtml}, this.articleObj)
       const Authorization = `Bearer ${localStorage.getItem('token')}`
-      if (articleId) {
-        axios.put(`/api/articles/${articleId}`, data, { headers: {Authorization} }, function (result) {
-          console.log(result, 'result---------------->')
+      if (articleId && articleId !== 'new') {
+        data.articleId = articleId
+        axios.put(`/api/articles/${articleId}`, data, { headers: {Authorization} }).then(res => {
+          if (res.status === 200 && res.data.code === '000' && res.data.result._id) {
+            this.$router.push(`/console/editor/${res.data.result._id}`)
+          }
         })
       } else {
-        axios.post('/api/articles', data, { headers: { Authorization } }, function (result) {
-          console.log(result, 'result------------->')
+        axios.post('/api/articles', data, { headers: { Authorization } }).then(res => {
+          if (res.status === 200 && res.data.code === '000' && res.data.result._id) {
+            this.$router.push(`/console/editor/${res.data.result._id}`)
+          }
         })
       }
     },
     saveMavon: function (value, render) {
       this.render = render
       this.content = value
+      axios.post('/api/articles')
     },
     getAticle () {
       const id = this.articleId
       if (id !== 'new') {
-        axios.get(`/api/articles/${id}`).then((result) => {
-          const { content, title, isMarkdown, isPublic, subTitle, abstract, tags, reffers } = result.data.data
-          this.articleObj = { title, content, isPublic, subTitle, abstract, tags, reffers }
-          this.isMarkdown = isMarkdown
+        axios.get(`/api/articles/${id}?console=1`).then((result) => {
+          // eslint-disable-next-line camelcase
+          const { content, title, isMarkdown, isPublic, subTitle, abstract, tags, refers, _id } = result.data.data
+          this.articleObj = { title, content, isPublic, subTitle, abstract, tags, refers }
+          this.articleObj.articleId = _id
+          this.isPublic = !!isPublic
+          // eslint-disable-next-line camelcase
+          this.articleObj.isMarkdown = !!isMarkdown
         })
       }
     },
@@ -224,7 +233,6 @@ export default {
           result.forEach(item => {
             tags.push({name: item.name, value: item._id})
           })
-          // console.log(result, '--------------->')
         })
       }
     },
@@ -233,26 +241,26 @@ export default {
         return alert('请填写文献名称')
       }
       const obj = {
-        value: this.refferEdit.refferValue,
+        title: this.refferEdit.refferValue,
         link: this.refferEdit.refferLink,
         status: false
       }
-      this.articleObj.reffers.push(obj)
+      this.articleObj.refers.push(obj)
       this.refferEdit.refferValue = ''
       this.refferEdit.refferLink = ''
     },
     refferStatusChange (item) {
       return (() => {
-        console.log(this.articleObj.reffers)
+        console.log(this.articleObj.refers)
         item.status = !item.status
       })()
     },
     refferChange (index, title, link) {
-      if (this.articleObj.reffers[index]._id) {
-        this.articleObj.reffers[index].title = title
-        this.articleObj.reffers[index].link = link
+      if (this.articleObj.refers[index]._id) {
+        this.articleObj.refers[index].title = title
+        this.articleObj.refers[index].link = link
       } else {
-        this.articleObj.reffers.push({ title, link })
+        this.articleObj.refers.push({ title, link })
       }
     }
   }

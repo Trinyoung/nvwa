@@ -1,3 +1,12 @@
+<!--
+ * @Author: Trinyoung.Lu
+ * @Date: 2020-08-10 15:49:42
+ * @LastEditors: Trinyoung.Lu
+ * @LastEditTime: 2020-09-22 18:05:34
+ * @PageTitle: XXX页面
+ * @Description: XXX
+ * @FilePath: \nvwa\src\App.vue
+-->
 <template>
   <div id="app">
     <router-view/>
@@ -36,5 +45,8 @@ body {
 }
 .broadSide {
   border-radius: 5px 5px 5px 5px;
+}
+a:hover {
+  text-decoration: none;
 }
 </style>

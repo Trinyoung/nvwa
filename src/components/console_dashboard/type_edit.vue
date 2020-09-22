@@ -2,7 +2,7 @@
  * @Author: Trinyoung.Lu
  * @Date: 2020-08-31 19:32:06
  * @LastEditors: Trinyoung.Lu
- * @LastEditTime: 2020-09-14 18:17:51
+ * @LastEditTime: 2020-09-22 17:51:47
  * @PageTitle: XXX页面
  * @Description: XXX
  * @FilePath: \nvwa\src\components\console_dashboard\type_edit.vue
@@ -60,7 +60,7 @@
 </template>
 <script>
 import $ from 'jquery'
-import Axios from 'axios'
+import axios from 'axios'
 export default {
   data () {
     return {
@@ -77,7 +77,9 @@ export default {
     save (id) {
       const condition = {}
       if (id) {
-
+        axios.post('/api/types', condition).then(res => {
+          console.log(res)
+        })
       }
     }
   }
