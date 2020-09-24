@@ -110,16 +110,22 @@ export default {
         this.refers = refers
         // eslint-disable-next-line no-mixed-operators
         this.author = createdBy && createdBy.realName || ''
+        // if () {}
       })
     },
     getComments: function () {
       return ''
     },
-    fomatTime: function (unix) {
+    formatTime: function (unix) {
       return moment(unix).format('YYYY-MM-DD')
     },
     setFavorite () {
-
+      Axios.post(`/myapi/articles/favorites`, {articleId: this.articleId}).then(res => {
+        this.$cookies.set(`favorite-${this.articleId}`, true, {expired: moment})
+      })
+    },
+    setReads () {
+      Axios.post(`/api/articles/reads`)
     }
   }
 }

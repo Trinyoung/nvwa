@@ -2,7 +2,6 @@
   <div>
       <v-header></v-header>
       <v-main :articleId="articleId"></v-main>
-      <v-bottom></v-bottom>
   </div>
 </template>
 <script>

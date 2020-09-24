@@ -2,7 +2,7 @@
  * @Author: Trinyoung.Lu
  * @Date: 2020-08-04 08:31:03
  * @LastEditors: Trinyoung.Lu
- * @LastEditTime: 2020-09-22 18:45:31
+ * @LastEditTime: 2020-09-23 09:25:57
  * @PageTitle: XXX页面
  * @Description: XXX
  * @FilePath: \nvwa\src\main.js
@@ -21,14 +21,28 @@ import 'bootstrap-select/dist/js/bootstrap-select'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import ElementUI from 'element-ui' // （1）
 import 'element-ui/lib/theme-chalk/index.css'
-import { formatTime } from '@/tools/moment.js'
+// import { formatTime } from '@/tools/moment.js'
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(VueCookie)
 Vue.use(ElementUI, {zIndex: 3000})
-Vue.prototype.formatTime = formatTime
-// . router.beforeEach()
+Vue.cookie.set('hello', 'world')
+router.beforeEach((from, to, next) => {
+  console.log(from, to, '===================>')
+  const regex = new RegExp('/console')
+  if (regex.test(from.path)) {
+    const token = localStorage.getItem('token')
+    if (token) {
+      next()
+    } else {
+      router.replace('/login')
+    }
+  } else {
+    next()
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
