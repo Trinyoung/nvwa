@@ -68,8 +68,8 @@
             <th scope="row">{{index + 1}}</th>
             <td>{{item.title}}</td>
             <td>{{item.types}}</td>
-            <td>{{item.createdAt}}</td>
-            <td>{{item.tags}}</td>
+            <td>{{formatTime(item.createdAt)}}</td>
+            <td>{{item.tags.join()}}</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-secondary">编辑</button>
@@ -91,6 +91,7 @@ import $ from 'jquery'
 import typeEdit from './type_edit'
 import Axios from 'axios'
 import pagination from '../tools/pagination'
+import moment from 'moment'
 export default {
   components: {
     datePicker,
@@ -135,16 +136,22 @@ export default {
       })
       $('.selectpicker').selectpicker()
     })
+    this.getList()
   },
   methods: {
-    getList () {
-      Axios.get('/api/types').then((res) => {
-        const { docs, pages, total, page } = res.result.data
+    getList (n = 1) {
+      let queryString = `page=${n}&limit=10`
+      Axios.get(`/api/articles/types/list?${queryString}`).then((res) => {
+        console.log(res, '==========/res=========')
+        const { docs, pages, total, page } = res.data.result
         this.list = docs
         this.pages = pages
         this.page = page
         this.total = total
       })
+    },
+    formatTime (time) {
+      return moment(time * 1000).format('YYYY-MM-DD')
     },
     showDatePickResult: function () {
       console.log(this.searchInfo.date)

@@ -2,7 +2,7 @@
  * @Author: Trinyoung.Lu
  * @Date: 2020-08-31 19:32:06
  * @LastEditors: Trinyoung.Lu
- * @LastEditTime: 2020-09-22 17:51:47
+ * @LastEditTime: 2020-09-24 19:59:33
  * @PageTitle: XXX页面
  * @Description: XXX
  * @FilePath: \nvwa\src\components\console_dashboard\type_edit.vue
@@ -16,45 +16,38 @@
       </button>
     </div>
     <div class="modal-body">
-      <form>
-        <div class="form-group row">
-          <div class="col-sm-8">
-            <input type="text" class="form-control" id="recipient-name" placeholder="分类名称">
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-5">
-            <select class="form-control">
-              <option>一级分类</option>
-            </select>
-          </div>
-          <div class="col-sm-5">
-            <select class="form-control">
-              <option>一级分类</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-8">
-            <select name="tags" id="tags-picker" class="selectpicker form-control" title="添加标签" data-live-search="true" multiple>
-              <option value="" data-content="<span class='badge badge-success'>angular</span>">angular</option>
-              <option value="" data-content="<span class='badge badge-success'>react</span>">react</option>
-              <option value="" data-content="<span class='badge badge-success'>vue</span>">vue</option>
-              <option value="" data-content="<span class='badge badge-success'>javascript</span>">js</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-8">
-            <textarea class="form-control" id="description" placeholder="描述"></textarea>
-          </div>
-        </div>
-      </form>
+     <el-form :model="dataForm" :rules="rules" ref="dataForm" label-width="80px">
+      <el-form-item label="名称：" prop="title">
+        <el-input v-model="dataForm.title"></el-input>
+      </el-form-item>
+      <el-form-item label="分类：">
+         <el-cascader
+          :options="types"
+          v-model="dataForm.parent"
+          :props="{ checkStrictly: true }"
+          clearable></el-cascader>
+      </el-form-item>
+      <el-form-item label="标识码：" v-if="!dataForm.parent" prop="typeCode">
+         <el-input v-model="dataForm.typeCode" placeholder="请输入标识码"></el-input>
+      </el-form-item>
+      <el-form-item label="标签：">
+         <el-select v-model="dataForm.tags" placeholder="请选择标签">
+          <el-option
+            v-for="item in tags"
+            :key="item._id"
+            :label="item.name"
+            :value="item._id"
+          ></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="描述：" >
+        <el-input type="textarea" v-model="dataForm.description"></el-input>
+      </el-form-item>
+    </el-form>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-      <button type="button" class="btn btn-primary">提交</button>
+      <button type="button" class="btn btn-primary" @click="save">提交</button>
     </div>
   </div>
 </template>
@@ -64,20 +57,39 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      typeName: '',
-      firstType: '',
-      secondType: '',
-      description: ''
+      dataForm: {
+        title: '',
+        parent: '',
+        // tags: [],
+        description: '',
+        typeCode: ''
+      },
+      rules: {
+        title: [
+          {required: true, message: '请输入分类名称', trigger: 'blur'},
+          {min: 3, max: 30, message: '长度3 到 30个字符', trigger: 'blur'}
+        ],
+        typeCode: [
+          {required: true, message: '请输入标识码', trigger: 'blur'},
+          {min: 4, max: 4, message: '长度为4', trigger: 'blur'}
+        ]
+      }
     }
   },
+  props: ['types', 'tags', 'typeId'],
   mounted () {
     $('.selectpicker').selectpicker()
   },
   methods: {
-    save (id) {
-      const condition = {}
-      if (id) {
-        axios.post('/api/types', condition).then(res => {
+    save () {
+      const id = this.typeId
+      const Authorization = `Bearer ${localStorage.getItem('token')}`
+      if (!id) {
+        axios.post('/api/articles/types', this.dataForm, { headers: { Authorization } }).then(res => {
+          console.log(res)
+        })
+      } else {
+        axios.put(`/api/articles/types/${id}`, this.dataForm, { headers: { Authorization } }).then(res => {
           console.log(res)
         })
       }
@@ -85,32 +97,11 @@ export default {
   }
 }
 </script>
-<style scoped>
-  main {
-    text-align: left;
+<style>
+  .el-cascader {
+    width: 100%;
   }
-  .edit-container {
-    height: calc(100vh- 48px);
-  }
-  .title {
-    /* background: gray; */
-  }
-  .col-form-label {
-    font-size: 1.2rem;
-    font-weight: bold;
-    display: inline-block;
-    height: 40px;
-    line-height: 40px;
-    text-align: right;
-  }
-  .row {
-    margin-left: 0;
-    /* height: 40px; */
-  }
-  .submit {
-    text-align: center;
-  }
-  .submit-button {
-    width: 30%;
+  .el-select {
+    width: 100%;
   }
 </style>
