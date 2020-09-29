@@ -1,8 +1,17 @@
+<!--
+ * @Author: Trinyoung.Lu
+ * @Date: 2020-08-31 14:52:33
+ * @LastEditors: Trinyoung.Lu
+ * @LastEditTime: 2020-09-29 18:39:04
+ * @PageTitle: XXX页面
+ * @Description: XXX
+ * @FilePath: \nvwa\src\components\console_dashboard\main.vue
+-->
 <template>
-  <main role="main" class="col-md-9 ml-sm-auto col-lg-10">
+  <div role="main" class="container-fluid console-container">
     <router-view/>
     <v-bottom></v-bottom>
-  </main>
+  </div>
 </template>
 <script>
 import datePicker from 'vue-bootstrap-datetimepicker'
@@ -65,77 +74,11 @@ export default {
 }
 </script>
 <style scoped>
-.type-level {
-  width: 85%;
-}
-#split-icon {
-  display: inline-block;
-  width: 30px;
-}
-.border-gray {
-  border: gray;
-}
-.form-container {
-  padding: 5px;
-}
-.media-body {
-  text-align: left;
-}
-.col-title {
-  text-align: left;
-}
-.align-left {
-  text-align: left;
-}
-.form-check-label {
-  font-size: 0.8rem;
-}
-.item-title {
-  color: white;
-  font-size: 1.1rem;
-}
-#search-input {
-  display: inline-block;
-}
-
-#basic-addon2 {
-  width: 4rem;
-}
-#page-list {
-  margin-top: 0.5rem;
-}
-.pagination {
-  margin: 0 auto;
-}
-.list-group-item {
-  border: none;
-}
-.row {
-  margin-left: 0;
-  margin-right: 0;
-}
-.pagination {
-  width: 300px;
-}
-
-.d-table {
-  display: table;
-}
-.d-table-cell {
-  display: table-cell;
-  vertical-align: middle;
-}
-.d-vertical-center {
-  vertical-align: middle;
-}
-.d-align-right {
-  text-align: right;
-}
-.d-inline-block {
-  display: inline-block !important;
-}
-.search-input {
-  display: inline-block;
-  width: auto;
-}
+  .console-container {
+    position: relative;
+    margin-left: 225px;
+    padding-left:10px;
+    padding-right: 10px;
+    min-height: calc(100vh - 40px);
+  }
 </style>

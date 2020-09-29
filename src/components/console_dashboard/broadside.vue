@@ -1,5 +1,5 @@
 <template>
-  <nav id="sidebarMenu" class="col-sm-2 d-md-block sidebar collapse">
+  <nav id="sidebarMenu" class="d-md-block sidebar collapse">
     <div class="sidebar-sticky pt-3">
       <div class="dropdown">
         <button data-toggle="dropdown" class="btn btn-primary add-button rounded-pill">+ 新建</button>
@@ -7,33 +7,32 @@
           <ul>
             <li class="dropdown-item">
               <router-link to="/console/editor/new">
-                <b-icon-file-text></b-icon-file-text>
+                <b-icon-file-text class="icon"></b-icon-file-text>
                 新建文章
               </router-link>
             </li>
             <li class="dropdown-item">
               <router-link to="/">
-                <b-icon-file-earmark-binary></b-icon-file-earmark-binary>
+                <b-icon-file-earmark-binary class="icon"></b-icon-file-earmark-binary>
                 新建日志
               </router-link>
             </li>
             <li class="dropdown-item">
               <router-link to="/">
-                <b-icon-book></b-icon-book>
+                <b-icon-book class="icon"></b-icon-book>
                 新建系列
               </router-link>
             </li>
             <li class="dropdown-item">
               <router-link to="/">
-                <span data-feather="file">
-                  <b-icon-images></b-icon-images>
-                </span>
+                <b-icon-images class="icon"></b-icon-images>
+                <!-- </span> -->
                 新建相册
               </router-link>
             </li>
             <li class="dropdown-item">
               <router-link to="/">
-                <b-icon-upload></b-icon-upload>
+                <b-icon-upload class="icon"></b-icon-upload>
                 上传资源
               </router-link>
             </li>
@@ -53,30 +52,26 @@
       </h6>
       <ul class="nav flex-column">
         <li class="nav-item">
-        </li>
-        <li class="nav-item">
           <div class="nav-link">
-            <span data-feather="file">
-              <b-icon-file-richtext></b-icon-file-richtext>
-            </span>
-          <span data-toggle="dropdown"> 文档管理 </span>
+            <b-icon-file-richtext class="icon"></b-icon-file-richtext>
+            <span data-toggle="dropdown"> 文档管理 </span>
           <div class="dropdown-menu" id="dropdownMenu2" aria-labelledby="dropdown02">
             <ul>
               <li class="dropdown-item">
                 <router-link to="/console/articles">
-                  <b-icon-file-text></b-icon-file-text>
+                  <b-icon-file-text class="icon"></b-icon-file-text>
                   文章管理
                 </router-link>
               </li>
               <li class="dropdown-item">
                 <router-link to="/console/logs">
-                  <b-icon-file-earmark-binary></b-icon-file-earmark-binary>
+                  <b-icon-file-earmark-binary class="icon"></b-icon-file-earmark-binary>
                   日志管理
                 </router-link>
               </li>
               <li class="dropdown-item">
                 <router-link to="/console/series">
-                  <b-icon-book></b-icon-book>
+                  <b-icon-book class="icon"></b-icon-book>
                   系列管理
                 </router-link>
               </li>
@@ -86,9 +81,7 @@
         </li>
         <li class="nav-item">
           <router-link class="nav-link" to="/console/types">
-            <span data-feather="file">
-              <b-icon-folder2></b-icon-folder2>
-            </span>
+            <b-icon-folder2 class="icon"></b-icon-folder2>
             分类管理
           </router-link>
         </li>
@@ -102,25 +95,19 @@
         </li>
         <li class="nav-item">
           <router-link class="nav-link" to="#">
-            <span data-feather="file">
-              <b-icon-images></b-icon-images>
-            </span>
+            <b-icon-images class="icon"></b-icon-images>
             相册管理
           </router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" to="#">
-            <span data-feather="file">
-              <b-icon-file-earmark-zip></b-icon-file-earmark-zip>
-            </span>
+            <b-icon-file-earmark-zip class="icon"></b-icon-file-earmark-zip>
             资源文件
           </router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" to="#">
-            <span data-feather="file">
-              <b-icon-trash></b-icon-trash>
-            </span>
+            <b-icon-trash class="icon"></b-icon-trash>
             归档管理
           </router-link>
         </li>
@@ -134,9 +121,8 @@
       <ul class="nav flex-column mb-2">
         <li class="nav-item">
           <router-link class="nav-link" to="#">
-            <span data-feather="file">
-              <b-icon-person></b-icon-person>
-            </span>
+            <b-icon-person class="icon"></b-icon-person>
+            <!-- </span> -->
             个人信息
           </router-link>
         </li>
@@ -180,23 +166,29 @@ export default {
   #sidebarMenu {
     background-color: #002338;
   }
+
   .sidebar {
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
+    width: 220px;
     z-index: 100; /* Behind the navbar */
     padding: 48px 0 0; /* Height of navbar */
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    /* overflow: scroll; */
   }
-
+  .sidebar-sticky::-webkit-scrollbar {
+    display:none
+  }
   .sidebar-sticky {
     position: relative;
     top: 0;
     height: calc(100vh - 48px);
     padding-top: .5rem;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    /* overflow-x: hidden; */
+    overflow-y: auto;
+    /* Scrollable contents if viewport is shorter than content. */
   }
   @supports ((position: -webkit-sticky) or (position: sticky)) {
   .sidebar-sticky {
@@ -208,14 +200,14 @@ export default {
 .sidebar .nav-link {
   font-weight: 500;
   color: #bbbbbb;
-  /* text-align: left; */
-  /* margin-left: 2rem; */
+  text-align: left;
+  margin-left: 2rem;
 }
 .sidebar .nav-item {
-  text-align: left;
+  /* text-align: left; */
   font-weight: 500;
   color: #bbbbbb;
-  margin-left: 2rem;
+  /* margin-left: 2rem; */
 }
 .sidebar .nav-link .feather {
   margin-right: 4px;
@@ -235,7 +227,9 @@ export default {
   font-size: .75rem;
   text-transform: uppercase;
 }
-
+.icon {
+  margin-right: 0.2rem;
+}
 /*
  * Navbar
  */

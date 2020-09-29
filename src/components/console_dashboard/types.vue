@@ -7,42 +7,41 @@
         </li>
       </ol>
     </nav>
-    <form class="pb-2 pr-3 pl-3 pt-0 form-container border-bottom">
-      <div class="form-row my-2">
-        <div class="col form-inline">
-          <strong> 起止日期：</strong>
-          <date-picker v-model="searchInfo.startDate" :config="options" @dp-hide="showDatePickResult"></date-picker>
-          <span id="split-icon" class="justify-center">至</span>
-          <date-picker v-model="searchInfo.endDate" :config="options"></date-picker>
-        </div>
-        <div class="col-5 form-inline">
-          <strong>发布状态：</strong>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value =0 v-model="searchInfo.published">
-            <label class="form-check-label" for="inlineCheckbox1">已发布</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value =1 v-model="searchInfo.published">
-            <label class="form-check-label" for="inlineCheckbox2">未发布</label>
-          </div>
-        </div>
-      </div>
-      <div class="form-row my-2">
-        <div class="col form-inline">
-          <label for=""><strong>标签选择：</strong> </label>
-          <select name="" id="" class="selectpicker border border-gray rounded" multiple data-live-search="true" title="选择标签">
-            <option value="">Angular</option>
-            <option value="">Vue</option>
-            <option value="">React</option>
-            <option value="">nodejs</option>
-          </select>
-        </div>
-        <div class="col-5 align-left">
-          <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search" v-model="searchInfo.keyword">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
-        </div>
-      </div>
-    </form>
+    <div class="pb-2 pr-3 pl-3 pt-0 form-container border-bottom">
+      <el-form :inline="true">
+        <el-form-item label="日期范围:">
+          <el-date-picker
+            v-model="searchInfo.dateRange"
+            type="datetimerange"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期">
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="标签选择:">
+          <el-select v-model="searchInfo.tags" placeholder="请选择活动区域">
+            <el-option label="区域一" value="shanghai"></el-option>
+            <el-option label="区域二" value="beijing"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="分类选择:">
+          <el-cascader
+            v-model="searchInfo.type"
+            :options="options"
+            :props="{ checkStrictly: true }"
+            clearable></el-cascader>
+        </el-form-item>
+        <el-form-item label="发布状态:">
+          <el-switch v-model="searchInfo.published"></el-switch>
+        </el-form-item>
+        <el-form-item label="关键字：">
+          <el-input v-model="searchInfo.keyword"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="success" plain>搜索</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
     <div class="my-0 p-3 shadow-sm" id="main-content">
       <div class="breadcrumb">
         <button class="btn btn-primary" data-toggle="modal" data-target="#edit-type">新增</button>
@@ -142,7 +141,6 @@ export default {
     getList (n = 1) {
       let queryString = `page=${n}&limit=10`
       Axios.get(`/api/articles/types/list?${queryString}`).then((res) => {
-        console.log(res, '==========/res=========')
         const { docs, pages, total, page } = res.data.result
         this.list = docs
         this.pages = pages
@@ -255,5 +253,8 @@ export default {
 }
 .table .handle-cell {
   width: 200px;
+}
+.el-form-item {
+  margin-bottom: 0;
 }
 </style>
