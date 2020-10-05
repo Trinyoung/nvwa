@@ -20,7 +20,7 @@
                 </span>
                 <a class="ml-2 align-middle">
                   <b-icon-person></b-icon-person>
-                  {{ item.createdBy.realName }}
+                  {{ item.createdBy}}
                 </a>
                 <a class="ml-2 align-middle">
                   <b-icon-eye></b-icon-eye>
@@ -68,7 +68,7 @@ export default {
       let queryString = `page=${page}`
       if (keyword) queryString += `&keyword=${keyword}`
       if (type) queryString += `&type=${keyword}`
-      Axios.get(`/api/articles/list?${queryString}`).then((res) => {
+      Axios.get(`/myapi/articles/list?${queryString}`).then((res) => {
         if (res.data.code !== '000') {
           return alert('获取结果失败')
         }

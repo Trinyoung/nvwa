@@ -99,18 +99,16 @@ export default {
   methods: {
     getArticleDetail: function () {
       const id = this.articleId
-      Axios.get(`/api/articles/${id}`).then((result) => {
+      Axios.get(`/myapi/articles/${id}`).then((result) => {
         const { content, title, updatedBy, updatedAt, createdAt, createdBy, refers } = result.data.data
         const contentHtml = result.data.data.content_html
         this.contentHtml = contentHtml || content
         this.title = title
         this.updatedBy = updatedBy
         this.updatedAt = updatedAt || createdAt
-        console.log(refers, 'refers ==============>')
         this.refers = refers
         // eslint-disable-next-line no-mixed-operators
         this.author = createdBy && createdBy.realName || ''
-        // if () {}
       })
     },
     getComments: function () {
