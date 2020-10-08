@@ -43,13 +43,43 @@
       </el-form>
     </div>
     <div class="my-0 p-3 shadow-sm" id="main-content">
-      <div class="breadcrumb">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#edit-type">新增</button>
-        <div class="modal fade" tabindex="-1" role="dialog" id="edit-type" aria-hidden="true">
+      <div class="btn-toolbar my-1 pb-1" role="toolbar" aria-label="Toolbar with button groups">
+        <el-button type="primary">新 增</el-button>
+        <el-dialog title="Shipping address" :visible.sync="dialogFormVisible">
+            <el-form-item label="名称：" prop="title">
+              <el-input v-model="dataForm.title"></el-input>
+            </el-form-item>
+            <el-form-item label="分类：">
+              <el-cascader
+                :options="types"
+                v-model="dataForm.parent"
+                :props="{ checkStrictly: true }"
+                clearable></el-cascader>
+            </el-form-item>
+            <el-form-item label="标识码：" v-if="!dataForm.parent" prop="typeCode">
+              <el-input v-model="dataForm.typeCode" placeholder="请输入标识码"></el-input>
+            </el-form-item>
+            <el-form-item label="标签：">
+              <el-select v-model="dataForm.tags" placeholder="请选择标签">
+                <el-option
+                  v-for="item in tags"
+                  :key="item._id"
+                  :label="item.name"
+                  :value="item._id"
+                ></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="描述：" >
+              <el-input type="textarea" v-model="dataForm.description"></el-input>
+            </el-form-item>
+          </el-form>
+        </el-dialog>
+        <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#edit-type">新增</button> -->
+        <!-- <div class="modal fade" tabindex="-1" role="dialog" id="edit-type" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
             <typeEdit/>
           </div>
-        </div>
+        </div> -->
       </div>
       <table class="table table-bordered">
         <thead class="thead-light">
@@ -103,6 +133,7 @@ export default {
       pages: 1,
       currentPage: 1,
       total: 0,
+      dialogFormVisible: false,
       searchInfo: {
         startDate: new Date(),
         endDate: new Date(),

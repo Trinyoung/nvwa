@@ -42,3 +42,9 @@ export default {
     }
   }
 </style>
+<style>
+  table .el-button {
+    height: 25px;
+    padding: 5px 12px;
+  }
+</style>

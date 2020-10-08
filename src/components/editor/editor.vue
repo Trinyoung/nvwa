@@ -77,13 +77,32 @@
       </div>
       <div class="col-md-2">
         <div class="form-check-inline">
-          <button class="btn btn-success" data-toggle="modal" data-target="#referDialog">
+          <!-- <button class="btn btn-success" data-toggle="modal" data-target="#referDialog">
             添加引用
-          </button>
+          </button> -->
+          <el-button type="success" @click="dialogFormVisible = true">添加引用</el-button>
         </div>
       </div>
     </form>
-    <div class="modal fade" id="referDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <el-dialog title="文献引用" :visible.sync="dialogFormVisible">
+      <el-form :model="refferEdit">
+        <el-form-item label="文献名称" :label-width="formLabelWidth">
+          <el-input v-model="refferEdit.refferValue" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="文献链接" :label-width="formLabelWidth">
+          <el-input v-model="refferEdit.refferLink"></el-input>
+          <!-- <el-select v-model="form.region" placeholder="Please select a zone">
+            <el-option label="Zone No.1" value="shanghai"></el-option>
+            <el-option label="Zone No.2" value="beijing"></el-option>
+          </el-select> -->
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="addReffer()">Confirm</el-button>
+      </span>
+    </el-dialog>
+    <!-- <div class="modal fade" id="referDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -110,7 +129,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <ul class="list-group">
       <li class="list-group-item" v-for="(item, index) in articleObj.refers" :key="item.title">
         <div v-if="!item.status" class="row">
@@ -157,6 +176,8 @@ export default {
   data: function () {
     return {
       tagList: [],
+      dialogFormVisible: false,
+      formLabelWidth: '100px',
       articleObj: {
         content: '',
         category: '1',
@@ -248,6 +269,7 @@ export default {
       this.articleObj.refers.push(obj)
       this.refferEdit.refferValue = ''
       this.refferEdit.refferLink = ''
+      this.dialogFormVisible = false
     },
     refferStatusChange (item) {
       return (() => {

@@ -18,40 +18,11 @@
       </div>
     </form>
     <div class="my-0 p-3 shadow-sm" id="main-content">
-      <div class="breadcrumb">
+      <!-- <div class="breadcrumb">
         <button class="btn btn-primary" data-toggle="modal" data-target="#edit-type">新增</button>
-        <div class="modal fade" tabindex="-1" role="dialog" id="edit-type" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">标签设置</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form>
-                  <div class="form-group row">
-                    <div class="col-sm-8">
-                      <input type="text"
-                        class="form-control"
-                        id="recipient-name"
-                        v-model="condition.name"
-                        placeholder="名称">
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary"
-                data-toggle="modal" data-target="#edit-type"
-                data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary"
-                 @click="save">提交</button>
-              </div>
-            </div>
-          </div>
-        </div>
+      </div> -->
+      <div class="btn-toolbar my-1 pb-1" role="toolbar" aria-label="Toolbar with button groups">
+        <el-button type="primary" @click="openDialog">新增</el-button>
       </div>
       <table class="table table-bordered">
         <thead class="thead-light">
@@ -69,10 +40,8 @@
             <td>{{item.createdAt}}</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary"
-                data-toggle="modal" data-target="#edit-type"
-                @click="openDialog(index)">编辑</button>
-                <button type="button" class="btn btn-secondary">删除</button>
+                <el-button @click="openDialog(index)" type="primary" plain>编辑</el-button>
+                <el-button type="danger" plain>删除</el-button>
               </div>
             </td>
           </tr>
@@ -80,6 +49,17 @@
       </table>
       <pagination :getList="getList" :currentPage="currentPage" :pages ="pages"></pagination>
     </div>
+    <el-dialog title="标签设置" :visible.sync="dialogFormVisible">
+      <el-form :model="condition">
+        <el-form-item label="名称" label-width="50px">
+          <el-input v-model="condition.name" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取消</el-button>
+        <el-button type="primary" @click="dialogFormVisible = false">确认</el-button>
+      </span>
+    </el-dialog>
   </main>
 </template>
 <script>
@@ -102,6 +82,7 @@ export default {
       searchInfo: {
         keyword: ''
       },
+      dialogFormVisible: false,
       options: {
         format: 'YYYY-MM-DD HH:mm:ss',
         useCurrent: false,
@@ -183,6 +164,10 @@ export default {
         this.currentPage--
         this.getList(this.currentPage)
       }
+    },
+    openDialog (index) {
+      this.dialogFormVisible = true
+      this.condition = Object.assign({}, this.dataList[index])
     }
   }
 }
@@ -195,7 +180,10 @@ export default {
   font-weight: bold;
   font-size: 1.5rem;
 }
-
+table .el-button {
+  height: 25px;
+  padding: 5px 12px;
+}
 .type-level {
   width: 85%;
 }

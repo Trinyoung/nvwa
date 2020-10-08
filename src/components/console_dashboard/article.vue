@@ -45,12 +45,7 @@
     </div>
     <div class="my-0 p-3 shadow-sm" id="main-content">
       <div class="btn-toolbar my-1 pb-1" role="toolbar" aria-label="Toolbar with button groups">
-        <div class="btn-group mr-2" role="group" aria-label="Second group">
-          <button type="button" class="btn btn-secondary">删除</button>
-        </div>
-        <div class="btn-group" role="group" aria-label="Third group">
-          <button type="button" class="btn btn-secondary">新增</button>
-        </div>
+        <el-button type="primary" to='/console/editor/new'>新 增</el-button>
       </div>
       <table class="table table-bordered">
         <thead class="thead-light">
@@ -71,12 +66,12 @@
             <td>{{item.type}}</td>
             <td>{{item.createdBy}}</td>
             <td>{{item.createdAt}}</td>
-            <td>{{item.tags}}</td>
+            <td>{{item.tags.join()}}</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">详情</button>
-                <button type="button" class="btn btn-secondary">编辑</button>
-                <button type="button" class="btn btn-secondary">删除</button>
+                <el-button type="success" plain>详情</el-button>
+                <el-button type="primary" plain>编辑</el-button>
+                <el-button type="danger" plain>删除</el-button>
               </div>
             </td>
           </tr>
@@ -93,6 +88,7 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import $ from 'jquery'
 import Axios from 'axios'
 import pagination from '../tools/pagination'
+import moment from 'moment'
 export default {
   components: {
     datePicker,
@@ -149,21 +145,22 @@ export default {
     showDatePickResult: function () {
       console.log(this.searchInfo.date)
     },
-    getList () {
-      const { page = 1, keyword, type } = this.$data
-      console.log(page, keyword, type, ' ---------->')
+    getList (page) {
       let queryString = `page=${page}`
+      if (page) {
+        this.currentPage = page
+      }
+      const { keyword, type } = this.$data
       if (keyword) queryString += `&keyword=${keyword}`
       if (type) queryString += `&type=${keyword}`
-      Axios.get(`/api/articles?${queryString}`).then((res) => {
-        console.log(res, 'res----------------->')
+      Axios.get(`/myapi/articles/list?${queryString}`).then((res) => {
         if (res.data.code !== '000') {
           return alert('获取结果失败')
         }
         this.$data.list = res.data.result.docs
         this.$data.pages = res.data.result.pages
         this.$data.list.forEach((item) => {
-          console.log(item)
+          item.createdAt = moment(item.createdAt * 1000).format('YYYY-MM-DD HH:mm:ss')
         })
       })
     }
@@ -209,10 +206,10 @@ export default {
   color: white;
   font-size: 1.1rem;
 }
-/* #search-input {
-  display: inline-block;
-} */
-
+table .el-button {
+  height: 25px;
+  padding: 5px 12px;
+}
 #basic-addon2 {
   width: 4rem;
 }
