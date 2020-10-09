@@ -73,6 +73,10 @@
             <el-form-item label="描述：" >
               <el-input type="textarea" v-model="dataForm.description" placeholder="请添加描述"></el-input>
             </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="submitForm('dataForm')">Create</el-button>
+              <el-button @click="resetForm('dataForm')">Reset</el-button>
+            </el-form-item>
           </el-form>
         </el-dialog>
       </div>
@@ -174,6 +178,44 @@ export default {
     },
     showDatePickResult: function () {
       console.log(this.searchInfo.date)
+    },
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          const id = this.typeId
+          const Authorization = `Bearer ${localStorage.getItem('token')}`
+          const request = Object.assign({isTop: 1}, this.dataForm)
+          if (!id) {
+            Axios.post('/api/articles/types', request, { headers: { Authorization } }).then(res => {
+              if (res.data.code === 200) {
+                this.dialogFormVisible = false
+              } else {
+                this.$message({
+                  showClose: true,
+                  message: res.data.message
+                })
+              }
+            }).catch(err => {
+              this.$message({
+                showClose: true,
+                message: `创建分类出现错误, ${err}`
+              })
+            })
+          } else {
+            Axios.put(`/api/articles/types/${id}`, request, { headers: { Authorization } }).then(res => {
+              console.log(res)
+            }).catch(err => {
+              this.$message({
+                showClose: true,
+                message: `修改分类出现错误, ${err}`
+              })
+            })
+          }
+        }
+      })
+    },
+    resetForm (formName) {
+      this.$refs[formName].restFields()
     }
   }
 }
