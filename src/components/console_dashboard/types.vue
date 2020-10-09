@@ -27,7 +27,7 @@
         <el-form-item label="分类选择:">
           <el-cascader
             v-model="searchInfo.type"
-            :options="options"
+            :options="types"
             :props="{ checkStrictly: true }"
             clearable></el-cascader>
         </el-form-item>
@@ -44,10 +44,11 @@
     </div>
     <div class="my-0 p-3 shadow-sm" id="main-content">
       <div class="btn-toolbar my-1 pb-1" role="toolbar" aria-label="Toolbar with button groups">
-        <el-button type="primary">新 增</el-button>
-        <el-dialog title="Shipping address" :visible.sync="dialogFormVisible">
-            <el-form-item label="名称：" prop="title">
-              <el-input v-model="dataForm.title"></el-input>
+        <el-button type="primary" @click="dialogFormVisible=true">新 增</el-button>
+        <el-dialog title="分类管理" :visible.sync="dialogFormVisible" class="dataForm-container">
+          <el-form :model="dataForm" :rules="rules" ref="dataForm" label-width="80px">
+            <el-form-item label="名称：" prop="title" >
+              <el-input v-model="dataForm.title" placeholder="请输入名称"></el-input>
             </el-form-item>
             <el-form-item label="分类：">
               <el-cascader
@@ -56,10 +57,10 @@
                 :props="{ checkStrictly: true }"
                 clearable></el-cascader>
             </el-form-item>
-            <el-form-item label="标识码：" v-if="!dataForm.parent" prop="typeCode">
+            <el-form-item label="标识码：" label-width="80px" v-if="!dataForm.parent" prop="typeCode">
               <el-input v-model="dataForm.typeCode" placeholder="请输入标识码"></el-input>
             </el-form-item>
-            <el-form-item label="标签：">
+            <el-form-item label="标签：" >
               <el-select v-model="dataForm.tags" placeholder="请选择标签">
                 <el-option
                   v-for="item in tags"
@@ -70,16 +71,10 @@
               </el-select>
             </el-form-item>
             <el-form-item label="描述：" >
-              <el-input type="textarea" v-model="dataForm.description"></el-input>
+              <el-input type="textarea" v-model="dataForm.description" placeholder="请添加描述"></el-input>
             </el-form-item>
           </el-form>
         </el-dialog>
-        <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#edit-type">新增</button> -->
-        <!-- <div class="modal fade" tabindex="-1" role="dialog" id="edit-type" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <typeEdit/>
-          </div>
-        </div> -->
       </div>
       <table class="table table-bordered">
         <thead class="thead-light">
@@ -116,15 +111,12 @@
 import datePicker from 'vue-bootstrap-datetimepicker'
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
 import '@fortawesome/fontawesome-free/css/all.css'
-import $ from 'jquery'
-import typeEdit from './type_edit'
 import Axios from 'axios'
 import pagination from '../tools/pagination'
 import moment from 'moment'
 export default {
   components: {
     datePicker,
-    typeEdit,
     pagination
   },
   data: function () {
@@ -134,6 +126,8 @@ export default {
       currentPage: 1,
       total: 0,
       dialogFormVisible: false,
+      types: [],
+      tags: [],
       searchInfo: {
         startDate: new Date(),
         endDate: new Date(),
@@ -141,31 +135,26 @@ export default {
         published: '',
         keyword: ''
       },
-      options: {
-        format: 'YYYY-MM-DD HH:mm:ss',
-        useCurrent: false,
-        locale: 'zh-cn'
+      dataForm: {
+        title: '',
+        parent: '',
+        // tags: [],
+        description: '',
+        typeCode: ''
+      },
+      rules: {
+        title: [
+          {required: true, message: '请输入分类名称', trigger: 'blur'},
+          {min: 3, max: 30, message: '长度3 到 30个字符', trigger: 'blur'}
+        ],
+        typeCode: [
+          {required: true, message: '请输入标识码', trigger: 'blur'},
+          {min: 4, max: 4, message: '长度为4', trigger: 'blur'}
+        ]
       }
     }
   },
   created: function () {
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-      $.extend(true, $.fn.datetimepicker.defaults, {
-        icons: {
-          time: 'far fa-clock',
-          date: 'far fa-calendar',
-          p: 'fas fa-arrow-up',
-          down: 'fas fa-arrow-down',
-          previous: 'fas fa-chevron-left',
-          next: 'fas fa-chevron-right',
-          today: 'fas fa-calendar-check',
-          clear: 'far fa-trash-alt',
-          close: 'far fa-times-circle'
-        }
-      })
-      $('.selectpicker').selectpicker()
-    })
     this.getList()
   },
   methods: {
@@ -174,6 +163,7 @@ export default {
       Axios.get(`/api/articles/types/list?${queryString}`).then((res) => {
         const { docs, pages, total, page } = res.data.result
         this.list = docs
+        console.log(this.list, 'this list is here ')
         this.pages = pages
         this.page = page
         this.total = total
@@ -287,5 +277,17 @@ export default {
 }
 .el-form-item {
   margin-bottom: 0;
+}
+
+.dataForm-container .el-form-item {
+  margin-bottom: 20px
+}
+
+.el-cascader {
+  width: 100%;
+}
+
+.el-select {
+  width: 100%;
 }
 </style>

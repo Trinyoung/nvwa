@@ -51,7 +51,7 @@
     </div>
     <el-dialog title="标签设置" :visible.sync="dialogFormVisible">
       <el-form :model="condition">
-        <el-form-item label="名称" label-width="50px">
+        <el-form-item label="名称:" label-width="50px">
           <el-input v-model="condition.name" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
@@ -66,7 +66,6 @@
 import datePicker from 'vue-bootstrap-datetimepicker'
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
 import '@fortawesome/fontawesome-free/css/all.css'
-import $ from 'jquery'
 import typeEdit from './type_edit'
 import Axios from 'axios'
 import moment from 'moment'
@@ -97,25 +96,8 @@ export default {
       pages: 1
     }
   },
-  created: function () {
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-      $.extend(true, $.fn.datetimepicker.defaults, {
-        icons: {
-          time: 'far fa-clock',
-          date: 'far fa-calendar',
-          p: 'fas fa-arrow-up',
-          down: 'fas fa-arrow-down',
-          previous: 'fas fa-chevron-left',
-          next: 'fas fa-chevron-right',
-          today: 'fas fa-calendar-check',
-          clear: 'far fa-trash-alt',
-          close: 'far fa-times-circle'
-        }
-      })
-      $('.selectpicker').selectpicker()
-      this.getList()
-    })
+  created () {
+    this.getList()
   },
   mounted () {
     this.getList(1)

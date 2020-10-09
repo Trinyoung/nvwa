@@ -45,7 +45,7 @@
     </div>
     <div class="my-0 p-3 shadow-sm" id="main-content">
       <div class="btn-toolbar my-1 pb-1" role="toolbar" aria-label="Toolbar with button groups">
-        <el-button type="primary" to='/console/editor/new'>新 增</el-button>
+        <el-button type="primary" :to="{path: '/console/editor/new'}">新 增</el-button>
       </div>
       <table class="table table-bordered">
         <thead class="thead-light">
