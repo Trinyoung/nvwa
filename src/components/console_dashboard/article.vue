@@ -85,7 +85,6 @@
 import datePicker from 'vue-bootstrap-datetimepicker'
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
 import '@fortawesome/fontawesome-free/css/all.css'
-import $ from 'jquery'
 import Axios from 'axios'
 import pagination from '../tools/pagination'
 import moment from 'moment'
@@ -106,31 +105,8 @@ export default {
         published: '',
         keyword: ''
       },
-      options: {
-        format: 'YYYY-MM-DD HH:mm:ss',
-        useCurrent: false,
-        locale: 'zh-cn'
-      }
+      options: []
     }
-  },
-  created: function () {
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-      $.extend(true, $.fn.datetimepicker.defaults, {
-        icons: {
-          time: 'far fa-clock',
-          date: 'far fa-calendar',
-          p: 'fas fa-arrow-up',
-          down: 'fas fa-arrow-down',
-          previous: 'fas fa-chevron-left',
-          next: 'fas fa-chevron-right',
-          today: 'fas fa-calendar-check',
-          clear: 'far fa-trash-alt',
-          close: 'far fa-times-circle'
-        }
-      })
-      $('.selectpicker').selectpicker()
-    })
   },
   mounted () {
     this.getList()

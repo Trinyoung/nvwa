@@ -96,9 +96,9 @@
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
 }
 #dropdownMenu2 {
-    position: absolute;
-    right: 0!important;
-    left: auto;
+  position: absolute;
+  right: 0!important;
+  left: auto;
 }
 #search-input {
   border-radius: 0.5rem 0 0 0.5rem;

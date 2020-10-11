@@ -60,10 +60,10 @@
           <b>上一篇：</b><a href="#">龙的传人</a>
         </div>
         <div class="col-sm-4">
-          <div class="favorite-icon">
+          <div v-bind:class="{'isFavorited':isFavorited, 'favorite-icon':!isFavorited} ">
             <b-icon-hand-thumbs-up class="size-2" @click="setFavorite"></b-icon-hand-thumbs-up>
           </div>
-          <span class="favorite-num">16</span>
+          <span class="favorite-num">{{favoriteNum}}</span>
         </div>
         <div class="col-sm-4">
           <b>下一篇：</b><a href="#">黄河大合唱</a>
@@ -83,8 +83,12 @@ export default {
   },
   data: function () {
     return {
+      color: 'red',
+      userInfo: {},
+      isFavorited: false,
       contentHtml: '',
       title: '',
+      favoriteNum: 0,
       author: '',
       updatedBy: '',
       updatedAt: '',
@@ -95,9 +99,15 @@ export default {
   props: ['articleId'],
   created: function () {
     this.getArticleDetail()
+    this.getComments()
+    this.getFavoriteNums()
+    this.userInfo = localStorage.getItem('userInfo') && JSON.stringify(localStorage.getItem('userInfo'))
+    if (this.userInfo) {
+      this.getFavorite()
+    }
   },
   methods: {
-    getArticleDetail: function () {
+    getArticleDetail () {
       const id = this.articleId
       Axios.get(`/myapi/articles/${id}`).then((result) => {
         const { content, title, updatedBy, updatedAt, createdAt, createdBy, refers } = result.data.data
@@ -108,18 +118,47 @@ export default {
         this.updatedAt = updatedAt || createdAt
         this.refers = refers
         // eslint-disable-next-line no-mixed-operators
-        this.author = createdBy && createdBy.realName || ''
+        this.author = createdBy
       })
     },
-    getComments: function () {
+    getComments () {
       return ''
     },
-    formatTime: function (unix) {
+    formatTime (unix) {
       return moment(unix).format('YYYY-MM-DD')
     },
     setFavorite () {
-      Axios.post(`/myapi/articles/favorites`, {articleId: this.articleId}).then(res => {
-        this.$cookies.set(`favorite-${this.articleId}`, true, {expired: moment})
+      const request = {
+        articleId: this.articleId,
+        createdBy: this.userInfo.uid
+      }
+      console.log(JSON.stringify(request, 'request===============>'))
+      Axios.post('/myapi/articles/favorites', request).then(res => {
+        if (res.data.code === '000') {
+          this.isFavorited = true
+          this.favoriteNum++
+        }
+      })
+    },
+    getFavoriteNums () {
+      Axios.get(`/myapi/aritcles/favorites/nums?articleId=${this.articleId}`).then(res => {
+        if (res.data.code === '000') {
+          this.favoriteNum = res.data.nums
+        }
+      })
+    },
+    getFavorite () {
+      let queryString = `articleId=${this.articleId}`
+      if (this.userInfo) {
+        queryString += `&uid=${this.userInfo.uid}`
+      }
+      Axios.get(`/myapi/articles/favorites?${queryString}`).then(res => {
+        this.isFavorited = res.result
+      }).catch(err => {
+        this.$message({
+          type: 'error',
+          message: err.message
+        })
       })
     },
     setReads () {
@@ -239,5 +278,12 @@ export default {
   }
   .content-container >>> thead {
     background: #e9ecef;
+  }
+  .isFavorited {
+    color: red
+  }
+  .isFavorited:hover {
+    cursor: pointer;
+    /* color: black */
   }
 </style>
