@@ -132,7 +132,6 @@ export default {
         articleId: this.articleId,
         createdBy: this.userInfo.uid
       }
-      console.log(JSON.stringify(request, 'request===============>'))
       Axios.post('/myapi/articles/favorites', request).then(res => {
         if (res.data.code === '000') {
           this.isFavorited = true
