@@ -69,7 +69,7 @@
           <b>下一篇：</b><a href="#">黄河大合唱</a>
         </div>
       </div>
-      <v-bottom :refers="refers"></v-bottom>
+      <v-bottom :refers="refers" :articleId="articleId" :uid="uid"></v-bottom>
     </div>
   </main>
 </template>
@@ -101,7 +101,10 @@ export default {
     this.getArticleDetail()
     this.getComments()
     this.getFavoriteNums()
-    this.userInfo = localStorage.getItem('userInfo') && JSON.stringify(localStorage.getItem('userInfo'))
+    this.userInfo = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
+    console.log(this.userInfo, '---------------->')
+    this.uid = this.userInfo.uid
+    console.log(this.uid, '<========this.uid=========>')
     if (this.userInfo) {
       this.getFavorite()
     }
@@ -119,6 +122,11 @@ export default {
         this.refers = refers
         // eslint-disable-next-line no-mixed-operators
         this.author = createdBy
+      }).catch(err => {
+        this.$message({
+          type: 'error',
+          message: err.message
+        })
       })
     },
     getComments () {

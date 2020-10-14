@@ -2,15 +2,10 @@
     <div class="reffer-container pt-3">
     <div class="border-gray row ">
       <div class="col-sm-10">
-        <h5 class="border-bottom border-gray pb-2 mb-0">评论 (10)</h5>
-      </div>
-      <div class="col-sm-2">
-        <div data-toggle="collapse" data-target="#collapseExample">
-          <el-button type="success" plain>发表评论</el-button>
-        </div>
+        <h5 class="border-bottom border-gray pb-2 mb-0">评论 ({{commentNums}})</h5>
       </div>
     </div>
-    <div class="collapse mt-2" id="collapseExample">
+    <div class="mt-2">
       <el-form label-width="100px" :model="dataForm" ref="dataForm" :rules="rules">
         <el-form-item label="评论内容" prop="content">
           <el-input type="textarea" v-model="dataForm.content" class="content-container" placeholder="请添加评论内容"></el-input>
@@ -19,20 +14,20 @@
           <el-input v-model="dataForm.nilName" placeholder="请填写昵称，长度限定为10个字符"></el-input>
         </el-form-item>
         <el-form-item label="邮箱" v-if="isUser" prop="email">
-          <el-input v-model="dataForm.email" placeholder="请填写邮箱"></el-input>
+          <el-input v-model="dataForm.email" placeholder="请填写邮箱, 不对外显示"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="success" @click="submitForm('ruleForm')">发表</el-button>
-          <el-button type="danger" plain @click="resetForm('ruleForm')">重置</el-button>
+          <el-button type="success" @click="submitForm('dataForm')">发 表</el-button>
+          <el-button type="danger" plain @click="resetForm('dataForm')">取消</el-button>
         </el-form-item>
       </el-form>
     </div>
 
     <ul class="list-group list-group-container">
-      <li class="list-group-item">
+      <li class="list-group-item" v-for="item in comments" :key="item._id">
         <div class="comment-item comment-header">
           <b class="comment-author">
-            trinyoung
+            {{item.nilName}}
           </b>
           <div class="d-inline-right">
             <b-icon-hand-thumbs-up class="icon"></b-icon-hand-thumbs-up>
@@ -40,10 +35,10 @@
           </div>
         </div>
         <div class="comment-body comment-item">
-          <span>我们的人阿斯顿发生</span>
+          <span>{{item.content}}</span>
         </div>
         <div class="comment-bottom comment-item">
-          <span>2020-08-02</span>
+          <span>{{formatTime(item.createdAt)}}</span>
           <span class="hover-change reply-button" data-toggle="collapse" data-target="#collapseReply">回复</span>
           <div class="collapse mt-2" id="collapseReply">
             <el-form label-width="100px" :model="dataForm" ref="dataForm" :rules="rules">
@@ -57,25 +52,11 @@
                 <el-input v-model="dataForm.email" placeholder="请填写邮箱"></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="success" @click="submitForm('dataForm')">发表</el-button>
-                <el-button type="danger" plain @click="resetForm('ruleForm')">重置</el-button>
+                <el-button type="success" @click="submitForm('dataForm')">发 表</el-button>
+                <el-button type="danger" plain @click="resetForm('ruleForm')">取 消</el-button>
               </el-form-item>
             </el-form>
           </div>
-        </div>
-      </li>
-      <li class="list-group-item">
-        <div class="comment-item">
-          <b class="margin-auto comment-author">
-            一蓑烟雨任平生
-          </b>
-        </div>
-        <div class="comment-body comment-item">
-          <span>我们的人阿斯顿发生</span>
-        </div>
-        <div class="comment-bottom comment-item">
-          <span>2020-08-02 </span>
-          <span class="hover-change reply-button"> 回复</span>
         </div>
       </li>
     </ul>
@@ -83,10 +64,14 @@
 </template>
 <script>
 import Axios from 'axios'
+import moment from 'moment'
 export default {
   props: ['refers', 'articleId', 'uid'],
   created () {
+    console.log(this.articleId, '------------------->')
+    console.log(this.uid, '+++++++++uid+++++++>')
     this.isUser = this.uid && true
+    this.getComments()
   },
   data () {
     return {
@@ -94,14 +79,15 @@ export default {
       commentNums: 0,
       comments: [],
       dataForm: {
-        content: ''
+        content: '',
+        articleId: this.articleId
       },
       rules: {
         content: [
           {required: true, message: '请填写评论内容', trigger: 'blur'}
         ],
         email: [
-          {required: true, message: '请填写邮箱', trigger: 'blur'},
+          {required: true, message: '请填写邮箱，邮箱不对外显示', trigger: 'blur'},
           {type: 'email', message: '请填写正确的邮箱各式', trigger: 'blur'}
         ],
         nilName: [
@@ -116,14 +102,41 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           const submitForm = Object.assign({
-            ariticleId: this.ariticleId
+            ariticleId: this.articleId
           }, this.dataForm)
           if (this.uid) {
             submitForm.createdBy = this.uid
           }
-          Axios.post('/myapi/comments', submitForm)
+          Axios.post('/myapi/comments', submitForm).then(res => {
+            this.dataForm.resetFields()
+            this.$message({
+              type: 'success',
+              message: '发表成功'
+            })
+          }).catch(err => {
+            this.$message({
+              type: 'error',
+              message: `评论发表失败, ${err.msg}`
+            })
+          })
         }
       })
+    },
+    getComments () {
+      Axios.get(`/myapi/comments/${this.articleId}/list`).then(res => {
+        console.log(res, 'res------------------>is here')
+        this.comments = res.data.list
+        console.log()
+        this.commentNums = this.comments.length
+      }).catch(err => {
+        this.$message({
+          type: 'error',
+          message: err.msg
+        })
+      })
+    },
+    formatTime (unix) {
+      return moment(unix * 1000).format('YYYY-MM-DD HH:mm:ss')
     },
     resetFields () {
       this.resetFields()

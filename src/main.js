@@ -27,13 +27,12 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(VueCookie)
 Vue.use(ElementUI, {zIndex: 3000})
-Vue.cookie.set('hello', 'world')
+
 router.beforeEach((from, to, next) => {
-  console.log(from, to, '===================>')
   const regex = new RegExp('/console')
+  const cookie = Vue.cookie.get('nvwaId.sig')
   if (regex.test(from.path)) {
-    const token = localStorage.getItem('token')
-    if (token) {
+    if (cookie) {
       next()
     } else {
       router.replace('/login')

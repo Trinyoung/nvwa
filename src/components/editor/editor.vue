@@ -223,6 +223,11 @@ export default {
           if (res.status === 200 && res.data.code === '000' && res.data.result._id) {
             this.$router.push(`/console/editor/${res.data.result._id}`)
           }
+        }).catch(err => {
+          this.$message({
+            type: 'error',
+            message: err.message
+          })
         })
       }
     },

@@ -79,10 +79,9 @@ export default {
           return alert('登录失败, 请检查用户名和密码')
         }
         console.log(result.data, '----------data')
-        localStorage.setItem('userInfo', result.data.userInfo)
+        localStorage.setItem('userInfo', JSON.stringify(result.data.userInfo))
         localStorage.setItem('token', result.data.token)
         this.$router.push('/home')
-        // window.history.length > 1 ? this.$router.push('/home') : this.$router.go(-1)
       })
     }
   }
