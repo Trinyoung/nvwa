@@ -45,10 +45,10 @@
               <el-form-item label="评论内容" prop="content">
                 <el-input type="textarea" v-model="dataForm.content" class="content-container" placeholder="请添加评论内容"></el-input>
               </el-form-item>
-              <el-form-item label="昵称" v-if="isUser" prop="nilName">
+              <el-form-item label="昵称" v-if="!isUser" prop="nilName">
                 <el-input v-model="dataForm.nilName" placeholder="请填写昵称，长度限定为10个字符"></el-input>
               </el-form-item>
-              <el-form-item label="邮箱" v-if="isUser" prop="email">
+              <el-form-item label="邮箱" v-if="!isUser" prop="email">
                 <el-input v-model="dataForm.email" placeholder="请填写邮箱"></el-input>
               </el-form-item>
               <el-form-item>
@@ -68,14 +68,11 @@ import moment from 'moment'
 export default {
   props: ['refers', 'articleId', 'uid'],
   created () {
-    console.log(this.articleId, '------------------->')
-    console.log(this.uid, '+++++++++uid+++++++>')
-    this.isUser = this.uid && true
+    this.isUser = !!this.uid
     this.getComments()
   },
   data () {
     return {
-      isUser: false,
       commentNums: 0,
       comments: [],
       dataForm: {
@@ -124,7 +121,6 @@ export default {
     },
     getComments () {
       Axios.get(`/myapi/comments/${this.articleId}/list`).then(res => {
-        console.log(res, 'res------------------>is here')
         this.comments = res.data.list
         console.log()
         this.commentNums = this.comments.length

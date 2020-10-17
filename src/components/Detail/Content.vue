@@ -102,9 +102,7 @@ export default {
     this.getComments()
     this.getFavoriteNums()
     this.userInfo = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
-    console.log(this.userInfo, '---------------->')
     this.uid = this.userInfo.uid
-    console.log(this.uid, '<========this.uid=========>')
     if (this.userInfo) {
       this.getFavorite()
     }
@@ -113,15 +111,17 @@ export default {
     getArticleDetail () {
       const id = this.articleId
       Axios.get(`/myapi/articles/${id}`).then((result) => {
-        const { content, title, updatedBy, updatedAt, createdAt, createdBy, refers } = result.data.data
+        const { content, title, updatedBy, updatedAt, createdAt, createdBy, refers, author } = result.data.data
         const contentHtml = result.data.data.content_html
         this.contentHtml = contentHtml || content
         this.title = title
         this.updatedBy = updatedBy
         this.updatedAt = updatedAt || createdAt
         this.refers = refers
+        this.author = author
+        this.$emit('getAuthor', this.uid === createdBy)
         // eslint-disable-next-line no-mixed-operators
-        this.author = createdBy
+        this.author = author
       }).catch(err => {
         this.$message({
           type: 'error',

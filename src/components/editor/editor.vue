@@ -77,9 +77,6 @@
       </div>
       <div class="col-md-2">
         <div class="form-check-inline">
-          <!-- <button class="btn btn-success" data-toggle="modal" data-target="#referDialog">
-            添加引用
-          </button> -->
           <el-button type="success" @click="dialogFormVisible = true">添加引用</el-button>
         </div>
       </div>
@@ -91,10 +88,6 @@
         </el-form-item>
         <el-form-item label="文献链接" :label-width="formLabelWidth">
           <el-input v-model="refferEdit.refferLink"></el-input>
-          <!-- <el-select v-model="form.region" placeholder="Please select a zone">
-            <el-option label="Zone No.1" value="shanghai"></el-option>
-            <el-option label="Zone No.2" value="beijing"></el-option>
-          </el-select> -->
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -102,34 +95,6 @@
         <el-button type="primary" @click="addReffer()">Confirm</el-button>
       </span>
     </el-dialog>
-    <!-- <div class="modal fade" id="referDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">文献引用</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">文献标题:</label>
-                <input type="text" class="form-control" v-model="refferEdit.refferValue">
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">文献链接:</label>
-                <input type="text" class="form-control" v-model="refferEdit.refferLink">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-primary" @click="addReffer()">提交</button>
-          </div>
-        </div>
-      </div>
-    </div> -->
     <ul class="list-group">
       <li class="list-group-item" v-for="(item, index) in articleObj.refers" :key="item.title">
         <div v-if="!item.status" class="row">
@@ -209,7 +174,7 @@ export default {
     save: function (published) {
       const contentHtml = $('.v-note-read-content').html()
       const articleId = this.articleId
-      const data = Object.assign({published, content_html: contentHtml}, this.articleObj)
+      const data = Object.assign({published: false, content_html: contentHtml}, this.articleObj)
       const Authorization = `Bearer ${localStorage.getItem('token')}`
       if (articleId && articleId !== 'new') {
         data.articleId = articleId
@@ -217,24 +182,42 @@ export default {
           if (res.status === 200 && res.data.code === '000' && res.data.result._id) {
             this.$router.push(`/console/editor/${res.data.result._id}`)
           }
+          if (res.data.code === '401') {
+            this.$router.push(`/login`)
+          }
+        }).catch(err => {
+          this.$message({
+            type: 'error',
+            message: err.msg
+          })
         })
       } else {
         axios.post('/api/articles', data, { headers: { Authorization } }).then(res => {
           if (res.status === 200 && res.data.code === '000' && res.data.result._id) {
             this.$router.push(`/console/editor/${res.data.result._id}`)
           }
+          if (res.data.code === '401') {
+            this.$router.push('/login')
+          }
         }).catch(err => {
           this.$message({
             type: 'error',
-            message: err.message
+            message: err.msg
           })
         })
       }
     },
     saveMavon: function (value, render) {
-      this.render = render
-      this.content = value
-      axios.post('/api/articles')
+      const Authorization = `Bearer ${localStorage.getItem('token')}`
+      const data = Object.assign({published: false, content_html: render, content: value}, this.articleObj)
+      axios.post('/api/articles', data, {headers: {Authorization}}).then(res => {
+        if (res.status === 200 && res.data.code === '000' && res.data.result._id) {
+          this.$router.push(`/console/editor/${res.data.result._id}`)
+        }
+        if (res.data.code === '401') {
+          this.$router.push('/login')
+        }
+      })
     },
     getAticle () {
       const id = this.articleId

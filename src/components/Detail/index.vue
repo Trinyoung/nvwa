@@ -4,8 +4,8 @@
     <main role="main" class="container">
       <div class="row">
         <v-broadside class="col-md-2 broadside"></v-broadside>
-        <v-main class="col-md-9" :articleId="articleId"></v-main>
-        <v-rightside class="col-md-1" :articleId="articleId"></v-rightside>
+        <v-main class="col-md-9" :articleId="articleId" :article="article" @getAuthor='getAuthor'></v-main>
+        <v-rightside class="col-md-1" :articleId="articleId" :isAuthor="isAuthor"></v-rightside>
       </div>
     </main>
     <v-bottom></v-bottom>
@@ -17,7 +17,7 @@ import broadside from '../Broadside'
 import main from './Content'
 import rightside from './Rightside'
 import bottom from '../bottom'
-import $ from 'jquery'
+// import Axios from 'axios'
 export default {
   components: {
     'v-broadside': broadside,
@@ -26,11 +26,20 @@ export default {
     'v-rightside': rightside,
     'v-bottom': bottom
   },
+  data () {
+    return {
+      article: {}
+    }
+  },
   props: ['articleId'],
   created: function () {
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    })
+    // this.getAuthor()
+  },
+  methods: {
+    getAuthor (isAuthor) {
+      console.log(isAuthor, 'isAuthor------------->')
+      this.isAuthor = isAuthor
+    }
   }
 }
 </script>
