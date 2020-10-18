@@ -4,7 +4,7 @@
     <main role="main" class="container-fluid">
       <div class="row">
         <v-broadside></v-broadside>
-        <v-main></v-main>
+        <v-main :tags= tags></v-main>
       </div>
     </main>
   </div>
@@ -14,12 +14,18 @@ import header from './Header'
 import broadside from './broadside'
 import main from './main'
 import bottom from '../bottom'
+import Axios from 'axios'
 export default {
   components: {
     'v-broadside': broadside,
     'v-main': main,
     'v-header': header,
     'v-bottom': bottom
+  },
+  data () {
+    return {
+      tags: []
+    }
   },
   created () {
     this.init()
@@ -31,6 +37,13 @@ export default {
       if (!token) {
         this.$router.push('/login')
       }
+      this.getTags()
+    },
+    getTags () {
+      Axios.get('/myapi/tags').then(res => {
+        this.tags = res.data.list
+        localStorage.setItem('tags', JSON.stringify(this.tags))
+      })
     }
   }
 }

@@ -78,10 +78,17 @@
   </div>
 </template>
 <script>
+import Axios from 'axios'
 export default {
   data: function () {
     return {
       listItems: ['星辰大海', '人间百态', '车水马龙', '小桥流水', '大漠孤烟']
+    }
+  },
+  created () {},
+  methods: {
+    getArticleInfo () {
+      Axios.get()
     }
   }
 }

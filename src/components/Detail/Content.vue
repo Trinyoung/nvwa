@@ -21,11 +21,11 @@
           <li class="breadcrumb-item active" aria-current="page">大中国</li>
         </ol>
       </nav>
-      <h1 class="border-bottom border-gray pb-2 mb-0 col-title">{{title}}</h1>
+      <h1 class="border-bottom border-gray pb-2 mb-0 col-title">{{article.title}}</h1>
       <div class="text-muted article-tip">
         <ul class="list-group list-group-horizontal mt-1">
-          <li class="list-group-item "><b>作者：</b>{{author}}</li>
-          <li class="list-group-item "><b>更新时间：</b>{{formatTime(updatedAt * 1000)}}</li>
+          <li class="list-group-item "><b>作者：</b>{{article.author}}</li>
+          <li class="list-group-item "><b>更新时间：</b>{{formatTime(article.updatedAt * 1000)}}</li>
           <li class="list-group-item ">
             <b>字数：</b>2000
           </li>
@@ -34,21 +34,21 @@
           </li>
         </ul>
       </div>
-      <div class="content-container" v-html="contentHtml">
+      <div class="content-container" v-html="article.contentHtml">
       </div>
       (完)
       <div class="reffer-container pt-3">
         <h5 class="border-bottom border-gray pb-2 mb-0">文献引用</h5>
         <ul class="list-group list-group-container">
-          <li class="list-group-item" v-for="(item, index) in refers" :key="index">
+          <li class="list-group-item" v-for="(item, index) in article.refers" :key="index">
             <b>{{index+1}}. </b> <span>{{item.title}}</span> <a :href="item.link">{{item.link}}</a>
           </li>
         </ul>
       </div>
       <div class="tags-container my-3">
-        <h5 class="border-bottom border-gray pb-2 mb-0 text-left">标签 ({{tags.length}})</h5>
+        <h5 class="border-bottom border-gray pb-2 mb-0 text-left">标签 ({{article.tags && article.tags.length || 0}})</h5>
         <ul class="list-group list-group-horizontal mt-1">
-          <li class="list-group-item" v-for="item in tags" :key="item.id">
+          <li class="list-group-item" v-for="item in article.tags" :key="item.id">
             <span class="tag-icon d-inline-block">
               {{item}}
             </span>
@@ -69,7 +69,7 @@
           <b>下一篇：</b><a href="#">黄河大合唱</a>
         </div>
       </div>
-      <v-bottom :refers="refers" :articleId="articleId" :uid="uid"></v-bottom>
+      <v-bottom :refers="article.refers" :articleId="articleId" :uid="uid"></v-bottom>
     </div>
   </main>
 </template>
@@ -86,19 +86,12 @@ export default {
       color: 'red',
       userInfo: {},
       isFavorited: false,
-      contentHtml: '',
-      title: '',
-      favoriteNum: 0,
-      author: '',
-      updatedBy: '',
-      updatedAt: '',
-      tags: ['前端', 'vue', 'nodejs'],
-      refers: []
+      favoriteNum: 0
     }
   },
-  props: ['articleId'],
+  props: ['articleId', 'article'],
   created: function () {
-    this.getArticleDetail()
+    // this.getArticleDetail()
     this.getComments()
     this.getFavoriteNums()
     this.userInfo = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
@@ -108,27 +101,26 @@ export default {
     }
   },
   methods: {
-    getArticleDetail () {
-      const id = this.articleId
-      Axios.get(`/myapi/articles/${id}`).then((result) => {
-        const { content, title, updatedBy, updatedAt, createdAt, createdBy, refers, author } = result.data.data
-        const contentHtml = result.data.data.content_html
-        this.contentHtml = contentHtml || content
-        this.title = title
-        this.updatedBy = updatedBy
-        this.updatedAt = updatedAt || createdAt
-        this.refers = refers
-        this.author = author
-        this.$emit('getAuthor', this.uid === createdBy)
-        // eslint-disable-next-line no-mixed-operators
-        this.author = author
-      }).catch(err => {
-        this.$message({
-          type: 'error',
-          message: err.message
-        })
-      })
-    },
+    // getArticleDetail () {
+    //   const id = this.articleId
+    //   Axios.get(`/myapi/articles/${id}`).then((result) => {
+    //     const { content, title, updatedBy, updatedAt, createdAt, createdBy, refers, author } = result.data.data
+    //     const contentHtml = result.data.data.content_html
+    //     this.contentHtml = contentHtml || content
+    //     this.title = title
+    //     this.updatedBy = updatedBy
+    //     this.updatedAt = updatedAt || createdAt
+    //     this.refers = refers
+    //     this.author = author
+    //     // this.$emit('getAuthor', this.uid === createdBy)
+    //     this.author = author
+    //   }).catch(err => {
+    //     this.$message({
+    //       type: 'error',
+    //       message: err.message
+    //     })
+    //   })
+    // },
     getComments () {
       return ''
     },
@@ -136,6 +128,9 @@ export default {
       return moment(unix).format('YYYY-MM-DD')
     },
     setFavorite () {
+      if (this.isFavorited) {
+        return this.$message('已经点过赞了！')
+      }
       const request = {
         articleId: this.articleId,
         createdBy: this.userInfo.uid

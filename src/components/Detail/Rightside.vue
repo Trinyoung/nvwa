@@ -21,10 +21,10 @@
           编辑
         </div>
         <div class="my-3 sidebar-item" >
-          <b-icon-reply width="2em" height="2em"></b-icon-reply>
+          <b-icon-reply width="2em" height="2em" @click="$router.go(-1)"></b-icon-reply>
           返回
         </div>
-        <div v-if="isauthor" class="my-3 sidebar-item">
+        <div v-if="isAuthor" class="my-3 sidebar-item">
           <b-icon-trash width="2em" height="2em"></b-icon-trash>
           删除
         </div>
@@ -36,16 +36,10 @@
 export default {
   data: function () {
     return {
-      isauthor: false
     }
   },
   props: ['articleId', 'isAuthor'],
-  activated () {
-    this.isauthor = this.isAuthor
-    // console.log(this.isAuthor, '----------------===========>')
-  },
   methods: {
-
   }
 }
 </script>

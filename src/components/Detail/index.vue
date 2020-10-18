@@ -4,7 +4,7 @@
     <main role="main" class="container">
       <div class="row">
         <v-broadside class="col-md-2 broadside"></v-broadside>
-        <v-main class="col-md-9" :articleId="articleId" :article="article" @getAuthor='getAuthor'></v-main>
+        <v-main class="col-md-9" :articleId="articleId" :article="article"></v-main>
         <v-rightside class="col-md-1" :articleId="articleId" :isAuthor="isAuthor"></v-rightside>
       </div>
     </main>
@@ -17,7 +17,7 @@ import broadside from '../Broadside'
 import main from './Content'
 import rightside from './Rightside'
 import bottom from '../bottom'
-// import Axios from 'axios'
+import Axios from 'axios'
 export default {
   components: {
     'v-broadside': broadside,
@@ -28,17 +28,36 @@ export default {
   },
   data () {
     return {
-      article: {}
+      article: {},
+      isAuthor: false
     }
   },
   props: ['articleId'],
   created: function () {
-    // this.getAuthor()
+    this.getArticleDetail()
   },
   methods: {
-    getAuthor (isAuthor) {
-      console.log(isAuthor, 'isAuthor------------->')
-      this.isAuthor = isAuthor
+    getArticleDetail () {
+      const id = this.articleId
+      Axios.get(`/myapi/articles/${id}`).then((result) => {
+        const { content, title, updatedBy, updatedAt, createdAt, createdBy, refers, author, tags } = result.data.data
+        const contentHtml = result.data.data.content_html
+        this.article.contentHtml = contentHtml || content
+        this.article.title = title
+        this.article.updatedBy = updatedBy
+        this.article.updatedAt = updatedAt || createdAt
+        this.article.refers = refers
+        this.article.tags = tags || []
+        this.article.author = author
+        this.isAuthor = this.uid === createdBy
+        console.log(this.uid, 'this uid is here')
+        console.log(this.isAuthor, '是否是作者呢？')
+      }).catch(err => {
+        this.$message({
+          type: 'error',
+          message: err.message
+        })
+      })
     }
   }
 }

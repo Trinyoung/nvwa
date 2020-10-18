@@ -20,9 +20,8 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item label="标签选择:">
-          <el-select v-model="searchInfo.tags" placeholder="请选择活动区域">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
+          <el-select v-model="searchInfo.tag" placeholder="请选择活动区域">
+            <el-option v-for="item in tags" :key="item.id" :value="item._id" :label="item.name"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="分类选择:">
@@ -45,7 +44,7 @@
     </div>
     <div class="my-0 p-3 shadow-sm" id="main-content">
       <div class="btn-toolbar my-1 pb-1" role="toolbar" aria-label="Toolbar with button groups">
-        <el-button type="primary" :to="{path: '/console/editor/new'}">新 增</el-button>
+        <el-button type="primary" @click="jumpTo('/console/editor/new')">新 增</el-button>
       </div>
       <table class="table table-bordered">
         <thead class="thead-light">
@@ -69,9 +68,9 @@
             <td>{{item.tags.join()}}</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <el-button type="success" plain>详情</el-button>
-                <el-button type="primary" plain>编辑</el-button>
-                <el-button type="danger" plain>删除</el-button>
+                <el-button type="success" plain @click="jumpTo(`/articles/${item._id}`)">详情</el-button>
+                <el-button type="primary" plain @click="jumpTo(`/console/editor/${item._id}`)">编辑</el-button>
+                <el-button type="danger" plain @click="deleteArticle(item._id)">删除</el-button>
               </div>
             </td>
           </tr>
@@ -82,15 +81,12 @@
   </main>
 </template>
 <script>
-import datePicker from 'vue-bootstrap-datetimepicker'
-import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import Axios from 'axios'
 import pagination from '../tools/pagination'
 import moment from 'moment'
 export default {
   components: {
-    datePicker,
     pagination
   },
   data: function () {
@@ -101,15 +97,17 @@ export default {
       searchInfo: {
         dateRange: '',
         type: '',
-        tags: [],
         published: '',
-        keyword: ''
+        keyword: '',
+        tag: ''
       },
-      options: []
+      options: [],
+      tags: []
     }
   },
   mounted () {
     this.getList()
+    this.getTags()
   },
   methods: {
     getNewestList: function () {
@@ -137,6 +135,36 @@ export default {
         this.$data.pages = res.data.result.pages
         this.$data.list.forEach((item) => {
           item.createdAt = moment(item.createdAt * 1000).format('YYYY-MM-DD HH:mm:ss')
+        })
+      })
+    },
+    getTags () {
+      let tags = localStorage.getItem('tags')
+      if (tags) {
+        this.tags = JSON.parse(tags)
+        return
+      }
+      Axios.get('/myapi/tags', (res) => {
+        this.tags = res.data.list
+        localStorage.setItem('tags', this.tags)
+      })
+    },
+    jumpTo (url) {
+      this.$router.push(url)
+    },
+    deleteArticle (id) {
+      this.$confirm(`确定要删除该篇文章吗？`, {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消'
+      }).then(() => {
+        const Authorization = `Bearer ${localStorage.getItem('token')}`
+        Axios.delete(`/api/articles/${id}`, {headers: {Authorization}}).then(res => {
+          this.$message({
+            type: 'success',
+            message: '删除成功'
+          })
+        }).catch(err => {
+          this.$message.error(err.msg)
         })
       })
     }

@@ -10,10 +10,10 @@
         <el-form-item label="评论内容" prop="content">
           <el-input type="textarea" v-model="dataForm.content" class="content-container" placeholder="请添加评论内容"></el-input>
         </el-form-item>
-        <el-form-item label="昵称" v-if="isUser" prop="nilName">
+        <el-form-item label="昵称" v-if="!isUser" prop="nilName">
           <el-input v-model="dataForm.nilName" placeholder="请填写昵称，长度限定为10个字符"></el-input>
         </el-form-item>
-        <el-form-item label="邮箱" v-if="isUser" prop="email">
+        <el-form-item label="邮箱" v-if="!isUser" prop="email">
           <el-input v-model="dataForm.email" placeholder="请填写邮箱, 不对外显示"></el-input>
         </el-form-item>
         <el-form-item>
@@ -41,15 +41,15 @@
           <span>{{formatTime(item.createdAt)}}</span>
           <span class="hover-change reply-button" data-toggle="collapse" data-target="#collapseReply">回复</span>
           <div class="collapse mt-2" id="collapseReply">
-            <el-form label-width="100px" :model="dataForm" ref="dataForm" :rules="rules">
+            <el-form label-width="100px" :model="item.reply" ref="replyForm" :rules="rules">
               <el-form-item label="评论内容" prop="content">
-                <el-input type="textarea" v-model="dataForm.content" class="content-container" placeholder="请添加评论内容"></el-input>
+                <el-input type="textarea" v-model="item.reply.content" class="content-container" placeholder="请添加评论内容"></el-input>
               </el-form-item>
               <el-form-item label="昵称" v-if="!isUser" prop="nilName">
-                <el-input v-model="dataForm.nilName" placeholder="请填写昵称，长度限定为10个字符"></el-input>
+                <el-input v-model="item.reply.nilName" placeholder="请填写昵称，长度限定为10个字符"></el-input>
               </el-form-item>
               <el-form-item label="邮箱" v-if="!isUser" prop="email">
-                <el-input v-model="dataForm.email" placeholder="请填写邮箱"></el-input>
+                <el-input v-model="item.reply.email" placeholder="请填写邮箱"></el-input>
               </el-form-item>
               <el-form-item>
                 <el-button type="success" @click="submitForm('dataForm')">发 表</el-button>
@@ -70,14 +70,15 @@ export default {
   created () {
     this.isUser = !!this.uid
     this.getComments()
+    this.dataForm.ariticleId = this.articleId
+    this.replyForm.ariticleId = this.articleId
   },
   data () {
     return {
       commentNums: 0,
       comments: [],
       dataForm: {
-        content: '',
-        articleId: this.articleId
+        content: ''
       },
       rules: {
         content: [
@@ -91,6 +92,9 @@ export default {
           {required: true, message: '请填写昵称', trigger: 'blur'},
           {type: 'string', max: 20, message: '限定长度为10', trigger: 'blur'}
         ]
+      },
+      replyForm: {
+        content: ''
       }
     }
   },
@@ -124,6 +128,9 @@ export default {
         this.comments = res.data.list
         console.log()
         this.commentNums = this.comments.length
+        this.comments.forEach(item => {
+          item.reply = {}
+        })
       }).catch(err => {
         this.$message({
           type: 'error',

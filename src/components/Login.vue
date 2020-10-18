@@ -70,18 +70,17 @@ export default {
   },
   methods: {
     login: function () {
-      console.log(this.username, this.password, this.rememberMe, '信息的啥所发生的')
       axios.post('/api/user/login',
         {username: this.username, password: this.password, rememberMe: this.rememberMe}
       ).then((result) => {
-        console.log(result, 'result -------------> result')
         if (result.status !== 200 || result.data.code !== '000') {
-          return alert('登录失败, 请检查用户名和密码')
+          return this.$message.error('登录失败, 请检查用户名和密码')
         }
-        console.log(result.data, '----------data')
         localStorage.setItem('userInfo', JSON.stringify(result.data.userInfo))
         localStorage.setItem('token', result.data.token)
-        this.$router.push('/home')
+        this.$router.replace('/home')
+      }).catch(err => {
+        this.$message.error('登录出现错误', err.msg)
       })
     }
   }

@@ -53,20 +53,25 @@
       </div>
       <div class="col-md-1 right-side col-sm-0">
         <div class="sidebar">
-          <div class="my-3 sidebar-item" data-toggle="tooltip" data-placement="right" title="保存">
+          <div class="my-3 sidebar-item">
             <b-icon-archive class="size-2"></b-icon-archive>
+            保存
           </div>
-          <div class="my-3 sidebar-item" data-toggle="tooltip" data-placement="right" title="删除">
+          <div class="my-3 sidebar-item">
             <b-icon-trash class="size-2"></b-icon-trash>
+            删除
           </div>
-          <div class="my-3 sidebar-item" data-toggle="tooltip" data-placement="right" title="分享">
+          <div class="my-3 sidebar-item">
             <b-icon-box-arrow-up-right class="size-2"></b-icon-box-arrow-up-right>
+            分享
           </div>
-          <div class="my-3 sidebar-item" data-toggle="tooltip" data-placement="right" title="收藏">
+          <div class="my-3 sidebar-item">
             <b-icon-star class="size-2"></b-icon-star>
+            收藏
           </div>
-          <div class="my-3 sidebar-item" data-toggle="tooltip" data-placement="right" title="返回">
-            <b-icon-reply class="size-2"></b-icon-reply>
+          <div class="my-3 sidebar-item">
+            <b-icon-reply class="size-2" @click="$router.go(-1)"></b-icon-reply>
+            返回
           </div>
         </div>
       </div>
@@ -328,14 +333,16 @@ export default {
   background: #e9ecef;
 }
 .sidebar-item {
-  background: wheat;
+  /* background: wheat; */
+  color: green;
   width: 3rem;
   height: 3rem;
-  border-radius: 50% 50% 50% 50%;
+  /* border-radius: 50% 50% 50% 50%; */
   margin: 0 auto;
 }
 .sidebar-item :hover{
   cursor: pointer;
+  color: red;
 }
 
 #dropdownMenu2 {
@@ -390,6 +397,9 @@ export default {
 }
 .modal-content {
   text-align: left;
+}
+.color-green {
+  color: green
 }
 </style>
 <style>
