@@ -8,12 +8,12 @@
           :options="types"></el-cascader>
         </el-form-item>
         <el-form-item label="标签: ">
-          <el-select v-model="articleObj.tag" filterable placeholder="请选择">
+          <el-select v-model="articleObj.tag"  placeholder="请选择" multiple >
             <el-option
               v-for="item in tags"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
+              :key="item._id"
+              :label="item.name"
+              :value="item._id">
             </el-option>
           </el-select>
         </el-form-item>
@@ -170,6 +170,7 @@ export default {
   },
   created: function () {
     this.getAticle()
+    this.getTags()
   },
   props: ['articleId'],
   methods: {
@@ -228,19 +229,16 @@ export default {
       const id = this.articleId
       if (id !== 'new') {
         axios.get(`/api/articles/${id}?console=1`).then((result) => {
-          // eslint-disable-next-line camelcase
           const { content, title, isMarkdown, isPublic, subTitle, abstract, tags, refers, _id } = result.data.data
           this.articleObj = { title, content, isPublic, subTitle, abstract, tags, refers }
           this.articleObj.articleId = _id
           this.isPublic = !!isPublic
-          // eslint-disable-next-line camelcase
           this.articleObj.isMarkdown = !!isMarkdown
         })
       }
     },
     getTags () {
-      let tags = localStorage.getItem('tags')
-      tags = tags.split(',')
+      let tags = JSON.parse(localStorage.getItem('tags'))
       if (!tags || tags.length === 0) {
         axios.get('/api/tags').then(res => {
           const result = res.data.data
@@ -249,6 +247,10 @@ export default {
           })
         })
       }
+      this.tags = tags
+    },
+    getTypes () {
+
     },
     addReffer () {
       if (!this.refferEdit.refferValue) {

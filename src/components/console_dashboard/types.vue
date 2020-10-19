@@ -61,7 +61,7 @@
               <el-input v-model="dataForm.typeCode" placeholder="请输入标识码"></el-input>
             </el-form-item>
             <el-form-item label="标签：" >
-              <el-select v-model="dataForm.tags" placeholder="请选择标签">
+              <el-select v-model="dataForm.tags" placeholder="请选择标签" multiple>
                 <el-option
                   v-for="item in tags"
                   :key="item._id"
@@ -100,8 +100,11 @@
             <td>{{item.tags.join()}}</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">编辑</button>
-                <button type="button" class="btn btn-secondary">删除</button>
+                 <!-- <div class="btn-group" role="group" aria-label="Basic example"> -->
+                <el-button type="success" plain @click="jumpTo(`/articles/${item._id}`)">详情</el-button>
+                <el-button type="primary" plain @click="jumpTo(`/console/editor/${item._id}`)">编辑</el-button>
+                <el-button type="danger" plain @click="deleteArticle(item._id)">删除</el-button>
+              <!-- </div> -->
               </div>
             </td>
           </tr>
@@ -160,6 +163,7 @@ export default {
   },
   created: function () {
     this.getList()
+    this.getTags()
   },
   methods: {
     getList (n = 1) {
@@ -216,6 +220,20 @@ export default {
     },
     resetForm (formName) {
       this.$refs[formName].restFields()
+    },
+    getTypes () {
+
+    },
+    getTags () {
+      let tags = localStorage.getItem('tags')
+      if (tags) {
+        this.tags = JSON.parse(tags)
+        return
+      }
+      Axios.get('/myapi/tags', (res) => {
+        this.tags = res.data.list
+        localStorage.setItem('tags', this.tags)
+      })
     }
   }
 }
