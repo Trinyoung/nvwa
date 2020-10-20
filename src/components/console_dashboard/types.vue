@@ -164,6 +164,7 @@ export default {
   created: function () {
     this.getList()
     this.getTags()
+    this.getTypes()
   },
   methods: {
     getList (n = 1) {
@@ -188,7 +189,19 @@ export default {
         if (valid) {
           const id = this.typeId
           const Authorization = `Bearer ${localStorage.getItem('token')}`
-          const request = Object.assign({isTop: 1}, this.dataForm)
+          const { parent, title, description, tags } = this.dataForm
+          console.log(this.dataForm, 'dataForm ------------------>')
+          const request = {
+            isTop: 1,
+            parent: parent[0].id,
+            title,
+            typeCode: parent[0].typeCode,
+            description,
+            tags
+          }
+          if (request.parent) {
+            request.isTop = 0
+          }
           if (!id) {
             Axios.post('/api/articles/types', request, { headers: { Authorization } }).then(res => {
               if (res.data.code === 200) {
@@ -222,7 +235,14 @@ export default {
       this.$refs[formName].restFields()
     },
     getTypes () {
-
+      let types = localStorage.getItem('types')
+      if (types) {
+        this.tags = JSON.parse(types)
+        return
+      }
+      Axios.get('/myapi/articles/types/all').then(res => {
+        this.types = res.data.result
+      })
     },
     getTags () {
       let tags = localStorage.getItem('tags')

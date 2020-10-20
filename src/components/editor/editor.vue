@@ -140,12 +140,8 @@ export default {
     'v-markdownEditor': mavonEditor,
     'v-editor': quillEditor
   },
-  mounted: function () {
-    $('.selectpicker').selectpicker()
-  },
   data: function () {
     return {
-      tagList: [],
       dialogFormVisible: false,
       formLabelWidth: '100px',
       articleObj: {
@@ -171,6 +167,7 @@ export default {
   created: function () {
     this.getAticle()
     this.getTags()
+    this.getTypes()
   },
   props: ['articleId'],
   methods: {
@@ -250,7 +247,14 @@ export default {
       this.tags = tags
     },
     getTypes () {
-
+      let types = JSON.parse(localStorage.getItem('types'))
+      console.log(types, 'types --------<>----------------')
+      if (!types || types.length === 0) {
+        console.log('api/articles---------------->')
+        axios.get('/myapi/articles/types/all').then(res => {
+          console.log(res, 'res =================> res is here')
+        })
+      }
     },
     addReffer () {
       if (!this.refferEdit.refferValue) {
