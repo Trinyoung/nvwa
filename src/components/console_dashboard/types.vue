@@ -97,14 +97,16 @@
             <td>{{item.title}}</td>
             <td>{{item.types}}</td>
             <td>{{formatTime(item.createdAt)}}</td>
-            <td>{{item.tags.join()}}</td>
+            <td>
+              <el-tag v-for="tag in item.tags" :key="tag._id">
+                {{tag.name}}
+              </el-tag>
+            </td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                 <!-- <div class="btn-group" role="group" aria-label="Basic example"> -->
                 <el-button type="success" plain @click="jumpTo(`/articles/${item._id}`)">详情</el-button>
                 <el-button type="primary" plain @click="jumpTo(`/console/editor/${item._id}`)">编辑</el-button>
                 <el-button type="danger" plain @click="deleteArticle(item._id)">删除</el-button>
-              <!-- </div> -->
               </div>
             </td>
           </tr>
@@ -169,10 +171,9 @@ export default {
   methods: {
     getList (n = 1) {
       let queryString = `page=${n}&limit=10`
-      Axios.get(`/api/articles/types/list?${queryString}`).then((res) => {
+      Axios.get(`/myapi/articles/types/list?${queryString}`).then((res) => {
         const { docs, pages, total, page } = res.data.result
         this.list = docs
-        console.log(this.list, 'this list is here ')
         this.pages = pages
         this.page = page
         this.total = total
@@ -204,8 +205,14 @@ export default {
           }
           if (!id) {
             Axios.post('/api/articles/types', request, { headers: { Authorization } }).then(res => {
-              if (res.data.code === 200) {
+              if (res.data.code === '000') {
                 this.dialogFormVisible = false
+                this.$message({
+                  showClose: true,
+                  message: '编辑成功'
+                })
+                localStorage.removeItem('types')
+                this.getTypes()
               } else {
                 this.$message({
                   showClose: true,
@@ -220,7 +227,18 @@ export default {
             })
           } else {
             Axios.put(`/api/articles/types/${id}`, request, { headers: { Authorization } }).then(res => {
-              console.log(res)
+              if (res.data.code === '000') {
+                this.dialogFormVisible = false
+                this.$message({
+                  showClose: true,
+                  message: '编辑成功'
+                })
+              } else {
+                this.$message({
+                  showClose: true,
+                  message: res.data.message
+                })
+              }
             }).catch(err => {
               this.$message({
                 showClose: true,
@@ -369,5 +387,8 @@ export default {
 
 .el-select {
   width: 100%;
+}
+.el-tag {
+  margin-left:5px;
 }
 </style>

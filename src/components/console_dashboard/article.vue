@@ -27,7 +27,7 @@
         <el-form-item label="分类选择:">
           <el-cascader
             v-model="searchInfo.type"
-            :options="options"
+            :options="types"
             :props="{ checkStrictly: true }"
             clearable></el-cascader>
         </el-form-item>
@@ -65,7 +65,11 @@
             <td>{{item.type}}</td>
             <td>{{item.createdBy}}</td>
             <td>{{item.createdAt}}</td>
-            <td>{{item.tags.join()}}</td>
+            <td>
+              <el-tag v-for="tag in item.tags" :key="tag._id">
+                {{tag.name}}
+              </el-tag>
+            </td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <el-button type="success" plain @click="jumpTo(`/articles/${item._id}`)">详情</el-button>
@@ -102,12 +106,14 @@ export default {
         tag: ''
       },
       options: [],
-      tags: []
+      tags: [],
+      types: []
     }
   },
   mounted () {
-    this.getList()
+    this.getList(1)
     this.getTags()
+    this.getTypes()
   },
   methods: {
     getNewestList: function () {
@@ -144,9 +150,20 @@ export default {
         this.tags = JSON.parse(tags)
         return
       }
-      Axios.get('/myapi/tags', (res) => {
+      Axios.get('/myapi/tags').then((res) => {
         this.tags = res.data.list
-        localStorage.setItem('tags', this.tags)
+        localStorage.setItem('tags', JSON.stringify(this.tags))
+      })
+    },
+    getTypes () {
+      let types = localStorage.getItem('types')
+      if (types) {
+        this.types = JSON.parse(types)
+        return
+      }
+      Axios.get('/myapi/articles/types/all').then(res => {
+        this.types = res.data.result
+        localStorage.setItem('types', JSON.stringify(this.types))
       })
     },
     jumpTo (url) {
@@ -172,87 +189,34 @@ export default {
 }
 </script>
 <style scoped>
-.select-handle {
-  background: cadetblue;
-  line-height: 100%;
-  height: 100%;
-  width: 50px;
-}
-.title {
-  text-align: left;
-}
 .title-nav .breadcrumb-item {
   font-weight: bold;
   font-size: 1.5rem;
-}
-
-.type-level {
-  width: 85%;
 }
 
 .form-container {
   padding: 5px;
   text-align: left;
 }
-.media-body {
-  text-align: left;
-}
-.col-title {
-  text-align: left;
-}
-.align-left {
-  text-align: left;
-}
+
 .form-check-label {
   font-size: 0.8rem;
 }
-.item-title {
-  color: white;
-  font-size: 1.1rem;
-}
+
 table .el-button {
   height: 25px;
   padding: 5px 12px;
 }
-#basic-addon2 {
-  width: 4rem;
-}
+
 #page-list {
   margin-top: 0.5rem;
 }
 .pagination {
   margin: 0 auto;
+  width: 300px;
 }
 .list-group-item {
   border: none;
-}
-.row {
-  margin-left: 0;
-  margin-right: 0;
-}
-.pagination {
-  width: 300px;
-}
-
-.d-table {
-  display: table;
-}
-.d-table-cell {
-  display: table-cell;
-  vertical-align: middle;
-}
-.d-vertical-center {
-  vertical-align: middle;
-}
-.d-align-right {
-  text-align: right;
-}
-.d-inline-block {
-  display: inline-block !important;
-}
-.search-input {
-  display: inline-block;
-  width: auto;
 }
 
 .table td, th {
@@ -263,12 +227,7 @@ table .el-button {
 .table th {
   padding: 0.75rem;
 }
-.table .btn {
-  height: 2.4rem;
-}
-.table .handle-cell {
-  width: 200px;
-}
+
 .el-form-item {
   margin-bottom: 0;
 }

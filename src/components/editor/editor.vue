@@ -8,7 +8,7 @@
           :options="types"></el-cascader>
         </el-form-item>
         <el-form-item label="标签: ">
-          <el-select v-model="articleObj.tag"  placeholder="请选择" multiple >
+          <el-select v-model="articleObj.tags"  placeholder="请选择" multiple >
             <el-option
               v-for="item in tags"
               :key="item._id"
@@ -54,7 +54,7 @@
       <div class="col-md-1 right-side col-sm-0">
         <div class="sidebar">
           <div class="my-3 sidebar-item">
-            <b-icon-archive class="size-2"></b-icon-archive>
+            <b-icon-archive class="size-2" @click="save(0)"></b-icon-archive>
             保存
           </div>
           <div class="my-3 sidebar-item">
@@ -231,6 +231,7 @@ export default {
           this.articleObj.articleId = _id
           this.isPublic = !!isPublic
           this.articleObj.isMarkdown = !!isMarkdown
+          this.articleObj.tags = tags
         })
       }
     },
