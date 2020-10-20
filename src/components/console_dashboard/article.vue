@@ -135,7 +135,7 @@ export default {
       if (type) queryString += `&type=${keyword}`
       Axios.get(`/myapi/articles/list?${queryString}`).then((res) => {
         if (res.data.code !== '000') {
-          return alert('获取结果失败')
+          return this.$message.error('获取结果失败')
         }
         this.$data.list = res.data.result.docs
         this.$data.pages = res.data.result.pages

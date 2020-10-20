@@ -238,7 +238,7 @@ export default {
     getTags () {
       let tags = JSON.parse(localStorage.getItem('tags'))
       if (!tags || tags.length === 0) {
-        axios.get('/api/tags').then(res => {
+        axios.get('/myapi/tags').then(res => {
           const result = res.data.data
           result.forEach(item => {
             tags.push({name: item.name, value: item._id})
@@ -249,11 +249,10 @@ export default {
     },
     getTypes () {
       let types = JSON.parse(localStorage.getItem('types'))
-      console.log(types, 'types --------<>----------------')
       if (!types || types.length === 0) {
-        console.log('api/articles---------------->')
         axios.get('/myapi/articles/types/all').then(res => {
-          console.log(res, 'res =================> res is here')
+          this.types = res.data.result
+          localStorage.setItem('types', JSON.stringify(this.types))
         })
       }
     },
