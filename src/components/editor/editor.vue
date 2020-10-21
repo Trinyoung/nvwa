@@ -48,7 +48,10 @@
     </div>
     <div class="row row-container">
       <div class="col-md-11 col-lg-11 col-sm-11 content-container">
-        <v-markdownEditor v-if="articleObj.isMarkdown" class='mavonEditor' v-model="articleObj.content" @save="save(0)"></v-markdownEditor>
+        <v-markdownEditor v-if="articleObj.isMarkdown" class='mavonEditor'
+        v-model="articleObj.content" @save="save(0)"
+        ref="md"
+        @imgAdd="imgAdd"></v-markdownEditor>
         <v-editor v-if="!articleObj.isMarkdown" class="quillEditor border-0" v-model="articleObj.content"></v-editor>
       </div>
       <div class="col-md-1 right-side col-sm-0">
@@ -78,7 +81,6 @@
     </div>
     <form class="form row text-sm-left text-md-center other-set my-2">
       <div class="col-sm-12 col-md-10 col-lg-10 my-2 d-flex">
-
       </div>
       <div class="col-md-2">
         <div class="form-check-inline">
@@ -283,6 +285,16 @@ export default {
       } else {
         this.articleObj.refers.push({ title, link })
       }
+    },
+    imgAdd (pos, file) {
+      const formData = new FormData()
+      formData.append('img', file)
+      axios.post('/upload/upload/file', formData).then(res => {
+        console.log(res, '------res----<>------>')
+        // const
+        // if () {}
+        this.$refs.md.$img2Url(pos, res.data.path)
+      })
     }
   }
 }

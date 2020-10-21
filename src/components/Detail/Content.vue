@@ -34,7 +34,7 @@
           </li>
         </ul>
       </div>
-      <div class="content-container" v-html="article.contentHtml">
+      <div class="content-container markdown-body" v-html="article.contentHtml" >
       </div>
       (完)
       <div class="reffer-container pt-3">
@@ -77,6 +77,7 @@
 import Bottom from './Bottom'
 import Axios from 'axios'
 import moment from 'moment'
+import 'mavon-editor/dist/css/index.css'
 export default {
   components: {
     'v-bottom': Bottom
@@ -86,7 +87,8 @@ export default {
       color: 'red',
       userInfo: {},
       isFavorited: false,
-      favoriteNum: 0
+      favoriteNum: 0,
+      loading: false
     }
   },
   props: ['articleId', 'article'],
@@ -189,7 +191,9 @@ export default {
     color: white;
     font-size: 1.1rem;
   }
-
+  img {
+    max-width: 100%;
+  }
   .article-tip {
     margin-left: 1rem;
     text-align: left;
@@ -280,6 +284,9 @@ export default {
   }
   .content-container >>> thead {
     background: #e9ecef;
+  }
+  .content-container >>> img {
+    max-width: 100%;
   }
   .isFavorited {
     color: red

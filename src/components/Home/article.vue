@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white list-container shadow-sm p-3 rounded">
     <div class="article-list">
-      <ul>
+      <ul v-loading="loading">
         <li class="media pt-2" v-for="item in list" :key="item._id" :to="{path:`/articles/${item._id}`}">
           <p class="media-body pb-2 mb-0 lh-125 border-bottom border-gray pl-1">
             <router-link :to="{path:`/articles/${item._id}`}">
@@ -43,7 +43,6 @@
 import Axios from 'axios'
 import pagination from '../tools/pagination'
 import moment from 'moment'
-// import $ from 'jquery'
 export default {
   components: {
     pagination
@@ -52,17 +51,16 @@ export default {
     return {
       list: [],
       currentPage: 1,
-      pages: 1
+      pages: 1,
+      loading: false
     }
   },
   created: function () {
     this.getList(1)
   },
-  mounted: function () {
-    // this.getList()
-  },
   methods: {
     getList (page) {
+      this.loading = true
       if (page) this.currentPage = page || 1
       let { keyword, type } = this.$data
       let queryString = `page=${page}`
@@ -72,6 +70,7 @@ export default {
         if (res.data.code !== '000') {
           return alert('获取结果失败')
         }
+        this.loading = false
         this.$data.list = res.data.result.docs
         this.pages = res.data.result.pages
       })
