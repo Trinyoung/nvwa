@@ -39,21 +39,21 @@
         </div>
         <div class="comment-bottom comment-item">
           <span>{{formatTime(item.createdAt)}}</span>
-          <span class="hover-change reply-button" data-toggle="collapse" data-target="#collapseReply">回复</span>
-          <div class="collapse mt-2" id="collapseReply">
-            <el-form label-width="100px" :model="item.reply" ref="replyForm" :rules="rules">
+          <span class="hover-change reply-button" data-toggle="collapse" :data-target="`#collapseReply${item._id}`">回复</span>
+          <div class="collapse mt-2" :id="`collapseReply${item._id}`">
+            <el-form label-width="100px" :model="replyForm" ref="replyForm" :rules="rules">
               <el-form-item label="评论内容" prop="content">
-                <el-input type="textarea" v-model="item.reply.content" class="content-container" placeholder="请添加评论内容"></el-input>
+                <el-input type="textarea" v-model="replyForm.content" class="content-container" placeholder="请添加评论内容"></el-input>
               </el-form-item>
               <el-form-item label="昵称" v-if="!isUser" prop="nilName">
-                <el-input v-model="item.reply.nilName" placeholder="请填写昵称，长度限定为10个字符"></el-input>
+                <el-input v-model="replyForm.nilName" placeholder="请填写昵称，长度限定为10个字符"></el-input>
               </el-form-item>
               <el-form-item label="邮箱" v-if="!isUser" prop="email">
-                <el-input v-model="item.reply.email" placeholder="请填写邮箱"></el-input>
+                <el-input v-model="replyForm.email" placeholder="请填写邮箱"></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="success" @click="submitForm('dataForm')">发 表</el-button>
-                <el-button type="danger" plain @click="resetForm('ruleForm')">取 消</el-button>
+                <el-button type="success" @click="submitForm(`replyForm`, item._id)">发 表</el-button>
+                <el-button type="danger" plain @click="resetForm(`replyForm_${item._id}`)">取 消</el-button>
               </el-form-item>
             </el-form>
           </div>
@@ -70,15 +70,14 @@ export default {
   created () {
     this.isUser = !!this.uid
     this.getComments()
-    this.dataForm.ariticleId = this.articleId
-    this.replyForm.ariticleId = this.articleId
+    this.dataForm.articleId = this.articleId
+    this.replyForm.articleId = this.articleId
   },
   data () {
     return {
       commentNums: 0,
       comments: [],
       dataForm: {
-        content: ''
       },
       rules: {
         content: [
@@ -94,26 +93,29 @@ export default {
         ]
       },
       replyForm: {
-        content: ''
       }
     }
   },
   methods: {
-    submitForm (formName) {
+    submitForm (formName, reply, data) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           const submitForm = Object.assign({
-            ariticleId: this.articleId
-          }, this.dataForm)
+            articleId: this.articleId
+          }, this.dataForm, data)
           if (this.uid) {
             submitForm.createdBy = this.uid
           }
+          if (reply) {
+            submitForm.reply = reply
+          }
           Axios.post('/myapi/comments', submitForm).then(res => {
-            this.dataForm.resetFields()
+            this.dataForm = {}
             this.$message({
               type: 'success',
               message: '发表成功'
             })
+            this.getComments()
           }).catch(err => {
             this.$message({
               type: 'error',
@@ -126,11 +128,13 @@ export default {
     getComments () {
       Axios.get(`/myapi/comments/${this.articleId}/list`).then(res => {
         this.comments = res.data.list
-        console.log()
         this.commentNums = this.comments.length
         this.comments.forEach(item => {
-          item.reply = {}
+          // item.replyForm = {
+          //   content: ''
+          // }
         })
+        console.log(this.comments, '==================> comments')
       }).catch(err => {
         this.$message({
           type: 'error',
