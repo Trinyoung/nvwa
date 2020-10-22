@@ -19,9 +19,8 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item label="标签选择:">
-          <el-select v-model="searchInfo.tags" placeholder="请选择活动区域">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
+          <el-select v-model="searchInfo.tags" placeholder="请选择标签">
+            <el-option v-for="item in tags" :key="item.id" :value="item._id" :label="item.name"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="分类选择:">
@@ -167,6 +166,7 @@ export default {
     this.getList()
     this.getTags()
     this.getTypes()
+    console.log(this.tags, this.types, '==================>')
   },
   methods: {
     getList (n = 1) {
