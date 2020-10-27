@@ -290,9 +290,6 @@ export default {
       const formData = new FormData()
       formData.append('img', file)
       axios.post('/upload/upload/file', formData).then(res => {
-        console.log(res, '------res----<>------>')
-        // const
-        // if () {}
         this.$refs.md.$img2Url(pos, res.data.path)
       })
     }

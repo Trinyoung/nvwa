@@ -102,7 +102,7 @@ export default {
         if (valid) {
           const submitForm = Object.assign({
             articleId: this.articleId
-          }, this.dataForm, data)
+          }, this.dataForm)
           if (this.uid) {
             submitForm.createdBy = this.uid
           }
