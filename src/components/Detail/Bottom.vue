@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="mt-2">
-      <el-form label-width="100px" :model="dataForm" ref="dataForm" :rules="rules">
+      <el-form label-width="100px" :model="dataForm" :rules="rules">
         <el-form-item label="评论内容" prop="content">
           <el-input type="textarea" v-model="dataForm.content" class="content-container" placeholder="请添加评论内容"></el-input>
         </el-form-item>
@@ -17,7 +17,7 @@
           <el-input v-model="dataForm.email" placeholder="请填写邮箱, 不对外显示"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="success" @click="submitForm('dataForm')">发 表</el-button>
+          <el-button type="success" :disabled="!dataForm.content" @click="submitForm('dataForm')">发 表</el-button>
           <el-button type="danger" plain @click="resetForm('dataForm')">取消</el-button>
         </el-form-item>
       </el-form>
@@ -41,18 +41,18 @@
           <span>{{formatTime(item.createdAt)}}</span>
           <span class="hover-change reply-button" data-toggle="collapse" :data-target="`#collapseReply${item._id}`">回复</span>
           <div class="collapse mt-2" :id="`collapseReply${item._id}`">
-            <el-form label-width="100px" :model="replyForm" ref="replyForm" :rules="rules">
+            <el-form label-width="100px" v-model="replyForm[item._id]" :rules="rules">
               <el-form-item label="评论内容" prop="content">
-                <el-input type="textarea" v-model="replyForm.content" class="content-container" placeholder="请添加评论内容"></el-input>
+                <el-input type="textarea" v-model="replyForm[item._id].content" class="content-container" placeholder="请添加评论内容"></el-input>
               </el-form-item>
               <el-form-item label="昵称" v-if="!isUser" prop="nilName">
-                <el-input v-model="replyForm.nilName" placeholder="请填写昵称，长度限定为10个字符"></el-input>
+                <el-input v-model="replyForm[item._id].nilName" placeholder="请填写昵称，长度限定为10个字符"></el-input>
               </el-form-item>
               <el-form-item label="邮箱" v-if="!isUser" prop="email">
-                <el-input v-model="replyForm.email" placeholder="请填写邮箱"></el-input>
+                <el-input v-model="replyForm[item._id].email" placeholder="请填写邮箱"></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="success" @click="submitForm(`replyForm`, item._id)">发 表</el-button>
+                <el-button type="success" :disabled="!replyForm[item._id].content" @click="submitForm(`replyForm[${item._id}]`, item._id, replyForm[item._id], item.parent)">发 表</el-button>
                 <el-button type="danger" plain @click="resetForm(`replyForm_${item._id}`)">取 消</el-button>
               </el-form-item>
             </el-form>
@@ -79,6 +79,7 @@ export default {
       comments: [],
       dataForm: {
       },
+      replyForm: {},
       rules: {
         content: [
           {required: true, message: '请填写评论内容', trigger: 'blur'}
@@ -91,38 +92,34 @@ export default {
           {required: true, message: '请填写昵称', trigger: 'blur'},
           {type: 'string', max: 20, message: '限定长度为10', trigger: 'blur'}
         ]
-      },
-      replyForm: {
       }
     }
   },
   methods: {
-    submitForm (formName, reply, data) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          const submitForm = Object.assign({
-            articleId: this.articleId
-          }, this.dataForm, data)
-          if (this.uid) {
-            submitForm.createdBy = this.uid
-          }
-          if (reply) {
-            submitForm.reply = reply
-          }
-          Axios.post('/myapi/comments', submitForm).then(res => {
-            this.dataForm = {}
-            this.$message({
-              type: 'success',
-              message: '发表成功'
-            })
-            this.getComments()
-          }).catch(err => {
-            this.$message({
-              type: 'error',
-              message: `评论发表失败, ${err.msg}`
-            })
-          })
-        }
+    submitForm (formName, reply, data, parent) {
+      const submitForm = Object.assign({
+        articleId: this.articleId
+      }, this.dataForm, data)
+      if (this.uid) {
+        submitForm.createdBy = this.uid
+      }
+      if (reply) {
+        submitForm.reply = reply
+        submitForm.isTop = 0
+        submitForm.parent = parent || reply
+      }
+      Axios.post('/myapi/comments', submitForm).then(res => {
+        this.dataForm = {}
+        this.$message({
+          type: 'success',
+          message: '发表成功'
+        })
+        this.getComments()
+      }).catch(err => {
+        this.$message({
+          type: 'error',
+          message: `评论发表失败, ${err.msg}`
+        })
       })
     },
     getComments () {
@@ -130,11 +127,8 @@ export default {
         this.comments = res.data.list
         this.commentNums = this.comments.length
         this.comments.forEach(item => {
-          // item.replyForm = {
-          //   content: ''
-          // }
+          this.$set(this.replyForm, item._id, {})
         })
-        console.log(this.comments, '==================> comments')
       }).catch(err => {
         this.$message({
           type: 'error',

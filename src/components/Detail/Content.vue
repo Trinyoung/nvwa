@@ -94,7 +94,6 @@ export default {
   props: ['articleId', 'article'],
   created: function () {
     // this.getArticleDetail()
-    this.getComments()
     this.getFavoriteNums()
     this.userInfo = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
     this.uid = this.userInfo.uid
@@ -123,9 +122,6 @@ export default {
     //     })
     //   })
     // },
-    getComments () {
-      return ''
-    },
     formatTime (unix) {
       return moment(unix).format('YYYY-MM-DD')
     },
