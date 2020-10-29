@@ -14,12 +14,12 @@
         </div>
         <div class="form-group row login-item">
           <div class="input-group mb-3">
-              <div class="input-group-prepend">
+            <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">
                 <b-icon-lock></b-icon-lock>
               </span>
-              </div>
-              <input type="password" class="form-control" placeholder="请输入密码" aria-label="password" aria-describedby="basic-addon1" v-model="inputInfo.password">
+            </div>
+            <input type="password" class="form-control" placeholder="请输入密码" aria-label="password" aria-describedby="basic-addon1" v-model="inputInfo.password">
           </div>
         </div>
         <div class="row form-group login-item">
@@ -61,14 +61,12 @@ export default {
     submit: function () {
       const { password, confirmPassword } = this.$data.inputInfo
       const username = this.username
-      console.log(username, 'params------------->')
       const confirmCode = localStorage.getItem('confirmCode')
       console.log(username, confirmCode, '---------confirmCode')
       if (!password || !confirmPassword || password !== confirmPassword) {
         return alert('请填写用户名或者邮箱！')
       }
       axios.put('http://localhost:9220/api/user/password', { password, username, confirmCode }).then((res) => {
-        console.log(res, 'res----------->')
         if (res.status !== 200 || res.data.code !== '000') {
           return alert('请求失败, 请检查用户名和邮箱！')
         } else {
