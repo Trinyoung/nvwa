@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="dashboard-container">
     <v-header></v-header>
     <main role="main" class="container-fluid">
       <div class="row">
@@ -56,7 +56,7 @@ export default {
   }
 </style>
 <style>
-  table .el-button {
+  .dashboard-container table .el-button {
     height: 25px;
     padding: 5px 12px;
   }

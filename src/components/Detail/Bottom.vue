@@ -58,6 +58,45 @@
             </el-form>
           </div>
         </div>
+        <div class="comment-children">
+          <ul class="list-group list-group-container">
+            <li class="list-group-item" v-for="ele in item.children" :key="ele._id">
+              <div class="comment-item comment-header">
+                <b class="comment-author">
+                  {{ele.nilName}}
+                </b>
+                <div class="d-inline-right">
+                  <b-icon-hand-thumbs-up class="icon"></b-icon-hand-thumbs-up>
+                  <span class="favorite-num">16</span>
+                </div>
+              </div>
+              <div class="comment-body comment-item">
+                <span>{{ele.content}}</span>
+              </div>
+              <div class="comment-bottom">
+                <span>{{formatTime(ele.createdAt)}}</span>
+                <span class="hover-change reply-button" data-toggle="collapse" :data-target="`#collapseReply${ele._id}`">回复</span>
+                <div class="collapse mt-2" :id="`collapseReply${ele._id}`">
+                  <el-form label-width="100px" v-model="replyForm[ele._id]" :rules="rules">
+                    <el-form-item label="评论内容" prop="content">
+                      <el-input type="textarea" v-model="replyForm[ele._id].content" class="content-container" placeholder="请添加评论内容"></el-input>
+                    </el-form-item>
+                    <el-form-item label="昵称" v-if="!isUser" prop="nilName">
+                      <el-input v-model="replyForm[ele._id].nilName" placeholder="请填写昵称，长度限定为10个字符"></el-input>
+                    </el-form-item>
+                    <el-form-item label="邮箱" v-if="!isUser" prop="email">
+                      <el-input v-model="replyForm[ele._id].email" placeholder="请填写邮箱"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                      <el-button type="success" :disabled="!replyForm[ele._id].content" @click="submitForm(`replyForm[${ele._id}]`, ele._id, replyForm[ele._id], ele.parent)">发 表</el-button>
+                      <el-button type="danger" plain @click="resetForm(`replyForm_${ele._id}`)">取 消</el-button>
+                    </el-form-item>
+                  </el-form>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
       </li>
     </ul>
   </div>
@@ -127,6 +166,11 @@ export default {
         this.comments = res.data.list
         this.commentNums = this.comments.length
         this.comments.forEach(item => {
+          if (item.children) {
+            item.children.forEach(ele => {
+              this.$set(this.replyForm, ele._id, {})
+            })
+          }
           this.$set(this.replyForm, item._id, {})
         })
       }).catch(err => {
@@ -181,6 +225,10 @@ export default {
     margin-top: 0.25rem;
     margin-bottom: 0.25rem;
   }
+  .comment-children {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
   .d-inline-right {
     display: inline-block;
     margin-right: 1rem;
@@ -201,8 +249,8 @@ export default {
     cursor: pointer;
     color: cornflowerblue;
   }
-  .comment-content {
-    height: 8rem;
+  .comment-body {
+    margin-right: 2rem;
   }
   .favorite-icon:hover {
     cursor: pointer;
@@ -221,11 +269,6 @@ export default {
   .el-form-item {
     margin-bottom: 12px;
     width: 90%
-  }
-  .content-container {
-    /* height: 40px; */
-    /* margin-bottom: 15px; */
-    /* resize: none; */
   }
 </style>
 <style>

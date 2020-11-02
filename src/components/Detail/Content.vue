@@ -93,35 +93,15 @@ export default {
   },
   props: ['articleId', 'article'],
   created: function () {
-    // this.getArticleDetail()
     this.getFavoriteNums()
     this.userInfo = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
     this.uid = this.userInfo.uid
+    this.getTags()
     if (this.userInfo) {
       this.getFavorite()
     }
   },
   methods: {
-    // getArticleDetail () {
-    //   const id = this.articleId
-    //   Axios.get(`/myapi/articles/${id}`).then((result) => {
-    //     const { content, title, updatedBy, updatedAt, createdAt, createdBy, refers, author } = result.data.data
-    //     const contentHtml = result.data.data.content_html
-    //     this.contentHtml = contentHtml || content
-    //     this.title = title
-    //     this.updatedBy = updatedBy
-    //     this.updatedAt = updatedAt || createdAt
-    //     this.refers = refers
-    //     this.author = author
-    //     // this.$emit('getAuthor', this.uid === createdBy)
-    //     this.author = author
-    //   }).catch(err => {
-    //     this.$message({
-    //       type: 'error',
-    //       message: err.message
-    //     })
-    //   })
-    // },
     formatTime (unix) {
       return moment(unix).format('YYYY-MM-DD')
     },
@@ -160,6 +140,15 @@ export default {
           message: err.message
         })
       })
+    },
+    getTags () {
+      let tags = JSON.parse(localStorage.getItem('tags'))
+      if (!tags || tags.length === 0) {
+        Axios.get('/myapi/tags').then(res => {
+          const result = res.data.data
+          localStorage.setItem('tags', JSON.stringify(result))
+        })
+      }
     },
     setReads () {
       Axios.post(`/api/articles/reads`)

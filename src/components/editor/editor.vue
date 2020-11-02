@@ -245,6 +245,7 @@ export default {
           result.forEach(item => {
             tags.push({name: item.name, value: item._id})
           })
+          localStorage.setItem('tags', JSON.stringify(result))
         })
       }
       this.tags = tags
