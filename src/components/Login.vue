@@ -120,10 +120,8 @@ export default {
   .button-right {
     width: 6rem;
     background: rgb(96, 96, 167);
-    /* margin-bottom: 0.5rem; */
   }
   .login-item {
-    /* display: inline-block; */
     margin: 0 auto;
     width: 80%;
     font-size: 1.1rem;

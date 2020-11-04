@@ -9,18 +9,11 @@
     </nav>
     <form class="pb-2 pr-3 pl-3 pt-0 form-container border-bottom">
       <div class="form-row my-2">
-        <div class="col form-inline">
-        </div>
-        <div class="col-5 form-inline align-left">
-          <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search" v-model="searchInfo.keyword">
-          <button class="ml-2 btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
-        </div>
+        <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search" v-model="searchInfo.keyword">
+        <button class="ml-2 btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
       </div>
     </form>
     <div class="my-0 p-3 shadow-sm" id="main-content">
-      <!-- <div class="breadcrumb">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#edit-type">新增</button>
-      </div> -->
       <div class="btn-toolbar my-1 pb-1" role="toolbar" aria-label="Toolbar with button groups">
         <el-button type="primary" @click="openDialog">新增</el-button>
       </div>
@@ -57,15 +50,13 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">确认</el-button>
+        <el-button type="primary" @click="save">确认</el-button>
       </span>
     </el-dialog>
   </main>
 </template>
 <script>
 import datePicker from 'vue-bootstrap-datetimepicker'
-import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
-import '@fortawesome/fontawesome-free/css/all.css'
 import typeEdit from './type_edit'
 import Axios from 'axios'
 import moment from 'moment'
@@ -124,15 +115,22 @@ export default {
     save (id) {
       const condition = this.condition
       const Authorization = `Bearer ${localStorage.getItem('token')}`
-      Axios.post('/api/tags', condition, { headers: {Authorization} }).then(res => {
+      const url = id ? 'api/tags' : `/api/tags/${id}`
+      Axios.post(url, condition, { headers: {Authorization} }).then(res => {
+        this.$message.success('添加成功！')
         if (res.data && res.data.code === '000') {
-          if (this.dataList.length < 10) {
+          if (!id && this.dataList.length < 10) {
             res.data.result.createdAt = moment(res.data.result.createdAt).format('YYYY-MM-DD HH:mm:ss')
             this.dataList.push(res.data.result)
           } else {
             this.getList()
           }
+        } else {
+          this.$message.error(res.data.message)
         }
+        localStorage.removeItem('tags')
+      }).catch(err => {
+        this.$message.error(err)
       })
     },
     pageAdd () {

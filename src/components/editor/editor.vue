@@ -109,11 +109,9 @@
             <a :href="item.link">{{index + 1}} .</a>
             <a :href= item.link class="d-inline-block">{{item.title}}</a>
           </div>
-          <div>
-            <div class="btn-group mr-2" role="group" aria-label="First group">
-              <button type="button" class="btn btn-secondary" @click="refferStatusChange(item)">编辑</button>
-              <button type="button" class="btn btn-secondary">删除</button>
-            </div>
+          <div class="btn-group mr-2" role="group" aria-label="First group">
+            <button type="button" class="btn btn-secondary" @click="refferStatusChange(item)">编辑</button>
+            <button type="button" class="btn btn-secondary">删除</button>
           </div>
         </div>
         <form v-if ="item.status" class="row">
@@ -184,6 +182,7 @@ export default {
       if (articleId && articleId !== 'new') {
         data.articleId = articleId
         axios.put(`/api/articles/${articleId}`, data, { headers: {Authorization} }).then(res => {
+          this.$message.success('发表成功')
           if (res.status === 200 && res.data.code === '000' && res.data.result._id) {
             this.$router.push(`/console/editor/${res.data.result._id}`)
           }
@@ -199,6 +198,7 @@ export default {
       } else {
         axios.post('/api/articles', data, { headers: { Authorization } }).then(res => {
           if (res.status === 200 && res.data.code === '000' && res.data.result._id) {
+            this.$message.success('发表成功')
             this.$router.push(`/console/editor/${res.data.result._id}`)
           }
           if (res.data.code === '401') {
@@ -238,10 +238,11 @@ export default {
       }
     },
     getTags () {
-      let tags = JSON.parse(localStorage.getItem('tags'))
+      // console.log(tags, 'tags=================>')
+      let tags = JSON.parse(localStorage.getItem('tags')) || []
       if (!tags || tags.length === 0) {
         axios.get('/myapi/tags').then(res => {
-          const result = res.data.data
+          const result = res.data.list
           result.forEach(item => {
             tags.push({name: item.name, value: item._id})
           })
