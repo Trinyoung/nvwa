@@ -62,11 +62,11 @@
           <tr v-for="(item, index) in list" :key="index">
             <th scope="row">{{index + 1}}</th>
             <td>{{item.title}}</td>
-            <td>{{item.type}}</td>
+            <td>{{item.type && item.type.title}}</td>
             <td>{{item.createdBy}}</td>
             <td>{{item.createdAt}}</td>
             <td>
-              <el-tag v-for="tag in item.tags" :key="tag._id">
+              <el-tag v-for="tag in item.tags" :key="tag._id" class="tag">
                 {{tag.name}}
               </el-tag>
             </td>
@@ -230,5 +230,8 @@ table .el-button {
 
 .el-form-item {
   margin-bottom: 0;
+}
+.tag {
+  margin-right: 5px;
 }
 </style>

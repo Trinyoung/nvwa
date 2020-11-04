@@ -5,7 +5,13 @@
         <el-form-item label="分类: ">
           <el-cascader
           v-model="articleObj.type"
-          :options="types"></el-cascader>
+          :options="types"
+          :props="{ checkStrictly: true }"
+          clearable></el-cascader>
+          <!-- v-model="searchInfo.type"
+            :options="types"
+            :props="{ checkStrictly: true }"
+            clearable -->
         </el-form-item>
         <el-form-item label="标签: ">
           <el-select v-model="articleObj.tags"  placeholder="请选择" multiple >
@@ -18,7 +24,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="是否公开: ">
-          <el-switch v-model="articleObj.public"></el-switch>
+          <el-switch v-model="articleObj.isPublic"></el-switch>
         </el-form-item>
         <el-form-item label="Markdown: ">
           <el-switch v-model="articleObj.isMarkdown"></el-switch>
@@ -153,7 +159,7 @@ export default {
         tags: [],
         refers: [],
         isMarkdown: true,
-        public: true,
+        isPublic: true,
         type: undefined
       },
       refferEdit: {
@@ -177,14 +183,21 @@ export default {
     save: function (published) {
       const contentHtml = $('.v-note-read-content').html()
       const articleId = this.articleId
-      const data = Object.assign({published: false, content_html: contentHtml}, this.articleObj)
+      const {content, category, title, subTitle, tags, refers, isMarkdown, isPublic, type} = this.articleObj
+      console.log(type, '==================>')
+      let data = Object.assign({published: false, content_html: contentHtml})
+      data = Object.assign(data, {
+        content, category, title, subTitle, tags, refers, isMarkdown, isPublic, type: type[0].id, typeCode: type[0].typeCode
+      })
       const Authorization = `Bearer ${localStorage.getItem('token')}`
       if (articleId && articleId !== 'new') {
         data.articleId = articleId
         axios.put(`/api/articles/${articleId}`, data, { headers: {Authorization} }).then(res => {
-          this.$message.success('发表成功')
           if (res.status === 200 && res.data.code === '000' && res.data.result._id) {
+            this.$message.success('发表成功')
             this.$router.push(`/console/editor/${res.data.result._id}`)
+          } else {
+            this.$message.error(res.data.err.errors.message)
           }
           if (res.data.code === '401') {
             this.$router.push(`/login`)
@@ -238,7 +251,6 @@ export default {
       }
     },
     getTags () {
-      // console.log(tags, 'tags=================>')
       let tags = JSON.parse(localStorage.getItem('tags')) || []
       if (!tags || tags.length === 0) {
         axios.get('/myapi/tags').then(res => {
@@ -252,8 +264,8 @@ export default {
       this.tags = tags
     },
     getTypes () {
-      let types = JSON.parse(localStorage.getItem('types'))
-      if (!types || types.length === 0) {
+      this.types = JSON.parse(localStorage.getItem('types'))
+      if (!this.types || this.types.length === 0) {
         axios.get('/myapi/articles/types/all').then(res => {
           this.types = res.data.result
           localStorage.setItem('types', JSON.stringify(this.types))

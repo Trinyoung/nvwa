@@ -38,7 +38,7 @@
       </div>
       (完)
       <div class="reffer-container pt-3">
-        <h5 class="border-bottom border-gray pb-2 mb-0">文献引用</h5>
+        <h5 class="border-bottom border-gray pb-2 mb-0">文献引用({{article.refers&&article.refers.length || 0}})</h5>
         <ul class="list-group list-group-container">
           <li class="list-group-item" v-for="(item, index) in article.refers" :key="index">
             <b>{{index+1}}. </b> <span>{{item.title}}</span> <a :href="item.link">{{item.link}}</a>
@@ -49,9 +49,7 @@
         <h5 class="border-bottom border-gray pb-2 mb-0 text-left">标签 ({{article.tags && article.tags.length || 0}})</h5>
         <ul class="list-group list-group-horizontal mt-1">
           <li class="list-group-item" v-for="item in article.tags" :key="item.id">
-            <span class="tag-icon d-inline-block">
-              {{item}}
-            </span>
+            <el-tag type="primary" effect="dark">{{item.name}}</el-tag>
           </li>
         </ul>
       </div>
@@ -107,7 +105,7 @@ export default {
     },
     setFavorite () {
       if (this.isFavorited) {
-        return this.$message('已经点过赞了！')
+        return this.$message.success('已经点过赞了！')
       }
       const request = {
         articleId: this.articleId,
