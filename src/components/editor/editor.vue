@@ -8,10 +8,6 @@
           :options="types"
           :props="{ checkStrictly: true }"
           clearable></el-cascader>
-          <!-- v-model="searchInfo.type"
-            :options="types"
-            :props="{ checkStrictly: true }"
-            clearable -->
         </el-form-item>
         <el-form-item label="标签: ">
           <el-select v-model="articleObj.tags"  placeholder="请选择" multiple >
@@ -160,7 +156,7 @@ export default {
         refers: [],
         isMarkdown: true,
         isPublic: true,
-        type: undefined
+        type: []
       },
       refferEdit: {
         refferValue: '',
@@ -176,6 +172,11 @@ export default {
     this.getTypes()
   },
   props: ['articleId'],
+  watch: {
+    'articleObj.type' (val) {
+      console.log(val, 'val=======================>')
+    }
+  },
   methods: {
     submit: function () {
       console.log('submit')
@@ -184,15 +185,15 @@ export default {
       const contentHtml = $('.v-note-read-content').html()
       const articleId = this.articleId
       const {content, category, title, subTitle, tags, refers, isMarkdown, isPublic, type} = this.articleObj
-      console.log(type, '==================>')
       let data = Object.assign({published: false, content_html: contentHtml})
       data = Object.assign(data, {
-        content, category, title, subTitle, tags, refers, isMarkdown, isPublic, type: type[0].id, typeCode: type[0].typeCode
+        content, category, title, subTitle, tags, refers, isMarkdown, isPublic, type: type[type.length - 1]
       })
       const Authorization = `Bearer ${localStorage.getItem('token')}`
       if (articleId && articleId !== 'new') {
         data.articleId = articleId
         axios.put(`/api/articles/${articleId}`, data, { headers: {Authorization} }).then(res => {
+          console.log('id', res)
           if (res.status === 200 && res.data.code === '000' && res.data.result._id) {
             this.$message.success('发表成功')
             this.$router.push(`/console/editor/${res.data.result._id}`)
@@ -241,14 +242,22 @@ export default {
       const id = this.articleId
       if (id !== 'new') {
         axios.get(`/api/articles/${id}?console=1`).then((result) => {
-          const { content, title, isMarkdown, isPublic, subTitle, abstract, tags, refers, _id } = result.data.data
-          this.articleObj = { title, content, isPublic, subTitle, abstract, tags, refers }
+          const { content, title, isMarkdown, isPublic, subTitle, abstract, tags, refers, _id, type, typeCode } = result.data.data
+          this.articleObj = { title, content, isPublic, subTitle, abstract, tags, refers, type, typeCode }
           this.articleObj.articleId = _id
           this.isPublic = !!isPublic
           this.articleObj.isMarkdown = !!isMarkdown
-          this.articleObj.tags = tags
+          // this.articleObj.type = [type]
+          this.getParentTypes(typeCode)
+        }).catch(err => {
+          this.$message.error(err.message)
         })
       }
+    },
+    getParentTypes (typeCode) {
+      axios.get(`/myapi/articles/types/parent?typeCode=${typeCode}`).then(res => {
+        this.articleObj.type = res.data.result.map(item => item._id)
+      })
     },
     getTags () {
       let tags = JSON.parse(localStorage.getItem('tags')) || []
