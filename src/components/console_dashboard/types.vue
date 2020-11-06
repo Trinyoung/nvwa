@@ -187,7 +187,6 @@ export default {
           const Authorization = `Bearer ${localStorage.getItem('token')}`
           const { parent, title, description, tags } = this.dataForm
           const [ typeCode, typeParent ] = parent[0] && parent[0].split('_')
-          console.log(parent[0].split('_'), '====================>')
           const request = {
             isTop: 1,
             parent: typeParent,
@@ -244,6 +243,7 @@ export default {
       }
       Axios.get('/myapi/articles/types/all').then(res => {
         this.types = res.data.result
+        localStorage.setItem('types', JSON.stringify(this.types))
       })
     },
     getTags () {
@@ -254,7 +254,7 @@ export default {
       }
       Axios.get('/myapi/tags', (res) => {
         this.tags = res.data.list
-        localStorage.setItem('tags', this.tags)
+        localStorage.setItem('tags', JSON.stringify(this.tags))
       })
     }
   }
