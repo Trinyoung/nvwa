@@ -239,7 +239,9 @@ export default {
           this.articleObj.articleId = _id
           this.isPublic = !!isPublic
           this.articleObj.isMarkdown = !!isMarkdown
-          this.getParentTypes(typeCode)
+          if (typeCode) {
+            this.getParentTypes(typeCode)
+          }
         }).catch(err => {
           this.$message.error(err.message)
         })
