@@ -150,6 +150,11 @@ export default {
     },
     setReads () {
       Axios.post(`/api/articles/reads`)
+    },
+    getParentTypes () {
+      Axios.get(`/myapi/articles/types/parent?id=${this.article.type}`).then(res => {
+        this.articleObj.type = res.data.result.map(item => item._id)
+      })
     }
   }
 }

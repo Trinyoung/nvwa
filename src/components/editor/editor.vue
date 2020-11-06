@@ -167,9 +167,9 @@ export default {
     }
   },
   created: function () {
-    this.getAticle()
     this.getTags()
     this.getTypes()
+    this.getAticle()
   },
   props: ['articleId'],
   methods: {
@@ -178,8 +178,9 @@ export default {
       const articleId = this.articleId
       const {content, category, title, subTitle, tags, refers, isMarkdown, isPublic, type} = this.articleObj
       let data = Object.assign({published: false, content_html: contentHtml})
+      const {typeId, typeCode} = type[type.length - 1] && type[type.length - 1].split('-')
       data = Object.assign(data, {
-        content, category, title, subTitle, tags, refers, isMarkdown, isPublic, type: type[type.length - 1]
+        content, category, title, subTitle, tags, refers, isMarkdown, isPublic, type: typeId, typeCode
       })
       const Authorization = `Bearer ${localStorage.getItem('token')}`
       if (articleId && articleId !== 'new') {
@@ -238,7 +239,6 @@ export default {
           this.articleObj.articleId = _id
           this.isPublic = !!isPublic
           this.articleObj.isMarkdown = !!isMarkdown
-          // this.articleObj.type = [type]
           this.getParentTypes(typeCode)
         }).catch(err => {
           this.$message.error(err.message)
