@@ -145,7 +145,7 @@ export default {
       },
       dataForm: {
         title: '',
-        parent: '',
+        parent: [],
         description: '',
         typeCode: ''
       },
@@ -186,11 +186,13 @@ export default {
           const id = this.typeId
           const Authorization = `Bearer ${localStorage.getItem('token')}`
           const { parent, title, description, tags } = this.dataForm
+          const [ typeCode, typeParent ] = parent[0] && parent[0].split('_')
+          console.log(parent[0].split('_'), '====================>')
           const request = {
             isTop: 1,
-            parent: parent[0].id,
+            parent: typeParent,
             title,
-            typeCode: parent[0].typeCode,
+            typeCode,
             description,
             tags
           }
@@ -208,16 +210,10 @@ export default {
                 localStorage.removeItem('types')
                 this.getTypes()
               } else {
-                this.$message({
-                  showClose: true,
-                  message: res.data.message
-                })
+                this.$message.error('创建分类出现错误', res.data.message)
               }
             }).catch(err => {
-              this.$message({
-                showClose: true,
-                message: `创建分类出现错误, ${err}`
-              })
+              this.$message.error('创建分类出现错误', err.message)
             })
           } else {
             Axios.put(`/api/articles/types/${id}`, request, { headers: { Authorization } }).then(res => {
@@ -228,16 +224,10 @@ export default {
                   message: '编辑成功'
                 })
               } else {
-                this.$message({
-                  showClose: true,
-                  message: res.data.message
-                })
+                this.$message.error('创建分类出现错误', res.data.message)
               }
             }).catch(err => {
-              this.$message({
-                showClose: true,
-                message: `修改分类出现错误, ${err}`
-              })
+              this.$message.error('创建分类出现错误', err.message)
             })
           }
         }
@@ -249,7 +239,7 @@ export default {
     getTypes () {
       let types = localStorage.getItem('types')
       if (types) {
-        this.tags = JSON.parse(types)
+        this.types = JSON.parse(types)
         return
       }
       Axios.get('/myapi/articles/types/all').then(res => {
