@@ -237,9 +237,6 @@ export default {
     },
     getHotList: function () {
       return ''
-    },
-    showDatePickResult: function () {
-      console.log(this.searchInfo.date)
     }
   }
 }

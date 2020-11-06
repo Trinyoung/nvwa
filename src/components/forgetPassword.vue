@@ -103,9 +103,7 @@ export default {
       const params = Object.assign({}, this.inputInfo)
       const username = this.inputInfo.username
       localStorage.setItem('confirmCode', this.inputInfo.confirmCode)
-      console.log(params, '参数在这里呢------------->')
       axios.put('http://localhost:9220/api/user/confirmCode', params).then((result) => {
-        console.log(result, 'result')
         if (result.status !== 200 || result.data.code !== '000') {
           return alert('验证码、邮箱或者用户名输入错误')
         }

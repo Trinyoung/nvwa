@@ -50,8 +50,6 @@ export default {
         this.article.tags = tags || []
         this.article.author = author
         this.isAuthor = this.uid === createdBy
-        console.log(this.uid, 'this uid is here')
-        console.log(this.isAuthor, '是否是作者呢？')
       }).catch(err => {
         this.$message({
           type: 'error',

@@ -33,7 +33,6 @@ export default {
   methods: {
     init () {
       const token = localStorage.getItem('token')
-      console.log(token, 'token and cookie is here')
       if (!token) {
         this.$router.push('/login')
       }

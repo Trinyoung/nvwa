@@ -146,7 +146,6 @@ export default {
       dataForm: {
         title: '',
         parent: '',
-        // tags: [],
         description: '',
         typeCode: ''
       },
@@ -166,7 +165,6 @@ export default {
     this.getList()
     this.getTags()
     this.getTypes()
-    console.log(this.tags, this.types, '==================>')
   },
   methods: {
     getList (n = 1) {
@@ -182,16 +180,12 @@ export default {
     formatTime (time) {
       return moment(time * 1000).format('YYYY-MM-DD')
     },
-    showDatePickResult: function () {
-      console.log(this.searchInfo.date)
-    },
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           const id = this.typeId
           const Authorization = `Bearer ${localStorage.getItem('token')}`
           const { parent, title, description, tags } = this.dataForm
-          console.log(this.dataForm, 'dataForm ------------------>')
           const request = {
             isTop: 1,
             parent: parent[0].id,

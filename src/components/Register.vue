@@ -184,7 +184,6 @@ export default {
     register: function () {
       const userInfo = Object.assign({}, this.userInfo)
       userInfo.birthday = moment(userInfo.birthday).unix()
-      console.log(userInfo, 'userInfo-------------->')
       if (!userInfo.username) {
         alert('缺少用户名')
         return
@@ -214,7 +213,6 @@ export default {
         return
       }
       axios.post('http://localhost:3000/api/user/register', userInfo).then((result) => {
-        console.log(result, 'result+++++++++++>')
         if (result.data.code !== '000') {
           return alert('注册失败，请填写正确的注册信息！')
         }

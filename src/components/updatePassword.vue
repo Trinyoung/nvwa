@@ -62,7 +62,6 @@ export default {
       const { password, confirmPassword } = this.$data.inputInfo
       const username = this.username
       const confirmCode = localStorage.getItem('confirmCode')
-      console.log(username, confirmCode, '---------confirmCode')
       if (!password || !confirmPassword || password !== confirmPassword) {
         return alert('请填写用户名或者邮箱！')
       }

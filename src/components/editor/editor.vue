@@ -172,15 +172,7 @@ export default {
     this.getTypes()
   },
   props: ['articleId'],
-  watch: {
-    'articleObj.type' (val) {
-      console.log(val, 'val=======================>')
-    }
-  },
   methods: {
-    submit: function () {
-      console.log('submit')
-    },
     save: function (published) {
       const contentHtml = $('.v-note-read-content').html()
       const articleId = this.articleId
@@ -193,7 +185,6 @@ export default {
       if (articleId && articleId !== 'new') {
         data.articleId = articleId
         axios.put(`/api/articles/${articleId}`, data, { headers: {Authorization} }).then(res => {
-          console.log('id', res)
           if (res.status === 200 && res.data.code === '000' && res.data.result._id) {
             this.$message.success('发表成功')
             this.$router.push(`/console/editor/${res.data.result._id}`)
@@ -297,7 +288,6 @@ export default {
     },
     refferStatusChange (item) {
       return (() => {
-        console.log(this.articleObj.refers)
         item.status = !item.status
       })()
     },
