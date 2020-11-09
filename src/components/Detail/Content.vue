@@ -19,21 +19,16 @@
           </li>
         </ol>
       </nav>
-      <!-- <el-breadcrumb separator-class="el-icon-arrow-right" class="breadcrumb">
-        <el-breadcrumb-item v-for="type in articleTypes" :key="type._id" :to="`/home/articles?type=${type._id}`">
-          {{type.title}}
-        </el-breadcrumb-item>
-      </el-breadcrumb> -->
       <h1 class="border-bottom border-gray pb-2 mb-0 col-title">{{article.title}}</h1>
       <div class="text-muted article-tip">
         <ul class="list-group list-group-horizontal mt-1">
           <li class="list-group-item "><b>作者：</b>{{article.author}}</li>
           <li class="list-group-item "><b>更新时间：</b>{{formatTime(article.updatedAt * 1000)}}</li>
           <li class="list-group-item ">
-            <b>字数：</b>2000
+            <b>字数：</b>{{article.wordNums}}
           </li>
           <li class="list-group-item">
-            <b>阅读数：</b>2000
+            <b>阅读数：</b>{{article.hasReads}}
           </li>
         </ul>
       </div>
@@ -98,10 +93,10 @@ export default {
     this.userInfo = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
     this.uid = this.userInfo.uid
     this.getTags()
-    this.getParentTypes()
     if (this.userInfo) {
       this.getFavorite()
     }
+    this.setReads()
   },
   methods: {
     formatTime (unix) {
@@ -153,7 +148,16 @@ export default {
       }
     },
     setReads () {
-      Axios.post(`/api/articles/reads`)
+      const request = { articleId: this.articleId }
+      const hasRead = sessionStorage.getItem(`read_${this.articleId}`)
+      if (!hasRead) {
+        Axios.post(`/myapi/articles/reads`, request).then(res => {
+          sessionStorage.setItem(`read_${this.articleId}`, res.data.result._id)
+          this.article.hasReads++
+        }).catch(err => {
+          this.$message.error(err.message)
+        })
+      }
     }
   }
 }

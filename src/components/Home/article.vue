@@ -6,12 +6,12 @@
           <p class="media-body pb-2 mb-0 lh-125 border-bottom border-gray pl-1">
             <router-link :to="{path:`/articles/${item._id}`}">
               <strong class="d-block text-gray-dark">
-                <div class="d-inline-block new-icon">新</div>
-                <div class="d-inline-block hot-icon">热</div>
+                <div class="d-inline-block new-icon" v-if="item.isNew">新</div>
+                <div class="d-inline-block hot-icon" v-if="item.isHot">热</div>
                 {{ item.title }}
               </strong>
-              <span class="d-block text-muted">
-                {{ item.description }}
+              <span class="d-block text-muted" >
+                {{ item.content && item.content.substr(0, 200) }}......
               </span>
               <span class="d-block small text-muted">
                 <span class="align-middle">
@@ -24,11 +24,11 @@
                 </a>
                 <a class="ml-2 align-middle">
                   <b-icon-eye></b-icon-eye>
-                  {{ item.reads || 0 }}
+                  {{ item.hasReads || 0 }}
                 </a>
                 <span class="ml-2 align-middle">
                   <b-icon-hand-thumbs-up></b-icon-hand-thumbs-up>
-                  {{ item.favorites.length || 0 }}
+                  {{ item.favorites || 0 }}
                 </span>
               </span>
             </router-link>
@@ -101,12 +101,14 @@ export default {
     color: green;
     font-weight: 100;
     padding: 0 5px 0 5px;
+    font-size: 0.5rem;
   }
   .hot-icon {
     border: 1px solid red;
     color: red;
     font-weight: 100;
     padding: 0 5px 0 5px;
+    font-size: 0.5rem;
   }
   .list-container {
     min-height: calc(100vh - 132px);

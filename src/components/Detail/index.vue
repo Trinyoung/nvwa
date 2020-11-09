@@ -35,7 +35,8 @@ export default {
         updatedAt: '',
         refers: [],
         tags: [],
-        types: []
+        types: [],
+        hasReads: 0
       },
       isAuthor: false,
       loading: false
@@ -50,7 +51,7 @@ export default {
       const id = this.articleId
       this.loading = false
       Axios.get(`/myapi/articles/${id}`).then((result) => {
-        const { content, title, updatedBy, updatedAt, createdAt, createdBy, refers, author, tags, type } = result.data.data
+        const { content, title, updatedBy, updatedAt, createdAt, createdBy, refers, author, tags, type, hasReads, wordNums, favorites } = result.data.data
         const contentHtml = result.data.data.content_html
         this.article.contentHtml = contentHtml || content
         this.article.title = title
@@ -59,8 +60,10 @@ export default {
         this.article.refers = refers
         this.article.tags = tags || []
         this.article.author = author
+        this.article.hasReads = hasReads
         this.isAuthor = this.uid === createdBy
         this.loading = false
+        this.article.wordNums = wordNums
         if (type) {
           this.getParentTypes(type.typeCode)
         }
@@ -77,6 +80,9 @@ export default {
       }).catch(err => {
         this.$message.error(err.message)
       })
+    },
+    countWordsNums () {
+
     }
   }
 }
