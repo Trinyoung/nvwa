@@ -57,14 +57,12 @@
 </template>
 <script>
 import datePicker from 'vue-bootstrap-datetimepicker'
-import typeEdit from './type_edit'
 import Axios from 'axios'
 import moment from 'moment'
 import pagination from '../tools/pagination'
 export default {
   components: {
     datePicker,
-    typeEdit,
     pagination
   },
   data: function () {

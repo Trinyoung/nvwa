@@ -56,7 +56,7 @@
                 :props="{ checkStrictly: true }"
                 clearable></el-cascader>
             </el-form-item>
-            <el-form-item label="标识码：" label-width="80px" v-if="!dataForm.parent" prop="typeCode">
+            <el-form-item label="标识码：" prop="typeCode">
               <el-input v-model="dataForm.typeCode" placeholder="请输入标识码"></el-input>
             </el-form-item>
             <el-form-item label="标签：" >
@@ -103,9 +103,9 @@
             </td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <el-button type="success" plain @click="jumpTo(`/articles/${item._id}`)">详情</el-button>
-                <el-button type="primary" plain @click="jumpTo(`/console/editor/${item._id}`)">编辑</el-button>
-                <el-button type="danger" plain @click="deleteArticle(item._id)">删除</el-button>
+                <el-button type="success" plain >详情</el-button>
+                <el-button type="primary" plain >编辑</el-button>
+                <el-button type="danger" plain >删除</el-button>
               </div>
             </td>
           </tr>
@@ -117,7 +117,6 @@
 </template>
 <script>
 import datePicker from 'vue-bootstrap-datetimepicker'
-import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import Axios from 'axios'
 import pagination from '../tools/pagination'
@@ -147,7 +146,8 @@ export default {
         title: '',
         parent: [],
         description: '',
-        typeCode: ''
+        typeCode: '',
+        tags: []
       },
       rules: {
         title: [
@@ -155,8 +155,8 @@ export default {
           {min: 3, max: 30, message: '长度3 到 30个字符', trigger: 'blur'}
         ],
         typeCode: [
-          {required: true, message: '请输入标识码', trigger: 'blur'},
-          {min: 4, max: 4, message: '长度为4', trigger: 'blur'}
+          {required: true, type: 'string', message: '请输入标识码', trigger: 'blur'},
+          {length: 4, message: '长度限定为4', trigger: 'blur'}
         ]
       }
     }
@@ -181,12 +181,15 @@ export default {
       return moment(time * 1000).format('YYYY-MM-DD')
     },
     submitForm (formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           const id = this.typeId
           const Authorization = `Bearer ${localStorage.getItem('token')}`
-          const { parent, title, description, tags } = this.dataForm
-          const [ typeCode, typeParent ] = parent[0] && parent[0].split('_')
+          let { parent, title, description, tags, typeCode } = this.dataForm
+          let typeParent
+          if (parent && parent.length > 0) {
+            [ typeCode, typeParent ] = parent[0] && parent[0].split('_')
+          }
           const request = {
             isTop: 1,
             parent: typeParent,

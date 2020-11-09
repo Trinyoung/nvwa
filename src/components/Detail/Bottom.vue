@@ -70,6 +70,14 @@
                   <span class="favorite-num">16</span>
                 </div>
               </div>
+              <div class="comment-target comment-item" v-if="ele.target">
+                <div class="mb-2">
+                  @ {{ele.target.nilName}}
+                </div>
+                <div>
+                  {{ele.target.content}}
+                </div>
+              </div>
               <div class="comment-body comment-item">
                 <span>{{ele.content}}</span>
               </div>
@@ -219,11 +227,20 @@ export default {
     margin:10px;
   }
   .comment-author {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
   .comment-item {
     margin-top: 0.25rem;
     margin-bottom: 0.25rem;
+    font-size: 0.8rem;
+  }
+  .comment-target {
+    background:rgb(246,248,250);
+    margin-left: 0.8rem;
+    margin-right: 0.8rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    color: gray;
   }
   .comment-children {
     margin-left: 1rem;

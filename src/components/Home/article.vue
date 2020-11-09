@@ -18,14 +18,14 @@
                   <b-icon-calendar2-check></b-icon-calendar2-check>
                   {{ formatTime(item.createdAt) }}
                 </span>
-                <a class="ml-2 align-middle">
+                <span class="ml-2 align-middle">
                   <b-icon-person></b-icon-person>
-                  {{ item.createdBy}}
-                </a>
-                <a class="ml-2 align-middle">
+                  {{ item.createdBy }}
+                </span>
+                <span class="ml-2 align-middle">
                   <b-icon-eye></b-icon-eye>
                   {{ item.hasReads || 0 }}
-                </a>
+                </span>
                 <span class="ml-2 align-middle">
                   <b-icon-hand-thumbs-up></b-icon-hand-thumbs-up>
                   {{ item.favorites || 0 }}

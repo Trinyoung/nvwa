@@ -51,7 +51,7 @@ export default {
       const id = this.articleId
       this.loading = false
       Axios.get(`/myapi/articles/${id}`).then((result) => {
-        const { content, title, updatedBy, updatedAt, createdAt, createdBy, refers, author, tags, type, hasReads, wordNums, favorites } = result.data.data
+        const { content, title, updatedBy, updatedAt, createdAt, createdBy, refers, author, tags, type, hasReads, wordNums } = result.data.data
         const contentHtml = result.data.data.content_html
         this.article.contentHtml = contentHtml || content
         this.article.title = title
