@@ -178,7 +178,8 @@ export default {
       const articleId = this.articleId
       const {content, category, title, subTitle, tags, refers, isMarkdown, isPublic, type} = this.articleObj
       let data = Object.assign({published: false, content_html: contentHtml})
-      const {typeId, typeCode} = type[type.length - 1] && type[type.length - 1].split('-')
+      const [typeCode, typeId] = type[type.length - 1] && type[type.length - 1].split('_')
+      console.log(typeId, typeCode, '类型相关的的字段')
       data = Object.assign(data, {
         content, category, title, subTitle, tags, refers, isMarkdown, isPublic, type: typeId, typeCode
       })
@@ -249,7 +250,7 @@ export default {
     },
     getParentTypes (typeCode) {
       axios.get(`/myapi/articles/types/parent?typeCode=${typeCode}`).then(res => {
-        this.articleObj.type = res.data.result.map(item => item._id)
+        this.articleObj.type = res.data.result
       })
     },
     getTags () {
@@ -289,9 +290,7 @@ export default {
       this.dialogFormVisible = false
     },
     refferStatusChange (item) {
-      return (() => {
-        item.status = !item.status
-      })()
+      item.status = !item.status
     },
     refferChange (index, title, link) {
       if (this.articleObj.refers[index]._id) {
