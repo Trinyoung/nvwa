@@ -84,8 +84,8 @@
               <div class="comment-bottom">
                 <span>{{formatTime(ele.createdAt)}}</span>
                 <span class="hover-change reply-button" data-toggle="collapse" :data-target="`#collapseReply${ele._id}`">回复</span>
-                <div class="collapse mt-2" :id="`collapseReply${ele._id}`">
-                  <el-form label-width="100px" v-model="replyForm[ele._id]" :rules="rules">
+                <div class="collapse mt-2" :id="`collapseReply${ele._id}`" >
+                  <el-form label-width="100px" v-model="replyForm[ele._id]" :ref='`replyForm.${ele._id}`'>
                     <el-form-item label="评论内容" prop="content">
                       <el-input type="textarea" v-model="replyForm[ele._id].content" class="content-container" placeholder="请添加评论内容"></el-input>
                     </el-form-item>
@@ -96,8 +96,8 @@
                       <el-input v-model="replyForm[ele._id].email" placeholder="请填写邮箱"></el-input>
                     </el-form-item>
                     <el-form-item>
-                      <el-button type="success" :disabled="!replyForm[ele._id].content" @click="submitForm(`replyForm[${ele._id}]`, ele._id, replyForm[ele._id], ele.parent)">发 表</el-button>
-                      <el-button type="danger" plain @click="resetForm(`replyForm_${ele._id}`)">取 消</el-button>
+                      <el-button type="success" :disabled="!replyForm[ele._id].content" @click="submitForm(`replyForm.${ele._id}`, ele._id, replyForm[ele._id], ele.parent)">发 表</el-button>
+                      <el-button type="danger" plain @click="resetForm(`replyForm[${ele._id}]`, ele._id)" data-toggle="collapse" :data-target="`#collapseReply${ele._id}`">取 消</el-button>
                     </el-form-item>
                   </el-form>
                 </div>
@@ -112,6 +112,7 @@
 <script>
 import Axios from 'axios'
 import moment from 'moment'
+import $ from 'jquery'
 export default {
   props: ['refers', 'articleId', 'uid'],
   created () {
@@ -137,13 +138,16 @@ export default {
         ],
         nilName: [
           {required: true, message: '请填写昵称', trigger: 'blur'},
-          {type: 'string', max: 20, message: '限定长度为10', trigger: 'blur'}
+          {type: 'string', max: 20, message: '限定长度为20', trigger: 'blur'}
         ]
       }
     }
   },
   methods: {
     submitForm (formName, reply, data, parent) {
+      console.log(formName, 'formName---------------->')
+      // this.$refs[formName].validate((valid) => {
+      // if (valid) {
       const submitForm = Object.assign({
         articleId: this.articleId
       }, this.dataForm, data)
@@ -161,6 +165,7 @@ export default {
           type: 'success',
           message: '发表成功'
         })
+        $(`#collapseReply${reply}`).collapse(false)
         this.getComments()
       }).catch(err => {
         this.$message({
@@ -168,6 +173,8 @@ export default {
           message: `评论发表失败, ${err.msg}`
         })
       })
+      // }
+      // })
     },
     getComments () {
       Axios.get(`/myapi/comments/${this.articleId}/list`).then(res => {
@@ -190,6 +197,9 @@ export default {
     },
     formatTime (unix) {
       return moment(unix * 1000).format('YYYY-MM-DD HH:mm:ss')
+    },
+    resetForm (formName, id) {
+      this.replyForm[formName] = {}
     },
     resetFields () {
       this.resetFields()
