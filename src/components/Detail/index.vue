@@ -4,7 +4,7 @@
     <main role="main" class="container">
       <div class="row">
         <v-broadside class="col-md-2 broadside"></v-broadside>
-        <v-main class="col-md-9" :articleId="articleId" :article="article"></v-main>
+        <v-main class="col-md-9" :articleId="articleId" :article="article" v-loading='loading'></v-main>
         <v-rightside class="col-md-1" :articleId="articleId" :isAuthor="isAuthor"></v-rightside>
       </div>
     </main>
@@ -28,8 +28,17 @@ export default {
   },
   data () {
     return {
-      article: {},
-      isAuthor: false
+      article: {
+        title: '',
+        updatedBy: '',
+        contentHtml: '',
+        updatedAt: '',
+        refers: [],
+        tags: [],
+        types: []
+      },
+      isAuthor: false,
+      loading: false
     }
   },
   props: ['articleId'],
@@ -39,8 +48,9 @@ export default {
   methods: {
     getArticleDetail () {
       const id = this.articleId
+      this.loading = false
       Axios.get(`/myapi/articles/${id}`).then((result) => {
-        const { content, title, updatedBy, updatedAt, createdAt, createdBy, refers, author, tags } = result.data.data
+        const { content, title, updatedBy, updatedAt, createdAt, createdBy, refers, author, tags, type } = result.data.data
         const contentHtml = result.data.data.content_html
         this.article.contentHtml = contentHtml || content
         this.article.title = title
@@ -50,11 +60,22 @@ export default {
         this.article.tags = tags || []
         this.article.author = author
         this.isAuthor = this.uid === createdBy
+        this.loading = false
+        if (type) {
+          this.getParentTypes(type.typeCode)
+        }
       }).catch(err => {
         this.$message({
           type: 'error',
           message: err.message
         })
+      })
+    },
+    getParentTypes (type) {
+      Axios.get(`/myapi/articles/types/parent?typeCode=${type}&withTitle=1`).then(res => {
+        this.article.types = res.data.result
+      }).catch(err => {
+        this.$message.error(err.message)
       })
     }
   }

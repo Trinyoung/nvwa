@@ -14,13 +14,16 @@
     <div class="my-1 pt-0 p-3 bg-white rounded shadow-sm">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="#">音乐</a>
+          <li class="breadcrumb-item" v-for="type in article.types" :key="type._id">
+            <router-link :to="`/home/articles?type=${type._id}`">{{type.title}}</router-link>
           </li>
-          <li class="breadcrumb-item"><a href="#">流行音乐</a></li>
-          <li class="breadcrumb-item active" aria-current="page">大中国</li>
         </ol>
       </nav>
+      <!-- <el-breadcrumb separator-class="el-icon-arrow-right" class="breadcrumb">
+        <el-breadcrumb-item v-for="type in articleTypes" :key="type._id" :to="`/home/articles?type=${type._id}`">
+          {{type.title}}
+        </el-breadcrumb-item>
+      </el-breadcrumb> -->
       <h1 class="border-bottom border-gray pb-2 mb-0 col-title">{{article.title}}</h1>
       <div class="text-muted article-tip">
         <ul class="list-group list-group-horizontal mt-1">
@@ -90,11 +93,12 @@ export default {
     }
   },
   props: ['articleId', 'article'],
-  created: function () {
+  created () {
     this.getFavoriteNums()
     this.userInfo = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
     this.uid = this.userInfo.uid
     this.getTags()
+    this.getParentTypes()
     if (this.userInfo) {
       this.getFavorite()
     }
@@ -150,11 +154,6 @@ export default {
     },
     setReads () {
       Axios.post(`/api/articles/reads`)
-    },
-    getParentTypes () {
-      Axios.get(`/myapi/articles/types/parent?id=${this.article.type}`).then(res => {
-        this.articleObj.type = res.data.result.map(item => item._id)
-      })
     }
   }
 }
