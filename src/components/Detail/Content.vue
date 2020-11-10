@@ -1,5 +1,5 @@
 <template>
-  <main role="main" class="container">
+  <main role="main" class="main container">
     <div class="container p-3 rounded my-1 shadow-sm content-header justify-content-center">
       <div class="row my-1">
         <div class="col-sm-5">
@@ -47,7 +47,7 @@
         <h5 class="border-bottom border-gray pb-2 mb-0 text-left">标签 ({{article.tags && article.tags.length || 0}})</h5>
         <ul class="list-group list-group-horizontal mt-1">
           <li class="list-group-item" v-for="item in article.tags" :key="item.id">
-            <el-tag type="primary" effect="dark">{{item.name}}</el-tag>
+            <el-tag type="primary">{{item.name}}</el-tag>
           </li>
         </ul>
       </div>
@@ -91,7 +91,7 @@ export default {
   created () {
     this.getFavoriteNums()
     this.userInfo = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
-    this.uid = this.userInfo.uid
+    this.uid = this.userInfo && this.userInfo.uid
     this.getTags()
     if (this.userInfo) {
       this.getFavorite()
@@ -108,7 +108,7 @@ export default {
       }
       const request = {
         articleId: this.articleId,
-        createdBy: this.userInfo.uid
+        createdBy: this.userInfo && this.userInfo.uid
       }
       Axios.post('/myapi/articles/favorites', request).then(res => {
         if (res.data.code === '000') {
@@ -216,6 +216,9 @@ export default {
   .favorite-icon:hover {
     cursor: pointer;
     color: red;
+  }
+  .main {
+    padding-left: 10px;
   }
   .content-container {
     text-align: left;

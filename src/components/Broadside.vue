@@ -1,5 +1,5 @@
 <template>
-  <div class="broadSide my-1">
+  <div class="broadSide my-1 shadow-sm">
     <nav id="sidebarMenu" class="d-md-block sidebar collapse">
       <div class="avatar-head">
         <router-link to="/console">

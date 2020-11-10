@@ -11,7 +11,7 @@
                 {{ item.title }}
               </strong>
               <span class="d-block text-muted" >
-                {{ item.content && item.content.substr(0, 200) }}......
+                {{ item.content && item.content.substr(0, 150) }}……
               </span>
               <span class="d-block small text-muted">
                 <span class="align-middle">

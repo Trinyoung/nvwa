@@ -35,7 +35,7 @@ export default {
   .console-container {
     position: relative;
     margin-left: 225px;
-    padding-left:10px;
+    padding-left:5px;
     padding-right: 10px;
     min-height: calc(100vh - 40px);
   }

@@ -1,5 +1,5 @@
 <template>
-    <div class="reffer-container pt-3">
+  <div class="reffer-container pt-3">
     <div class="border-gray row ">
       <div class="col-sm-10">
         <h5 class="border-bottom border-gray pb-2 mb-0">评论 ({{commentNums}})</h5>
@@ -102,7 +102,8 @@
                       <el-button type="success" :disabled="!replyForm[ele._id].content"
                         data-toggle="collapse" :data-target="`#collapseReply${ele._id}`"
                         @click="submitForm(`replyForm.${ele._id}`, ele._id, replyForm[ele._id], ele.parent)">发 表</el-button>
-                      <el-button type="danger" plain @click="resetForm(`replyForm[${ele._id}]`, ele._id)" data-toggle="collapse" :data-target="`#collapseReply${ele._id}`">取 消</el-button>
+                      <el-button type="danger" plain @click="resetForm(`replyForm[${ele._id}]`, ele._id)"
+                        data-toggle="collapse" :data-target="`#collapseReply${ele._id}`">取 消</el-button>
                     </el-form-item>
                   </el-form>
                 </div>
@@ -121,7 +122,9 @@ import $ from 'jquery'
 export default {
   props: ['refers', 'articleId', 'uid'],
   created () {
-    this.isUser = !!this.uid
+    const vistorInfo = this.$cookie.get('visitInfo')
+    this.vistorInfo = JSON.stringify(vistorInfo)
+    this.isUser = !!this.uid || !!vistorInfo
     this.getComments()
     this.dataForm.articleId = this.articleId
     this.replyForm.articleId = this.articleId
@@ -130,6 +133,10 @@ export default {
     return {
       commentNums: 0,
       comments: [],
+      visitInfo: {
+        nilName: '',
+        email: ''
+      },
       dataForm: {
       },
       replyForm: {},
@@ -156,6 +163,10 @@ export default {
       if (this.uid) {
         submitForm.createdBy = this.uid
       }
+      if (this.vistorInfo) {
+        submitForm.nilName = this.visitInfo.nilName
+        submitForm.email = this.visitInfo.email
+      }
       if (reply) {
         submitForm.reply = reply
         submitForm.isTop = 0
@@ -169,6 +180,9 @@ export default {
         })
         $(`#collapseReply${reply}`).collapse(false)
         this.getComments()
+        if (this.$cookie.get('visitInfo')) {
+          this.isUser = true
+        }
       }).catch(err => {
         this.$message({
           type: 'error',
