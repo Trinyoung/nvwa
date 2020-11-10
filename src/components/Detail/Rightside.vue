@@ -2,30 +2,31 @@
   <!-- <div class="broadSide my-3 sticky"> -->
     <div class="col-md-1 right-side my-3">
       <div class="sidebar">
-        <div class="my-3 sidebar-item">
-          <b-icon-hand-thumbs-up width="2em" height="2em"></b-icon-hand-thumbs-up>
-          点赞
+        <div class="my-3 sidebar-item shadow-sm tag-item">
+          <b-icon-hand-thumbs-up width="1.8em" height="1.8em" class="tag" >
+          </b-icon-hand-thumbs-up>
+          点 赞
         </div>
-        <div class="my-3 sidebar-item">
-          <b-icon-share width="2em" height="2em"></b-icon-share>
+        <div class="my-3 sidebar-item shadow-sm tag-item">
+          <b-icon-share width="1.8em" height="1.8em" class="tag"></b-icon-share>
           分享
         </div>
-        <div class="my-3 sidebar-item">
-          <b-icon-star width="2em" height="2em"></b-icon-star>
+        <div class="my-3 sidebar-item shadow-sm tag-item">
+          <b-icon-star width="1.8em" height="1.8em" class="tag"></b-icon-star>
           收藏
         </div>
-        <div class="my-3 sidebar-item">
+        <div class="my-3 sidebar-item shadow-sm tag-item">
           <router-link :to="{name: 'Editor', params: { articleId }}">
-            <b-icon-pencil-square width="2em" height="2em"></b-icon-pencil-square>
+            <b-icon-pencil-square width="1.8em" height="1.8em" class="tag"></b-icon-pencil-square>
           </router-link>
           编辑
         </div>
-        <div class="my-3 sidebar-item" >
-          <b-icon-reply width="2em" height="2em" @click="$router.go(-1)"></b-icon-reply>
+        <div class="my-3 sidebar-item shadow-sm tag-item" >
+          <b-icon-reply @click="$router.go(-1)" width="1.8em" height="1.8em" class="tag"></b-icon-reply>
           返回
         </div>
-        <div v-if="isAuthor" class="my-3 sidebar-item">
-          <b-icon-trash width="2em" height="2em"></b-icon-trash>
+        <div v-if="isAuthor" class="my-3 sidebar-item shadow-sm tag-item">
+          <b-icon-trash width="1.8em" height="1.8em" class="tag"></b-icon-trash>
           删除
         </div>
       </div>
@@ -52,17 +53,25 @@ export default {
   width: 3rem;
   height: 3rem;
   margin: 0 auto;
+  color: darkgray;
+  font-size: 0.9rem;
 }
 .sidebar-item :hover{
   color: red;
   cursor: pointer;
 }
-
+.tag  {
+  /* color: red; */
+  margin: 0 auto;
+  display: block;
+  color: darkgray;
+}
 .tag-item {
-  background: wheat;
-  width: 3rem;
-  height: 3rem;
+  /* background: wheat; */
+  width: 4rem;
+  height: 4rem;
   border-radius: 50% 50% 50% 50%;
+  border: 1px solid aliceblue;
   margin: 0 auto;
 }
 #dropdownMenu2 {

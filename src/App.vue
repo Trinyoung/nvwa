@@ -35,15 +35,10 @@ export default {
 body {
   font-size: 0.95rem;
   height: 100%;
-  background-color:turquoise;
-  /* background: #DCDFE6; */
 }
 * {
   margin: 0;
   padding: 0;
-}
-.broadSide {
-  border-radius: 5px 5px 5px 5px;
 }
 a:hover {
   text-decoration: none;

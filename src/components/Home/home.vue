@@ -108,7 +108,8 @@
     text-align: left;
   }
   .justify-content-center {
-    background-image: url('../../../static/首页标题栏.jpg');
+    /* background-image: url('../../../static/首页标题栏.jpg'); */
+    background-color: aliceblue;
     background-repeat: no-repeat;
     background-size: 100% 100%;
     opacity: 0.5;

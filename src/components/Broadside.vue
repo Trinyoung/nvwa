@@ -94,15 +94,12 @@ export default {
 .broadSide .sidebar-heading {
   font-size: 1.5rem;
   margin-top: 20px;
-  color: aliceblue;
 }
 .broadSide {
-  color: aliceblue;
   min-height: calc(100vh -48px);
 }
 .broadSide .text-muted {
   font-size: 1.1rem;
-  color: aliceblue;
 }
 .avatar-head {
   margin-top: 2rem;
@@ -114,7 +111,6 @@ export default {
 
 #sidebarMenu {
   padding-top: 1rem;
-  background-color: #033553;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   position: sticky;

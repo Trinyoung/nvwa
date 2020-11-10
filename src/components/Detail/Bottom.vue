@@ -52,8 +52,11 @@
                 <el-input v-model="replyForm[item._id].email" placeholder="请填写邮箱"></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="success" :disabled="!replyForm[item._id].content" @click="submitForm(`replyForm[${item._id}]`, item._id, replyForm[item._id], item.parent)">发 表</el-button>
-                <el-button type="danger" plain @click="resetForm(`replyForm_${item._id}`)">取 消</el-button>
+                <el-button type="success" :disabled="!replyForm[item._id].content"
+                  @click="submitForm(`replyForm[${item._id}]`, item._id, replyForm[item._id], item.parent)"
+                  data-toggle="collapse" :data-target="`#collapseReply${item._id}`"
+                  >发 表</el-button>
+                <el-button type="danger" plain @click="resetForm(`replyForm_${item._id}`)" data-toggle="collapse" :data-target="`#collapseReply${item._id}`">取 消</el-button>
               </el-form-item>
             </el-form>
           </div>
@@ -96,7 +99,9 @@
                       <el-input v-model="replyForm[ele._id].email" placeholder="请填写邮箱"></el-input>
                     </el-form-item>
                     <el-form-item>
-                      <el-button type="success" :disabled="!replyForm[ele._id].content" @click="submitForm(`replyForm.${ele._id}`, ele._id, replyForm[ele._id], ele.parent)">发 表</el-button>
+                      <el-button type="success" :disabled="!replyForm[ele._id].content"
+                        data-toggle="collapse" :data-target="`#collapseReply${ele._id}`"
+                        @click="submitForm(`replyForm.${ele._id}`, ele._id, replyForm[ele._id], ele.parent)">发 表</el-button>
                       <el-button type="danger" plain @click="resetForm(`replyForm[${ele._id}]`, ele._id)" data-toggle="collapse" :data-target="`#collapseReply${ele._id}`">取 消</el-button>
                     </el-form-item>
                   </el-form>
@@ -145,9 +150,6 @@ export default {
   },
   methods: {
     submitForm (formName, reply, data, parent) {
-      console.log(formName, 'formName---------------->')
-      // this.$refs[formName].validate((valid) => {
-      // if (valid) {
       const submitForm = Object.assign({
         articleId: this.articleId
       }, this.dataForm, data)
@@ -173,8 +175,6 @@ export default {
           message: `评论发表失败, ${err.msg}`
         })
       })
-      // }
-      // })
     },
     getComments () {
       Axios.get(`/myapi/comments/${this.articleId}/list`).then(res => {

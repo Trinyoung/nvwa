@@ -67,14 +67,16 @@ export default {
     text-align: left;
   }
   .justify-content-center {
+    background-color: aliceblue;
     /* background-image: image('../../static/首页标题栏.jpg'); */
-    background-image: url('../../../static/首页标题栏.jpg');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+    /* background-image: url('../../../static/首页标题栏.jpg'); */
+    /* background-repeat: no-repeat; */
+    /* background-size: 100% 100%; */
     /* opacity: 0.5; */
   }
   .item-title {
-    color: white;
+    /* color: white; */
+    color: gray;
     font-size: 1.1rem;
   }
 
