@@ -97,6 +97,7 @@ export default {
 }
 .broadSide {
   min-height: calc(100vh -48px);
+  border: 1px solid aliceblue;
 }
 .broadSide .text-muted {
   font-size: 1.1rem;

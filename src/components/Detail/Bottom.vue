@@ -29,9 +29,9 @@
           <b class="comment-author">
             {{item.nilName}}
           </b>
-          <div class="d-inline-right">
-            <b-icon-hand-thumbs-up class="icon"></b-icon-hand-thumbs-up>
-            <span class="favorite-num">16</span>
+          <div class="d-inline-right" v-bind:class="{'isFavorited':item.isFavorited, 'favorite-icon':!item.isFavorited}">
+            <b-icon-hand-thumbs-up width="1.5em" height="2em" @click="setCommentFavorite(item)"></b-icon-hand-thumbs-up>
+            <span class="favorite-num align-bottom">{{item.favoriteNum || 0}}</span>
           </div>
         </div>
         <div class="comment-body comment-item">
@@ -68,9 +68,9 @@
                 <b class="comment-author">
                   {{ele.nilName}}
                 </b>
-                <div class="d-inline-right">
-                  <b-icon-hand-thumbs-up class="icon"></b-icon-hand-thumbs-up>
-                  <span class="favorite-num">16</span>
+                <div class="d-inline-right"  v-bind:class="{'isFavorited':ele.isFavorited, 'favorite-icon':!ele.isFavorited}" >
+                  <b-icon-hand-thumbs-up width="1.5em" height="2em" @click="setCommentFavorite(ele)"></b-icon-hand-thumbs-up>
+                  <span class="favorite-num align-bottom">{{ele.favoriteNum || 0}}</span>
                 </div>
               </div>
               <div class="comment-target comment-item" v-if="ele.target">
@@ -191,7 +191,11 @@ export default {
       })
     },
     getComments () {
-      Axios.get(`/myapi/comments/${this.articleId}/list`).then(res => {
+      let url = `/myapi/comments/${this.articleId}/list`
+      if (this.uid) {
+        url += `?uid=${this.uid}`
+      }
+      Axios.get(url).then(res => {
         this.comments = res.data.list
         this.commentNums = this.comments.length
         this.comments.forEach(item => {
@@ -208,6 +212,31 @@ export default {
           message: err.msg
         })
       })
+    },
+    setCommentFavorite (comment) {
+      const isFavorited = sessionStorage.getItem(`comment_favorite_${comment._id}`)
+      if (comment.isFavorited || isFavorited) {
+        if (!comment.isFavorited) {
+          comment.isFavorited = true
+        }
+        return this.$message.error('已经点赞过了, 请勿重复点赞！')
+      }
+      if (!comment.isFavorited && !isFavorited) {
+        Axios.post('/myapi/comments/favorites', {commentId: comment._id, createdBy: this.uid}).then(res => {
+          if (res.data.code === '000') {
+            comment.favoriteNum = res.data.result
+            comment.isFavorited = true
+            if (!this.uid) {
+              sessionStorage.setItem(`comment_favorite_${comment._id}`, 1)
+            }
+          } else {
+            this.$message.error('点赞失败')
+          }
+        })
+      }
+    },
+    getCommentFavorites () {
+      Axios.get('/myapi/comments/favorites', {})
     },
     formatTime (unix) {
       return moment(unix * 1000).format('YYYY-MM-DD HH:mm:ss')
@@ -233,7 +262,8 @@ export default {
     position: relative;
   }
   .favorite-num {
-    margin-top: 0.5rem;
+    display: inline-block;
+    /* margin-top: 0.5rem; */
   }
   .comment-body {
     margin-left: 1rem;
@@ -292,6 +322,15 @@ export default {
   }
   .comment-body {
     margin-right: 2rem;
+  }
+  .favorite-icon {
+    color: darkgray;
+  }
+  .isFavorited {
+    color: red
+  }
+  .isFavorited:hover {
+    cursor: pointer;
   }
   .favorite-icon:hover {
     cursor: pointer;
