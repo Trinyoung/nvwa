@@ -112,8 +112,8 @@ export default {
       }
       try {
         const result = await this.$postAjax('/myapi/articles/favorites', request)
-        this.isFavorited = true
         console.log(result, 'result-------------->')
+        this.isFavorited = true
         // this.favoriteNum
       } catch (err) {
         this.$message.error(err.message)
