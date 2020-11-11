@@ -100,18 +100,19 @@ export default {
     border:1px solid green;
     color: green;
     font-weight: 100;
-    padding: 0 5px 0 5px;
+    padding: 0 3px 0 3px;
     font-size: 0.5rem;
   }
   .hot-icon {
     border: 1px solid red;
     color: red;
     font-weight: 100;
-    padding: 0 5px 0 5px;
+    padding: 0 3px 0 3px;
     font-size: 0.5rem;
   }
   .list-container {
     min-height: calc(100vh - 132px);
+    border: 1px solid aliceblue;
   }
   svg {
     margin-bottom: 1.5px;

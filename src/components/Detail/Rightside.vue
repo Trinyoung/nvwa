@@ -64,6 +64,7 @@ export default {
 .sidebar-item :hover{
   color: red;
   cursor: pointer;
+  border: 1px solid aliceblue;
 }
 .tag  {
   /* color: red; */

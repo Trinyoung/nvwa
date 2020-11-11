@@ -1,39 +1,39 @@
 <template>
-    <main role="main" class="container">
-      <ul class="nav justify-content-center d-flex align-items-center p-3 my-1 bg-purple rounded shadow-sm">
-        <li class="nav-item">
-          <router-link to="/home">
-            <span class="nav-link active item-title">首页</span>
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/home/articles">
-            <span class="nav-link active item-title">文章</span>
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/home/types">
-            <span class="nav-link active item-title">分类</span>
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/home/logger">
-            <span class="nav-link item-title">日志</span>
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/home/logger">
-            <span class="nav-link item-title">连载</span>
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/home/logger">
-            <span class="nav-link item-title">相册</span>
-          </router-link>
-        </li>
-      </ul>
-      <router-view/>
-    </main>
+  <main role="main" class="container">
+    <ul class="nav justify-content-center d-flex align-items-center p-3 my-2 bg-purple rounded shadow-sm">
+      <li class="nav-item">
+        <router-link to="/home">
+          <span class="nav-link active item-title">首页</span>
+        </router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="/home/articles">
+          <span class="nav-link active item-title">文章</span>
+        </router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="/home/types">
+          <span class="nav-link active item-title">分类</span>
+        </router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="/home/logger">
+          <span class="nav-link item-title">日志</span>
+        </router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="/home/logger">
+          <span class="nav-link item-title">连载</span>
+        </router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="/home/logger">
+          <span class="nav-link item-title">相册</span>
+        </router-link>
+      </li>
+    </ul>
+    <router-view/>
+  </main>
 </template>
 <script>
 import $ from 'jquery'
@@ -66,6 +66,7 @@ export default {
   .col-title {
     text-align: left;
   }
+
   .justify-content-center {
     background-color: aliceblue;
     /* background-image: image('../../static/首页标题栏.jpg'); */
@@ -83,5 +84,10 @@ export default {
   .item-title:hover {
     cursor: pointer;
     color: blue;
+  }
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
   }
 </style>
