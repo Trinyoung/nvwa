@@ -1,8 +1,8 @@
 <template>
   <div>
-    <header/>
+    <!-- <header/> -->
     <main>
-      
+
     </main>
   </div>
 </template>
@@ -10,7 +10,7 @@
 import header from './Header'
 export default {
   components: {
-    header
+    'v-header': header
   }
 }
 </script>

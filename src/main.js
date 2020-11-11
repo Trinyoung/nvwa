@@ -23,7 +23,6 @@ import ElementUI from 'element-ui' // （1）
 import 'element-ui/lib/theme-chalk/index.css'
 import {postAjax, getAjax, deleteAjax, putAjax} from '@/api/request'
 Vue.config.productionTip = false
-console.log(postAjax, '----------------->')
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(VueCookie)

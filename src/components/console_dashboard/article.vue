@@ -122,7 +122,7 @@ export default {
     getHotList: function () {
       return ''
     },
-    getList (page) {
+    async getList (page) {
       let queryString = `page=${page}`
       if (page) {
         this.currentPage = page
@@ -130,16 +130,16 @@ export default {
       const { keyword, type } = this.$data
       if (keyword) queryString += `&keyword=${keyword}`
       if (type) queryString += `&type=${keyword}`
-      Axios.get(`/myapi/articles/list?${queryString}`).then((res) => {
-        if (res.data.code !== '000') {
-          return this.$message.error('获取结果失败')
-        }
-        this.$data.list = res.data.result.docs
-        this.$data.pages = res.data.result.pages
-        this.$data.list.forEach((item) => {
+      try {
+        const result = await this.$getAjax(`/myapi/articles/list?${queryString}`)
+        this.list = result.docs
+        this.pages = result.pages
+        this.list.forEach(item => {
           item.createdAt = moment(item.createdAt * 1000).format('YYYY-MM-DD HH:mm:ss')
         })
-      })
+      } catch (err) {
+        this.$message.error(err.message)
+      }
     },
     getTags () {
       let tags = localStorage.getItem('tags')

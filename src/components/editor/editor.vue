@@ -253,16 +253,14 @@ export default {
         this.articleObj.type = res.data.result
       })
     },
-    getTags () {
+    async getTags () {
       let tags = JSON.parse(localStorage.getItem('tags')) || []
       if (!tags || tags.length === 0) {
-        axios.get('/myapi/tags').then(res => {
-          const result = res.data.list
-          result.forEach(item => {
-            tags.push({name: item.name, value: item._id})
-          })
-          localStorage.setItem('tags', JSON.stringify(result))
+        const result = await this.$getAjax('/myapi/tags')
+        result.forEach(item => {
+          tags.push({name: item.name, value: item._id})
         })
+        localStorage.setItem('tags', JSON.stringify(result))
       }
       this.tags = tags
     },

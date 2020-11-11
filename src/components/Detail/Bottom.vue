@@ -156,7 +156,7 @@ export default {
     }
   },
   methods: {
-    submitForm (formName, reply, data, parent) {
+    async submitForm (formName, reply, data, parent) {
       const submitForm = Object.assign({
         articleId: this.articleId
       }, this.dataForm, data)
@@ -172,23 +172,34 @@ export default {
         submitForm.isTop = 0
         submitForm.parent = parent || reply
       }
-      Axios.post('/myapi/comments', submitForm).then(res => {
-        this.dataForm = {}
-        this.$message({
-          type: 'success',
-          message: '发表成功'
-        })
+      try {
+        await this.$postAjax('/myapi/comments', submitForm)
         $(`#collapseReply${reply}`).collapse(false)
+        this.$message.success('发表成功')
         this.getComments()
         if (this.$cookie.get('visitInfo')) {
           this.isUser = true
         }
-      }).catch(err => {
-        this.$message({
-          type: 'error',
-          message: `评论发表失败, ${err.msg}`
-        })
-      })
+      } catch (err) {
+        this.$message.error(err.message)
+      }
+      // Axios.post('/myapi/comments', submitForm).then(res => {
+      //   this.dataForm = {}
+      //   this.$message({
+      //     type: 'success',
+      //     message: '发表成功'
+      //   })
+      //   $(`#collapseReply${reply}`).collapse(false)
+      //   this.getComments()
+      //   if (this.$cookie.get('visitInfo')) {
+      //     this.isUser = true
+      //   }
+      // }).catch(err => {
+      //   this.$message({
+      //     type: 'error',
+      //     message: `评论发表失败, ${err.msg}`
+      //   })
+      // })
     },
     getComments () {
       let url = `/myapi/comments/${this.articleId}/list`
