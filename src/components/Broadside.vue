@@ -1,5 +1,5 @@
 <template>
-  <div class="broadSide my-1 shadow-sm">
+  <div class="broadSide my-2 shadow-sm">
     <nav id="sidebarMenu" class="d-md-block sidebar collapse">
       <div class="avatar-head">
         <router-link to="/console">
@@ -84,8 +84,10 @@ export default {
   },
   created () {},
   methods: {
-    getArticleInfo () {
-      Axios.get()
+    getArticleNums () {
+      Axios.get('/myapi/articles/nums').then(res => {
+        console.log(res, 'res--------------->')
+      })
     }
   }
 }
@@ -98,6 +100,7 @@ export default {
 .broadSide {
   min-height: calc(100vh -48px);
   border: 1px solid aliceblue;
+  background: aliceblue;
 }
 .broadSide .text-muted {
   font-size: 1.1rem;

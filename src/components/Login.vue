@@ -1,5 +1,5 @@
 <template>
-  <form class="loginForm">
+  <form class="loginForm border">
     <div class="container">
       <div class="form-group row loginHead pd-3">
         <div class="col-sm-12"><span class="loginTitle">登 录</span></div>
@@ -24,30 +24,34 @@
           <input type="password" class="form-control" placeholder="请输入密码" aria-label="password" aria-describedby="basic-addon1" v-model="password">
         </div>
       </div>
-      <div class="row form-group width-8 mb-2">
+      <div class="row form-group width-8 mb-3 font-8">
         <div class='col-sm-6'>
           <input type="checkbox" class="form-check-input" id="exampleCheck1" v-model="rememberMe" value=true>
           <label class="form-check-label" for="exampleCheck1">记住我</label>
         </div>
         <div class="col-sm-6">
-          <router-link to="forgetPassword">
+          <router-link to="forgetPassword" class="link">
             忘记密码？
           </router-link>
+          <!-- <el-link :underline="false" to="forgetPassword">
+            忘记密码？
+          </el-link> -->
         </div>
       </div>
-      <div class="row form-group mb-1">
+      <div class="row form-group mb-3">
         <div class="col-sm-2">
 
         </div>
         <div class="col-sm-8">
-          <Button type='submit' class='button-left btn-primary btn line-input-button width-8' v-on:click="login">登录</Button>
+          <Button type='submit' class='button-left btn-success btn line-input-button width-8' v-on:click="login">登 录</Button>
+          <!-- <el-button type="success" class="width-8 line-input-button">登 录</el-button> -->
         </div>
         <div class="col-sm-2">
         </div>
       </div>
       <div class="row form-group mb-0">
         <div class="col-sm-12 font-8">
-          <router-link to="/register">
+          <router-link to="/register" class="link">
             还没有注册？ 申请注册
           </router-link>
         </div>
@@ -91,7 +95,7 @@ export default {
     font-size: .8rem;
   }
   .loginForm {
-    background-color: white;
+    background-color: aliceblue;
     border-radius: .5rem;
     margin: auto;
     top: 50%;
@@ -100,27 +104,23 @@ export default {
     margin-top: -10rem;
     padding-bottom: 0.5rem;
   }
-
-  .labeltitle {
-    font-size: 1rem;
-    color: green;
-    margin-right: 0.2rem;
+  .link {
+    outline: none;
+    color: gray;
   }
+  .link:hover {
+    color: blue;
+  }
+  .form-check-label {
+    color: gray;
+  }
+
   .loginHead {
     text-align: center;
-    color: blue;
-    background: wheat;
+    background: aliceblue;
     border-radius: 0.5rem 0.5rem 0 0;
   }
-  .button-left {
-    margin-right: 0.5rem;
-    width: 6rem;
-  }
 
-  .button-right {
-    width: 6rem;
-    background: rgb(96, 96, 167);
-  }
   .login-item {
     margin: 0 auto;
     width: 80%;
@@ -130,7 +130,6 @@ export default {
   .width-8 {
     width: 80%;
     margin: 0 auto;
-    /* font-size: 0.8rem; */
   }
   .input-group-text {
     background-color: none;

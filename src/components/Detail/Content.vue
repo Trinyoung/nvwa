@@ -1,6 +1,6 @@
 <template>
   <main role="main" class="main container">
-    <div class="container p-3 rounded my-1 shadow-sm content-header justify-content-center">
+    <div class="container p-3 rounded my-2 shadow-sm content-header justify-content-center">
       <div class="row my-1">
         <div class="col-sm-5">
           <b>上一篇：</b><a href="#">龙的传人</a>
@@ -102,7 +102,7 @@ export default {
     formatTime (unix) {
       return moment(unix).format('YYYY-MM-DD')
     },
-    setFavorite () {
+    async setFavorite () {
       if (this.isFavorited) {
         return this.$message.success('已经点过赞了！')
       }
@@ -110,12 +110,20 @@ export default {
         articleId: this.articleId,
         createdBy: this.userInfo && this.userInfo.uid
       }
-      Axios.post('/myapi/articles/favorites', request).then(res => {
-        if (res.data.code === '000') {
-          this.isFavorited = true
-          this.favoriteNum++
-        }
-      })
+      try {
+        const result = await this.$postAjax('/myapi/articles/favorites', request)
+        this.isFavorited = true
+        console.log(result, 'result-------------->')
+        // this.favoriteNum
+      } catch (err) {
+        this.$message.error(err.message)
+      }
+      // Axios.post('/myapi/articles/favorites', request).then(res => {
+      //   if (res.data.code === '000') {
+      //     this.isFavorited = true
+      //     this.favoriteNum++
+      //   }
+      // })
     },
     getFavoriteNums () {
       Axios.get(`/myapi/aritcles/favorites/nums?articleId=${this.articleId}`).then(res => {
