@@ -11,6 +11,7 @@
         </div>
       </div>
     </div> -->
+    <v-rightside :articleId="articleId" :isAuthor="isAuthor"></v-rightside>
     <div class="my-1 pt-0 p-3 bg-white rounded shadow-sm">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -72,10 +73,12 @@
 <script>
 import Bottom from './Bottom'
 import moment from 'moment'
+import rightside from './Rightside'
 import 'mavon-editor/dist/css/index.css'
 export default {
   components: {
-    'v-bottom': Bottom
+    'v-bottom': Bottom,
+    'v-rightside': rightside
   },
   data: function () {
     return {
@@ -126,7 +129,6 @@ export default {
         this.isAuthor = this.uid === createdBy
         this.loading = false
         this.article.wordNums = wordNums
-        // this.$refs.broadSide.userId = createdBy
         if (type) {
           this.getParentTypes(type.typeCode)
         }
@@ -206,6 +208,9 @@ export default {
 <style scoped>
   .media-body {
     text-align: left;
+  }
+  .left-5 {
+    left: -5rem;
   }
   .size-2 {
     height: 2em;

@@ -15,12 +15,14 @@ import header from '../Header'
 import broadside from '../Broadside'
 import main from './main'
 import bottom from '../bottom'
+// import rightside from './Rightside'
 export default {
   components: {
     'v-broadside': broadside,
     'v-main': main,
     'v-header': header,
     'v-bottom': bottom
+    // 'v-rightside': rightside
   },
   props: ['uid'],
   created () {

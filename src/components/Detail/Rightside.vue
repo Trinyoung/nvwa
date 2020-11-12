@@ -53,6 +53,7 @@ export default {
 .sidebar {
   position: fixed;
   top: 150px;
+  left: 100px;
 }
 .sidebar-item {
   width: 3rem;
