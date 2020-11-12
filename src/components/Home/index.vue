@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-header></v-header>
+    <v-header :isLogin="isLogin"></v-header>
     <main role="main" class="container">
       <div class="row">
         <v-broadside class="col-md-2 broadside" :uid="uid" ref="broadSide"></v-broadside>
@@ -24,15 +24,20 @@ export default {
     'v-bottom': bottom
     // 'v-rightside': rightside
   },
+  data () {
+    return {
+      isLogin: false
+    }
+  },
   props: ['uid'],
   created () {
     console.log(this.uid, '----------+++++++>-------------->')
   },
   methods: {
+    init () {
+      
+    },
     articleInfoChange (readsNums, favoriteNums) {
-      // articleInfo
-      // readsNums: 0,
-      //   favoriteNums: 0
       console.log(readsNums, favoriteNums, '点赞数和阅读数')
       if (readsNums) {
         this.$refs['broadSide'].articleInfo.readsNums++

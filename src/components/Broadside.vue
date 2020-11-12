@@ -102,15 +102,24 @@ export default {
   },
   methods: {
     init () {
-      console.log(this.userId, this.uid, 'userId, uid---------------------->')
-      this.userId = this.userId || this.uid
-      if (this.userId) {
-        this.userInfo = JSON.parse(localStorage.getItem(`userInfo_${this.userId}`))
-        this.getArticleNums()
+      this.getUserInfo()
+    },
+    async getUserInfo () {
+      let userInfo = localStorage.getItem(`userInfo_${this.$route.params.uid}`)
+      if (userInfo) {
+        this.userInfo = JSON.parse(userInfo)
       }
+      if (!userInfo) {
+        try {
+          this.userInfo = await this.$getAjax(`/myapi/user/userInfo?uid=${this.$route.params.uid}`)
+        } catch (err) {
+          this.$message.error(err.message)
+        }
+      }
+      this.getArticleNums()
     },
     async getArticleNums () {
-      const result = await this.$getAjax(`/myapi/articles/nums?createdBy=${this.userId}`)
+      const result = await this.$getAjax(`/myapi/articles/nums?createdBy=${this.$route.params.uid}`)
       this.articleInfo = result
     }
   }

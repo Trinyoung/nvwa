@@ -79,10 +79,9 @@ export default {
         const result = await this.$postAjax('/api/user/login', request)
         localStorage.setItem('userInfo', JSON.stringify(result.userInfo))
         localStorage.setItem('token', result.token)
-        // if (window.history.length > 1) {
-        //   console.log(window.history.length, '----------------->')
-        //   // return this.$router.go(-1)
-        // }
+        const twodaysLater = new Date().getTime() + 48 * 60 * 60 * 1000
+        this.$cookie.setItem('isLogin', 1, {httpOnly: false, expires: new Date(twodaysLater), overwrite: true, secure: false})
+        // ('nvwaId', authId, {httpOnly:false, expires: new Date(twodaysLater), overwrite: true, secure: false});
         this.$router.push(`/home/${result.userInfo.uid}`)
       } catch (err) {
         this.$message.error(err.message)

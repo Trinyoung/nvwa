@@ -18,6 +18,10 @@ function deleteAjax (url, body, withCredential) {
 async function handleRequest ({method, url, body, withCredential}) {
   try {
     const res = await request(method, url, body, withCredential)
+    if (res.data.code === '401') {
+      localStorage.removeItem('token')
+      localStorage.removeItem('userInfo')
+    }
     if (res.data && res.data.code !== '000') {
       throw new Error(res.data.err)
     }

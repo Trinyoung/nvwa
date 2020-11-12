@@ -12,7 +12,7 @@
       </div>
     </div> -->
     <v-rightside :articleId="articleId" :isAuthor="isAuthor"></v-rightside>
-    <div class="my-1 pt-0 p-3 bg-white rounded shadow-sm">
+    <div class="my-1 pt-0 p-3 bg-white rounded border shadow-sm">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item" v-for="type in article.types" :key="type._id">
@@ -87,6 +87,7 @@ export default {
       isFavorited: false,
       favoriteNum: 0,
       loading: false,
+      isAuthor: false,
       article: {
         title: '',
         updatedBy: '',
