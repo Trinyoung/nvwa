@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <header/> -->
     <main>
 
     </main>

@@ -71,7 +71,7 @@
 </template>
 <script>
 import Bottom from './Bottom'
-import Axios from 'axios'
+// import Axios from 'axios'
 import moment from 'moment'
 import 'mavon-editor/dist/css/index.css'
 export default {
@@ -92,7 +92,6 @@ export default {
     this.getFavoriteNums()
     this.userInfo = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
     this.uid = this.userInfo && this.userInfo.uid
-    this.getTags()
     if (this.userInfo) {
       this.getFavorite()
     }
@@ -111,60 +110,44 @@ export default {
         createdBy: this.userInfo && this.userInfo.uid
       }
       try {
-        const result = await this.$postAjax('/myapi/articles/favorites', request)
-        console.log(result, 'result-------------->')
+        await this.$postAjax('/myapi/articles/favorites', request)
         this.isFavorited = true
-        // this.favoriteNum
+        this.favoriteNum++
       } catch (err) {
         this.$message.error(err.message)
       }
-      // Axios.post('/myapi/articles/favorites', request).then(res => {
-      //   if (res.data.code === '000') {
-      //     this.isFavorited = true
-      //     this.favoriteNum++
-      //   }
-      // })
     },
-    getFavoriteNums () {
-      Axios.get(`/myapi/aritcles/favorites/nums?articleId=${this.articleId}`).then(res => {
-        if (res.data.code === '000') {
-          this.favoriteNum = res.data.nums
-        }
-      })
+    async getFavoriteNums () {
+      try {
+        const result = await this.$getAjax(`/myapi/aritcles/favorites/nums?articleId=${this.articleId}`)
+        this.favoriteNum = result
+      } catch (err) {
+        this.$message.error(err.message)
+      }
     },
-    getFavorite () {
-      let queryString = `articleId=${this.articleId}`
+    async getFavorite () {
+      let queryString = ''
       if (this.userInfo) {
-        queryString += `&uid=${this.userInfo.uid}`
+        queryString = `uid=${this.userInfo.uid}`
       }
-      Axios.get(`/myapi/articles/favorites?${queryString}`).then(res => {
-        this.isFavorited = res.result
-      }).catch(err => {
-        this.$message({
-          type: 'error',
-          message: err.message
-        })
-      })
-    },
-    getTags () {
-      let tags = JSON.parse(localStorage.getItem('tags'))
-      if (!tags || tags.length === 0) {
-        Axios.get('/myapi/tags').then(res => {
-          const result = res.data.data
-          localStorage.setItem('tags', JSON.stringify(result))
-        })
+      try {
+        const result = await this.$getAjax(`/myapi/articles/favorites/${this.articleId}?${queryString}`)
+        this.isFavorited = !!result
+      } catch (err) {
+        this.$message.error(err.message)
       }
     },
-    setReads () {
+    async setReads () {
       const request = { articleId: this.articleId }
       const hasRead = sessionStorage.getItem(`read_${this.articleId}`)
       if (!hasRead) {
-        Axios.post(`/myapi/articles/reads`, request).then(res => {
-          sessionStorage.setItem(`read_${this.articleId}`, res.data.result._id)
+        try {
+          const result = await this.$postAjax(`/myapi/articles/reads`, request)
+          sessionStorage.setItem(`read_${this.articleId}`, result._id)
           this.article.hasReads++
-        }).catch(err => {
+        } catch (err) {
           this.$message.error(err.message)
-        })
+        }
       }
     }
   }

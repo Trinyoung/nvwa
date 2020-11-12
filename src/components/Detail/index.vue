@@ -47,12 +47,13 @@ export default {
     this.getArticleDetail()
   },
   methods: {
-    getArticleDetail () {
+    async getArticleDetail () {
       const id = this.articleId
       this.loading = false
-      Axios.get(`/myapi/articles/${id}`).then((result) => {
-        const { content, title, updatedBy, updatedAt, createdAt, createdBy, refers, author, tags, type, hasReads, wordNums } = result.data.data
-        const contentHtml = result.data.data.content_html
+      try {
+        const result = await this.$getAjax(`/myapi/articles/${id}`)
+        const { content, title, updatedBy, updatedAt, createdAt, createdBy, refers, author, tags, type, hasReads, wordNums } = result
+        const contentHtml = result.content_html
         this.article.contentHtml = contentHtml || content
         this.article.title = title
         this.article.updatedBy = updatedBy
@@ -67,12 +68,9 @@ export default {
         if (type) {
           this.getParentTypes(type.typeCode)
         }
-      }).catch(err => {
-        this.$message({
-          type: 'error',
-          message: err.message
-        })
-      })
+      } catch (err) {
+        this.$message.error(err.message)
+      }
     },
     getParentTypes (type) {
       Axios.get(`/myapi/articles/types/parent?typeCode=${type}&withTitle=1`).then(res => {

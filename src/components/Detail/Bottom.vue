@@ -183,31 +183,15 @@ export default {
       } catch (err) {
         this.$message.error(err.message)
       }
-      // Axios.post('/myapi/comments', submitForm).then(res => {
-      //   this.dataForm = {}
-      //   this.$message({
-      //     type: 'success',
-      //     message: '发表成功'
-      //   })
-      //   $(`#collapseReply${reply}`).collapse(false)
-      //   this.getComments()
-      //   if (this.$cookie.get('visitInfo')) {
-      //     this.isUser = true
-      //   }
-      // }).catch(err => {
-      //   this.$message({
-      //     type: 'error',
-      //     message: `评论发表失败, ${err.msg}`
-      //   })
-      // })
     },
-    getComments () {
+    async getComments () {
       let url = `/myapi/comments/${this.articleId}/list`
       if (this.uid) {
         url += `?uid=${this.uid}`
       }
-      Axios.get(url).then(res => {
-        this.comments = res.data.list
+      try {
+        const result = await this.$getAjax(url)
+        this.comments = result
         this.commentNums = this.comments.length
         this.comments.forEach(item => {
           if (item.children) {
@@ -217,14 +201,11 @@ export default {
           }
           this.$set(this.replyForm, item._id, {})
         })
-      }).catch(err => {
-        this.$message({
-          type: 'error',
-          message: err.msg
-        })
-      })
+      } catch (err) {
+        this.$message.error(err.message)
+      }
     },
-    setCommentFavorite (comment) {
+    async setCommentFavorite (comment) {
       const isFavorited = sessionStorage.getItem(`comment_favorite_${comment._id}`)
       if (comment.isFavorited || isFavorited) {
         if (!comment.isFavorited) {
@@ -233,17 +214,16 @@ export default {
         return this.$message.error('已经点赞过了, 请勿重复点赞！')
       }
       if (!comment.isFavorited && !isFavorited) {
-        Axios.post('/myapi/comments/favorites', {commentId: comment._id, createdBy: this.uid}).then(res => {
-          if (res.data.code === '000') {
-            comment.favoriteNum = res.data.result
-            comment.isFavorited = true
-            if (!this.uid) {
-              sessionStorage.setItem(`comment_favorite_${comment._id}`, 1)
-            }
-          } else {
-            this.$message.error('点赞失败')
+        try {
+          const result = await this.$postAjax('/myapi/comments/favorites', {commentId: comment._id, createdBy: this.uid})
+          comment.favoriteNum = result
+          comment.isFavorited = true
+          if (!this.uid) {
+            sessionStorage.setItem(`comment_favorite_${comment._id}`, 1)
           }
-        })
+        } catch (err) {
+          this.$message.error(err.message)
+        }
       }
     },
     getCommentFavorites () {
