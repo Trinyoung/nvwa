@@ -5,10 +5,10 @@
         <router-link to="/console">
           <img class='avatar' src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
         </router-link>
-        <p>{{userInfo.username}}</p>
+        <p class="">{{userInfo.username}}</p>
         <ul class="list-info">
-          <li>文章数:{{aritcleNums || 0}}</li>
-          <li>浏览量:0</li>
+          <li>文章数:{{aritcleInfo.aritcleNums || 0}}</li>
+          <li>浏览量:{{aritcleInfo.readsNums || 0}}</li>
         </ul>
       </div>
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -79,8 +79,9 @@
 export default {
   data: function () {
     return {
+      userId: '',
       userInfo: {
-        userName: ''
+        username: ''
       },
       aritcleInfo: {
         articleNums: 0,
@@ -91,13 +92,23 @@ export default {
   },
   props: ['uid'],
   created () {
-    this.userInfo = JSON.parse(localStorage.getItem(`userInfo_${this.uid}`))
-    this.getArticleNums()
+    this.init()
+  },
+  watch: {
+    'userId' (val) {
+      this.init()
+    }
   },
   methods: {
+    init () {
+      this.userId = this.userId || this.uid
+      if (this.userId) {
+        this.userInfo = JSON.parse(localStorage.getItem(`userInfo_${this.userId}`))
+        this.getArticleNums()
+      }
+    },
     async getArticleNums () {
       const result = await this.$getAjax(`/myapi/articles/nums?createdBy=${this.uid}`)
-      // console.log(result, '------------------>')
       this.aritcleInfo = result
     }
   }

@@ -60,6 +60,7 @@ export default {
   margin: 0 auto;
   color: darkgray;
   font-size: 0.9rem;
+  background: aliceblue;
 }
 .sidebar-item :hover{
   color: red;
@@ -101,14 +102,6 @@ export default {
 }
 #add-button {
   font-weight: bold;
-}
-
-.publish-button {
-  width: 100%;
-}
-.publish-col {
-  background: #007bff;
-  border-radius: 1rem;
 }
 
 .list-item {
