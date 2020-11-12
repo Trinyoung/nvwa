@@ -1,6 +1,6 @@
 <template>
-  <main role="main" class="main container">
-    <div class="container p-3 rounded my-2 shadow-sm content-header justify-content-center">
+  <main role="main" class="main">
+    <!-- <div class="container p-3 rounded my-2 shadow-sm content-header justify-content-center">
       <div class="row my-1">
         <div class="col-sm-5">
           <b>上一篇：</b><a href="#">龙的传人</a>
@@ -10,7 +10,7 @@
           <b>下一篇：</b><a href="#">黄河大合唱</a>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="my-1 pt-0 p-3 bg-white rounded shadow-sm">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -71,7 +71,6 @@
 </template>
 <script>
 import Bottom from './Bottom'
-// import Axios from 'axios'
 import moment from 'moment'
 import 'mavon-editor/dist/css/index.css'
 export default {
@@ -84,20 +83,81 @@ export default {
       userInfo: {},
       isFavorited: false,
       favoriteNum: 0,
-      loading: false
+      loading: false,
+      article: {
+        title: '',
+        updatedBy: '',
+        contentHtml: '',
+        updatedAt: '',
+        refers: [],
+        tags: [],
+        types: [],
+        hasReads: 0,
+        createdBy: ''
+      }
     }
   },
-  props: ['articleId', 'article'],
+  props: ['articleId'],
   created () {
-    this.getFavoriteNums()
+    this.getArticleDetail()
     this.userInfo = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
     this.uid = this.userInfo && this.userInfo.uid
     if (this.userInfo) {
       this.getFavorite()
     }
-    // this.setReads()
   },
   methods: {
+    async getArticleDetail () {
+      const id = this.articleId
+      this.loading = false
+      try {
+        const result = await this.$getAjax(`/myapi/articles/${id}`)
+        const { content, title, updatedBy, updatedAt, createdAt, createdBy, refers, author, tags, type, hasReads, wordNums } = result
+        const contentHtml = result.content_html
+        this.article.contentHtml = contentHtml || content
+        this.article.title = title
+        this.article.updatedBy = updatedBy
+        this.article.updatedAt = updatedAt || createdAt
+        this.article.refers = refers
+        this.article.tags = tags || []
+        this.article.author = author
+        this.article.hasReads = hasReads
+        this.article.createdBy = createdBy
+        this.isAuthor = this.uid === createdBy
+        this.loading = false
+        this.article.wordNums = wordNums
+        // this.$refs.broadSide.userId = createdBy
+        if (type) {
+          this.getParentTypes(type.typeCode)
+        }
+        this.setReads()
+        this.getFavoriteNums()
+      } catch (err) {
+        this.$message.error(err.message)
+      }
+    },
+    async getParentTypes (type) {
+      try {
+        const result = await this.$getAjax(`/myapi/articles/types/parent?typeCode=${type}&withTitle=1`)
+        this.article.types = result
+      } catch (err) {
+        this.$message.error(err.message)
+      }
+    },
+    async setReads () {
+      const request = { articleId: this.articleId, authorUid: this.article.createdBy }
+      const hasRead = sessionStorage.getItem(`read_${this.articleId}`)
+      if (!hasRead) {
+        try {
+          const result = await this.$postAjax(`/myapi/articles/reads`, request)
+          sessionStorage.setItem(`read_${this.articleId}`, result._id)
+          this.article.hasReads++
+          this.$emit('articleInfoChange', true)
+        } catch (err) {
+          this.$message.error(err.message)
+        }
+      }
+    },
     formatTime (unix) {
       return moment(unix).format('YYYY-MM-DD')
     },
@@ -114,6 +174,8 @@ export default {
         await this.$postAjax('/myapi/articles/favorites', request)
         this.isFavorited = true
         this.favoriteNum++
+        console.log('点赞开始了')
+        this.$emit('articleInfoChange', false, true)
       } catch (err) {
         this.$message.error(err.message)
       }
@@ -195,9 +257,6 @@ export default {
   .favorite-icon:hover {
     cursor: pointer;
     color: red;
-  }
-  .main {
-    padding-left: 10px;
   }
   .content-container {
     text-align: left;

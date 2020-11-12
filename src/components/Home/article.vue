@@ -4,7 +4,8 @@
       <ul v-loading="loading">
         <li class="media pt-2" v-for="item in list" :key="item._id" :to="{path:`/articles/${item._id}`}">
           <p class="media-body pb-2 mb-0 lh-125 border-bottom border-gray pl-1">
-            <router-link :to="{path:`/articles/${item._id}`}">
+            <!-- <router-link :to="{path:`/articles/${item._id}`}"> -->
+            <router-link :to="{path:`/home/${uid}/articles/${item._id}`}">
               <strong class="d-block text-gray-dark">
                 <div class="d-inline-block new-icon" v-if="item.isNew">新</div>
                 <div class="d-inline-block hot-icon" v-if="item.isHot">热</div>
@@ -52,11 +53,14 @@ export default {
       list: [],
       currentPage: 1,
       pages: 1,
-      loading: false
+      loading: false,
+      uid: this.$route.params.uid
     }
   },
-  props: [ 'uid' ],
+  // props: [ 'uid' ],
   created: function () {
+    this.uid = this.$route.params.uid
+    console.log(this.$route.params.uid, '-------uid article--------->')
     this.getList(1)
   },
   methods: {

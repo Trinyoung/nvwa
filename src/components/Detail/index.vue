@@ -63,7 +63,7 @@ export default {
         this.article.tags = tags || []
         this.article.author = author
         this.article.hasReads = hasReads
-        this.aritcle.createdBy = createdBy
+        this.article.createdBy = createdBy
         this.isAuthor = this.uid === createdBy
         this.loading = false
         this.article.wordNums = wordNums
@@ -71,6 +71,7 @@ export default {
         if (type) {
           this.getParentTypes(type.typeCode)
         }
+        this.setReads()
       } catch (err) {
         this.$message.error(err.message)
       }
@@ -82,8 +83,19 @@ export default {
         this.$message.error(err.message)
       })
     },
-    countWordsNums () {
-
+    async setReads () {
+      const request = { articleId: this.articleId, authorUid: this.article.createdBy }
+      const hasRead = sessionStorage.getItem(`read_${this.articleId}`)
+      if (!hasRead) {
+        try {
+          const result = await this.$postAjax(`/myapi/articles/reads`, request)
+          sessionStorage.setItem(`read_${this.articleId}`, result._id)
+          this.article.hasReads++
+          this.$refs.broadSide.articleInfo.readsNums++
+        } catch (err) {
+          this.$message.error(err.message)
+        }
+      }
     }
   }
 }

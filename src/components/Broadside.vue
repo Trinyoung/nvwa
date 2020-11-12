@@ -5,10 +5,11 @@
         <router-link to="/console">
           <img class='avatar' src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
         </router-link>
-        <p class="">{{userInfo.username}}</p>
-        <ul class="list-info">
-          <li>文章数:{{aritcleInfo.aritcleNums || 0}}</li>
-          <li>浏览量:{{aritcleInfo.readsNums || 0}}</li>
+        <p class="font-yahei">{{userInfo.username}}</p>
+        <ul class="list-info font-yahei">
+          <li>文章数：{{articleInfo.articleNums || 0}}</li>
+          <li>浏览量：{{articleInfo.readsNums || 0}}</li>
+          <li>点赞数：{{articleInfo.favoriteNums || 0}}</li>
         </ul>
       </div>
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -83,7 +84,7 @@ export default {
       userInfo: {
         username: ''
       },
-      aritcleInfo: {
+      articleInfo: {
         articleNums: 0,
         readsNums: 0,
         favoriteNums: 0
@@ -101,6 +102,7 @@ export default {
   },
   methods: {
     init () {
+      console.log(this.userId, this.uid, 'userId, uid---------------------->')
       this.userId = this.userId || this.uid
       if (this.userId) {
         this.userInfo = JSON.parse(localStorage.getItem(`userInfo_${this.userId}`))
@@ -108,8 +110,8 @@ export default {
       }
     },
     async getArticleNums () {
-      const result = await this.$getAjax(`/myapi/articles/nums?createdBy=${this.uid}`)
-      this.aritcleInfo = result
+      const result = await this.$getAjax(`/myapi/articles/nums?createdBy=${this.userId}`)
+      this.articleInfo = result
     }
   }
 }
@@ -134,7 +136,11 @@ export default {
   border-radius: 50%;
   width: 30%
 }
-
+.font-yahei {
+  /* font-family: "Microsoft YaHei"; */
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+}
 #sidebarMenu {
   padding-top: 1rem;
   background-repeat: no-repeat;

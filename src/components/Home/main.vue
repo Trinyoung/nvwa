@@ -32,7 +32,7 @@
         </router-link>
       </li>
     </ul>
-    <router-view/>
+    <router-view @articleInfoChange="articleInfoChange"/>
   </main>
 </template>
 <script>
@@ -52,6 +52,10 @@ export default {
     },
     getHotList: function () {
       return ''
+    },
+    articleInfoChange (readsNums, favoriteNums) {
+      console.log('------点赞进行中------------> asdafsd')
+      this.$emit('articleInfoChange', readsNums, favoriteNums)
     }
   }
 }

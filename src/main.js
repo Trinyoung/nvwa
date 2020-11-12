@@ -42,6 +42,7 @@ router.beforeEach((from, to, next) => {
       Vue.prototype.$getAjax(`/myapi/user/userInfo?uid=${from.params.uid}`).then(res => {
         localStorage.setItem(`userInfo_${from.params.uid}`, JSON.stringify(res))
       }).catch(err => {
+        console.log(err, '----------err vue--------->')
         Vue.$message(err.message)
       })
     }

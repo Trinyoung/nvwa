@@ -3,8 +3,8 @@
     <v-header></v-header>
     <main role="main" class="container">
       <div class="row">
-        <v-broadside class="col-md-2 broadside" :uid="uid"></v-broadside>
-        <v-main class="col-md-10" :uid="uid"></v-main>
+        <v-broadside class="col-md-2 broadside" :uid="uid" ref="broadSide"></v-broadside>
+        <v-main class="col-md-10" :uid="uid" @articleInfoChange="articleInfoChange"></v-main>
       </div>
     </main>
     <v-bottom></v-bottom>
@@ -27,7 +27,18 @@ export default {
     console.log(this.uid, '----------+++++++>-------------->')
   },
   methods: {
-
+    articleInfoChange (readsNums, favoriteNums) {
+      // articleInfo
+      // readsNums: 0,
+      //   favoriteNums: 0
+      console.log(readsNums, favoriteNums, '点赞数和阅读数')
+      if (readsNums) {
+        this.$refs['broadSide'].articleInfo.readsNums++
+      }
+      if (favoriteNums) {
+        this.$refs['broadSide'].articleInfo.favoriteNums++
+      }
+    }
   }
 }
 </script>

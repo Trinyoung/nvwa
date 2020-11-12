@@ -19,7 +19,7 @@ async function handleRequest ({method, url, body, withCredential}) {
   try {
     const res = await request(method, url, body, withCredential)
     if (res.data && res.data.code !== '000') {
-      throw new Error(res.data.result.message)
+      throw new Error(res.data.err)
     }
     return res.data.result
   } catch (error) {
