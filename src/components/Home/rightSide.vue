@@ -61,7 +61,7 @@ export default {
 .sidebar-item {
   width: 3rem;
   position: relative;
-  left: 3.5rem;
+  left: 3.8rem;
   height: 3rem;
   margin: 0 auto;
   color: darkgray;
