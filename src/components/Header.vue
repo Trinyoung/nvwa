@@ -19,22 +19,27 @@
       </div>
     </form>
     <div class="dropdown">
-      <el-button type="success" plain @click="jumpTo('/register')">注册</el-button>
-      <el-button type="danger" plain @click="jumpTo('/login')">登录</el-button>
-      <!-- <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <el-button type="success" plain @click="jumpTo('/register')" v-if="!isLogin">注册</el-button>
+      <el-button type="danger" plain @click="jumpTo('/login')" v-if="!isLogin">登录</el-button>
+      <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-if="isLogin">
         你好: Trinyoung
       </button>
       <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
         <a class="dropdown-item" href="#">进入后台</a>
         <a class="dropdown-item" href="#">登出</a>
-      </div> -->
+      </div>
     </div>
   </nav>
 </template>
 <script>
 export default {
+  data () {
+    return {
+      isLogin: false
+    }
+  },
   created () {
-
+    this.isLogin = !!this.$cookie.get('isLogin')
   },
   methods: {
     jumpTo (url) {

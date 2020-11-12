@@ -80,7 +80,7 @@ export default {
         localStorage.setItem('userInfo', JSON.stringify(result.userInfo))
         localStorage.setItem('token', result.token)
         const twodaysLater = new Date().getTime() + 48 * 60 * 60 * 1000
-        this.$cookie.setItem('isLogin', 1, {httpOnly: false, expires: new Date(twodaysLater), overwrite: true, secure: false})
+        this.$cookie.set('isLogin', 1, {httpOnly: false, expires: new Date(twodaysLater), overwrite: true, secure: false})
         // ('nvwaId', authId, {httpOnly:false, expires: new Date(twodaysLater), overwrite: true, secure: false});
         this.$router.push(`/home/${result.userInfo.uid}`)
       } catch (err) {
