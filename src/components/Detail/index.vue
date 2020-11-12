@@ -63,6 +63,7 @@ export default {
         this.article.tags = tags || []
         this.article.author = author
         this.article.hasReads = hasReads
+        this.aritcle.createdBy = createdBy
         this.isAuthor = this.uid === createdBy
         this.loading = false
         this.article.wordNums = wordNums

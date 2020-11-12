@@ -90,6 +90,7 @@ export default {
   props: ['articleId', 'article'],
   created () {
     this.getFavoriteNums()
+    console.log(this.article, 'article+++++++++++++=>')
     this.userInfo = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
     this.uid = this.userInfo && this.userInfo.uid
     if (this.userInfo) {
@@ -108,7 +109,7 @@ export default {
       const request = {
         articleId: this.articleId,
         createdBy: this.userInfo && this.userInfo.uid,
-        authorUid: this.uid
+        authorUid: this.article.createdBy
       }
       try {
         await this.$postAjax('/myapi/articles/favorites', request)
@@ -139,7 +140,7 @@ export default {
       }
     },
     async setReads () {
-      const request = { articleId: this.articleId }
+      const request = { articleId: this.articleId, authorUid: this.article.createdBy }
       const hasRead = sessionStorage.getItem(`read_${this.articleId}`)
       if (!hasRead) {
         try {
@@ -233,7 +234,7 @@ export default {
 
   }
   .content-container >>> h1 {
-    font-size: 1.8rem!important;
+    font-size: 1.6rem!important;
     font-weight: bold;
     border-bottom: 1px solid gainsboro;
     padding-bottom: 2px;
