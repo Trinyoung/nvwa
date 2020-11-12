@@ -5,9 +5,9 @@
         <router-link to="/console">
           <img class='avatar' src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
         </router-link>
-        <p>Trinyoung</p>
+        <p>{{userInfo.username}}</p>
         <ul class="list-info">
-          <li>文章数:0</li>
+          <li>文章数:{{aritcleNums || 0}}</li>
           <li>浏览量:0</li>
         </ul>
       </div>
@@ -75,19 +75,30 @@
   </div>
 </template>
 <script>
-import Axios from 'axios'
+// import Axios from 'axios'
 export default {
   data: function () {
     return {
-      listItems: ['星辰大海', '人间百态', '车水马龙', '小桥流水', '大漠孤烟']
+      userInfo: {
+        userName: ''
+      },
+      aritcleInfo: {
+        articleNums: 0,
+        readsNums: 0,
+        favoriteNums: 0
+      }
     }
   },
-  created () {},
+  props: ['uid'],
+  created () {
+    this.userInfo = JSON.parse(localStorage.getItem(`userInfo_${this.uid}`))
+    this.getArticleNums()
+  },
   methods: {
-    getArticleNums () {
-      Axios.get('/myapi/articles/nums').then(res => {
-        console.log(res, 'res--------------->')
-      })
+    async getArticleNums () {
+      const result = await this.$getAjax(`/myapi/articles/nums?createdBy=${this.uid}`)
+      // console.log(result, '------------------>')
+      this.aritcleInfo = result
     }
   }
 }

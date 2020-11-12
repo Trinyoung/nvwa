@@ -107,7 +107,8 @@ export default {
       }
       const request = {
         articleId: this.articleId,
-        createdBy: this.userInfo && this.userInfo.uid
+        createdBy: this.userInfo && this.userInfo.uid,
+        authorUid: this.uid
       }
       try {
         await this.$postAjax('/myapi/articles/favorites', request)

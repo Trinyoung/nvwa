@@ -3,7 +3,7 @@
     <v-header></v-header>
     <main role="main" class="container">
       <div class="row">
-        <v-broadside class="col-md-2 broadside"></v-broadside>
+        <v-broadside class="col-md-2 broadside" :uid="createdBy"></v-broadside>
         <v-main class="col-md-9" :articleId="articleId" :article="article" v-loading='loading'></v-main>
         <v-rightside class="col-md-1" :articleId="articleId" :isAuthor="isAuthor"></v-rightside>
       </div>
@@ -36,7 +36,8 @@ export default {
         refers: [],
         tags: [],
         types: [],
-        hasReads: 0
+        hasReads: 0,
+        createdBy: ''
       },
       isAuthor: false,
       loading: false
@@ -65,6 +66,7 @@ export default {
         this.isAuthor = this.uid === createdBy
         this.loading = false
         this.article.wordNums = wordNums
+        this.createdBy = createdBy
         if (type) {
           this.getParentTypes(type.typeCode)
         }

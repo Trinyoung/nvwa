@@ -2,32 +2,32 @@
   <main role="main" class="container">
     <ul class="nav justify-content-center d-flex align-items-center p-3 my-2 bg-purple rounded shadow-sm">
       <li class="nav-item">
-        <router-link to="/home">
+        <router-link :to="`/home/${uid}`">
           <span class="nav-link active item-title">首页</span>
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/home/articles">
+        <router-link :to="`/home/${uid}/articles`">
           <span class="nav-link active item-title">文章</span>
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/home/types">
+        <router-link :to="`/home/${uid}/types`">
           <span class="nav-link active item-title">分类</span>
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/home/logger">
+        <router-link :to="`/home/${uid}/logger`">
           <span class="nav-link item-title">日志</span>
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/home/logger">
+        <router-link :to="`/home/${uid}/logger`">
           <span class="nav-link item-title">连载</span>
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/home/logger">
+        <router-link :to="`/home/${uid}/logger`">
           <span class="nav-link item-title">相册</span>
         </router-link>
       </li>
@@ -36,7 +36,7 @@
   </main>
 </template>
 <script>
-import $ from 'jquery'
+// import $ from 'jquery'
 export default {
   data: function () {
     return {
@@ -45,16 +45,13 @@ export default {
       hotList: []
     }
   },
+  props: ['uid'],
   methods: {
     getNewestList: function () {
       return ''
     },
     getHotList: function () {
       return ''
-    },
-    changeView: function (type = 'home') {
-      this.view = type
-      $()
     }
   }
 }

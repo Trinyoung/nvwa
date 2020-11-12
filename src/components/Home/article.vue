@@ -55,6 +55,7 @@ export default {
       loading: false
     }
   },
+  props: [ 'uid' ],
   created: function () {
     this.getList(1)
   },
@@ -63,7 +64,7 @@ export default {
       this.loading = true
       if (page) this.currentPage = page || 1
       let { keyword, type } = this.$data
-      let queryString = `page=${page}`
+      let queryString = `page=${page}&createdBy=${this.uid}`
       if (keyword) queryString += `&keyword=${keyword}`
       if (type) queryString += `&type=${keyword}`
       Axios.get(`/myapi/articles/list?${queryString}`).then((res) => {

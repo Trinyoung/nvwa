@@ -26,11 +26,11 @@
       </div>
       <div class="row form-group width-8 mb-3 font-8">
         <div class='col-sm-6'>
-          <input type="checkbox" class="form-check-input" id="exampleCheck1" v-model="rememberMe" value=true>
-          <label class="form-check-label" for="exampleCheck1">记住我</label>
+          <input type="checkbox" class="form-check-input"  v-model="rememberMe" value=true>
+          <label class="form-check-label" for="exampleCheck1" id="rememberMe">记住我</label>
         </div>
         <div class="col-sm-6">
-          <router-link to="forgetPassword" class="link">
+          <router-link to="forgetPassword" class="link form-check-label d-inline-block">
             忘记密码？
           </router-link>
           <!-- <el-link :underline="false" to="forgetPassword">
@@ -43,8 +43,8 @@
 
         </div>
         <div class="col-sm-8">
-          <Button type='submit' class='button-left btn-success btn line-input-button width-8' v-on:click="login">登 录</Button>
-          <!-- <el-button type="success" class="width-8 line-input-button">登 录</el-button> -->
+          <!-- <Button class='btn-success btn width-8' @click="login()">登 录</Button> -->
+          <el-button type="success" class="width-8 line-input-button" @click="login">登 录</el-button>
         </div>
         <div class="col-sm-2">
         </div>
@@ -60,7 +60,7 @@
   </form>
 </template>
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 export default {
   computed: {
 
@@ -73,19 +73,40 @@ export default {
     }
   },
   methods: {
-    login: function () {
-      axios.post('/api/user/login',
-        {username: this.username, password: this.password, rememberMe: this.rememberMe}
-      ).then((result) => {
-        if (result.status !== 200 || result.data.code !== '000') {
-          return this.$message.error('登录失败, 请检查用户名和密码')
-        }
-        localStorage.setItem('userInfo', JSON.stringify(result.data.userInfo))
-        localStorage.setItem('token', result.data.token)
-        this.$router.replace('/home')
-      }).catch(err => {
-        this.$message.error('登录出现错误', err.msg)
-      })
+    async login () {
+      const request = {username: this.username, password: this.password, rememberMe: this.rememberMe}
+      try {
+        const result = await this.$postAjax('/api/user/login', request)
+        localStorage.setItem('userInfo', JSON.stringify(result.userInfo))
+        localStorage.setItem('token', result.token)
+        // if (window.history.length > 1) {
+        //   console.log(window.history.length, '----------------->')
+        //   // return this.$router.go(-1)
+        // }
+        this.$router.push(`/home/${result.userInfo.uid}`)
+      } catch (err) {
+        this.$message.error(err.message)
+      }
+      // localStorage.setItem('userInfo', result)
+      // localStorage.setItem('token', )
+      // axios.post('/api/user/login',
+      //   {username: this.username, password: this.password, rememberMe: this.rememberMe}
+      // ).then((result) => {
+      //   if (result.status !== 200 || result.data.code !== '000') {
+      //     return this.$message.error('登录失败, 请检查用户名和密码')
+      //   }
+      //   localStorage.setItem('userInfo', JSON.stringify(result.data.userInfo))
+      //   localStorage.setItem('token', result.data.token)
+      //   // window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/home')
+      //   if (window.history.length > 1) {
+      //     return this.$router.go(-1)
+      //   }
+      //   this.$router.push('/home/')
+      //   // if () {}
+      //   // this.$router.push('/home')
+      // }).catch(err => {
+      //   this.$message.error('登录出现错误', err.msg)
+      // })
     }
   }
 }
@@ -113,6 +134,7 @@ export default {
   }
   .form-check-label {
     color: gray;
+    margin-top: 2px;
   }
 
   .loginHead {
@@ -156,13 +178,12 @@ export default {
   }
 
   .line-input-button {
-    display: inline-block;
-    line-height: 1.5rem;
-    height: 100%;
     font-size:1.2rem;
+    padding: 0.5rem;
   }
   #rememberMe {
-    border: 1px solid green;
-    margin-bottom: 2px;
+    /* border: 1px solid green; */
+    /* margin-bottom: 3px; */
+    margin-top: 2px;
   }
 </style>

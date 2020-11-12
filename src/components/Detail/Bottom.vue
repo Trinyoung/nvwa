@@ -215,7 +215,8 @@ export default {
       }
       if (!comment.isFavorited && !isFavorited) {
         try {
-          const result = await this.$postAjax('/myapi/comments/favorites', {commentId: comment._id, createdBy: this.uid})
+          const request = {commentId: comment._id, createdBy: this.uid, authorUid: this.uid}
+          const result = await this.$postAjax('/myapi/comments/favorites', request)
           comment.favoriteNum = result
           comment.isFavorited = true
           if (!this.uid) {

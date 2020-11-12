@@ -4,9 +4,10 @@ import homePage from '@/components/home/home'
 import Loggers from '@/components/home/Loggers'
 import types from '@/components/home/types'
 const obj = {
-  path: '/home',
+  path: '/home/:uid',
   name: 'Home',
   component: home,
+  props: true,
   children: [ {
     path: '/',
     name: 'main',

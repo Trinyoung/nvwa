@@ -3,8 +3,8 @@
     <v-header></v-header>
     <main role="main" class="container">
       <div class="row">
-        <v-broadside class="col-md-2 broadside"></v-broadside>
-        <v-main class="col-md-10"></v-main>
+        <v-broadside class="col-md-2 broadside" :uid="uid"></v-broadside>
+        <v-main class="col-md-10" :uid="uid"></v-main>
       </div>
     </main>
     <v-bottom></v-bottom>
@@ -21,6 +21,13 @@ export default {
     'v-main': main,
     'v-header': header,
     'v-bottom': bottom
+  },
+  props: ['uid'],
+  created () {
+    console.log(this.uid, '----------+++++++>-------------->')
+  },
+  methods: {
+
   }
 }
 </script>

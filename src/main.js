@@ -36,6 +36,16 @@ Vue.use(ElementUI, {zIndex: 3000})
 router.beforeEach((from, to, next) => {
   const regex = new RegExp('/console')
   const cookie = Vue.cookie.get('nvwaId.sig')
+  if (!cookie) {
+    let userInfo = localStorage.getItem(`userInfo_${from.params.uid}`)
+    if (!userInfo) {
+      Vue.prototype.$getAjax(`/myapi/user/userInfo?uid=${from.params.uid}`).then(res => {
+        localStorage.setItem(`userInfo_${from.params.uid}`, JSON.stringify(res))
+      }).catch(err => {
+        Vue.$message(err.message)
+      })
+    }
+  }
   if (regex.test(from.path)) {
     if (cookie) {
       next()
