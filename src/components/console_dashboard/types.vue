@@ -184,7 +184,6 @@ export default {
       this.$refs['dataForm'].validate(async (valid) => {
         if (valid) {
           const id = this.typeId
-          // const Authorization = `Bearer ${localStorage.getItem('token')}`
           let { parent, title, description, tags, typeCode } = this.dataForm
           let typeParent
           if (parent && parent.length > 0) {

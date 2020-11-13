@@ -156,8 +156,6 @@ export default {
 .avatar {
   padding: 0;
   border-radius: 50%;
-  /* width: 80px; */
-  /* overflow: hidden; */
   width: 35%;
 }
 .avatar-img {
@@ -165,7 +163,6 @@ export default {
   border-radius: 50%;
 }
 .font-yahei {
-  /* font-family: "Microsoft YaHei"; */
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 600;
 }

@@ -34,7 +34,7 @@
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <el-button @click="openDialog(index)" type="primary" plain>编辑</el-button>
-                <el-button type="danger" plain>删除</el-button>
+                <el-button type="danger" plain @click="remove(item._id)">删除</el-button>
               </div>
             </td>
           </tr>
@@ -86,29 +86,23 @@ export default {
     }
   },
   created () {
-    this.getList()
-  },
-  mounted () {
     this.getList(1)
   },
   methods: {
-    getList (page) {
-      let queryString = `page=${page}`
+    async getList (page) {
       if (page) {
         this.currentPage = page
       }
+      let queryString = `page=${this.currentPage}`
       if (this.searchInfo.keyword) {
         queryString += `&keyword=${this.searchInfo.keyword}`
       }
-      Axios.get(`/api/tags/list?${queryString}`).then(res => {
-        if (res.data && res.data.code === '000') {
-          const dataList = res.data.result.docs
-          this.total = res.data.result.total
-          this.pages = res.data.result.pages
-          dataList.forEach(item => { item.createdAt = moment().format('YYYY-MM-DD HH:mm:ss') })
-          this.dataList = dataList
-        }
-      })
+      const result = await this.$getAjax(`/api/tags/list?${queryString}`)
+      const dataList = result.docs
+      this.total = result.total
+      this.pages = result.pages
+      dataList.forEach(item => { item.createdAt = moment().format('YYYY-MM-DD HH:mm:ss') })
+      this.dataList = dataList
     },
     save (id) {
       const condition = this.condition
@@ -130,6 +124,15 @@ export default {
       }).catch(err => {
         this.$message.error(err)
       })
+    },
+    async remove (id) {
+      try {
+        const result = await this.$deleteAjax(`/api/tags/${id}`, true)
+        this.$message.success(result)
+        this.getList()
+      } catch (err) {
+        this.$message.error(err.message)
+      }
     },
     pageAdd () {
       if (this.currentPage < this.pages) {

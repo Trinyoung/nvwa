@@ -12,7 +12,7 @@ function putAjax (url, body, withCredential) {
   return handleRequest({method: 'put', url, body, withCredential})
 }
 
-function deleteAjax (url, body, withCredential) {
+function deleteAjax (url, withCredential, body) {
   return handleRequest({method: 'delete', url, body, withCredential})
 }
 async function handleRequest ({method, url, body, withCredential}) {
@@ -21,6 +21,7 @@ async function handleRequest ({method, url, body, withCredential}) {
     if (res.data.code === '401') {
       localStorage.removeItem('token')
       localStorage.removeItem('userInfo')
+      this.$router.push('/login')
     }
     if (res.data && res.data.code !== '000') {
       throw new Error(res.data.err)
@@ -38,7 +39,7 @@ function request (method, url, data, withCredential) {
     headers: {}
   }
   if (withCredential) {
-    options.headers.Authorization = localStorage.getItem('token')
+    options.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
   }
   return Axios(options)
 }
