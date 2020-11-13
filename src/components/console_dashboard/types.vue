@@ -180,11 +180,11 @@ export default {
     formatTime (time) {
       return moment(time * 1000).format('YYYY-MM-DD')
     },
-    submitForm (formName) {
-      this.$refs['dataForm'].validate((valid) => {
+    async submitForm (formName) {
+      this.$refs['dataForm'].validate( async (valid) => {
         if (valid) {
           const id = this.typeId
-          const Authorization = `Bearer ${localStorage.getItem('token')}`
+          // const Authorization = `Bearer ${localStorage.getItem('token')}`
           let { parent, title, description, tags, typeCode } = this.dataForm
           let typeParent
           if (parent && parent.length > 0) {
@@ -201,36 +201,23 @@ export default {
           if (request.parent) {
             request.isTop = 0
           }
-          if (!id) {
-            Axios.post('/api/articles/types', request, { headers: { Authorization } }).then(res => {
-              if (res.data.code === '000') {
-                this.dialogFormVisible = false
-                this.$message({
-                  showClose: true,
-                  message: '编辑成功'
-                })
-                localStorage.removeItem('types')
-                this.getTypes()
-              } else {
-                this.$message.error('创建分类出现错误', res.data.message)
+          try {
+            let result
+            if (!id) {
+              result = await this.postAjax(`/api/articles/types`, request, true)
+              if (this.dataList.length < 10) {
+                this.dataList.push(result)
               }
-            }).catch(err => {
-              this.$message.error('创建分类出现错误', err.message)
-            })
-          } else {
-            Axios.put(`/api/articles/types/${id}`, request, { headers: { Authorization } }).then(res => {
-              if (res.data.code === '000') {
-                this.dialogFormVisible = false
-                this.$message({
-                  showClose: true,
-                  message: '编辑成功'
-                })
-              } else {
-                this.$message.error('创建分类出现错误', res.data.message)
-              }
-            }).catch(err => {
-              this.$message.error('创建分类出现错误', err.message)
-            })
+            } else {
+              result = await this.putAjax(`/api/articles/types/${id}`, request, true)
+              this.dataList.splice()
+            }
+            this.dialogFormVisible = false
+            this.$message.success('编辑成功！')
+            localStorage.removeItem('types')
+            this.getTypes()
+          } catch (err) {
+            this.$message.error('创建分类出现错误', err.message)
           }
         }
       })
@@ -238,27 +225,31 @@ export default {
     resetForm (formName) {
       this.$refs[formName].restFields()
     },
-    getTypes () {
+    async getTypes () {
       let types = localStorage.getItem('types')
       if (types) {
         this.types = JSON.parse(types)
         return
       }
-      Axios.get('/myapi/articles/types/all').then(res => {
-        this.types = res.data.result
+      try {
+        this.types = await this.$getAjax(`/myapi/articles/types/all?createdBy=${this.$route.params.uid}`)
         localStorage.setItem('types', JSON.stringify(this.types))
-      })
+      } catch (err) {
+        this.$message.error(err.message)
+      }
     },
-    getTags () {
+    async getTags () {
       let tags = localStorage.getItem('tags')
       if (tags) {
         this.tags = JSON.parse(tags)
         return
       }
-      Axios.get('/myapi/tags', (res) => {
-        this.tags = res.data.list
+      try {
+        this.tags = await this.$getAjax(`/myapi/tags?createdBy=${this.$route.params.uid}`)
         localStorage.setItem('tags', JSON.stringify(this.tags))
-      })
+      } catch (err) {
+        this.$message.error(err.message)
+      }
     }
   }
 }

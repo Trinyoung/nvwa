@@ -35,7 +35,6 @@ export default {
   },
   methods: {
     init () {
-      
     },
     articleInfoChange (readsNums, favoriteNums) {
       console.log(readsNums, favoriteNums, '点赞数和阅读数')

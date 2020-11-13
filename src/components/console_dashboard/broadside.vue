@@ -58,19 +58,19 @@
           <div class="dropdown-menu" id="dropdownMenu2" aria-labelledby="dropdown02">
             <ul>
               <li class="dropdown-item">
-                <router-link to="/console/articles">
+                <router-link :to="`/console/${$route.params.uid}/articles`">
                   <b-icon-file-text class="icon"></b-icon-file-text>
                   文章管理
                 </router-link>
               </li>
               <li class="dropdown-item">
-                <router-link to="/console/logs">
+                <router-link :to="`/console/${$route.params.uid}/logs`">
                   <b-icon-file-earmark-binary class="icon"></b-icon-file-earmark-binary>
                   日志管理
                 </router-link>
               </li>
               <li class="dropdown-item">
-                <router-link to="/console/series">
+                <router-link :to="`/console/${$route.params.uid}/series`">
                   <b-icon-book class="icon"></b-icon-book>
                   系列管理
                 </router-link>
@@ -80,13 +80,13 @@
           </div>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/console/types">
+          <router-link class="nav-link" :to="`/console/${$route.params.uid}/types`">
             <b-icon-folder2 class="icon"></b-icon-folder2>
             分类管理
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/console/tags">
+          <router-link class="nav-link" :to="`/console/${$route.params.uid}/tags`">
             <span data-feather="file">
               <b-icon-tags></b-icon-tags>
             </span>
@@ -94,19 +94,19 @@
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="#">
+          <router-link class="nav-link" :to="`/console/${$route.params.uid}/`">
             <b-icon-images class="icon"></b-icon-images>
             相册管理
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="#">
+          <router-link class="nav-link" :to="`/console/${$route.params.uid}/`">
             <b-icon-file-earmark-zip class="icon"></b-icon-file-earmark-zip>
             资源文件
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="#">
+          <router-link class="nav-link" :to="`/console/${$route.params.uid}/`">
             <b-icon-trash class="icon"></b-icon-trash>
             归档管理
           </router-link>
@@ -120,18 +120,17 @@
       </h6>
       <ul class="nav flex-column mb-2">
         <li class="nav-item">
-          <router-link class="nav-link" to="#">
+          <router-link class="nav-link" :to="`/console/${$route.params.uid}/user`">
             <b-icon-person class="icon"></b-icon-person>
-            <!-- </span> -->
             个人信息
           </router-link>
         </li>
         <li class="nav-item">
         <a class="nav-link" href="#">
-            <span data-feather="file-text">
-              <b-icon-people></b-icon-people>
-            </span>
-            用户管理
+          <span data-feather="file-text">
+            <b-icon-people></b-icon-people>
+          </span>
+          用户管理
         </a>
         </li>
         <li class="nav-item">

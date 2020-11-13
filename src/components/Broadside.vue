@@ -2,9 +2,15 @@
   <div class="broadSide my-2 shadow-sm">
     <nav id="sidebarMenu" class="d-md-block sidebar collapse">
       <div class="avatar-head">
-        <router-link to="/console">
-          <img class='avatar' src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
+        <img class='avatar' v-if="!isMaster"
+          src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
+        <router-link :to="toConsoleUrl" v-if="isMaster">
+          <img class='avatar'
+          src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
         </router-link>
+        <!-- <el-button class="avatar">
+          <img class='avatar-img' src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
+        </el-button> -->
         <p class="font-yahei">{{userInfo.username}}</p>
         <ul class="list-info font-yahei">
           <li>文章数：{{articleInfo.articleNums || 0}}</li>
@@ -76,7 +82,6 @@
   </div>
 </template>
 <script>
-// import Axios from 'axios'
 export default {
   data: function () {
     return {
@@ -88,7 +93,9 @@ export default {
         articleNums: 0,
         readsNums: 0,
         favoriteNums: 0
-      }
+      },
+      isMaster: false,
+      toConsoleUrl: `/console/${this.$route.params.uid}`
     }
   },
   props: ['uid'],
@@ -116,6 +123,11 @@ export default {
           this.$message.error(err.message)
         }
       }
+      // if (userInfo.uid) {}
+      const self = localStorage.getItem('userInfo')
+      if (self && JSON.parse(self).uid === this.$route.params.uid) {
+        this.isMaster = true
+      }
       this.getArticleNums()
     },
     async getArticleNums () {
@@ -142,8 +154,15 @@ export default {
   margin-top: 2rem;
 }
 .avatar {
+  padding: 0;
   border-radius: 50%;
-  width: 30%
+  /* width: 80px; */
+  /* overflow: hidden; */
+  width: 35%;
+}
+.avatar-img {
+  width: 100%;
+  border-radius: 50%;
 }
 .font-yahei {
   /* font-family: "Microsoft YaHei"; */

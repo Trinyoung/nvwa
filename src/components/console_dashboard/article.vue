@@ -1,5 +1,5 @@
 <template>
-  <main class="my-1 shadow-sm bg-white border">
+  <main class="my-1 shadow-sm bg-white border height-100">
     <nav aria-label="breadcrumb" class="title-nav">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -42,7 +42,7 @@
         </el-form-item>
       </el-form>
     </div>
-    <div class="my-0 p-3 shadow-sm" id="main-content">
+    <div class="my-0 p-3" id="main-content">
       <div class="btn-toolbar my-1 pb-1" role="toolbar" aria-label="Toolbar with button groups">
         <el-button type="primary" @click="jumpTo('/console/editor/new')">新 增</el-button>
       </div>
@@ -80,8 +80,8 @@
           </tr>
         </tbody>
       </table>
-      <pagination :pages = pages :getList = getList :currentPage = currentPage></pagination>
     </div>
+    <pagination :pages = pages :getList = getList :currentPage = currentPage></pagination>
   </main>
 </template>
 <script>
@@ -230,5 +230,8 @@ table .el-button {
 }
 .tag {
   margin-right: 5px;
+}
+.height-100 {
+  min-height: calc(100vh - 100px);
 }
 </style>
