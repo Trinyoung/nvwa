@@ -231,21 +231,18 @@ export default {
         }
       })
     },
-    getAticle () {
+    async getAticle () {
       const id = this.articleId
       if (id !== 'new') {
-        axios.get(`/api/articles/${id}?console=1`).then((result) => {
-          const { content, title, isMarkdown, isPublic, subTitle, abstract, tags, refers, _id, type, typeCode } = result.data.data
-          this.articleObj = { title, content, isPublic, subTitle, abstract, tags, refers, type, typeCode }
-          this.articleObj.articleId = _id
-          this.isPublic = !!isPublic
-          this.articleObj.isMarkdown = !!isMarkdown
-          if (typeCode) {
-            this.getParentTypes(typeCode)
-          }
-        }).catch(err => {
-          this.$message.error(err.message)
-        })
+        const result = await this.$getAjax(`/api/articles/${id}?console=1`)
+        const { content, title, isMarkdown, isPublic, subTitle, abstract, tags, refers, _id, type, typeCode } = result
+        this.articleObj = { title, content, isPublic, subTitle, abstract, tags, refers, type, typeCode }
+        this.articleObj.articleId = _id
+        this.isPublic = !!isPublic
+        this.articleObj.isMarkdown = !!isMarkdown
+        if (typeCode) {
+          this.getParentTypes(typeCode)
+        }
       }
     },
     getParentTypes (typeCode) {
