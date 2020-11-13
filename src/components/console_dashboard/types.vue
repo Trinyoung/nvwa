@@ -1,5 +1,5 @@
 <template>
-  <main class="my-1 shadow-lg bg-white">
+  <main class="my-1 shadow-sm border">
     <nav aria-label="breadcrumb" class="title-nav">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">

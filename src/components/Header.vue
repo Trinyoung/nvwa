@@ -22,11 +22,21 @@
       <el-button type="success" plain @click="jumpTo('/register')" v-if="!isLogin">注册</el-button>
       <el-button type="danger" plain @click="jumpTo('/login')" v-if="!isLogin">登录</el-button>
       <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-if="isLogin">
-        你好: Trinyoung
+        你好: {{userInfo.username}}
       </button>
       <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
-        <a class="dropdown-item" href="#">进入后台</a>
-        <a class="dropdown-item" href="#">登出</a>
+        <router-link :to="'#'" class="dropdown-item">
+          <b-icon-person></b-icon-person>
+          我的主页
+        </router-link>
+        <router-link :to="'#'" class="dropdown-item">
+          <b-icon-lock></b-icon-lock>
+          修改密码
+        </router-link>
+        <router-link :to="'#'" class="dropdown-item">
+          <b-icon-power></b-icon-power>
+          退 出
+        </router-link>
       </div>
     </div>
   </nav>
@@ -35,11 +45,17 @@
 export default {
   data () {
     return {
-      isLogin: false
+      isLogin: false,
+      userInfo: {
+        username: ''
+      }
     }
   },
   created () {
     this.isLogin = !!this.$cookie.get('isLogin')
+    if (this.isLogin) {
+      this.userInfo = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
+    }
   },
   methods: {
     jumpTo (url) {

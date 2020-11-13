@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white list-container shadow-sm p-3 rounded">
+  <div class="bg-white list-container shadow-sm p-3 rounded border">
     <div class="article-list">
       <ul v-loading="loading">
         <li class="media pt-2" v-for="item in list" :key="item._id" :to="{path:`/articles/${item._id}`}">
