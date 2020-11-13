@@ -181,7 +181,7 @@ export default {
       return moment(time * 1000).format('YYYY-MM-DD')
     },
     async submitForm (formName) {
-      this.$refs['dataForm'].validate( async (valid) => {
+      this.$refs['dataForm'].validate(async (valid) => {
         if (valid) {
           const id = this.typeId
           // const Authorization = `Bearer ${localStorage.getItem('token')}`
