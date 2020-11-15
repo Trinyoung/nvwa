@@ -110,6 +110,7 @@ export default {
   methods: {
     init () {
       this.getUserInfo()
+      this.getHotArticles()
     },
     async getUserInfo () {
       let userInfo = localStorage.getItem(`userInfo_${this.$route.params.uid}`)
@@ -133,6 +134,10 @@ export default {
     async getArticleNums () {
       const result = await this.$getAjax(`/myapi/articles/nums?createdBy=${this.$route.params.uid}`)
       this.articleInfo = result
+    },
+    async getHotArticles () {
+      const result = await this.$getAjax(`/myapi/articles/list/hot?authonUid=${this.$route.params.uid}`)
+      console.log(result, '------------------>')
     }
   }
 }
