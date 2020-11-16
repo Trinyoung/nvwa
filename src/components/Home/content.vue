@@ -1,25 +1,20 @@
 <template>
   <main role="main" class="main">
-    <!-- <div class="container p-3 rounded my-2 shadow-sm content-header justify-content-center">
-      <div class="row my-1">
-        <div class="col-sm-5">
-          <b>上一篇：</b><a href="#">龙的传人</a>
-        </div>
-        <div class="col-sm-2"></div>
-        <div class="col-sm-5">
-          <b>下一篇：</b><a href="#">黄河大合唱</a>
-        </div>
-      </div>
-    </div> -->
     <v-rightside :articleId="articleId" :isAuthor="isAuthor"></v-rightside>
-    <div class="my-1 pt-0 p-3 bg-white rounded border shadow-sm">
-      <nav aria-label="breadcrumb">
+    <div class="my-1 pt-0 p-3 rounded shadow-sm border-aliceBlue">
+      <!-- <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item" v-for="type in article.types" :key="type._id">
             <router-link :to="`/home/articles?type=${type._id}`">{{type.title}}</router-link>
           </li>
         </ol>
-      </nav>
+      </nav> -->
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
+        <el-breadcrumb-item><a href="/">promotion management</a></el-breadcrumb-item>
+        <el-breadcrumb-item>promotion list</el-breadcrumb-item>
+        <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
+      </el-breadcrumb>
       <h1 class="border-bottom border-gray pb-2 mb-0 col-title">{{article.title}}</h1>
       <div class="text-muted article-tip">
         <ul class="list-group list-group-horizontal mt-1">
@@ -210,6 +205,13 @@ export default {
   .media-body {
     text-align: left;
   }
+  .border-aliceBlue {
+    border: 1px solid aliceblue;
+  }
+  .breadcrumb {
+    background: aliceblue;
+    /* width: 100%; */
+  }
   .left-5 {
     left: -5rem;
   }
@@ -219,11 +221,6 @@ export default {
   }
   .col-title {
     text-align: center;
-  }
-  .justify-content-center {
-    /* background-image: url('../../../static/首页标题栏.jpg'); */
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
   }
   .item-title {
     /* color: white; */
@@ -244,15 +241,6 @@ export default {
   .list-group-item {
     border: none;
     padding: 0.35rem 0.25rem;
-  }
-  .content-header {
-    margin-left: 0;
-    margin-right: 0;
-    font-size: 1rem;
-    background-color: aliceblue;
-    /* background-image: url('../../../static/首页标题栏.jpg'); */
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
   }
   .favorite-icon {
     color: darkgray;

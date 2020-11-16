@@ -1,6 +1,6 @@
 <template>
   <main role="main" class="container">
-    <ul class="nav justify-content-center d-flex align-items-center p-3 my-2 bg-purple rounded shadow-sm">
+    <ul class="nav justify-content-center d-flex align-items-center p-3 my-2 rounded shadow-sm">
       <li class="nav-item">
         <router-link :to="`/home/${uid}`">
           <span class="nav-link active item-title">首页</span>
@@ -70,10 +70,8 @@ export default {
 
   .justify-content-center {
     background-color: aliceblue;
-    /* background-image: image('../../static/首页标题栏.jpg'); */
-    /* background-image: url('../../../static/首页标题栏.jpg'); */
-    /* background-repeat: no-repeat; */
-    /* background-size: 100% 100%; */
+    top: 0;
+    position: sticky;
     /* opacity: 0.5; */
   }
   .item-title {

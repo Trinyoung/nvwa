@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-11-13 08:44:15
+ * @LastEditTime: 2020-11-16 17:20:37
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \nvwa\src\components\Home\index.vue
+-->
 <template>
   <div>
     <v-header :isLogin="isLogin"></v-header>
@@ -63,6 +71,6 @@ export default {
   .broadside {
     padding: 0;
     position: sticky;
-    top: 0
+    top: 40px
   }
 </style>
