@@ -2,19 +2,13 @@
   <main role="main" class="main">
     <v-rightside :articleId="articleId" :isAuthor="isAuthor"></v-rightside>
     <div class="my-1 pt-0 p-3 rounded shadow-sm border-aliceBlue">
-      <!-- <nav aria-label="breadcrumb">
+      <nav aria-label="breadcrumb" class="breadcrumb-container rounded">
         <ol class="breadcrumb">
           <li class="breadcrumb-item" v-for="type in article.types" :key="type._id">
             <router-link :to="`/home/articles?type=${type._id}`">{{type.title}}</router-link>
           </li>
         </ol>
-      </nav> -->
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
-        <el-breadcrumb-item><a href="/">promotion management</a></el-breadcrumb-item>
-        <el-breadcrumb-item>promotion list</el-breadcrumb-item>
-        <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
-      </el-breadcrumb>
+      </nav>
       <h1 class="border-bottom border-gray pb-2 mb-0 col-title">{{article.title}}</h1>
       <div class="text-muted article-tip">
         <ul class="list-group list-group-horizontal mt-1">
@@ -208,9 +202,11 @@ export default {
   .border-aliceBlue {
     border: 1px solid aliceblue;
   }
-  .breadcrumb {
+  .breadcrumb-container {
     background: aliceblue;
-    /* width: 100%; */
+  }
+  .breadcrumb {
+    background: none;
   }
   .left-5 {
     left: -5rem;

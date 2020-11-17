@@ -173,7 +173,7 @@ export default {
   position: sticky;
   border-radius: 1rem;
   left: 0;
-  top: 0;
+  top: 60px;
   min-height: calc(100vh - 48px);
 }
 

@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-08-04 08:31:03
+ * @LastEditTime: 2020-11-17 09:06:47
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \nvwa\src\components\Home\main.vue
+-->
 <template>
   <main role="main" class="container">
     <ul class="nav justify-content-center d-flex align-items-center p-3 my-2 rounded shadow-sm">
@@ -61,6 +69,10 @@ export default {
 }
 </script>
 <style scoped>
+  .container {
+    position: relative;
+    /* top: 20px; */
+  }
   .media-body {
     text-align: left;
   }
@@ -70,8 +82,9 @@ export default {
 
   .justify-content-center {
     background-color: aliceblue;
-    top: 0;
+    top: 50px;
     position: sticky;
+    z-index: 10;
     /* opacity: 0.5; */
   }
   .item-title {
