@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <main>
+  <!-- <div> -->
+  <main>
 
-    </main>
-  </div>
+  </main>
+  <!-- </div> -->
 </template>
 <script>
 import header from './Header'
