@@ -55,7 +55,7 @@
           <b>下一篇：</b><a href="#">黄河大合唱</a>
         </div>
       </div>
-      <v-bottom :refers="article.refers" :articleId="articleId" :uid="uid"></v-bottom>
+      <v-bottom :refers="article.refers" :articleId="articleId" :uid="$route.params.uid"></v-bottom>
     </div>
   </main>
 </template>
@@ -92,14 +92,22 @@ export default {
   },
   props: ['articleId'],
   created () {
-    this.getArticleDetail()
-    this.userInfo = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
-    this.uid = this.userInfo && this.userInfo.uid
-    if (this.userInfo) {
-      this.getFavorite()
+    this.init()
+  },
+  watch: {
+    'articleId' (val) {
+      this.init()
     }
   },
   methods: {
+    init () {
+      this.getArticleDetail()
+      this.userInfo = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
+      this.uid = this.userInfo && this.userInfo.uid
+      if (this.userInfo) {
+        this.getFavorite()
+      }
+    },
     async getArticleDetail () {
       const id = this.articleId
       this.loading = false

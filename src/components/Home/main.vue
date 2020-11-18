@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-08-04 08:31:03
- * @LastEditTime: 2020-11-17 09:06:47
+ * @LastEditTime: 2020-11-18 15:44:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\Home\main.vue
@@ -44,8 +44,11 @@
   </main>
 </template>
 <script>
-// import $ from 'jquery'
+import broadSide from '../Broadside'
 export default {
+  components: {
+    'v-broadSide': broadSide
+  },
   data: function () {
     return {
       view: 'home',

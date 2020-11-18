@@ -122,12 +122,12 @@ import $ from 'jquery'
 export default {
   props: ['refers', 'articleId', 'uid'],
   created () {
-    const vistorInfo = this.$cookie.get('visitInfo')
-    this.vistorInfo = JSON.stringify(vistorInfo)
-    this.isUser = !!this.uid || !!vistorInfo
-    this.getComments()
-    this.dataForm.articleId = this.articleId
-    this.replyForm.articleId = this.articleId
+    this.init()
+  },
+  watch: {
+    'articleId' (val) {
+      this.init()
+    }
   },
   data () {
     return {
@@ -156,6 +156,14 @@ export default {
     }
   },
   methods: {
+    init () {
+      const vistorInfo = this.$cookie.get('visitInfo')
+      this.vistorInfo = JSON.stringify(vistorInfo)
+      this.isUser = !!this.uid || !!vistorInfo
+      this.getComments()
+      this.dataForm.articleId = this.articleId
+      this.replyForm.articleId = this.articleId
+    },
     async submitForm (formName, reply, data, parent) {
       const submitForm = Object.assign({
         articleId: this.articleId
