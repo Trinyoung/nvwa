@@ -178,7 +178,6 @@ export default {
       const articleId = this.articleId
       const {content, category, title, subTitle, tags, refers, isMarkdown, isPublic, type = []} = this.articleObj
       let data = Object.assign({published: false, content_html: contentHtml})
-      console.log(type, 'type---------------------->')
       let [ typeCode, typeId ] = (type[type.length - 1] && type[type.length - 1].split('_')) || [undefined, undefined]
       console.log(typeId, typeCode, '类型相关的的字段')
       data = Object.assign(data, {
