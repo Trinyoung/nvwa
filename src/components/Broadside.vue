@@ -8,9 +8,6 @@
           <img class='avatar'
           src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
         </router-link>
-        <!-- <el-button class="avatar">
-          <img class='avatar-img' src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
-        </el-button> -->
         <p class="font-yahei">{{userInfo.username}}</p>
         <ul class="list-info font-yahei">
           <li>文章数：{{articleInfo.articleNums || 0}}</li>
@@ -19,32 +16,14 @@
         </ul>
       </div>
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-        <span>常用标签</span>
+        <span>最新文章</span>
       </h6>
 
       <ul class="nav flex-column">
-        <li class="nav-item">
-          <router-link class="nav-link" to="#">
-            <span data-feather="file-text"></span>
-            Current month
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="#">
-            <span data-feather="file-text"></span>
-            Current month
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="#">
-            <span data-feather="file-text"></span>
-            Current month
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="#">
-            <span data-feather="file-text"></span>
-            Current month
+        <li class="nav-item text-left" v-for="item in newArticles" :key="item._id">
+          <router-link class="nav-link d-inline-block" :to="`/home/${uid}/articles/${item._id}`">
+            <span data-feather="file-text">{{item.title}}</span>
+            <div class="nav-item-time align-baseline"> <b-icon-calendar2-check></b-icon-calendar2-check>{{formatTime(item.createdAt)}}</div>
           </router-link>
         </li>
       </ul>
@@ -53,28 +32,13 @@
         热门文章
       </h6>
       <ul class="nav flex-column">
-        <li class="nav-item">
-          <router-link class="nav-link" to="#">
-            <span data-feather="file-text"></span>
-            Current month
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="#">
-            <span data-feather="file-text"></span>
-            Current month
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="#">
-            <span data-feather="file-text"></span>
-            Current month
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="#">
-            <span data-feather="file-text"></span>
-            Current month
+        <li class="nav-item text-left" v-for="item in hotArticles" :key="item._id">
+          <router-link class="nav-link" :to="`/home/${uid}/articles/${item._id}`">
+            <span data-feather="file-text">{{item.title}}</span>
+            <div class="nav-item-time align-baseline">
+              <b-icon-calendar2-check></b-icon-calendar2-check>
+              {{formatTime(item.createdAt)}}
+            </div>
           </router-link>
         </li>
       </ul>
@@ -82,6 +46,7 @@
   </div>
 </template>
 <script>
+import moment from 'moment'
 export default {
   data: function () {
     return {
@@ -98,7 +63,7 @@ export default {
       toConsoleUrl: `/console/${this.$route.params.uid}`
     }
   },
-  props: ['uid'],
+  props: ['uid', 'hotArticles', 'newArticles'],
   created () {
     this.init()
   },
@@ -123,7 +88,6 @@ export default {
           this.$message.error(err.message)
         }
       }
-      // if (userInfo.uid) {}
       const self = localStorage.getItem('userInfo')
       if (self && JSON.parse(self).uid === this.$route.params.uid) {
         this.isMaster = true
@@ -133,6 +97,9 @@ export default {
     async getArticleNums () {
       const result = await this.$getAjax(`/myapi/articles/nums?createdBy=${this.$route.params.uid}`)
       this.articleInfo = result
+    },
+    formatTime (time) {
+      return moment(time * 1000).format('YYYY-MM-DD')
     }
   }
 }
@@ -149,6 +116,10 @@ export default {
 }
 .broadSide .text-muted {
   font-size: 1.1rem;
+}
+.nav-item-time {
+  font-size: 0.8rem;
+  color: darkgray;
 }
 .avatar-head {
   margin-top: 2rem;
@@ -179,5 +150,8 @@ export default {
 
 .list-info {
   list-style-type: none;
+}
+.nav-link {
+  display: inline-block;
 }
 </style>
