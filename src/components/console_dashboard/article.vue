@@ -63,7 +63,7 @@
             <th scope="row">{{index + 1}}</th>
             <td>{{item.title}}</td>
             <td>{{item.type && item.type.title}}</td>
-            <td>{{item.createdBy}}</td>
+            <td>{{item.author.username}}</td>
             <td>{{item.createdAt}}</td>
             <td>
               <el-tag v-for="tag in item.tags" :key="tag._id" class="tag">
@@ -131,7 +131,7 @@ export default {
       if (keyword) queryString += `&keyword=${keyword}`
       if (type) queryString += `&type=${keyword}`
       try {
-        const result = await this.$getAjax(`/myapi/articles/list?${queryString}`)
+        const result = await this.$getAjax(`/api/articles/list?${queryString}`)
         this.list = result.docs
         this.pages = result.pages
         this.list.forEach(item => {
