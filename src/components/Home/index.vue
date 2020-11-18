@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-13 08:44:15
- * @LastEditTime: 2020-11-18 10:31:24
+ * @LastEditTime: 2020-11-18 14:13:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\Home\index.vue
@@ -58,7 +58,6 @@ export default {
     async getHotArticles () {
       try {
         const result = await this.$getAjax(`/myapi/articles/list/hot?authorUid=${this.uid}`)
-        // console.log(result, '000000000000000000000')
         this.hotArticles = result
       } catch (err) {
         this.$message(err.message)

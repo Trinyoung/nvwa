@@ -5,7 +5,7 @@
       <nav aria-label="breadcrumb" class="breadcrumb-container rounded">
         <ol class="breadcrumb">
           <li class="breadcrumb-item" v-for="type in article.types" :key="type._id">
-            <router-link :to="`/home/articles?type=${type._id}`">{{type.title}}</router-link>
+            <router-link :to="`/home/${$route.params.uid}/articles?type=${type._id}`">{{type.title}}</router-link>
           </li>
         </ol>
       </nav>
