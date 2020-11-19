@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-19 15:06:39
- * @LastEditTime: 2020-11-19 16:21:38
+ * @LastEditTime: 2020-11-19 16:45:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\homepage\index.vue
 -->
 <template>
-  <main>
+  <div>
     <v-header/>
     <main role="main" class="container">
       <div class="row">
@@ -16,7 +16,7 @@
       </div>
     </main>
     <v-bottom></v-bottom>
-  </main>
+  </div>
 </template>
 <script>
 import header from '@/components/Header'
