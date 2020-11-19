@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-19 15:06:21
- * @LastEditTime: 2020-11-19 16:58:42
+ * @LastEditTime: 2020-11-19 18:28:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\homepage\main.vue
@@ -9,70 +9,67 @@
 <template>
   <main role="main" class="container">
     <div class="border justify-content-center d-flex align-items-center p-3 my-2 rounded shadow-sm">
-      <div class="my-1 pt-0 p-3 rounded shadow-sm border-aliceBlue">
-        <nav aria-label="breadcrumb" class="breadcrumb-container rounded">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item" v-for="type in article.types" :key="type._id">
-              <router-link :to="`/home/${$route.params.uid}/articles?type=${type._id}`"
-              >{{type.title}}</router-link>
-            </li>
-          </ol>
-        </nav>
-        <h1 class="border-bottom border-gray pb-2 mb-0 col-title">{{article.title}}</h1>
-        <div class="text-muted article-tip">
-          <ul class="list-group list-group-horizontal mt-1">
-            <li class="list-group-item "><b>作者：</b>{{article.author}}</li>
-            <li class="list-group-item "><b>更新时间：</b>{{formatTime(article.updatedAt * 1000)}}</li>
-            <li class="list-group-item ">
-              <b>字数：</b>{{article.wordNums}}
-            </li>
-            <li class="list-group-item">
-              <b>阅读数：</b>{{article.hasReads}}
-            </li>
-          </ul>
-        </div>
-        <div class="content-container markdown-body" v-html="article.contentHtml" >
-        </div>
-        (完)
-        <div class="reffer-container pt-3">
-          <h5 class="border-bottom border-gray pb-2 mb-0">文献引用({{article.refers&&article.refers.length || 0}})</h5>
-          <ul class="list-group list-group-container">
-            <li class="list-group-item" v-for="(item, index) in article.refers" :key="index">
-              <b>{{index+1}}. </b> <span>{{item.title}}</span> <a :href="item.link">{{item.link}}</a>
-            </li>
-          </ul>
-        </div>
-        <div class="tags-container my-3">
-          <h5 class="border-bottom border-gray pb-2 mb-0 text-left">标签 ({{article.tags && article.tags.length || 0}})</h5>
-          <ul class="list-group list-group-horizontal mt-1">
-            <li class="list-group-item" v-for="item in article.tags" :key="item.id">
-              <el-tag type="primary">{{item.name}}</el-tag>
-            </li>
-          </ul>
-        </div>
-        <div class="row my-2">
-          <div class="col-sm-4">
-            <b>上一篇：</b><a href="#">龙的传人</a>
-          </div>
-          <div class="col-sm-4">
-            <div v-bind:class="{'isFavorited':isFavorited, 'favorite-icon':!isFavorited} ">
-              <b-icon-hand-thumbs-up class="size-2" @click="setFavorite"></b-icon-hand-thumbs-up>
-            </div>
-            <span class="favorite-num">{{favoriteNum}}</span>
-          </div>
-          <div class="col-sm-4">
-            <b>下一篇：</b><a href="#">黄河大合唱</a>
-          </div>
-        </div>
-        <v-bottom :refers="article.refers" :articleId="articleId" :uid="$route.params.uid"></v-bottom>
-      </div>
+     <div class="article-list">
+      <!-- <nav aria-label="breadcrumb" class="breadcrumb-container rounded">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item" v-for="type in types" :key="type._id">
+            <router-link :to="`/home/${$route.params.uid}/articles?type=${type._id}`">{{type.title}}</router-link>
+          </li>
+        </ol>
+      </nav> -->
+      <ul v-loading="loading">
+        <li class="media pt-2" v-for="item in list" :key="item._id" :to="{path:`/articles/${item._id}`}">
+          <p class="media-body pb-2 mb-0 lh-125 border-bottom border-gray pl-1">
+            <router-link :to="{path:`/home/${uid}/articles/${item._id}`}">
+              <strong class="d-block text-gray-dark">
+                <div class="d-inline-block new-icon" v-if="item.isNew">新</div>
+                <div class="d-inline-block hot-icon" v-if="item.isHot">热</div>
+                {{ item.title }}
+              </strong>
+              <span class="d-block text-muted" >
+                {{ item.content && item.content.substr(0, 150) }}……
+              </span>
+              <span class="d-block small text-muted">
+                <span class="align-middle">
+                  <b-icon-calendar2-check></b-icon-calendar2-check>
+                  {{ formatTime(item.createdAt) }}
+                </span>
+                <span class="ml-2 align-middle">
+                  <b-icon-person></b-icon-person>
+                  {{ item.createdBy }}
+                </span>
+                <span class="ml-2 align-middle">
+                  <b-icon-eye></b-icon-eye>
+                  {{ item.hasReads || 0 }}
+                </span>
+                <span class="ml-2 align-middle">
+                  <b-icon-hand-thumbs-up></b-icon-hand-thumbs-up>
+                  {{ item.favorites || 0 }}
+                </span>
+              </span>
+            </router-link>
+          </p>
+        </li>
+      </ul>
+    </div>
+    <!-- <pagination :currentPage="currentPage" :pages="pages" :getList="getList"></pagination> -->
     </div>
   </main>
 </template>
 <script>
 export default {
   data () {
-    return {}
+    return {
+      list: []
+    }
+  },
+  created () {
+    this.getList()
+  },
+  methods: {
+    async getList () {
+      this.list = await this.$getAjax('/myapi/articles/list')
+    }
   }
 }
 </script>
@@ -93,10 +90,8 @@ export default {
     top: 50px;
     position: sticky;
     z-index: 10;
-    /* opacity: 0.5; */
   }
   .item-title {
-    /* color: white; */
     color: gray;
     font-size: 1.1rem;
   }
