@@ -1,0 +1,50 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-11-19 15:06:39
+ * @LastEditTime: 2020-11-19 16:21:38
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \nvwa\src\components\homepage\index.vue
+-->
+<template>
+  <main>
+    <v-header/>
+    <main role="main" class="container">
+      <div class="row">
+        <v-broadside class="col-md-2 broadside" :uid="uid" ref="broadSide" :hotArticles="hotArticles" :newArticles="newArticles"></v-broadside>
+        <v-main class="col-md-10" :uid="uid" @articleInfoChange="articleInfoChange"></v-main>
+      </div>
+    </main>
+    <v-bottom></v-bottom>
+  </main>
+</template>
+<script>
+import header from '@/components/Header'
+import broadside from '@/components/homepage/broadside'
+import main from '@/components/homepage/main'
+export default {
+  components: {
+    'v-header': header,
+    'v-broadside': broadside,
+    'v-main': main
+  }
+}
+</script>
+<style scoped>
+  @media (min-width: 1600px) {
+    .main-container：{
+      width: 1500px;
+    }
+  }
+  @media (min-width: 1400px) {
+    .container {
+      max-width: 1300px;
+    }
+  }
+
+  .broadside {
+    padding: 0;
+    position: sticky;
+    top: 40px
+  }
+</style>
