@@ -1,10 +1,16 @@
 <template>
-  <div class="bg-white list-container shadow-sm p-3 rounded border">
+  <div class="bg-white list-container shadow-sm p-3 rounded">
     <div class="article-list">
+      <nav aria-label="breadcrumb" class="breadcrumb-container rounded">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item" v-for="type in types" :key="type._id">
+            <router-link :to="`/home/${$route.params.uid}/articles?type=${type._id}`">{{type.title}}</router-link>
+          </li>
+        </ol>
+      </nav>
       <ul v-loading="loading">
         <li class="media pt-2" v-for="item in list" :key="item._id" :to="{path:`/articles/${item._id}`}">
           <p class="media-body pb-2 mb-0 lh-125 border-bottom border-gray pl-1">
-            <!-- <router-link :to="{path:`/articles/${item._id}`}"> -->
             <router-link :to="{path:`/home/${uid}/articles/${item._id}`}">
               <strong class="d-block text-gray-dark">
                 <div class="d-inline-block new-icon" v-if="item.isNew">新</div>
@@ -54,14 +60,17 @@ export default {
       currentPage: 1,
       pages: 1,
       loading: false,
-      uid: this.$route.params.uid
+      uid: this.$route.params.uid,
+      types: []
     }
   },
-  // props: [ 'uid' ],
   created: function () {
-    this.uid = this.$route.params.uid
-    console.log(this.$route.params.uid, '-------uid article--------->')
     this.getList(1)
+    if (this.$route.query.type) {
+      this.getParentTypes(this.$route.query.type)
+    } else {
+      this.types = [{title: '全部', _id: ''}]
+    }
   },
   methods: {
     getList (page) {
@@ -85,6 +94,14 @@ export default {
         return moment(time * 1000).format('YYYY-MM-DD')
       } else {
         return moment().format('YYYY-MM-DD')
+      }
+    },
+    async getParentTypes (type) {
+      try {
+        const result = await this.$getAjax(`/myapi/articles/types/parent?id=${type}&withTitle=1`)
+        this.types = result
+      } catch (err) {
+        this.$message.error(err.message)
       }
     }
   }
