@@ -46,7 +46,50 @@
       <div class="btn-toolbar my-1 pb-1" role="toolbar" aria-label="Toolbar with button groups">
         <el-button type="primary" @click="jumpTo('/console/editor/new')">新 增</el-button>
       </div>
-      <table class="table table-bordered">
+      <el-table
+        :data="list"
+        border
+        style="width: 100%">
+        <el-table-column
+          prop="title"
+          label="标题"
+          width="180">
+        </el-table-column>
+        <el-table-column
+          prop="type.title"
+          label="分类"
+          width="180">
+        </el-table-column>
+        <el-table-column
+          prop="author.username"
+          label="作者">
+        </el-table-column>
+        <el-table-column
+         prop="createdAt"
+         label="发布时间">
+
+        </el-table-column>
+        <el-table-column
+         prop="tags"
+         label="标签">
+          <template slot-scope="scope">
+            <el-tag v-for="tag in scope.row.tags" :key="tag._id" class="tag">
+              {{tag.name}}
+            </el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column
+         label="操作">
+          <template>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <el-button type="success" plain @click="jumpTo(`/home/${$route.params.uid}/articles/${item._id}`)">详情</el-button>
+              <el-button type="primary" plain @click="jumpTo(`/console/editor/${item._id}`)">编辑</el-button>
+              <el-button type="danger" plain @click="deleteArticle(item._id)">删除</el-button>
+            </div>
+          </template>
+        </el-table-column>
+      </el-table>
+      <!-- <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
             <th scope="col">#</th>
@@ -79,7 +122,7 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
     </div>
     <pagination :pages = pages :getList = getList :currentPage = currentPage></pagination>
   </main>
@@ -123,7 +166,7 @@ export default {
       return ''
     },
     async getList (page) {
-      let queryString = `page=${page}`
+      let queryString = `page=${page}&createdBy=${this.$route.params.uid}`
       if (page) {
         this.currentPage = page
       }
@@ -155,16 +198,19 @@ export default {
         this.$message.error(err.message)
       }
     },
-    getTypes () {
+    async getTypes () {
       let types = localStorage.getItem('types')
       if (types) {
         this.types = JSON.parse(types)
         return
       }
-      Axios.get('/myapi/articles/types/all').then(res => {
-        this.types = res.data.result
+      try {
+        const result = await this.$getAjax('/myapi/articles/types/all')
+        this.types = result
         localStorage.setItem('types', JSON.stringify(this.types))
-      })
+      } catch (err) {
+        this.$message.error('获取失败')
+      }
     },
     jumpTo (url) {
       this.$router.push(url)

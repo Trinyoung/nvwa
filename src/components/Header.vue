@@ -25,7 +25,7 @@
         你好: {{userInfo.username}}
       </button>
       <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
-        <router-link :to="'#'" class="dropdown-item">
+        <router-link :to="`/home/${this.userInfo.uid}`" class="dropdown-item">
           <b-icon-person></b-icon-person>
           我的主页
         </router-link>
@@ -55,6 +55,7 @@ export default {
     this.isLogin = !!this.$cookie.get('isLogin')
     if (this.isLogin) {
       this.userInfo = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
+      // this.uid =
     }
   },
   methods: {
