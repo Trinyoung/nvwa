@@ -27,7 +27,7 @@
                 </span>
                 <span class="ml-2 align-middle">
                   <b-icon-person></b-icon-person>
-                  {{ item.createdBy }}
+                  {{ item.author.username }}
                 </span>
                 <span class="ml-2 align-middle">
                   <b-icon-eye></b-icon-eye>

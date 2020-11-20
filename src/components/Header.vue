@@ -1,9 +1,9 @@
 <template>
   <nav class="navbar sticky-top bg-white flex-md-nowrap p-0 shadow-sm">
-    <a class="navbar-brand align-bottom col-md-3 col-lg-2 d-inline-block" href="#">
+    <router-link class="navbar-brand align-bottom col-md-3 col-lg-2 d-inline-block" to="/homepage">
       <b-icon-house-fill class="icon" width="2rem" height="1.5rem"></b-icon-house-fill>
       <span class="d-inline-block align-bottom home-title">Trinyoung</span>
-    </a>
+    </router-link>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
       data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

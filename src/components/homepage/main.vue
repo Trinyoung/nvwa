@@ -1,26 +1,19 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-19 15:06:21
- * @LastEditTime: 2020-11-19 18:28:34
+ * @LastEditTime: 2020-11-20 09:20:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\homepage\main.vue
 -->
 <template>
   <main role="main" class="container">
-    <div class="border justify-content-center d-flex align-items-center p-3 my-2 rounded shadow-sm">
-     <div class="article-list">
-      <!-- <nav aria-label="breadcrumb" class="breadcrumb-container rounded">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item" v-for="type in types" :key="type._id">
-            <router-link :to="`/home/${$route.params.uid}/articles?type=${type._id}`">{{type.title}}</router-link>
-          </li>
-        </ol>
-      </nav> -->
+    <!-- <div class="border justify-content-center d-flex align-items-center p-3 my-2 rounded shadow-sm"> -->
+     <div class="article-list border p-3 my-2 rounded shadow-sm">
       <ul v-loading="loading">
         <li class="media pt-2" v-for="item in list" :key="item._id" :to="{path:`/articles/${item._id}`}">
           <p class="media-body pb-2 mb-0 lh-125 border-bottom border-gray pl-1">
-            <router-link :to="{path:`/home/${uid}/articles/${item._id}`}">
+            <router-link :to="{path:`/home/${item.author.uid}/articles/${item._id}`}">
               <strong class="d-block text-gray-dark">
                 <div class="d-inline-block new-icon" v-if="item.isNew">新</div>
                 <div class="d-inline-block hot-icon" v-if="item.isHot">热</div>
@@ -36,7 +29,7 @@
                 </span>
                 <span class="ml-2 align-middle">
                   <b-icon-person></b-icon-person>
-                  {{ item.createdBy }}
+                  {{ item.author.username }}
                 </span>
                 <span class="ml-2 align-middle">
                   <b-icon-eye></b-icon-eye>
@@ -51,16 +44,24 @@
           </p>
         </li>
       </ul>
+      <pagination :currentPage="currentPage" :pages="pages" :getList="getList"></pagination>
     </div>
-    <!-- <pagination :currentPage="currentPage" :pages="pages" :getList="getList"></pagination> -->
-    </div>
+    <!-- </div> -->
   </main>
 </template>
 <script>
+import moment from 'moment'
+import pagination from '@/components/tools/pagination'
 export default {
+  components: {
+    pagination
+  },
   data () {
     return {
-      list: []
+      list: [],
+      loading: false,
+      currentPage: 1,
+      pages: 1
     }
   },
   created () {
@@ -68,7 +69,13 @@ export default {
   },
   methods: {
     async getList () {
-      this.list = await this.$getAjax('/myapi/articles/list')
+      this.loading = true
+      const result = await this.$getAjax('/myapi/articles/list')
+      this.list = result.docs
+      this.loading = false
+    },
+    formatTime (time) {
+      return moment(time * 1000).format('YYYY-MM-DD')
     }
   }
 }
