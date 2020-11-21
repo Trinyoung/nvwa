@@ -63,7 +63,7 @@
             <th scope="row">{{index + 1}}</th>
             <td>{{item.title}}</td>
             <td>{{item.type && item.type.title}}</td>
-            <td>{{item.createdBy}}</td>
+            <td>{{item.author.username}}</td>
             <td>{{item.createdAt}}</td>
             <td>
               <el-tag v-for="tag in item.tags" :key="tag._id" class="tag">
@@ -85,7 +85,7 @@
   </main>
 </template>
 <script>
-import '@fortawesome/fontawesome-free/css/all.css'
+// import '@fortawesome/fontawesome-free/css/all.css'
 import Axios from 'axios'
 import pagination from '../tools/pagination'
 import moment from 'moment'
@@ -107,7 +107,24 @@ export default {
       },
       options: [],
       tags: [],
-      types: []
+      types: [],
+      tableData: [{
+        date: '2016-05-03',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-02',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-04',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-01',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }]
     }
   },
   mounted () {
@@ -123,7 +140,7 @@ export default {
       return ''
     },
     async getList (page) {
-      let queryString = `page=${page}`
+      let queryString = `page=${page}&createdBy=${this.$route.params.uid}`
       if (page) {
         this.currentPage = page
       }
@@ -131,7 +148,7 @@ export default {
       if (keyword) queryString += `&keyword=${keyword}`
       if (type) queryString += `&type=${keyword}`
       try {
-        const result = await this.$getAjax(`/myapi/articles/list?${queryString}`)
+        const result = await this.$getAjax(`/api/articles/list?${queryString}`)
         this.list = result.docs
         this.pages = result.pages
         this.list.forEach(item => {
@@ -155,16 +172,19 @@ export default {
         this.$message.error(err.message)
       }
     },
-    getTypes () {
+    async getTypes () {
       let types = localStorage.getItem('types')
       if (types) {
         this.types = JSON.parse(types)
         return
       }
-      Axios.get('/myapi/articles/types/all').then(res => {
-        this.types = res.data.result
+      try {
+        const result = await this.$getAjax('/myapi/articles/types/all')
+        this.types = result
         localStorage.setItem('types', JSON.stringify(this.types))
-      })
+      } catch (err) {
+        this.$message.error('获取失败')
+      }
     },
     jumpTo (url) {
       this.$router.push(url)

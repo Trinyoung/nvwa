@@ -1,9 +1,9 @@
 <template>
   <nav class="navbar sticky-top bg-white flex-md-nowrap p-0 shadow-sm">
-    <a class="navbar-brand align-bottom col-md-3 col-lg-2 d-inline-block" href="#">
+    <router-link class="navbar-brand align-bottom col-md-3 col-lg-2 d-inline-block" to="/homepage">
       <b-icon-house-fill class="icon" width="2rem" height="1.5rem"></b-icon-house-fill>
       <span class="d-inline-block align-bottom home-title">Trinyoung</span>
-    </a>
+    </router-link>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
       data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -25,9 +25,13 @@
         你好: {{userInfo.username}}
       </button>
       <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
-        <router-link :to="'#'" class="dropdown-item">
+        <router-link :to="`/home/${this.userInfo.uid}`" class="dropdown-item">
           <b-icon-person></b-icon-person>
           我的主页
+        </router-link>
+        <router-link :to="`/console/${this.userInfo.uid}`" class="dropdown-item">
+          <b-icon-gear></b-icon-gear>
+          控制台
         </router-link>
         <router-link :to="'#'" class="dropdown-item">
           <b-icon-lock></b-icon-lock>
@@ -55,6 +59,7 @@ export default {
     this.isLogin = !!this.$cookie.get('isLogin')
     if (this.isLogin) {
       this.userInfo = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
+      // this.uid =
     }
   },
   methods: {
@@ -111,7 +116,6 @@ export default {
   font-size: 1rem;
   color: #333;
   background-color: aliceblue;
-  /* box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25); */
   font-family:Georgia, 'Times New Roman', Times, serif
 }
 .home-title {

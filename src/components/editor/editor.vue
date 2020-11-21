@@ -173,50 +173,33 @@ export default {
   },
   props: ['articleId'],
   methods: {
-    save: function (published) {
+    async save (published) {
       const contentHtml = $('.v-note-read-content').html()
       const articleId = this.articleId
-      const {content, category, title, subTitle, tags, refers, isMarkdown, isPublic, type} = this.articleObj
+      const {content, category, title, subTitle, tags, refers, isMarkdown, isPublic, type = []} = this.articleObj
       let data = Object.assign({published: false, content_html: contentHtml})
-      const [typeCode, typeId] = type[type.length - 1] && type[type.length - 1].split('_')
+      let [ typeCode, typeId ] = (type[type.length - 1] && type[type.length - 1].split('_')) || [undefined, undefined]
       console.log(typeId, typeCode, '类型相关的的字段')
       data = Object.assign(data, {
         content, category, title, subTitle, tags, refers, isMarkdown, isPublic, type: typeId, typeCode
       })
-      const Authorization = `Bearer ${localStorage.getItem('token')}`
       if (articleId && articleId !== 'new') {
         data.articleId = articleId
-        axios.put(`/api/articles/${articleId}`, data, { headers: {Authorization} }).then(res => {
-          if (res.status === 200 && res.data.code === '000' && res.data.result._id) {
-            this.$message.success('发表成功')
-            this.$router.push(`/console/editor/${res.data.result._id}`)
-          } else {
-            this.$message.error(res.data.err.errors.message)
-          }
-          if (res.data.code === '401') {
-            this.$router.push(`/login`)
-          }
-        }).catch(err => {
-          this.$message({
-            type: 'error',
-            message: err.msg
-          })
-        })
+        try {
+          await this.$putAjax(`/api/articles/${articleId}`, data, true)
+          this.$message.success('发表成功')
+          this.$router.go(-1)
+        } catch (err) {
+          this.$message.error(err.message)
+        }
       } else {
-        axios.post('/api/articles', data, { headers: { Authorization } }).then(res => {
-          if (res.status === 200 && res.data.code === '000' && res.data.result._id) {
-            this.$message.success('发表成功')
-            this.$router.push(`/console/editor/${res.data.result._id}`)
-          }
-          if (res.data.code === '401') {
-            this.$router.push('/login')
-          }
-        }).catch(err => {
-          this.$message({
-            type: 'error',
-            message: err.msg
-          })
-        })
+        try {
+          await this.$postAjax(`/api/articles`, data, true)
+          this.$message.success('发表成功')
+          this.$router.go(-1)
+        } catch (err) {
+          this.$message.error(err.message)
+        }
       }
     },
     saveMavon: function (value, render) {

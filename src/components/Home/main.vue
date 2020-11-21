@@ -1,6 +1,14 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-08-04 08:31:03
+ * @LastEditTime: 2020-11-18 15:44:41
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \nvwa\src\components\Home\main.vue
+-->
 <template>
   <main role="main" class="container">
-    <ul class="nav justify-content-center d-flex align-items-center p-3 my-2 bg-purple rounded shadow-sm">
+    <ul class="nav justify-content-center d-flex align-items-center p-3 my-2 rounded shadow-sm">
       <li class="nav-item">
         <router-link :to="`/home/${uid}`">
           <span class="nav-link active item-title">首页</span>
@@ -36,8 +44,11 @@
   </main>
 </template>
 <script>
-// import $ from 'jquery'
+import broadSide from '../Broadside'
 export default {
+  components: {
+    'v-broadSide': broadSide
+  },
   data: function () {
     return {
       view: 'home',
@@ -61,6 +72,10 @@ export default {
 }
 </script>
 <style scoped>
+  .container {
+    position: relative;
+    /* top: 20px; */
+  }
   .media-body {
     text-align: left;
   }
@@ -70,10 +85,9 @@ export default {
 
   .justify-content-center {
     background-color: aliceblue;
-    /* background-image: image('../../static/首页标题栏.jpg'); */
-    /* background-image: url('../../../static/首页标题栏.jpg'); */
-    /* background-repeat: no-repeat; */
-    /* background-size: 100% 100%; */
+    top: 50px;
+    position: sticky;
+    z-index: 10;
     /* opacity: 0.5; */
   }
   .item-title {

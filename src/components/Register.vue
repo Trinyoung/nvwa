@@ -212,7 +212,7 @@ export default {
         alert('请填写手机号码')
         return
       }
-      axios.post('http://localhost:3000/api/user/register', userInfo).then((result) => {
+      axios.post('/api/user/register', userInfo).then((result) => {
         if (result.data.code !== '000') {
           return alert('注册失败，请填写正确的注册信息！')
         }

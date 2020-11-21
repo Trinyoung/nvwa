@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-11-11 18:05:23
+ * @LastEditTime: 2020-11-19 15:13:44
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \nvwa\src\router\index.js
+ */
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
@@ -8,6 +16,7 @@ import homeRouter from '@/components/Home/router'
 import consoleRouter from '@/components/Console_dashboard/router'
 import ForgetPassword from '@/components/forgetPassword'
 import updatePassword from '@/components/updatePassword'
+import homePage from '@/components/homepage'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
@@ -25,6 +34,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/homePage',
+      name: 'homepage',
+      component: homePage
     },
     {
       path: '/register',

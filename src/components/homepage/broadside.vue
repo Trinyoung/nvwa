@@ -1,22 +1,16 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-11-19 15:06:13
+ * @LastEditTime: 2020-11-19 16:11:01
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \nvwa\src\components\homepage\broadside.vue
+-->
 <template>
   <div class="broadSide my-2 shadow-sm">
     <nav id="sidebarMenu" class="d-md-block sidebar collapse">
-      <div class="avatar-head">
-        <img class='avatar' v-if="!isMaster"
-          src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
-        <router-link :to="toConsoleUrl" v-if="isMaster">
-          <img class='avatar'
-          src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
-        </router-link>
-        <p class="font-yahei">{{userInfo.username}}</p>
-        <ul class="list-info font-yahei">
-          <li>文章数：{{articleInfo.articleNums || 0}}</li>
-          <li>浏览量：{{articleInfo.readsNums || 0}}</li>
-          <li>点赞数：{{articleInfo.favoriteNums || 0}}</li>
-        </ul>
-      </div>
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-        <span>最新文章</span>
+        <span>推荐文章</span>
       </h6>
 
       <ul class="nav flex-column">
@@ -31,7 +25,7 @@
       </ul>
 
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-        热门文章
+        推荐作者
       </h6>
       <ul class="nav flex-column">
         <li class="nav-item text-left" v-for="item in hotArticles" :key="item._id">
@@ -61,11 +55,12 @@ export default {
         readsNums: 0,
         favoriteNums: 0
       },
+      hotArticles: [],
       isMaster: false,
       toConsoleUrl: `/console/${this.$route.params.uid}`
     }
   },
-  props: ['uid', 'hotArticles', 'newArticles'],
+  props: ['uid'],
   created () {
     this.init()
   },
@@ -97,13 +92,16 @@ export default {
       }
       this.getArticleNums()
     },
-    async getArticleNums () {
-      const result = await this.$getAjax(`/myapi/articles/nums?createdBy=${this.$route.params.uid}`)
-      this.articleInfo = result
-    },
+    // async getArticleNums () {
+    //   const result = await this.$getAjax(`/myapi/articles/nums?createdBy=${this.$route.params.uid}`)
+    //   this.articleInfo = result
+    // },
     async getHotArticles () {
-      const result = await this.$getAjax(`/myapi/articles/list/hot?authonUid=${this.$route.params.uid}`)
-      console.log(result, '------------------>')
+      try {
+        this.hotArticles = await this.$getAjax(`/myapi/articles/list/hot`)
+      } catch (err) {
+        this.$message.error(err.message)
+      }
     },
     formatTime (time) {
       return moment(time * 1000).format('YYYY-MM-DD')
