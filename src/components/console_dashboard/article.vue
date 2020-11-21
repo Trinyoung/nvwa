@@ -46,50 +46,7 @@
       <div class="btn-toolbar my-1 pb-1" role="toolbar" aria-label="Toolbar with button groups">
         <el-button type="primary" @click="jumpTo('/console/editor/new')">新 增</el-button>
       </div>
-      <el-table
-        :data="list"
-        border
-        style="width: 100%">
-        <el-table-column
-          prop="title"
-          label="标题"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="type.title"
-          label="分类"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="author.username"
-          label="作者">
-        </el-table-column>
-        <el-table-column
-         prop="createdAt"
-         label="发布时间">
-
-        </el-table-column>
-        <el-table-column
-         prop="tags"
-         label="标签">
-          <template slot-scope="scope">
-            <el-tag v-for="tag in scope.row.tags" :key="tag._id" class="tag">
-              {{tag.name}}
-            </el-tag>
-          </template>
-        </el-table-column>
-        <el-table-column
-         label="操作">
-          <template>
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <el-button type="success" plain @click="jumpTo(`/home/${$route.params.uid}/articles/${item._id}`)">详情</el-button>
-              <el-button type="primary" plain @click="jumpTo(`/console/editor/${item._id}`)">编辑</el-button>
-              <el-button type="danger" plain @click="deleteArticle(item._id)">删除</el-button>
-            </div>
-          </template>
-        </el-table-column>
-      </el-table>
-      <!-- <table class="table table-bordered">
+      <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
             <th scope="col">#</th>
@@ -122,13 +79,13 @@
             </td>
           </tr>
         </tbody>
-      </table> -->
+      </table>
     </div>
     <pagination :pages = pages :getList = getList :currentPage = currentPage></pagination>
   </main>
 </template>
 <script>
-import '@fortawesome/fontawesome-free/css/all.css'
+// import '@fortawesome/fontawesome-free/css/all.css'
 import Axios from 'axios'
 import pagination from '../tools/pagination'
 import moment from 'moment'
@@ -150,7 +107,24 @@ export default {
       },
       options: [],
       tags: [],
-      types: []
+      types: [],
+      tableData: [{
+        date: '2016-05-03',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-02',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-04',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }, {
+        date: '2016-05-01',
+        name: 'Tom',
+        address: 'No. 189, Grove St, Los Angeles'
+      }]
     }
   },
   mounted () {

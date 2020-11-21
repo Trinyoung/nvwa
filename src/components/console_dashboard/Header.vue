@@ -2,19 +2,53 @@
   <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow-sm">
     <router-link class="navbar-brand align-bottom d-inline-block" to="/homepage">
       <b-icon-house-fill class="icon" width="2rem" height="1.5rem"></b-icon-house-fill>
-      <span class="d-inline-block align-bottom home-title">Trinyoung</span>
+      <span class="d-inline-block align-bottom home-title text-transform">Trinyoung</span>
     </router-link>
-    <div class="dropdown navbar-nav">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Dropdown
+    <div class="dropdown">
+      <button class="btn dropdown-toggle avatar text-transform" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+        {{userInfo.username.substr(0, 2)}}
       </button>
       <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
-        <a class="dropdown-item" href="#">Setting</a>
-        <a class="dropdown-item" href="#">Sign Out</a>
+        <router-link :to="`/home/${this.userInfo.uid}`" class="dropdown-item">
+          <b-icon-person></b-icon-person>
+          我的主页
+        </router-link>
+        <router-link :to="`/console/${this.userInfo.uid}`" class="dropdown-item">
+          <b-icon-gear></b-icon-gear>
+          控制台
+        </router-link>
+        <router-link :to="'#'" class="dropdown-item">
+          <b-icon-lock></b-icon-lock>
+          修改密码
+        </router-link>
+        <router-link :to="'#'" class="dropdown-item">
+          <b-icon-power></b-icon-power>
+          退 出
+        </router-link>
       </div>
     </div>
   </nav>
 </template>
+<script>
+export default {
+  data () {
+    return {
+      userInfo: {}
+    }
+  },
+  created () {
+    this.init()
+  },
+  methods: {
+    init () {
+      this.getUserInfo()
+    },
+    getUserInfo () {
+      this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    }
+  }
+}
+</script>
 <style scoped>
 .sidebar-sticky {
   position: relative;
@@ -31,39 +65,44 @@
     position: sticky;
   }
 }
+.dropdown {
+  width: 80px;
+  margin-right: 10px;
+}
+#dropdownMenu2 {
+  left: -60px;
+  padding-left: -20px;
+}
 .navbar-brand {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   font-size: 1rem;
-  font-family:Georgia, 'Times New Roman', Times, serif
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  height:100%
 }
 .home-title {
   margin-bottom: -3px;
-}
-.sidebar .nav-link {
-  font-weight: 500;
-  color: #333;
-}
-
-.sidebar .nav-link .feather {
-  margin-right: 4px;
-  color: #999;
 }
 
 .sidebar .nav-link.active {
   color: #007bff;
 }
-
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
-  color: inherit;
+.avatar {
+  border-radius: 50%;
+  background: rgb(118, 224, 207);
+  padding: 0;
+  width: 45px;
+  height: 45px;
+  font-size: 0.8rem;
+  color: #fff;
 }
-
 .sidebar-heading {
   font-size: 0.75rem;
   text-transform: uppercase;
 }
-
+.text-transform {
+  text-transform: uppercase;
+}
 .navbar-brand {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -71,11 +110,6 @@
   width: 220px;
   background-color: rgba(28, 12, 245, 0.25);
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25);
-}
-
-.navbar .navbar-toggler {
-  top: 0.25rem;
-  right: 1rem;
 }
 
 .navbar .form-control {
@@ -93,16 +127,5 @@
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
 }
-#dropdownMenu2 {
-    position: absolute;
-    right: 0!important;
-    left: auto;
-}
-#search-input {
-  border-radius: 50% 50% 0 0;
-}
 
-#basic-addon2 {
-  width: 4rem;
-}
 </style>
