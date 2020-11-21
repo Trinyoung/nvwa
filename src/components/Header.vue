@@ -29,6 +29,10 @@
           <b-icon-person></b-icon-person>
           我的主页
         </router-link>
+        <router-link :to="`/console/${this.userInfo.uid}`" class="dropdown-item">
+          <b-icon-gear></b-icon-gear>
+          控制台
+        </router-link>
         <router-link :to="'#'" class="dropdown-item">
           <b-icon-lock></b-icon-lock>
           修改密码
@@ -112,7 +116,6 @@ export default {
   font-size: 1rem;
   color: #333;
   background-color: aliceblue;
-  /* box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25); */
   font-family:Georgia, 'Times New Roman', Times, serif
 }
 .home-title {

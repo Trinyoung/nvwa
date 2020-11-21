@@ -55,11 +55,12 @@ export default {
         readsNums: 0,
         favoriteNums: 0
       },
+      hotArticles: [],
       isMaster: false,
       toConsoleUrl: `/console/${this.$route.params.uid}`
     }
   },
-  props: ['uid', 'hotArticles', 'newArticles'],
+  props: ['uid'],
   created () {
     this.init()
   },
@@ -71,6 +72,7 @@ export default {
   methods: {
     init () {
       this.getUserInfo()
+      this.getHotArticles()
     },
     async getUserInfo () {
       let userInfo = localStorage.getItem(`userInfo_${this.$route.params.uid}`)
@@ -90,9 +92,16 @@ export default {
       }
       this.getArticleNums()
     },
-    async getArticleNums () {
-      const result = await this.$getAjax(`/myapi/articles/nums?createdBy=${this.$route.params.uid}`)
-      this.articleInfo = result
+    // async getArticleNums () {
+    //   const result = await this.$getAjax(`/myapi/articles/nums?createdBy=${this.$route.params.uid}`)
+    //   this.articleInfo = result
+    // },
+    async getHotArticles () {
+      try {
+        this.hotArticles = await this.$getAjax(`/myapi/articles/list/hot`)
+      } catch (err) {
+        this.$message.error(err.message)
+      }
     },
     formatTime (time) {
       return moment(time * 1000).format('YYYY-MM-DD')

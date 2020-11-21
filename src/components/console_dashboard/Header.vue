@@ -1,10 +1,9 @@
 <template>
-  <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand mr-0 px-3" href="#">Trinyoung</a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
-    data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow-sm">
+    <router-link class="navbar-brand align-bottom d-inline-block" to="/homepage">
+      <b-icon-house-fill class="icon" width="2rem" height="1.5rem"></b-icon-house-fill>
+      <span class="d-inline-block align-bottom home-title">Trinyoung</span>
+    </router-link>
     <div class="dropdown navbar-nav">
       <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Dropdown
@@ -32,7 +31,15 @@
     position: sticky;
   }
 }
-
+.navbar-brand {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 1rem;
+  font-family:Georgia, 'Times New Roman', Times, serif
+}
+.home-title {
+  margin-bottom: -3px;
+}
 .sidebar .nav-link {
   font-weight: 500;
   color: #333;
