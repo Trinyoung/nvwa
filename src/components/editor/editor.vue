@@ -1,5 +1,5 @@
 <template>
-  <div class="editor-container container col-md-9 my-1 p-3 bg-white" id="main-content">
+  <div class="editor-container container col-md-9  p-1 bg-white" id="main-content">
     <div class="header-container">
       <el-form :inline="true" class="header-form">
         <el-form-item label="分类: ">

@@ -1,11 +1,11 @@
 <template>
   <div>
-      <v-header></v-header>
-      <v-main :articleId="articleId"></v-main>
+    <v-header></v-header>
+    <v-main :articleId="articleId"></v-main>
   </div>
 </template>
 <script>
-import header from './Header'
+import header from '@/components/console_dashboard/Header'
 import editor from './editor'
 import $ from 'jquery'
 export default {

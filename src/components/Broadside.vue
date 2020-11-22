@@ -114,7 +114,7 @@ export default {
 .broadSide {
   min-height: calc(100vh -48px);
   border: 1px solid aliceblue;
-  background: aliceblue;
+  /* background:blueviolet */
 }
 .broadSide .text-muted {
   font-size: 1.1rem;
@@ -155,5 +155,6 @@ export default {
 }
 .nav-link {
   display: inline-block;
+  color: rgba(5, 0, 0, 0.842);
 }
 </style>

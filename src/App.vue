@@ -35,6 +35,7 @@ export default {
 body {
   font-size: 0.95rem;
   height: 100%;
+  /* background: aliceblue; */
 }
 * {
   margin: 0;
