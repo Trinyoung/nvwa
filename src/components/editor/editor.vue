@@ -112,8 +112,8 @@
             <a :href= item.link class="d-inline-block">{{item.title}}</a>
           </div>
           <div class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="button" class="btn btn-secondary" @click="refferStatusChange(item)">编辑</button>
-            <button type="button" class="btn btn-secondary">删除</button>
+            <el-button type="success" plain @click="refferStatusChange(item)">编辑</el-button>
+            <el-button type="danger" plain>删除</el-button>
           </div>
         </div>
         <form v-if ="item.status" class="row">
@@ -125,7 +125,8 @@
             <input type="text" class="form-control" placeholder="请输入文献链接" v-model="item.link">
           </div>
           <div class="col-2">
-            <button class="btn btn-primary" @click="refferChange(index, item.title, item.link)">确定</button>
+            <!-- <button class="btn btn-primary" @click="refferChange(index, item.title, item.link)">确定</button> -->
+            <el-button type="success" plain @click="refferChange(index, item.title, item.link)">确 定</el-button>
           </div>
         </form>
       </li>
@@ -320,7 +321,6 @@ export default {
 
 .mavonEditor {
   height:calc(100vh - 200px);
-  /* height: inherit; */
 }
 
 .titleInput {
