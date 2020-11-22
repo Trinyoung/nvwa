@@ -7,7 +7,7 @@
     </div>
       </div>
     </div>
-    <form class="loginForm">
+    <form class="loginForm border">
       <div class="container">
         <div class="form-group row loginHead pd-3">
           <div class="col-sm-12"><span class="loginTitle">找回密码</span></div>

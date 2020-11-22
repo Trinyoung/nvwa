@@ -10,7 +10,7 @@
   <main role="main" class="container">
     <ul class="nav justify-content-center d-flex align-items-center p-3 my-2 rounded shadow-sm">
       <li class="nav-item">
-        <router-link :to="`/home/${uid}`">
+        <router-link :to="`/home/${uid}`" class="active">
           <span class="nav-link active item-title">首页</span>
         </router-link>
       </li>
@@ -105,4 +105,8 @@ export default {
     padding-right: 10px;
     padding-bottom: 5px;
   }
+  .active:active {
+    color: rgb(77, 77, 231);
+  }
+  /* :active */
 </style>
