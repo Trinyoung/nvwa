@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-19 15:06:13
- * @LastEditTime: 2020-11-23 09:33:40
+ * @LastEditTime: 2020-11-23 13:56:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\homepage\broadside.vue
@@ -14,12 +14,14 @@
       </h6>
 
       <ul class="nav flex-column">
-        <li class="nav-item text-left" v-for="item in newArticles" :key="item._id">
+        <li class="nav-item text-left" v-for="item in authors" :key="item._id">
           <router-link class="nav-link d-inline-block" :to="`/person/${uid}/articles/${item._id}`">
-            <span data-feather="file-text">{{item.title}}</span>
+            <span data-feather="file-text">{{item.userInfo.username}}</span>
             <div class="nav-item-time align-baseline">
-              <b-icon-calendar2-check></b-icon-calendar2-check>
-              {{formatTime(item.createdAt)}}</div>
+              喜欢: {{item.favoriteNums}}
+              阅读: {{item.readNums}}
+              文章: {{item.articleNums}}
+            </div>
           </router-link>
         </li>
       </ul>
@@ -56,6 +58,7 @@ export default {
         favoriteNums: 0
       },
       hotArticles: [],
+      authors: [],
       isMaster: false,
       toConsoleUrl: `/console/${this.$route.params.uid}`
     }
@@ -73,6 +76,7 @@ export default {
     init () {
       this.getUserInfo()
       this.getHotArticles()
+      this.getHotAuthors()
     },
     async getUserInfo () {
       let userInfo = localStorage.getItem(`userInfo_${this.$route.params.uid}`)
@@ -90,15 +94,18 @@ export default {
       if (self && JSON.parse(self).uid === this.$route.params.uid) {
         this.isMaster = true
       }
-      this.getArticleNums()
     },
-    // async getArticleNums () {
-    //   const result = await this.$getAjax(`/myapi/articles/nums?createdBy=${this.$route.params.uid}`)
-    //   this.articleInfo = result
-    // },
     async getHotArticles () {
       try {
         this.hotArticles = await this.$getAjax(`/myapi/articles/list/hot`)
+      } catch (err) {
+        this.$message.error(err.message)
+      }
+    },
+    async getHotAuthors () {
+      try {
+        this.authors = await this.$getAjax(`/myapi/articles/list/authors/hot`)
+        console.log(this.authors, '-------------------->')
       } catch (err) {
         this.$message.error(err.message)
       }

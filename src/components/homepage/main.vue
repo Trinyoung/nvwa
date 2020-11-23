@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-19 15:06:21
- * @LastEditTime: 2020-11-20 09:20:52
+ * @LastEditTime: 2020-11-23 10:42:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\homepage\main.vue
@@ -91,7 +91,20 @@ export default {
   .col-title {
     text-align: left;
   }
-
+  .new-icon {
+    border:1px solid green;
+    color: green;
+    font-weight: 100;
+    padding: 0 3px 0 3px;
+    font-size: 0.5rem;
+  }
+  .hot-icon {
+    border: 1px solid red;
+    color: red;
+    font-weight: 100;
+    padding: 0 3px 0 3px;
+    font-size: 0.5rem;
+  }
   .justify-content-center {
     background-color: aliceblue;
     top: 50px;
