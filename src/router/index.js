@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-11 18:05:23
- * @LastEditTime: 2020-11-23 09:11:18
+ * @LastEditTime: 2020-11-23 09:32:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\router\index.js
@@ -28,7 +28,7 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      redirect: '/person'
+      redirect: '/home'
     },
     {
       path: '/login',
@@ -36,7 +36,7 @@ export default new Router({
       component: Login
     },
     {
-      path: '/homePage',
+      path: '/home',
       name: 'homepage',
       component: homePage
     },

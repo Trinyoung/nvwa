@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-19 15:06:13
- * @LastEditTime: 2020-11-19 16:11:01
+ * @LastEditTime: 2020-11-23 09:33:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\homepage\broadside.vue
@@ -10,7 +10,7 @@
   <div class="broadSide my-2 shadow-sm">
     <nav id="sidebarMenu" class="d-md-block sidebar collapse">
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-        <span>推荐文章</span>
+        <span>推荐作者</span>
       </h6>
 
       <ul class="nav flex-column">
@@ -25,7 +25,7 @@
       </ul>
 
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-        推荐作者
+        推荐文章
       </h6>
       <ul class="nav flex-column">
         <li class="nav-item text-left" v-for="item in hotArticles" :key="item._id">
