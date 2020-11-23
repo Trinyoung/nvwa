@@ -50,32 +50,35 @@
       </h6>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <div class="nav-link">
-            <b-icon-file-richtext class="icon"></b-icon-file-richtext>
-            <span data-toggle="dropdown"> 文档管理 </span>
-          <div class="dropdown-menu" id="dropdownMenu2" aria-labelledby="dropdown02">
-            <ul>
-              <li class="dropdown-item">
-                <router-link :to="`/console/${$route.params.uid}/articles`">
-                  <b-icon-file-text class="icon"></b-icon-file-text>
-                  文章管理
-                </router-link>
-              </li>
-              <li class="dropdown-item">
-                <router-link :to="`/console/${$route.params.uid}/logs`">
-                  <b-icon-file-earmark-binary class="icon"></b-icon-file-earmark-binary>
-                  日志管理
-                </router-link>
-              </li>
-              <li class="dropdown-item">
-                <router-link :to="`/console/${$route.params.uid}/series`">
-                  <b-icon-book class="icon"></b-icon-book>
-                  系列管理
-                </router-link>
-              </li>
-            </ul>
-          </div>
-          </div>
+          <!-- <div class="nav-link"> -->
+            <el-collapse class="nav-link" :accordion="false">
+              <el-collapse-item title="Consistency" icon-file-richtext>
+                <template slot="title">
+                  <b-icon-file-richtext class="collapse-icon"></b-icon-file-richtext> 文档管理
+                </template>
+                <ul>
+                  <li class="dropdown-item">
+                    <router-link :to="`/console/${$route.params.uid}/articles`" class="dropdown-item-link">
+                      <b-icon-file-text class="icon"></b-icon-file-text>
+                      文章管理
+                    </router-link>
+                  </li>
+                  <li class="dropdown-item">
+                    <router-link :to="`/console/${$route.params.uid}/logs`" class="dropdown-item-link">
+                      <b-icon-file-earmark-binary class="icon"></b-icon-file-earmark-binary>
+                      日志管理
+                    </router-link>
+                  </li>
+                  <li class="dropdown-item">
+                    <router-link :to="`/console/${$route.params.uid}/series`" class="dropdown-item-link">
+                      <b-icon-book class="icon"></b-icon-book>
+                      系列管理
+                    </router-link>
+                  </li>
+                </ul>
+              </el-collapse-item>
+            </el-collapse>
+          <!-- </div> -->
         </li>
         <li class="nav-item">
           <router-link class="nav-link" :to="`/console/${$route.params.uid}/types`">
@@ -85,9 +88,7 @@
         </li>
         <li class="nav-item">
           <router-link class="nav-link" :to="`/console/${$route.params.uid}/tags`">
-            <span data-feather="file">
-              <b-icon-tags></b-icon-tags>
-            </span>
+            <b-icon-tags class="icon"></b-icon-tags>
             标签管理
           </router-link>
         </li>
@@ -200,6 +201,10 @@ export default {
   text-align: left;
   margin-left: 2rem;
 }
+.dropdown-item-link {
+  color: #bbbbbb;
+}
+
 .sidebar .nav-item {
   /* text-align: left; */
   font-weight: 500;
@@ -262,5 +267,37 @@ export default {
 }
 .add-button {
   width: 80%;
+}
+
+</style>
+<style >
+.el-collapse {
+  border: none;
+  /* font-size: 1rem; */
+}
+.el-collapse-item__header {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #bbbbbb;
+  background-color: #002338;
+  border: none;
+  line-height: unset;
+  height: unset;
+}
+.el-collapse-item__content {
+  font-size: 0.95rem;
+  background: #01385a;
+  color: #bbbbbb;
+  border:none;
+  padding-bottom: 13px;
+}
+.el-collapse-item__wrap {
+  border: none;
+}
+.dropdown-item:hover {
+  background: #1173b1;
+}
+.collapse-icon {
+  margin-right: 0.5rem;
 }
 </style>

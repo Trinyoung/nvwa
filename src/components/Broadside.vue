@@ -21,7 +21,7 @@
 
       <ul class="nav flex-column">
         <li class="nav-item text-left" v-for="item in newArticles" :key="item._id">
-          <router-link class="nav-link d-inline-block" :to="`/home/${uid}/articles/${item._id}`">
+          <router-link class="nav-link d-inline-block" :to="`/person/${uid}/articles/${item._id}`">
             <span data-feather="file-text">{{item.title}}</span>
             <div class="nav-item-time align-baseline">
               <b-icon-calendar2-check></b-icon-calendar2-check>
@@ -35,7 +35,7 @@
       </h6>
       <ul class="nav flex-column">
         <li class="nav-item text-left" v-for="item in hotArticles" :key="item._id">
-          <router-link class="nav-link" :to="`/home/${uid}/articles/${item._id}`">
+          <router-link class="nav-link" :to="`/person/${uid}/articles/${item._id}`">
             <span data-feather="file-text">{{item.title}}</span>
             <div class="nav-item-time align-baseline">
               <b-icon-calendar2-check></b-icon-calendar2-check>
@@ -160,5 +160,6 @@ export default {
 }
 .nav-link {
   display: inline-block;
+  color: rgba(5, 0, 0, 0.842);
 }
 </style>

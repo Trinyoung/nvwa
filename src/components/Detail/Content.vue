@@ -15,7 +15,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item" v-for="type in article.types" :key="type._id">
-            <router-link :to="`/home/articles?type=${type._id}`">{{type.title}}</router-link>
+            <router-link :to="`/person/articles?type=${type._id}`">{{type.title}}</router-link>
           </li>
         </ol>
       </nav>

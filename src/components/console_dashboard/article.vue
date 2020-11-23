@@ -72,7 +72,7 @@
             </td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <el-button type="success" plain @click="jumpTo(`/home/${$route.params.uid}/articles/${item._id}`)">详情</el-button>
+                <el-button type="success" plain @click="jumpTo(`/person/${$route.params.uid}/articles/${item._id}`)">详情</el-button>
                 <el-button type="primary" plain @click="jumpTo(`/console/editor/${item._id}`)">编辑</el-button>
                 <el-button type="danger" plain @click="deleteArticle(item._id)">删除</el-button>
               </div>

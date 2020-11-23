@@ -1,5 +1,5 @@
 <template>
-  <div class="editor-container container col-md-9 my-1 p-3 bg-white" id="main-content">
+  <div class="editor-container container col-md-9  p-1 bg-white" id="main-content">
     <div class="header-container">
       <el-form :inline="true" class="header-form">
         <el-form-item label="分类: ">
@@ -53,7 +53,8 @@
         <v-markdownEditor v-if="articleObj.isMarkdown" class='mavonEditor'
         v-model="articleObj.content" @save="save(0)"
         ref="md"
-        @imgAdd="imgAdd"></v-markdownEditor>
+        @imgAdd="imgAdd"
+        @imgDel="imgDel"></v-markdownEditor>
         <v-editor v-if="!articleObj.isMarkdown" class="quillEditor border-0" v-model="articleObj.content"></v-editor>
       </div>
       <div class="col-md-1 right-side col-sm-0">
@@ -112,8 +113,8 @@
             <a :href= item.link class="d-inline-block">{{item.title}}</a>
           </div>
           <div class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="button" class="btn btn-secondary" @click="refferStatusChange(item)">编辑</button>
-            <button type="button" class="btn btn-secondary">删除</button>
+            <el-button type="success" plain @click="refferStatusChange(item)">编辑</el-button>
+            <el-button type="danger" plain>删除</el-button>
           </div>
         </div>
         <form v-if ="item.status" class="row">
@@ -125,7 +126,8 @@
             <input type="text" class="form-control" placeholder="请输入文献链接" v-model="item.link">
           </div>
           <div class="col-2">
-            <button class="btn btn-primary" @click="refferChange(index, item.title, item.link)">确定</button>
+            <!-- <button class="btn btn-primary" @click="refferChange(index, item.title, item.link)">确定</button> -->
+            <el-button type="success" plain @click="refferChange(index, item.title, item.link)">确 定</el-button>
           </div>
         </form>
       </li>
@@ -320,7 +322,6 @@ export default {
 
 .mavonEditor {
   height:calc(100vh - 200px);
-  /* height: inherit; */
 }
 
 .titleInput {

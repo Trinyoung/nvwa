@@ -9,7 +9,7 @@
         {{userInfo.username.substr(0, 2)}}
       </button>
       <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
-        <router-link :to="`/home/${this.userInfo.uid}`" class="dropdown-item">
+        <router-link :to="`/person/${this.userInfo.uid}`" class="dropdown-item">
           <b-icon-person></b-icon-person>
           我的主页
         </router-link>
@@ -17,14 +17,14 @@
           <b-icon-gear></b-icon-gear>
           控制台
         </router-link>
-        <router-link :to="'#'" class="dropdown-item">
+        <router-link :to="`/${this.userInfo.username}/updatePassword`" class="dropdown-item">
           <b-icon-lock></b-icon-lock>
           修改密码
         </router-link>
-        <router-link :to="'#'" class="dropdown-item">
+        <span class="dropdown-item logout" @click="logout" >
           <b-icon-power></b-icon-power>
-          退 出
-        </router-link>
+          退出
+        </span>
       </div>
     </div>
   </nav>
@@ -45,6 +45,16 @@ export default {
     },
     getUserInfo () {
       this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    },
+    async logout () {
+      try {
+        await this.$postAjax('/api/user/logout')
+        localStorage.removeItem('userInfo')
+        localStorage.removeItem('token')
+        this.$router.push('/login')
+      } catch (err) {
+        this.$message.error(err.message)
+      }
     }
   }
 }
@@ -127,5 +137,7 @@ export default {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
 }
-
+.logout:hover {
+  cursor: pointer;
+}
 </style>

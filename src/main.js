@@ -1,8 +1,8 @@
 /*
  * @Author: Trinyoung.Lu
  * @Date: 2020-08-04 08:31:03
- * @LastEditors: Trinyoung.Lu
- * @LastEditTime: 2020-09-23 09:25:57
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-11-23 10:35:16
  * @PageTitle: XXX页面
  * @Description: XXX
  * @FilePath: \nvwa\src\main.js
@@ -36,12 +36,14 @@ Vue.use(ElementUI, {zIndex: 3000})
 router.beforeEach((from, to, next) => {
   const regex = new RegExp('/console')
   const cookie = Vue.cookie.get('isLogin')
+  if (!cookie) {
+    localStorage.removeItem('token')
+    localStorage.removeItem('userInfo')
+  }
   if (regex.test(from.path)) {
     if (cookie) {
       next()
     } else {
-      localStorage.removeItem('token')
-      localStorage.removeItem('userInfo')
       router.replace('/login')
     }
   } else {

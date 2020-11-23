@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-19 15:06:21
- * @LastEditTime: 2020-11-20 09:20:52
+ * @LastEditTime: 2020-11-23 10:42:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\homepage\main.vue
@@ -13,7 +13,7 @@
       <ul v-loading="loading">
         <li class="media pt-2" v-for="item in list" :key="item._id" :to="{path:`/articles/${item._id}`}">
           <p class="media-body pb-2 mb-0 lh-125 border-bottom border-gray pl-1">
-            <router-link :to="{path:`/home/${item.author.uid}/articles/${item._id}`}">
+            <router-link :to="{path:`/person/${item.author.uid}/articles/${item._id}`}">
               <strong class="d-block text-gray-dark">
                 <div class="d-inline-block new-icon" v-if="item.isNew">新</div>
                 <div class="d-inline-block hot-icon" v-if="item.isHot">热</div>
@@ -91,7 +91,20 @@ export default {
   .col-title {
     text-align: left;
   }
-
+  .new-icon {
+    border:1px solid green;
+    color: green;
+    font-weight: 100;
+    padding: 0 3px 0 3px;
+    font-size: 0.5rem;
+  }
+  .hot-icon {
+    border: 1px solid red;
+    color: red;
+    font-weight: 100;
+    padding: 0 3px 0 3px;
+    font-size: 0.5rem;
+  }
   .justify-content-center {
     background-color: aliceblue;
     top: 50px;

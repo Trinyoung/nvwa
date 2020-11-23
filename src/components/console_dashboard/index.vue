@@ -14,7 +14,7 @@ import header from './Header'
 import broadside from './broadside'
 import main from './main'
 import bottom from '../bottom'
-// import Axios from 'axios'
+
 export default {
   components: {
     'v-broadside': broadside,
@@ -40,10 +40,6 @@ export default {
       this.getTags()
     },
     async getTags () {
-      // Axios.get('/myapi/tags?').then(res => {
-      //   this.tags = res.data.list
-      //   localStorage.setItem('tags', JSON.stringify(this.tags))
-      // })
       try {
         const result = await this.$getAjax(`/myapi/tags?createdBy=${this.uid}`)
         console.log(result, 'result------------------->')
