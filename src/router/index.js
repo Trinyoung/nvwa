@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-11 18:05:23
- * @LastEditTime: 2020-11-23 09:32:31
+ * @LastEditTime: 2020-11-23 17:00:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\router\index.js
@@ -13,7 +13,7 @@ import Register from '@/components/Register'
 import editorRouter from '@/components/editor/router'
 import Detail from '@/components/Detail'
 import homeRouter from '@/components/person/router'
-import consoleRouter from '@/components/Console_dashboard/router'
+import consoleRouter from '@/components/console_dashboard/router'
 import ForgetPassword from '@/components/forgetPassword'
 import updatePassword from '@/components/updatePassword'
 import homePage from '@/components/homepage'
