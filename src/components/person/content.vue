@@ -63,7 +63,7 @@
 <script>
 import Bottom from './Bottom'
 import moment from 'moment'
-import rightside from './Rightside'
+import rightside from './sightRide'
 import 'mavon-editor/dist/css/index.css'
 export default {
   components: {
