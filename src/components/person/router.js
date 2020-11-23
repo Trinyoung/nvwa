@@ -1,19 +1,19 @@
 /*
  * @Author: your name
  * @Date: 2020-11-11 18:05:18
- * @LastEditTime: 2020-11-19 13:31:30
- * @LastEditors: your name
+ * @LastEditTime: 2020-11-23 09:11:51
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\Home\router.js
  */
-import home from '@/components/Home'
-import article from '@/components/home/article'
-import homePage from '@/components/home/home'
-import Loggers from '@/components/home/Loggers'
-import types from '@/components/home/types'
-import detail from '@/components/home/content'
+import home from '@/components/person'
+import article from '@/components/person/article'
+import homePage from '@/components/person/home'
+import Loggers from '@/components/person/Loggers'
+import types from '@/components/person/types'
+import detail from '@/components/person/content'
 const obj = {
-  path: '/home/:uid',
+  path: '/person/:uid',
   name: 'Home',
   component: home,
   props: true,

@@ -25,7 +25,7 @@
         你好: {{userInfo.username}}
       </button>
       <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
-        <router-link :to="`/home/${this.userInfo.uid}`" class="dropdown-item">
+        <router-link :to="`/person/${this.userInfo.uid}`" class="dropdown-item">
           <b-icon-person></b-icon-person>
           我的主页
         </router-link>

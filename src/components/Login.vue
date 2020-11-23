@@ -79,7 +79,7 @@ export default {
         const result = await this.$postAjax('/api/user/login', request)
         localStorage.setItem('userInfo', JSON.stringify(result.userInfo))
         localStorage.setItem('token', result.token)
-        this.$router.push(`/home/${result.userInfo.uid}`)
+        this.$router.push(`/person/${result.userInfo.uid}`)
       } catch (err) {
         this.$message.error(err.message)
       }
@@ -93,13 +93,13 @@ export default {
       //   }
       //   localStorage.setItem('userInfo', JSON.stringify(result.data.userInfo))
       //   localStorage.setItem('token', result.data.token)
-      //   // window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/home')
+      //   // window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/person')
       //   if (window.history.length > 1) {
       //     return this.$router.go(-1)
       //   }
-      //   this.$router.push('/home/')
+      //   this.$router.push('/person/')
       //   // if () {}
-      //   // this.$router.push('/home')
+      //   // this.$router.push('/person')
       // }).catch(err => {
       //   this.$message.error('登录出现错误', err.msg)
       // })

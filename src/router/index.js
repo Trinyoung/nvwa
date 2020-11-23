@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-11 18:05:23
- * @LastEditTime: 2020-11-19 15:13:44
+ * @LastEditTime: 2020-11-23 09:11:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\router\index.js
@@ -12,7 +12,7 @@ import Login from '@/components/Login'
 import Register from '@/components/Register'
 import editorRouter from '@/components/editor/router'
 import Detail from '@/components/Detail'
-import homeRouter from '@/components/Home/router'
+import homeRouter from '@/components/person/router'
 import consoleRouter from '@/components/Console_dashboard/router'
 import ForgetPassword from '@/components/forgetPassword'
 import updatePassword from '@/components/updatePassword'
@@ -28,7 +28,7 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      redirect: '/home'
+      redirect: '/person'
     },
     {
       path: '/login',

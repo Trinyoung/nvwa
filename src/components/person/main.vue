@@ -10,32 +10,32 @@
   <main role="main" class="container">
     <ul class="nav justify-content-center d-flex align-items-center p-3 my-2 rounded shadow-sm">
       <li class="nav-item">
-        <router-link :to="`/home/${uid}`" class="active">
+        <router-link :to="`/person/${uid}`" class="active">
           <span class="nav-link active item-title">首页</span>
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link :to="`/home/${uid}/articles`">
+        <router-link :to="`/person/${uid}/articles`">
           <span class="nav-link active item-title">文章</span>
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link :to="`/home/${uid}/types`">
+        <router-link :to="`/person/${uid}/types`">
           <span class="nav-link active item-title">分类</span>
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link :to="`/home/${uid}/logger`">
+        <router-link :to="`/person/${uid}/logger`">
           <span class="nav-link item-title">日志</span>
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link :to="`/home/${uid}/logger`">
+        <router-link :to="`/person/${uid}/logger`">
           <span class="nav-link item-title">连载</span>
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link :to="`/home/${uid}/logger`">
+        <router-link :to="`/person/${uid}/logger`">
           <span class="nav-link item-title">相册</span>
         </router-link>
       </li>
