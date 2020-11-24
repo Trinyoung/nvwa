@@ -273,7 +273,6 @@ export default {
 <style >
 .el-collapse {
   border: none;
-  /* font-size: 1rem; */
 }
 .el-collapse-item__header {
   font-size: 0.95rem;

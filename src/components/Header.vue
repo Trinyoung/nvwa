@@ -59,7 +59,6 @@ export default {
     this.isLogin = !!this.$cookie.get('isLogin')
     if (this.isLogin) {
       this.userInfo = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
-      // this.uid =
     }
   },
   methods: {
