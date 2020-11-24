@@ -49,35 +49,33 @@
       </h6>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <!-- <div class="nav-link"> -->
-            <el-collapse class="nav-link" :accordion="false">
-              <el-collapse-item title="Consistency" icon-file-richtext>
-                <template slot="title">
-                  <b-icon-file-richtext class="collapse-icon"></b-icon-file-richtext> 文档管理
-                </template>
-                <ul>
-                  <li class="dropdown-item">
-                    <router-link :to="`/console/${$route.params.uid}/articles`" class="dropdown-item-link">
-                      <b-icon-file-text class="icon"></b-icon-file-text>
-                      文章管理
-                    </router-link>
-                  </li>
-                  <li class="dropdown-item">
-                    <router-link :to="`/console/${$route.params.uid}/logs`" class="dropdown-item-link">
-                      <b-icon-file-earmark-binary class="icon"></b-icon-file-earmark-binary>
-                      日志管理
-                    </router-link>
-                  </li>
-                  <li class="dropdown-item">
-                    <router-link :to="`/console/${$route.params.uid}/series`" class="dropdown-item-link">
-                      <b-icon-book class="icon"></b-icon-book>
-                      系列管理
-                    </router-link>
-                  </li>
-                </ul>
-              </el-collapse-item>
-            </el-collapse>
-          <!-- </div> -->
+          <el-collapse class="nav-link" :accordion="false">
+            <el-collapse-item title="Consistency" icon-file-richtext>
+              <template slot="title">
+                <b-icon-file-richtext class="collapse-icon"></b-icon-file-richtext> 文档管理
+              </template>
+              <ul>
+                <li class="dropdown-item">
+                  <router-link :to="`/console/${$route.params.uid}/articles`" class="dropdown-item-link">
+                    <b-icon-file-text class="icon"></b-icon-file-text>
+                    文章管理
+                  </router-link>
+                </li>
+                <li class="dropdown-item">
+                  <router-link :to="`/console/${$route.params.uid}/logs`" class="dropdown-item-link">
+                    <b-icon-file-earmark-binary class="icon"></b-icon-file-earmark-binary>
+                    日志管理
+                  </router-link>
+                </li>
+                <li class="dropdown-item">
+                  <router-link :to="`/console/${$route.params.uid}/series`" class="dropdown-item-link">
+                    <b-icon-book class="icon"></b-icon-book>
+                    系列管理
+                  </router-link>
+                </li>
+              </ul>
+            </el-collapse-item>
+          </el-collapse>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" :to="`/console/${$route.params.uid}/types`">
