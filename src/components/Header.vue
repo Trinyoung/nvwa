@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar sticky-top bg-white flex-md-nowrap p-0 shadow-sm">
-    <router-link class="navbar-brand align-bottom col-md-3 col-lg-2 d-inline-block" to="/homepage">
+    <router-link class="navbar-brand align-bottom col-md-3 col-lg-2 d-inline-block" to="/home">
       <b-icon-house-fill class="icon" width="2rem" height="1.5rem"></b-icon-house-fill>
       <span class="d-inline-block align-bottom home-title">Trinyoung</span>
     </router-link>
