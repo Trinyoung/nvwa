@@ -26,7 +26,6 @@
             <li class="dropdown-item">
               <router-link to="/">
                 <b-icon-images class="icon"></b-icon-images>
-                <!-- </span> -->
                 新建相册
               </router-link>
             </li>
