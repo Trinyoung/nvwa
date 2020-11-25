@@ -176,10 +176,15 @@ export default {
         submitForm.isTop = 0
         submitForm.parent = parent || reply
       }
+      if (this.visitInfo && !this.userInfo) {
+        submitForm.nilName = this.visitInfo.nilName
+        submitForm.email = this.visitInfo.email
+      }
       try {
         await this.$postAjax('/myapi/comments', submitForm)
         $(`#collapseReply${reply}`).collapse(false)
         this.$message.success('发表成功')
+        this.dataForm = {}
         this.getComments()
         if (this.$cookie.get('visitInfo')) {
           this.isUser = true

@@ -107,6 +107,10 @@ export default {
       this.isAuthor = false
       this.isFavorited = false
       this.uid = this.$route.params.uid
+      const isFavorite = sessionStorage.getItem(`favorite_${this.articleId}`)
+      if (isFavorite) {
+        this.isFavorited = true
+      }
       if (isLogin) {
         this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
         this.getFavorite()
@@ -178,7 +182,8 @@ export default {
         await this.$postAjax('/myapi/articles/favorites', request)
         this.isFavorited = true
         this.favoriteNum++
-        console.log('点赞开始了')
+        sessionStorage.setItem(`favorite_${this.articleId}`, 1)
+        // console.log('点赞开始了')
         this.$emit('articleInfoChange', false, true)
       } catch (err) {
         this.$message.error(err.message)
