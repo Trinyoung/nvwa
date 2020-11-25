@@ -53,8 +53,7 @@
         <v-markdownEditor v-if="articleObj.isMarkdown" class='mavonEditor'
         v-model="articleObj.content" @save="save(0)"
         ref="md"
-        @imgAdd="imgAdd"
-        @imgDel="imgDel"></v-markdownEditor>
+        @imgAdd="imgAdd"></v-markdownEditor>
         <v-editor v-if="!articleObj.isMarkdown" class="quillEditor border-0" v-model="articleObj.content"></v-editor>
       </div>
       <div class="col-md-1 right-side col-sm-0">
