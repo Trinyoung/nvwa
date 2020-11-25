@@ -166,7 +166,8 @@ export default {
     },
     async submitForm (formName, reply, data, parent) {
       const submitForm = Object.assign({
-        articleId: this.articleId
+        articleId: this.articleId,
+        authorUid: this.uid
       }, this.dataForm, data)
       if (this.uid) {
         submitForm.createdBy = this.uid
