@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-19 15:06:13
- * @LastEditTime: 2020-11-23 13:56:18
+ * @LastEditTime: 2020-11-25 11:53:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\homepage\broadside.vue
@@ -15,7 +15,7 @@
 
       <ul class="nav flex-column">
         <li class="nav-item text-left" v-for="item in authors" :key="item._id">
-          <router-link class="nav-link d-inline-block" :to="`/person/${uid}/articles/${item._id}`">
+          <router-link class="nav-link d-inline-block" :to="`/person/${item._id}`">
             <span data-feather="file-text">{{item.userInfo.username}}</span>
             <div class="nav-item-time align-baseline">
               喜欢: {{item.favoriteNums}}
@@ -31,7 +31,7 @@
       </h6>
       <ul class="nav flex-column">
         <li class="nav-item text-left" v-for="item in hotArticles" :key="item._id">
-          <router-link class="nav-link" :to="`/person/${uid}/articles/${item._id}`">
+          <router-link class="nav-link" :to="`/person/${item.authorUid}/articles/${item._id}`">
             <span data-feather="file-text">{{item.title}}</span>
             <div class="nav-item-time align-baseline">
               <b-icon-calendar2-check></b-icon-calendar2-check>
@@ -63,7 +63,7 @@ export default {
       toConsoleUrl: `/console/${this.$route.params.uid}`
     }
   },
-  props: ['uid'],
+  // props: ['uid'],
   created () {
     this.init()
   },
