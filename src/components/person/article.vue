@@ -79,7 +79,7 @@ export default {
       let { keyword, type } = this.$data
       let queryString = `page=${page}&createdBy=${this.uid}`
       if (keyword) queryString += `&keyword=${keyword}`
-      if (type) queryString += `&type=${keyword}`
+      if (type) queryString += `&type=${type}`
       Axios.get(`/myapi/articles/list?${queryString}`).then((res) => {
         if (res.data.code !== '000') {
           return alert('获取结果失败')

@@ -157,8 +157,8 @@ export default {
       const hasRead = sessionStorage.getItem(`read_${this.articleId}`)
       if (!hasRead) {
         try {
-          const result = await this.$postAjax(`/myapi/articles/reads`, request)
-          sessionStorage.setItem(`read_${this.articleId}`, result._id)
+          await this.$postAjax(`/myapi/articles/reads`, request)
+          sessionStorage.setItem(`read_${this.articleId}`, 1)
           this.article.hasReads++
           this.$emit('articleInfoChange', true)
         } catch (err) {
