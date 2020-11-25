@@ -103,9 +103,10 @@ export default {
   methods: {
     init () {
       this.getArticleDetail()
-      this.userInfo = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
-      this.uid = this.userInfo && this.userInfo.uid
-      if (this.userInfo) {
+      const isLogin = this.$cookie.get('isLogin')
+      this.uid = this.$route.params.uid
+      if (isLogin) {
+        this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
         this.getFavorite()
       }
     },
@@ -192,7 +193,7 @@ export default {
     async getFavorite () {
       let queryString = ''
       if (this.userInfo) {
-        queryString = `uid=${this.userInfo.uid}`
+        queryString = `authorUid=${this.userInfo.uid}`
       }
       try {
         const result = await this.$getAjax(`/myapi/articles/favorites/${this.articleId}?${queryString}`)
