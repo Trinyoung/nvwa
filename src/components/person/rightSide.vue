@@ -2,7 +2,10 @@
   <!-- <div class="col-md-1 right-side my-3"> -->
   <div class="sidebar">
     <div class="my-3 sidebar-item shadow-sm tag-item">
-      <b-icon-hand-thumbs-up width="1.8em" height="1.8em" class="tag" >
+      <b-icon-hand-thumbs-up width="1.8em" height="1.8em" class="tag"
+        v-bind:class="{'isFavorited':isFavorited, 'favorite-icon':!isFavorited} "
+        @click="setFavorite"
+      >
       </b-icon-hand-thumbs-up>
       点 赞
     </div>
@@ -38,7 +41,7 @@ export default {
       canCollect: false
     }
   },
-  props: ['articleId', 'isAuthor'],
+  props: ['articleId', 'isAuthor', 'isFavorited'],
   created () {
     const userInfo = localStorage.getItem('userInfo')
     if (userInfo) {
@@ -46,6 +49,25 @@ export default {
     }
   },
   methods: {
+    async setFavorite () {
+      console.log('点赞开始了-----------------》')
+      if (this.isFavorited) {
+        return this.$message.success('已经点过赞了！')
+      }
+      const request = {
+        articleId: this.articleId,
+        createdBy: this.userInfo && this.userInfo.uid,
+        authorUid: this.$route.params.uid
+      }
+      try {
+        await this.$postAjax('/myapi/articles/favorites', request)
+        this.$parent.isFavorited = true
+        // console.log('点赞开始了')
+        this.$emit('favoriteChange', false, true)
+      } catch (err) {
+        this.$message.error(err.message)
+      }
+    }
   }
 }
 </script>
@@ -124,5 +146,8 @@ export default {
   text-align: left;
   padding: 0.4rem 0.75rem;
   background: none;
+}
+.isFavorited {
+  color: red;
 }
 </style>

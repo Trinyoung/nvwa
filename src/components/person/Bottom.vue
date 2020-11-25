@@ -120,7 +120,7 @@ import Axios from 'axios'
 import moment from 'moment'
 import $ from 'jquery'
 export default {
-  props: ['refers', 'articleId', 'uid'],
+  props: ['refers', 'articleId'],
   created () {
     this.init()
   },
@@ -133,11 +133,10 @@ export default {
     return {
       commentNums: 0,
       comments: [],
-      visitInfo: {
-        nilName: '',
-        email: ''
-      },
       dataForm: {
+        nilName: '',
+        email: '',
+        content: ''
       },
       replyForm: {},
       rules: {
@@ -157,9 +156,9 @@ export default {
   },
   methods: {
     init () {
-      const vistorInfo = this.$cookie.get('visitInfo')
-      this.vistorInfo = JSON.stringify(vistorInfo)
-      this.isUser = !!this.uid || !!vistorInfo
+      this.visitInfo = JSON.parse(this.$cookie.get('visitInfo'))
+      this.isUser = !!this.$cookie.get('isLogin') || !!this.visitInfo
+      this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
       this.getComments()
       this.dataForm.articleId = this.articleId
       this.replyForm.articleId = this.articleId
@@ -167,14 +166,10 @@ export default {
     async submitForm (formName, reply, data, parent) {
       const submitForm = Object.assign({
         articleId: this.articleId,
-        authorUid: this.uid
+        authorUid: this.$route.params.uid
       }, this.dataForm, data)
-      if (this.uid) {
-        submitForm.createdBy = this.uid
-      }
-      if (this.vistorInfo) {
-        submitForm.nilName = this.visitInfo.nilName
-        submitForm.email = this.visitInfo.email
+      if (this.userInfo && this.userInfo.uid) {
+        submitForm.createdBy = this.userInfo.uid
       }
       if (reply) {
         submitForm.reply = reply

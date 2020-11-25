@@ -1,6 +1,6 @@
 <template>
   <main role="main" class="main">
-    <v-rightside :articleId="articleId" :isAuthor="isAuthor"></v-rightside>
+    <v-rightside :articleId="articleId" :isAuthor="isAuthor" :isFavorited="isFavorited" @favoriteChange="favoriteChange"></v-rightside>
     <div class="my-1 pt-0 p-3 rounded shadow-sm border-aliceBlue">
       <nav aria-label="breadcrumb" class="breadcrumb-container rounded">
         <ol class="breadcrumb">
@@ -56,7 +56,7 @@
           <b>下一篇：</b><a href="#">黄河大合唱</a>
         </div>
       </div>
-      <v-bottom :refers="article.refers" :articleId="articleId" :uid="$route.params.uid"></v-bottom>
+      <v-bottom :refers="article.refers" :articleId="articleId"></v-bottom>
     </div>
   </main>
 </template>
@@ -104,6 +104,8 @@ export default {
     init () {
       this.getArticleDetail()
       const isLogin = this.$cookie.get('isLogin')
+      this.isAuthor = false
+      this.isFavorited = false
       this.uid = this.$route.params.uid
       if (isLogin) {
         this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
@@ -126,7 +128,7 @@ export default {
         this.article.author = author
         this.article.hasReads = hasReads
         this.article.createdBy = createdBy
-        this.isAuthor = this.uid === createdBy
+        this.isAuthor = this.userInfo.uid === createdBy
         this.loading = false
         this.article.wordNums = wordNums
         if (type) {
@@ -201,6 +203,10 @@ export default {
       } catch (err) {
         this.$message.error(err.message)
       }
+    },
+    favoriteChange () {
+      this.favoriteNum++
+      this.$emit('articleInfoChange', false, true)
     }
   }
 }
