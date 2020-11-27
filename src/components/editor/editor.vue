@@ -279,12 +279,14 @@ export default {
         this.articleObj.refers.push({ title, link })
       }
     },
-    imgAdd (pos, file) {
+    async imgAdd (pos, file) {
       const formData = new FormData()
       formData.append('img', file)
-      axios.post('/upload/upload/file', formData).then(res => {
-        this.$refs.md.$img2Url(pos, res.data.path)
-      })
+      const result = await this.$postAjax('/upload/upload/file', formData)
+      this.$refs.md.$img2Url(pos, result)
+      // axios.post('/upload/upload/file', formData).then(res => {
+      //   this.$refs.md.$img2Url(pos, res.data.path)
+      // })
     }
   }
 }

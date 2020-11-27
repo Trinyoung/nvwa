@@ -32,7 +32,7 @@ module.exports = {
         changeOrigin: true,
         secure: true,
         pathRewrite: {
-          '^/upload': '/myapi'
+          '^/upload': '/api'
         }
       }
     },
