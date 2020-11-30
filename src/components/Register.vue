@@ -255,8 +255,12 @@ export default {
           submitForm = {
             password, username, birthday: moment(birthday).unix, realName, email, gender, job, mobile
           }
-          await this.$postAjax('/api/user/register', submitForm)
-          return this.$router.push('/login')
+          try {
+            await this.$postAjax('/api/user/register', submitForm)
+            return this.$router.push('/login')
+          } catch (err) {
+            this.$message.error(err.message)
+          }
         }
       })
     }
