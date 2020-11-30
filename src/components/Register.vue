@@ -1,6 +1,6 @@
 <template>
-  <form class="loginForm">
-    <div class="container">
+  <!-- <form class="loginForm">
+    <div class="container border">
       <div class="form-group row loginHead pd-3">
         <div class="col-sm-12">
           <span class="loginTitle">用户注册</span>
@@ -16,8 +16,7 @@
             type="text"
             id="email"
             placeholder="Enter email"
-            v-model="userInfo.email"
-          />
+            v-model="userInfo.email"/>
         </div>
         <div class="col-sm-1">
           <span class="line-text-middle labeltitle text-warning">*</span>
@@ -71,7 +70,6 @@
           />
         </div>
         <div class="col-sm-1">
-          <!-- <span class="line-text-middle labeltitle text-warning">*</span> -->
         </div>
       </div>
       <div class="form-group row">
@@ -149,12 +147,54 @@
         <div class="col-sm-3"></div>
       </div>
     </div>
-  </form>
+  </form> -->
+  <el-form class="border loginForm" label-width="100px" label-color="" :model="userInfo" :rules="rules" ref="userInfo">
+    <div class="form-group loginHead pd-3">
+      <span class="loginTitle">用户注册</span>
+    </div>
+    <el-form-item label="用户名" class="labeltitle" prop="username">
+      <el-input v-model="userInfo.username"></el-input>
+    </el-form-item>
+    <el-form-item label="邮箱" prop="email">
+      <el-input v-model="userInfo.email"></el-input>
+    </el-form-item>
+    <el-form-item label="手机" prop="mobile">
+      <el-input v-model="userInfo.mobile"></el-input>
+    </el-form-item>
+    <el-form-item label="昵称" prop="realName">
+      <el-input v-model="userInfo.realName"></el-input>
+    </el-form-item>
+    <el-form-item label="密码" prop="password">
+      <el-input v-model="userInfo.password"></el-input>
+    </el-form-item>
+    <el-form-item label="确认密码" prop="confirmPassword">
+      <el-input v-model="userInfo.confirmPassword"></el-input>
+    </el-form-item>
+    <el-form-item label="性别">
+      <el-radio-group v-model="userInfo.gender">
+        <el-radio :label="1" >男</el-radio>
+        <el-radio :label="2" >女</el-radio>
+      </el-radio-group>
+    </el-form-item>
+    <el-form-item label="工作">
+      <el-input v-model="userInfo.job"></el-input>
+    </el-form-item>
+    <el-form-item label="生日" class="text-left">
+      <el-date-picker
+        v-model="userInfo.birthday"
+        type="date"
+        placeholder="选择日期">
+      </el-date-picker>
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="register">确认</el-button>
+      <el-button>取消</el-button>
+    </el-form-item>
+  </el-form>
 </template>
 <script>
-import axios from 'axios'
-import datePicker from 'vue-bootstrap-datetimepicker'
 import moment from 'moment'
+import datePicker from 'vue-bootstrap-datetimepicker'
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 export default {
@@ -171,57 +211,58 @@ export default {
         birthday: new Date(),
         gender: 0,
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        job: ''
       },
       options: {
         format: 'YYYY-MM-DD',
         useCurrent: false,
         locale: 'zh-cn'
+      },
+      rules: {
+        email: [{
+          required: true, message: '请填写邮箱', trigger: 'blur'
+        }],
+        mobile: [
+          {required: true, message: '请填写手机号', trigger: 'blur'}
+        ],
+        username: [
+          {required: true, message: '请填写用户名', trigger: 'blur'}
+        ],
+        realName: [
+          {required: true, message: '请填写昵称', trigger: 'blur'}
+        ],
+        password: [
+          {required: true, message: '请填写密码', trigger: 'blur'}
+        ],
+        confirmPassword: [
+          {required: true, message: '请填入确认密码', trigger: 'blur'}
+        ]
       }
     }
   },
   methods: {
-    register: function () {
-      const userInfo = Object.assign({}, this.userInfo)
-      userInfo.birthday = moment(userInfo.birthday).unix()
-      if (!userInfo.username) {
-        alert('缺少用户名')
-        return
-      }
-
-      if (!userInfo.password) {
-        alert('请填写密码')
-        return
-      }
-
-      if (
-        userInfo.password &&
-        userInfo.confirmPassword &&
-        userInfo.password !== userInfo.confirmPassword
-      ) {
-        alert('请保持密码与确认密码一致')
-        return
-      }
-
-      if (!userInfo.email) {
-        alert('请填写邮箱')
-        return
-      }
-
-      if (!userInfo.mobile) {
-        alert('请填写手机号码')
-        return
-      }
-      axios.post('/api/user/register', userInfo).then((result) => {
-        if (result.data.code !== '000') {
-          return alert('注册失败，请填写正确的注册信息！')
+    register () {
+      this.$refs['userInfo'].validate(async (valid) => {
+        let submitForm = {}
+        const {password, username, birthday, realName, confirmPassword, email, gender, job, mobile} = this.userInfo
+        if (confirmPassword !== password) {
+          this.userInfo.password = ''
+          this.userInfo.confirmPassword = ''
+          return this.$message.error('确认密码与密码不一致， 请修改后再重新提交！')
         }
-        return this.$router.push('/login')
+        if (valid) {
+          submitForm = {
+            password, username, birthday: moment(birthday).unix, realName, email, gender, job, mobile
+          }
+          await this.$postAjax('/api/user/register', submitForm)
+          return this.$router.push('/login')
+        }
       })
     }
   }
 }
-</script>>
+</script>
 <style scoped>
 .loginForm {
   border-radius: 0.5rem;
@@ -233,46 +274,11 @@ export default {
   background: white;
 }
 
-.labeltitle {
-  font-size: 1.2rem;
-  color: green;
-  margin-right: 0.2rem;
-}
-
 .loginHead {
   text-align: center;
   color: blue;
   background: wheat;
   border-radius: 0.5rem 0.5rem 0 0;
-}
-.button-left {
-  margin-right: 0.5rem;
-  width: 6rem;
-  margin-bottom: 0.5rem;
-}
-
-.button-right {
-  width: 6rem;
-  background: rgb(96, 96, 167);
-  margin-bottom: 0.5rem;
-}
-
-.line-text-middle {
-  display: inline-block;
-  line-height: 2.5rem;
-  text-align: right;
-  font-weight: bold;
-}
-.line-input-middle {
-  display: inline-block;
-  height: 90%;
-  font-size: 1rem;
-}
-.line-text-right {
-  text-align: right;
-}
-.text-font {
-  font-weight: bold;
 }
 
 .loginTitle {
@@ -288,10 +294,23 @@ export default {
   height: 100%;
   font-size: 1.2rem;
 }
-.text-warning {
-  color: red
+
+.el-form-item {
+  margin-right: 40px;
+  margin-bottom: 20px;
 }
-.line-text-center {
-  text-align: center;
+
+.el-date-picker {
+  width: 100%;
+  text-align: left;
 }
+</style>
+<style>
+  .el-form-item__label {
+    color: green!important;
+    font-weight: 800;
+  }
+  .el-date-editor {
+    width: 100%!important;
+  }
 </style>
