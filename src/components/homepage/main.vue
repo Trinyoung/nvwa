@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-19 15:06:21
- * @LastEditTime: 2020-11-23 10:42:10
+ * @LastEditTime: 2020-12-02 14:58:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\homepage\main.vue
@@ -10,9 +10,9 @@
   <main role="main" class="container">
     <!-- <div class="border justify-content-center d-flex align-items-center p-3 my-2 rounded shadow-sm"> -->
      <div class="article-list border p-3 my-2 rounded shadow-sm">
-      <ul v-loading="loading">
-        <li class="media pt-2" v-for="item in list" :key="item._id" :to="{path:`/articles/${item._id}`}">
-          <p class="media-body pb-2 mb-0 lh-125 border-bottom border-gray pl-1">
+      <ul v-loading="loading" class="list-group list-group-flush">
+        <li class="list-group-item pt-2 list-group-item-action" v-for="item in list" :key="item._id" :to="{path:`/articles/${item._id}`}">
+          <p class="mb-0 text-left">
             <router-link :to="{path:`/person/${item.author.uid}/articles/${item._id}`}">
               <strong class="d-block text-gray-dark">
                 <div class="d-inline-block new-icon" v-if="item.isNew">新</div>
@@ -83,7 +83,6 @@ export default {
 <style scoped>
   .container {
     position: relative;
-    /* top: 20px; */
   }
   .media-body {
     text-align: left;
@@ -124,5 +123,8 @@ export default {
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 5px;
+  }
+  .list-group-item {
+    padding-left: 0;
   }
 </style>
