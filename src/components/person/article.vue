@@ -8,9 +8,9 @@
           </li>
         </ol>
       </nav>
-      <ul v-loading="loading">
-        <li class="media pt-2" v-for="item in list" :key="item._id" :to="{path:`/articles/${item._id}`}">
-          <p class="media-body pb-2 mb-0 lh-125 border-bottom border-gray pl-1">
+      <ul v-loading="loading" class="list-group list-group-flush">
+        <li class="media pt-2 list-group-item" v-for="item in list" :key="item._id" :to="{path:`/articles/${item._id}`}">
+          <p class="media-body mb-0 lh-125 border-gray ">
             <router-link :to="{path:`/person/${uid}/articles/${item._id}`}">
               <strong class="d-block text-gray-dark">
                 <div class="d-inline-block new-icon" v-if="item.isNew">新</div>

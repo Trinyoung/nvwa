@@ -1,5 +1,5 @@
 <template>
-  <main role="main" class="main container">
+  <main role="main" class="pl-1 container">
     <div class="container p-3 rounded my-2 shadow-sm content-header justify-content-center">
       <div class="row my-1">
         <div class="col-sm-5">
@@ -19,7 +19,7 @@
           </li>
         </ol>
       </nav>
-      <h1 class="border-bottom border-gray pb-2 mb-0 col-title">{{article.title}}</h1>
+      <h1 class="border-bottom border-gray pb-2 mb-0 text-center">{{article.title}}</h1>
       <div class="text-muted article-tip">
         <ul class="list-group list-group-horizontal mt-1">
           <li class="list-group-item "><b>作者：</b>{{article.author}}</li>
@@ -32,7 +32,7 @@
           </li>
         </ul>
       </div>
-      <div class="content-container markdown-body" v-html="article.contentHtml" >
+      <div class="content-container text-left markdown-body" v-html="article.contentHtml" >
       </div>
       (完)
       <div class="reffer-container pt-3">
@@ -71,7 +71,6 @@
 </template>
 <script>
 import Bottom from './Bottom'
-// import Axios from 'axios'
 import moment from 'moment'
 import 'mavon-editor/dist/css/index.css'
 export default {
@@ -142,23 +141,16 @@ export default {
 }
 </script>
 <style scoped>
-  .media-body {
-    text-align: left;
-  }
   .size-2 {
     height: 2em;
     width: 2em;
   }
-  .col-title {
-    text-align: center;
-  }
+
   .justify-content-center {
-    /* background-image: url('../../../static/首页标题栏.jpg'); */
     background-repeat: no-repeat;
     background-size: 100% 100%;
   }
   .item-title {
-    /* color: white; */
     font-size: 1.1rem;
   }
   img {
@@ -196,11 +188,10 @@ export default {
     cursor: pointer;
     color: red;
   }
-  .main {
+  /* .main {
     padding-left: 10px;
-  }
+  } */
   .content-container {
-    text-align: left;
     font-size: 0.9rem;
   }
   .tag-icon {
@@ -272,6 +263,5 @@ export default {
   }
   .isFavorited:hover {
     cursor: pointer;
-    /* color: black */
   }
 </style>

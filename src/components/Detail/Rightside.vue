@@ -75,20 +75,11 @@ export default {
   color: darkgray;
 }
 .tag-item {
-  /* background: wheat; */
   width: 4rem;
   height: 4rem;
   border-radius: 50% 50% 50% 50%;
   border: 1px solid aliceblue;
   margin: 0 auto;
-}
-#dropdownMenu2 {
-  left: 1.4rem!important;
-  top: 0.5rem!important;
-}
-
-#dropdownMenu2 :hover{
-  cursor: pointer;
 }
 
 .reffer-container {
