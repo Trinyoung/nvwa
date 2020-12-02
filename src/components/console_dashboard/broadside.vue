@@ -153,7 +153,26 @@
 import 'vue-feather-icons'
 export default {
   data () {
-    return {}
+    return {
+      sourceMangements: [
+        {
+          type: 1,
+          children: [
+            {
+              article: {
+                type: '1-1'
+              }
+            },
+            {
+              logger: {
+                type: '1-2'
+              }
+            }
+          ]
+        }
+      ],
+      systemMangements: []
+    }
   }
 }
 </script>
@@ -171,7 +190,6 @@ export default {
     z-index: 100; /* Behind the navbar */
     padding: 48px 0 0; /* Height of navbar */
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-    /* overflow: scroll; */
   }
   .sidebar-sticky::-webkit-scrollbar {
     display:none
@@ -181,16 +199,14 @@ export default {
     top: 0;
     height: calc(100vh - 48px);
     padding-top: .5rem;
-    /* overflow-x: hidden; */
     overflow-y: auto;
-    /* Scrollable contents if viewport is shorter than content. */
   }
   @supports ((position: -webkit-sticky) or (position: sticky)) {
-  .sidebar-sticky {
-    position: -webkit-sticky;
-    position: sticky;
+    .sidebar-sticky {
+      position: -webkit-sticky;
+      position: sticky;
+    }
   }
-}
 
 .sidebar .nav-link {
   font-weight: 500;
@@ -203,10 +219,8 @@ export default {
 }
 
 .sidebar .nav-item {
-  /* text-align: left; */
   font-weight: 500;
   color: #bbbbbb;
-  /* margin-left: 2rem; */
 }
 .sidebar .nav-link .feather {
   margin-right: 4px;

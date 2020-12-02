@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-08-04 08:31:03
- * @LastEditTime: 2020-11-18 15:44:41
+ * @LastEditTime: 2020-12-02 16:55:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\Home\main.vue
@@ -9,34 +9,9 @@
 <template>
   <main role="main" class="container">
     <ul class="nav justify-content-center d-flex align-items-center p-3 my-2 rounded shadow-sm">
-      <li class="nav-item">
-        <router-link :to="`/person/${uid}`" class="active">
-          <span class="nav-link active item-title">首页</span>
-        </router-link>
-      </li>
-      <li class="nav-item">
-        <router-link :to="`/person/${uid}/articles`">
-          <span class="nav-link active item-title">文章</span>
-        </router-link>
-      </li>
-      <li class="nav-item">
-        <router-link :to="`/person/${uid}/types`">
-          <span class="nav-link active item-title">分类</span>
-        </router-link>
-      </li>
-      <li class="nav-item">
-        <router-link :to="`/person/${uid}/logger`">
-          <span class="nav-link item-title">日志</span>
-        </router-link>
-      </li>
-      <li class="nav-item">
-        <router-link :to="`/person/${uid}/logger`">
-          <span class="nav-link item-title">连载</span>
-        </router-link>
-      </li>
-      <li class="nav-item">
-        <router-link :to="`/person/${uid}/logger`">
-          <span class="nav-link item-title">相册</span>
+      <li class="nav-item" v-for="item in activeMenus" :key="item.type"  @click="changeActive(item.type)">
+        <router-link :to="`/person/${uid}/${item.value}`" class="nav-link" >
+          <span class="item-title" v-bind:class="{active: isActive === item.type}">{{item.text}}</span>
         </router-link>
       </li>
     </ul>
@@ -45,28 +20,75 @@
 </template>
 <script>
 import broadSide from '../Broadside'
+// import menu from '/'
 export default {
   components: {
     'v-broadSide': broadSide
   },
-  data: function () {
+  data () {
     return {
       view: 'home',
       newestList: [],
-      hotList: []
+      hotList: [],
+      isActive: 1,
+      menus: [
+        {
+          type: 1,
+          text: '首页',
+          value: '',
+          active: true
+        },
+        {
+          type: 2,
+          text: '文章',
+          value: 'articles',
+          active: true
+        },
+        {
+          type: 3,
+          text: '分类',
+          value: 'types',
+          active: true
+        },
+        {
+          type: 4,
+          text: '日志',
+          value: 'logger',
+          active: false
+        },
+        {
+          type: 5,
+          text: '连载',
+          value: 'series',
+          active: false
+        },
+        {
+          type: 6,
+          text: '相册',
+          value: 'albumn',
+          active: false
+        }
+      ]
     }
   },
   props: ['uid'],
+  computed: {
+    activeMenus () {
+      return this.menus.filter(item => item.active)
+    }
+  },
   methods: {
-    getNewestList: function () {
+    getNewestList () {
       return ''
     },
-    getHotList: function () {
+    getHotList () {
       return ''
     },
     articleInfoChange (readsNums, favoriteNums) {
-      console.log('------点赞进行中------------> asdafsd')
       this.$emit('articleInfoChange', readsNums, favoriteNums)
+    },
+    changeActive (type) {
+      this.isActive = type
     }
   }
 }
@@ -105,7 +127,7 @@ export default {
     padding-right: 10px;
     padding-bottom: 5px;
   }
-  .active:active {
+  .active {
     color: rgb(77, 77, 231);
   }
   /* :active */

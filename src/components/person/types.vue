@@ -57,7 +57,7 @@
         </li>
         <li class="media pt-2">
           <p class="media-body pb-2 mb-0 lh-125 border-bottom border-gray pl-1">
-            <strong class="d-block text-gray-dark">
+            <strong class="d-block">
               <div class="d-inline-block hot-icon">热</div>
               掌上吉祥2.0 jssdk 功能清单
             </strong>
