@@ -204,12 +204,12 @@ export default {
             let result
             if (!id) {
               result = await this.$postAjax(`/api/articles/types`, request, true)
-              if (this.dataList.length < 10) {
-                this.dataList.push(result)
+              if (this.list.length < 10) {
+                this.list.push(result)
               }
             } else {
               result = await this.$putAjax(`/api/articles/types/${id}`, request, true)
-              this.dataList.splice()
+              this.list.splice()
             }
             this.dialogFormVisible = false
             this.$message.success('编辑成功！')
