@@ -180,7 +180,7 @@ export default {
     formatTime (time) {
       return moment(time * 1000).format('YYYY-MM-DD')
     },
-    async submitForm (formName) {
+    submitForm (formName) {
       this.$refs['dataForm'].validate(async (valid) => {
         if (valid) {
           const id = this.typeId
@@ -203,12 +203,12 @@ export default {
           try {
             let result
             if (!id) {
-              result = await this.postAjax(`/api/articles/types`, request, true)
+              result = await this.$postAjax(`/api/articles/types`, request, true)
               if (this.dataList.length < 10) {
                 this.dataList.push(result)
               }
             } else {
-              result = await this.putAjax(`/api/articles/types/${id}`, request, true)
+              result = await this.$putAjax(`/api/articles/types/${id}`, request, true)
               this.dataList.splice()
             }
             this.dialogFormVisible = false
@@ -216,6 +216,7 @@ export default {
             localStorage.removeItem('types')
             this.getTypes()
           } catch (err) {
+            console.log(err, '++++++++++++++++++=')
             this.$message.error('创建分类出现错误', err.message)
           }
         }

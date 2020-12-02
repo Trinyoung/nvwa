@@ -1,5 +1,13 @@
+/*
+ * @Author: your name
+ * @Date: 2020-11-23 16:22:12
+ * @LastEditTime: 2020-12-02 19:35:08
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \nvwa\src\api\request.js
+ */
 import Axios from 'axios'
-
+import router from '../router'
 function postAjax (url, body, withCredential) {
   return handleRequest({method: 'post', url, body, withCredential})
 }
@@ -21,7 +29,7 @@ async function handleRequest ({method, url, body, withCredential}) {
     if (res.data.code === '401') {
       localStorage.removeItem('token')
       localStorage.removeItem('userInfo')
-      this.$router.push('/login')
+      router.push('/login')
     }
     if (res.data && res.data.code !== '000') {
       throw new Error(res.data.err)
