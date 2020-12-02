@@ -1,8 +1,8 @@
 <!--
  * @Author: Trinyoung.Lu
  * @Date: 2020-08-10 15:49:42
- * @LastEditors: Trinyoung.Lu
- * @LastEditTime: 2020-09-22 18:05:34
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-02 14:51:18
  * @PageTitle: XXX页面
  * @Description: XXX
  * @FilePath: \nvwa\src\App.vue
@@ -42,6 +42,6 @@ body {
   padding: 0;
 }
 a:hover {
-  text-decoration: none;
+  text-decoration: none!important;;
 }
 </style>

@@ -2,7 +2,7 @@
  * @Author: Trinyoung.Lu
  * @Date: 2020-08-04 08:31:03
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-11-23 10:35:16
+ * @LastEditTime: 2020-12-02 14:48:51
  * @PageTitle: XXX页面
  * @Description: XXX
  * @FilePath: \nvwa\src\main.js
@@ -18,6 +18,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min'
 import 'bootstrap-select/dist/css/bootstrap-select.min.css'
 import 'bootstrap-select/dist/js/bootstrap-select'
+// import '@/assets/scss/index.scss'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import ElementUI from 'element-ui' // （1）
 import 'element-ui/lib/theme-chalk/index.css'

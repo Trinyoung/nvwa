@@ -9,8 +9,8 @@
         </ol>
       </nav>
       <ul v-loading="loading" class="list-group list-group-flush">
-        <li class="media pt-2 list-group-item" v-for="item in list" :key="item._id" :to="{path:`/articles/${item._id}`}">
-          <p class="media-body mb-0 lh-125 border-gray ">
+        <li class="list-group-item list-group-item-action" v-for="item in list" :key="item._id" :to="{path:`/articles/${item._id}`}">
+          <p class="mb-0 text-left">
             <router-link :to="{path:`/person/${uid}/articles/${item._id}`}">
               <strong class="d-block text-gray-dark">
                 <div class="d-inline-block new-icon" v-if="item.isNew">新</div>
@@ -103,12 +103,6 @@ export default {
 }
 </script>
 <style scoped>
-  .media-body {
-    text-align: left;
-  }
-  .col-title {
-    text-align: left;
-  }
   .item-title {
     color: white;
     font-size: 1.1rem;
@@ -137,5 +131,8 @@ export default {
   .favorite-icon:hover {
     color: red;
     cursor: pointer;
+  }
+  .list-group-item {
+    padding-left: 0;
   }
 </style>
