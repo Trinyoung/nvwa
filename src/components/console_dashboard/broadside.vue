@@ -269,31 +269,31 @@ export default {
 </style>
 <style >
 .el-collapse {
-  border: none;
+  border: none!important;
 }
 .el-collapse-item__header {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #bbbbbb;
-  background-color: #002338;
-  border: none;
-  line-height: unset;
-  height: unset;
+  font-size: 0.95rem!important;
+  font-weight: 500!important;
+  color: #bbbbbb!important;
+  background-color: #002338!important;
+  border: none!important;
+  line-height: unset!important;
+  height: unset!important;
 }
 .el-collapse-item__content {
-  font-size: 0.95rem;
-  background: #01385a;
-  color: #bbbbbb;
-  border:none;
-  padding-bottom: 13px;
+  font-size: 0.95rem!important;
+  background: #01385a!important;
+  color: #bbbbbb!important;
+  border:none!important;
+  padding-bottom: 13px!important;
 }
 .el-collapse-item__wrap {
-  border: none;
+  border: none!important;
 }
 .dropdown-item:hover {
-  background: #1173b1;
+  background: #1173b1!important;
 }
 .collapse-icon {
-  margin-right: 0.5rem;
+  margin-right: 0.5rem!important;
 }
 </style>
