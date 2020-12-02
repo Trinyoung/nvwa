@@ -47,7 +47,6 @@
   </div>
 </template>
 <script>
-import Axios from 'axios'
 import pagination from '../tools/pagination'
 import moment from 'moment'
 export default {
@@ -73,21 +72,17 @@ export default {
     }
   },
   methods: {
-    getList (page) {
+    async getList (page) {
       this.loading = true
       if (page) this.currentPage = page || 1
       let { keyword, type } = this.$data
       let queryString = `page=${page}&createdBy=${this.uid}`
       if (keyword) queryString += `&keyword=${keyword}`
       if (type) queryString += `&type=${type}`
-      Axios.get(`/myapi/articles/list?${queryString}`).then((res) => {
-        if (res.data.code !== '000') {
-          return alert('获取结果失败')
-        }
-        this.loading = false
-        this.$data.list = res.data.result.docs
-        this.pages = res.data.result.pages
-      })
+      const result = await this.$getAjax(`/myapi/articles/list?${queryString}`)
+      this.loading = false
+      this.list = result.docs
+      this.pages = result.pages
     },
     formatTime (time) {
       if (time) {
