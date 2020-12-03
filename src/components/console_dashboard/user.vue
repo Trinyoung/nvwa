@@ -141,12 +141,15 @@ export default {
             gender: Number(userInfo.gender),
             job: userInfo.job
           }
+          this.initData = Object.assign({}, this.dataForm)
+          this.isEditing = false
           this.$message.success('修改成功')
         }
       })
     },
     resetForm (formName) {
-      this.$refs[formName].resetFields()
+      this.dataForm = Object.assign({}, this.initData)
+      this.isEditing = false
     },
     async getUserInfo () {
       let userInfo = await this.$getAjax(`/api/user/${this.$route.params.uid}`)
