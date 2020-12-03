@@ -111,7 +111,7 @@ export default {
       isEditing: false,
       rules: {
         username: [
-          { required: true, message: 'Please input Activity name', trigger: 'blur' },
+          { required: true, message: '请填写正确的用户名', trigger: 'blur' },
         ],
         mobile: [
           { required: true, message: '手机号不能为空', trigger: 'blur' }
