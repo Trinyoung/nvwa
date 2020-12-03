@@ -77,7 +77,7 @@ export default {
     getList (page) {
       this.loading = true
       if (page) this.currentPage = page || 1
-      let { keyword} = this.$data
+      let { keyword } = this.$data
       let queryString = `page=${page}&createdBy=${this.uid}`
       if (keyword) queryString += `&keyword=${keyword}`
       if (this.$route.query.type) queryString += `&type=${this.$route.query.type}`

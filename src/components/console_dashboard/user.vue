@@ -190,4 +190,7 @@ export default {
     width: 60px;
     height: 60px;
   }
+  .list-group-item:hover {
+    cursor:pointer
+  }
 </style>
