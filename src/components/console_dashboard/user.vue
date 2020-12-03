@@ -17,45 +17,41 @@
           <!-- <span class="badge badge-secondary badge-pill">3</span> -->
         </h4>
         <ul class="list-group mb-3">
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <li class="list-group-item d-flex justify-content-between list-group-item-action">
             <div>
               <h6 class="my-0">文章</h6>
               <small class="text-muted">Brief description</small>
             </div>
             <span class="text-muted">12</span>
           </li>
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <li class="list-group-item d-flex justify-content-between list-group-item-action">
             <div>
               <h6 class="my-0">日志</h6>
               <small class="text-muted">Brief description</small>
             </div>
             <span class="text-muted">8</span>
           </li>
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <li class="list-group-item d-flex justify-content-between  list-group-item-action">
             <div>
               <h6 class="my-0">系列</h6>
               <small class="text-muted">Brief description</small>
             </div>
             <span class="text-muted">5</span>
           </li>
-          <li class="list-group-item d-flex justify-content-between bg-light">
-            <div class="text-success">
+          <li class="list-group-item d-flex justify-content-between  list-group-item-action">
+            <div>
               <h6 class="my-0">相册</h6>
               <small>EXAMPLECODE</small>
             </div>
             <span class="text-success">5</span>
           </li>
-          <li class="list-group-item d-flex justify-content-between bg-light">
+          <li class="list-group-item d-flex justify-content-between">
             <div>
               <h6 class="my-0">标签</h6>
               <small>EXAMPLECODE</small>
             </div>
             <span class="text-success">5</span>
           </li>
-          <!-- <li class="list-group-item d-flex justify-content-between">
-            <span>Total (USD)</span>
-            <strong>$20</strong>
-          </li> -->
         </ul>
       </div>
       <div class="col-md-8 order-md-1">
@@ -76,11 +72,11 @@
           <el-form-item label="工作" prop="job" >
             <el-input v-model="dataForm.job" :disabled="!isEditing"></el-input>
           </el-form-item>
-          <el-form-item label="生日" class="text-center" >
+          <el-form-item label="生日" class="text-center" prop="birthday">
             <el-date-picker type="date" placeholder="Pick a date" v-model="dataForm.birthday" style="width: 100%;" :disabled="!isEditing">
             </el-date-picker>
           </el-form-item>
-          <el-form-item label="性别" prop="resource" >
+          <el-form-item label="性别" prop="gender" >
             <el-radio-group v-model="dataForm.gender" :disabled="!isEditing">
               <el-radio :label="1">男</el-radio>
               <el-radio :label="2">女</el-radio>
@@ -111,11 +107,11 @@ export default {
         email: [],
         desc: ''
       },
+      initData: {},
       isEditing: false,
       rules: {
         username: [
           { required: true, message: 'Please input Activity name', trigger: 'blur' },
-          { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
         ],
         mobile: [
           { required: true, message: '手机号不能为空', trigger: 'blur' }
@@ -131,12 +127,21 @@ export default {
   },
   methods: {
     submitForm (formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(async (valid) => {
         if (valid) {
-          alert('submit!')
-        } else {
-          console.log('error submit!!')
-          return false
+          const submitData = Object.assign({}, this.dataForm)
+          submitData.birthday = moment(submitData.birthday).unix()
+          let userInfo = await this.$putAjax(`/api/user/${this.$route.params.uid}`, submitData, true)
+          this.dataForm = {
+            username: userInfo.username,
+            email: userInfo.email,
+            mobile: userInfo.mobile,
+            realName: userInfo.realName,
+            birthday: moment(userInfo.birthday * 1000).format('YYYY-MM-DD'),
+            gender: Number(userInfo.gender),
+            job: userInfo.job
+          }
+          this.$message.success('修改成功')
         }
       })
     },
@@ -154,18 +159,7 @@ export default {
         gender: Number(userInfo.gender),
         job: userInfo.job
       }
-    },
-    async save () {
-      let userInfo = await this.$putAjax(`/api/user/${this.$route.params.uid}`, this.dataForm, true)
-      this.dataForm = {
-        username: userInfo.username,
-        email: userInfo.email,
-        mobile: userInfo.mobile,
-        realName: userInfo.realName,
-        birthday: moment(userInfo.birthday * 1000).format('YYYY-MM-DD'),
-        gender: Number(userInfo.gender),
-        job: userInfo.job
-      }
+      this.initData = Object.assign(this.initData, this.dataForm)
     },
     changeFormStatus () {
       this.isEditing = true
