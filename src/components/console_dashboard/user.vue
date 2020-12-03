@@ -1,10 +1,187 @@
 <template>
   <main class="my-1 shadow-sm bg-white border height-100">
-    hello world
+  <div class="container text-left">
+    <div class="py-5 text-center">
+      <!-- <img class="d-block mx-auto mb-4" src="" alt="" width="72" height="72"> -->
+      <!-- <el-badge :value="12">
+        <el-avatar class="avatar"></el-avatar>
+      </el-badge> -->
+      <el-upload
+  action="#"
+  list-type="picture-card"
+  :auto-upload="false">
+    <i slot="default" class="el-icon-plus"></i>
+    <div slot="file" slot-scope="{file}">
+      <img
+        class="el-upload-list__item-thumbnail"
+        :src="file.url" alt=""
+      >
+      <span class="el-upload-list__item-actions">
+        <span
+          class="el-upload-list__item-preview"
+          @click="handlePictureCardPreview(file)"
+        >
+          <i class="el-icon-zoom-in"></i>
+        </span>
+        <span
+          v-if="!disabled"
+          class="el-upload-list__item-delete"
+          @click="handleDownload(file)"
+        >
+          <i class="el-icon-download"></i>
+        </span>
+        <span
+          v-if="!disabled"
+          class="el-upload-list__item-delete"
+          @click="handleRemove(file)"
+        >
+          <i class="el-icon-delete"></i>
+        </span>
+      </span>
+    </div>
+</el-upload>
+      <!-- <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group
+        has a validation state that can be triggered by attempting to submit the form without completing it.</p> -->
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 order-md-2 mb-4">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-muted">创作信息</span>
+          <!-- <span class="badge badge-secondary badge-pill">3</span> -->
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">文章</h6>
+              <small class="text-muted">Brief description</small>
+            </div>
+            <span class="text-muted">12</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">日志</h6>
+              <small class="text-muted">Brief description</small>
+            </div>
+            <span class="text-muted">8</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">系列</h6>
+              <small class="text-muted">Brief description</small>
+            </div>
+            <span class="text-muted">5</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between bg-light">
+            <div class="text-success">
+              <h6 class="my-0">相册</h6>
+              <small>EXAMPLECODE</small>
+            </div>
+            <span class="text-success">5</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between bg-light">
+            <div>
+              <h6 class="my-0">标签</h6>
+              <small>EXAMPLECODE</small>
+            </div>
+            <span class="text-success">5</span>
+          </li>
+          <!-- <li class="list-group-item d-flex justify-content-between">
+            <span>Total (USD)</span>
+            <strong>$20</strong>
+          </li> -->
+        </ul>
+      </div>
+      <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">基础信息</h4>
+        <el-form :model="dataForm" :rules="rules" ref="dataForm" label-width="120px" class="demo-dataForm" >
+          <el-form-item label="用户名" prop="username" >
+            <el-input v-model="dataForm.username" :disabled="!isEditing"></el-input>
+          </el-form-item>
+          <el-form-item label="昵称" prop="realName" >
+            <el-input v-model="dataForm.realName" :disabled="!isEditing"></el-input>
+          </el-form-item>
+          <el-form-item label="手机" prop="mobile" >
+            <el-input v-model="dataForm.mobile" :disabled="!isEditing"></el-input>
+          </el-form-item>
+          <el-form-item label="邮箱" prop="email" >
+            <el-input v-model="dataForm.email" :disabled="!isEditing"></el-input>
+          </el-form-item>
+          <el-form-item label="工作" prop="job" >
+            <el-input v-model="dataForm.job" :disabled="!isEditing"></el-input>
+          </el-form-item>
+          <el-form-item label="生日" class="text-center" >
+            <el-date-picker type="date" placeholder="Pick a date" v-model="dataForm.date1" style="width: 100%;" :disabled="!isEditing">
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item label="性别" prop="resource" >
+            <el-radio-group v-model="dataForm.resource" :disabled="!isEditing">
+              <el-radio :label="1">男</el-radio>
+              <el-radio :label="2">女</el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="submitForm('dataForm')">保存</el-button>
+            <el-button type="danger" @click="changeFormStatus">编辑</el-button>
+            <el-button type="warning" @click="resetForm('dataForm')">取消</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
+    </div>
+  </div>
   </main>
 </template>
+<script>
+export default {
+  data () {
+    return {
+      dataForm: {
+        username: '',
+        realName: '',
+        birthday: '',
+        gender: '',
+        mobile: '',
+        email: [],
+        desc: ''
+      },
+      isEditing: false,
+      rules: {
+        username: [
+          { required: true, message: 'Please input Activity name', trigger: 'blur' },
+          { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
+        ],
+        mobile: [
+          { required: true, message: '手机号不能为空', trigger: 'blur' }
+        ],
+        email: [
+          { required: true, message: '邮箱不能为空', trigger: 'blur' }
+        ]
+      }
+    }
+  },
+  methods: {
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert('submit!')
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    },
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
+    }
+  }
+}
+</script>
 <style scoped>
   .height-100 {
-    height: calc(100vh - 100px);
+    min-height: calc(100vh - 100px);
+  }
+  .avatar {
+    width: 60px;
+    height: 60px;
   }
 </style>

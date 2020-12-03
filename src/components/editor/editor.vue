@@ -49,7 +49,7 @@
       </div>
     </div>
     <div class="row row-container">
-      <div class="col-md-11 col-lg-11 col-sm-11 content-container">
+      <div class="col-md-11 col-lg-11 col-sm-11">
         <v-markdownEditor v-if="articleObj.isMarkdown" class='mavonEditor'
         v-model="articleObj.content" @save="save(0)"
         ref="md"
@@ -125,7 +125,6 @@
             <input type="text" class="form-control" placeholder="请输入文献链接" v-model="item.link">
           </div>
           <div class="col-2">
-            <!-- <button class="btn btn-primary" @click="refferChange(index, item.title, item.link)">确定</button> -->
             <el-button type="success" plain @click="refferChange(index, item.title, item.link)">确 定</el-button>
           </div>
         </form>
@@ -203,17 +202,11 @@ export default {
         }
       }
     },
-    saveMavon: function (value, render) {
-      const Authorization = `Bearer ${localStorage.getItem('token')}`
+    async saveMavon (value, render) {
+      // const Authorization = `Bearer ${localStorage.getItem('token')}`
       const data = Object.assign({published: false, content_html: render, content: value}, this.articleObj)
-      axios.post('/api/articles', data, {headers: {Authorization}}).then(res => {
-        if (res.status === 200 && res.data.code === '000' && res.data.result._id) {
-          this.$router.push(`/console/editor/${res.data.result._id}`)
-        }
-        if (res.data.code === '401') {
-          this.$router.push('/login')
-        }
-      })
+      this.$postAjax('/api/articles', data, true)
+      this.$message.succss('保存成功！')
     },
     async getAticle () {
       const id = this.articleId
@@ -284,17 +277,11 @@ export default {
       formData.append('img', file)
       const result = await this.$postAjax('/upload/upload/file', formData)
       this.$refs.md.$img2Url(pos, result)
-      // axios.post('/upload/upload/file', formData).then(res => {
-      //   this.$refs.md.$img2Url(pos, res.data.path)
-      // })
     }
   }
 }
 </script>
 <style scoped>
-.height-100 {
-  height: 100%;
-}
 .row {
   margin-right: 0;
 }
@@ -342,11 +329,9 @@ export default {
   background: #e9ecef;
 }
 .sidebar-item {
-  /* background: wheat; */
   color: green;
   width: 3rem;
   height: 3rem;
-  /* border-radius: 50% 50% 50% 50%; */
   margin: 0 auto;
 }
 .sidebar-item :hover{
@@ -367,9 +352,6 @@ export default {
   background: cadetblue;
 }
 
-.bi {
-  margin-top: 0.5rem;
-}
 .input-group-text {
   font-weight: bold;
 }
@@ -423,20 +405,17 @@ export default {
   box-shadow: none!important;
   border: 1px solid #b6d3f0!important;
 }
-</style>
-<style>
-  .header-container {
+.header-container {
     text-align: left;
     padding:3px 15px;
     border-radius: 5px;
   }
-  .header-container .el-form-item {
-    margin-bottom: 0;
-    margin-top: 8px;
-    margin-right: 20px;
-  }
-  .header-container .el-form-item__label {
-    font-weight: bold;
-  }
-
+.header-container .el-form-item {
+  margin-bottom: 0;
+  margin-top: 8px;
+  margin-right: 20px;
+}
+.header-container .el-form-item__label {
+  font-weight: bold;
+}
 </style>
