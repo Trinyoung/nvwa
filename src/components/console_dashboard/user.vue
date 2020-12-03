@@ -2,44 +2,10 @@
   <main class="my-1 shadow-sm bg-white border height-100">
   <div class="container text-left">
     <div class="py-5 text-center">
-      <!-- <img class="d-block mx-auto mb-4" src="" alt="" width="72" height="72"> -->
+      <img class="d-block mx-auto mb-4" src="" alt="" width="72" height="72">
       <!-- <el-badge :value="12">
         <el-avatar class="avatar"></el-avatar>
       </el-badge> -->
-      <el-upload
-  action="#"
-  list-type="picture-card"
-  :auto-upload="false">
-    <i slot="default" class="el-icon-plus"></i>
-    <div slot="file" slot-scope="{file}">
-      <img
-        class="el-upload-list__item-thumbnail"
-        :src="file.url" alt=""
-      >
-      <span class="el-upload-list__item-actions">
-        <span
-          class="el-upload-list__item-preview"
-          @click="handlePictureCardPreview(file)"
-        >
-          <i class="el-icon-zoom-in"></i>
-        </span>
-        <span
-          v-if="!disabled"
-          class="el-upload-list__item-delete"
-          @click="handleDownload(file)"
-        >
-          <i class="el-icon-download"></i>
-        </span>
-        <span
-          v-if="!disabled"
-          class="el-upload-list__item-delete"
-          @click="handleRemove(file)"
-        >
-          <i class="el-icon-delete"></i>
-        </span>
-      </span>
-    </div>
-</el-upload>
       <!-- <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group
         has a validation state that can be triggered by attempting to submit the form without completing it.</p> -->
     </div>
@@ -111,19 +77,19 @@
             <el-input v-model="dataForm.job" :disabled="!isEditing"></el-input>
           </el-form-item>
           <el-form-item label="生日" class="text-center" >
-            <el-date-picker type="date" placeholder="Pick a date" v-model="dataForm.date1" style="width: 100%;" :disabled="!isEditing">
+            <el-date-picker type="date" placeholder="Pick a date" v-model="dataForm.birthday" style="width: 100%;" :disabled="!isEditing">
             </el-date-picker>
           </el-form-item>
           <el-form-item label="性别" prop="resource" >
-            <el-radio-group v-model="dataForm.resource" :disabled="!isEditing">
+            <el-radio-group v-model="dataForm.gender" :disabled="!isEditing">
               <el-radio :label="1">男</el-radio>
               <el-radio :label="2">女</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm('dataForm')">保存</el-button>
-            <el-button type="danger" @click="changeFormStatus">编辑</el-button>
-            <el-button type="warning" @click="resetForm('dataForm')">取消</el-button>
+            <el-button type="primary" @click="submitForm('dataForm')" v-if="isEditing">保存</el-button>
+            <el-button type="danger" @click="changeFormStatus" v-if="!isEditing">编辑</el-button>
+            <el-button type="warning" @click="resetForm('dataForm')" v-if="isEditing">取消</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -132,6 +98,7 @@
   </main>
 </template>
 <script>
+import moment from 'moment'
 export default {
   data () {
     return {
@@ -159,6 +126,9 @@ export default {
       }
     }
   },
+  created () {
+    this.getUserInfo()
+  },
   methods: {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
@@ -172,6 +142,33 @@ export default {
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
+    },
+    async getUserInfo () {
+      let userInfo = await this.$getAjax(`/api/user/${this.$route.params.uid}`)
+      this.dataForm = {
+        username: userInfo.username,
+        email: userInfo.email,
+        mobile: userInfo.mobile,
+        realName: userInfo.realName,
+        birthday: moment(userInfo.birthday * 1000).format('YYYY-MM-DD'),
+        gender: Number(userInfo.gender),
+        job: userInfo.job
+      }
+    },
+    async save () {
+      let userInfo = await this.$putAjax(`/api/user/${this.$route.params.uid}`, this.dataForm, true)
+      this.dataForm = {
+        username: userInfo.username,
+        email: userInfo.email,
+        mobile: userInfo.mobile,
+        realName: userInfo.realName,
+        birthday: moment(userInfo.birthday * 1000).format('YYYY-MM-DD'),
+        gender: Number(userInfo.gender),
+        job: userInfo.job
+      }
+    },
+    changeFormStatus () {
+      this.isEditing = true
     }
   }
 }
