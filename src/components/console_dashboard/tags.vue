@@ -93,7 +93,7 @@ export default {
       if (page) {
         this.currentPage = page
       }
-      let queryString = `page=${this.currentPage}`
+      let queryString = `page=${this.currentPage}&createdBy=${this.$route.params.uid}`
       if (this.searchInfo.keyword) {
         queryString += `&keyword=${this.searchInfo.keyword}`
       }

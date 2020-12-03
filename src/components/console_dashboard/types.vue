@@ -118,7 +118,7 @@
 <script>
 import datePicker from 'vue-bootstrap-datetimepicker'
 import '@fortawesome/fontawesome-free/css/all.css'
-import Axios from 'axios'
+// import Axios from 'axios'
 import pagination from '../tools/pagination'
 import moment from 'moment'
 export default {
@@ -167,15 +167,14 @@ export default {
     this.getTypes()
   },
   methods: {
-    getList (n = 1) {
-      let queryString = `page=${n}&limit=10`
-      Axios.get(`/myapi/articles/types/list?${queryString}`).then((res) => {
-        const { docs, pages, total, page } = res.data.result
-        this.list = docs
-        this.pages = pages
-        this.page = page
-        this.total = total
-      })
+    async getList (n = 1) {
+      let queryString = `page=${n}&limit=10&createdBy=${this.$route.params.uid}`
+      const result = await this.$getAjax(`/myapi/articles/types/list?${queryString}`)
+      const {docs, pages, total, page} = result
+      this.list = docs
+      this.pages = pages
+      this.page = page
+      this.toal = total
     },
     formatTime (time) {
       return moment(time * 1000).format('YYYY-MM-DD')
