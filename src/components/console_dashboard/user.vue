@@ -17,7 +17,7 @@
           <!-- <span class="badge badge-secondary badge-pill">3</span> -->
         </h4>
         <ul class="list-group mb-3">
-          <li class="list-group-item d-flex justify-content-between list-group-item-action">
+          <li class="list-group-item d-flex justify-content-between list-group-item-action" @click="$router.push(`/console/${$route.params.uid}/articles`)">
             <div>
               <h6 class="my-0">文章</h6>
               <small class="text-muted">Brief description</small>
@@ -45,7 +45,7 @@
             </div>
             <span class="text-success">0</span>
           </li>
-          <li class="list-group-item d-flex justify-content-between">
+          <li class="list-group-item d-flex justify-content-between list-group-item-action" @click="$router.push(`/console/${$route.params.uid}/tags`)">
             <div>
               <h6 class="my-0">标签</h6>
               <small>EXAMPLECODE</small>
