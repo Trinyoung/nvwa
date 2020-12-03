@@ -31,8 +31,16 @@
             :props="{ checkStrictly: true }"
             clearable></el-cascader>
         </el-form-item>
-        <el-form-item label="发布状态:">
-          <el-switch v-model="searchInfo.published"></el-switch>
+        <el-form-item label="是否公开：">
+          <el-switch v-model="searchInfo.isPublic"
+            active-text="是"
+            inactive-text="否"
+          ></el-switch>
+        </el-form-item>
+        <el-form-item label="发布状态：">
+          <el-switch v-model="searchInfo.published"
+           active-text="已发布"
+           inactive-text="未发布"></el-switch>
         </el-form-item>
         <el-form-item label="关键字：">
           <el-input v-model="searchInfo.keyword"></el-input>
@@ -115,7 +123,8 @@ export default {
         type: '',
         published: '',
         keyword: '',
-        tag: ''
+        tag: '',
+        isPublic: 0
       },
       options: [],
       tags: [],
