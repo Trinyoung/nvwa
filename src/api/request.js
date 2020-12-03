@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-23 16:22:12
- * @LastEditTime: 2020-12-02 19:35:08
+ * @LastEditTime: 2020-12-03 08:58:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\api\request.js
@@ -29,6 +29,8 @@ async function handleRequest ({method, url, body, withCredential}) {
     if (res.data.code === '401') {
       localStorage.removeItem('token')
       localStorage.removeItem('userInfo')
+      localStorage.removeItem('types')
+      localStorage.removeItem('tags')
       router.push('/login')
     }
     if (res.data && res.data.code !== '000') {

@@ -70,6 +70,8 @@ export default {
         await this.$postAjax('/api/user/logout')
         localStorage.removeItem('userInfo')
         localStorage.removeItem('token')
+        localStorage.removeItem('tags')
+        localStorage.removeItem('types')
         this.$router.push('/login')
       } catch (err) {
         this.$message.error(err.message)
