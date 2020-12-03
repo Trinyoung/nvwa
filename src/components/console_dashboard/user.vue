@@ -22,35 +22,35 @@
               <h6 class="my-0">文章</h6>
               <small class="text-muted">Brief description</small>
             </div>
-            <span class="text-muted">12</span>
+            <span class="text-muted">{{articleCount}}</span>
           </li>
           <li class="list-group-item d-flex justify-content-between list-group-item-action">
             <div>
               <h6 class="my-0">日志</h6>
               <small class="text-muted">Brief description</small>
             </div>
-            <span class="text-muted">8</span>
+            <span class="text-muted">0</span>
           </li>
           <li class="list-group-item d-flex justify-content-between  list-group-item-action">
             <div>
               <h6 class="my-0">系列</h6>
               <small class="text-muted">Brief description</small>
             </div>
-            <span class="text-muted">5</span>
+            <span class="text-muted">0</span>
           </li>
           <li class="list-group-item d-flex justify-content-between  list-group-item-action">
             <div>
               <h6 class="my-0">相册</h6>
               <small>EXAMPLECODE</small>
             </div>
-            <span class="text-success">5</span>
+            <span class="text-success">0</span>
           </li>
           <li class="list-group-item d-flex justify-content-between">
             <div>
               <h6 class="my-0">标签</h6>
               <small>EXAMPLECODE</small>
             </div>
-            <span class="text-success">5</span>
+            <span class="text-success">{{tagCount}}</span>
           </li>
         </ul>
       </div>
@@ -109,6 +109,8 @@ export default {
       },
       initData: {},
       isEditing: false,
+      articleCount: 0,
+      tagCount: 0,
       rules: {
         username: [
           { required: true, message: '请填写正确的用户名', trigger: 'blur' },
@@ -124,6 +126,8 @@ export default {
   },
   created () {
     this.getUserInfo()
+    this.getArticleCount()
+    this.getTagsCount()
   },
   methods: {
     submitForm (formName) {
@@ -166,6 +170,14 @@ export default {
     },
     changeFormStatus () {
       this.isEditing = true
+    },
+    async getArticleCount () {
+      const result = await this.$getAjax(`/api/articles/${this.$route.params.uid}/count`, true)
+      this.articleCount = result
+    },
+    async getTagsCount () {
+      const result = await this.$getAjax(`/api/tags/${this.$route.params.uid}/count`, true)
+      this.tagCount = result
     }
   }
 }
