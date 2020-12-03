@@ -1,5 +1,5 @@
 <template>
-  <main class="my-1 shadow-sm bg-white border height-100">
+  <main class="my-1 shadow-sm bg-white border height-100 console_article_container">
     <nav aria-label="breadcrumb" class="title-nav">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -270,12 +270,18 @@ table .el-button {
 }
 
 .el-form-item {
-  margin-bottom: 0;
+  margin-bottom: 0.5rem;
 }
+
 .tag {
   margin-right: 5px;
 }
 .height-100 {
   min-height: calc(100vh - 100px);
 }
+</style>
+<style>
+  .console_article_container .el-form--inline .el-form-item__content {
+    vertical-align: baseline;
+  }
 </style>

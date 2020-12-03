@@ -2,7 +2,7 @@
  * @Author: Trinyoung.Lu
  * @Date: 2020-08-10 15:49:42
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-02 15:01:15
+ * @LastEditTime: 2020-12-03 10:29:40
  * @PageTitle: XXX页面
  * @Description: XXX
  * @FilePath: \nvwa\src\App.vue
@@ -43,5 +43,8 @@ body {
 }
 a:hover {
   text-decoration: none!important;;
+}
+label {
+  margin-bottom: 0!important;
 }
 </style>
