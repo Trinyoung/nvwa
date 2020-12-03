@@ -55,6 +55,8 @@
             <th scope="col">作者</th>
             <th scope="col">发布时间</th>
             <th scope="col">标签</th>
+            <th scope="col">是否公开</th>
+            <th scope="col">发布状态</th>
             <th scope="col">操作</th>
           </tr>
         </thead>
@@ -68,6 +70,16 @@
             <td>
               <el-tag v-for="tag in item.tags" :key="tag._id" class="tag">
                 {{tag.name}}
+              </el-tag>
+            </td>
+            <td>
+              <el-tag>
+                {{item.isPublic? '是': '否'}}
+              </el-tag>
+            </td>
+            <td>
+              <el-tag>
+                {{item.published?'已发布': '未发布'}}
               </el-tag>
             </td>
             <td class="handle-cell">
