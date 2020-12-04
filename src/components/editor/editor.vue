@@ -177,11 +177,11 @@ export default {
       const contentHtml = $('.v-note-read-content').html()
       const articleId = this.articleId
       const {content, category, title, subTitle, tags, refers, isMarkdown, isPublic, type = []} = this.articleObj
-      let data = Object.assign({published: false, content_html: contentHtml})
+      let data = Object.assign({published, content_html: contentHtml})
       let [ typeCode, typeId ] = (type[type.length - 1] && type[type.length - 1].split('_')) || [undefined, undefined]
       console.log(typeId, typeCode, '类型相关的的字段')
       data = Object.assign(data, {
-        content, category, title, subTitle, tags, refers, isMarkdown, isPublic, type: typeId, typeCode
+        content, category, title, subTitle, tags, refers, isMarkdown: Number(isMarkdown), isPublic: Number(isPublic), type: typeId, typeCode
       })
       if (articleId && articleId !== 'new') {
         data.articleId = articleId
@@ -211,11 +211,11 @@ export default {
     async getAticle () {
       const id = this.articleId
       if (id !== 'new') {
-        const result = await this.$getAjax(`/api/articles/${id}?console=1`)
+        const result = await this.$getAjax(`/api/articles/${id}`)
         const { content, title, isMarkdown, isPublic, subTitle, abstract, tags, refers, _id, type, typeCode } = result
         this.articleObj = { title, content, isPublic, subTitle, abstract, tags, refers, type, typeCode }
         this.articleObj.articleId = _id
-        this.isPublic = !!isPublic
+        this.articleObj.isPublic = !!isPublic
         this.articleObj.isMarkdown = !!isMarkdown
         if (typeCode) {
           this.getParentTypes(typeCode)
@@ -395,7 +395,7 @@ export default {
 </style>
 <style>
 .ql-container {
-  height:calc(100vh - 250px);
+  height:calc(100vh - 250px)!important;
   border: 1px solid #b6d3f0!important;
 }
 .ql-toolbar {
