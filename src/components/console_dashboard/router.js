@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-11-23 16:22:12
+ * @LastEditTime: 2020-12-04 10:07:06
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \nvwa\src\components\console_dashboard\router.js
+ */
 import article from '@/components/console_dashboard/article'
 import logger from '@/components/console_dashboard/logger'
 import console from '@/components/console_dashboard'
@@ -11,8 +19,7 @@ const obj = {
   props: true,
   children: [{
     path: '/',
-    name: 'console_home',
-    component: article
+    redirect: 'user'
   }, {
     path: 'articles',
     name: 'console_article',
