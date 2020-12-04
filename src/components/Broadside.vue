@@ -2,12 +2,19 @@
   <div class="broadSide my-2 shadow-sm">
     <nav id="sidebarMenu" class="d-md-block sidebar collapse">
       <div class="avatar-head">
-        <img class='avatar' v-if="!isMaster"
-          src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
-        <router-link :to="toConsoleUrl" v-if="isMaster">
+        <!-- <img class='avatar' v-if="!isMaster"
+          src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120"> -->
+        <el-avatar :size="60" src="https://empty" @error="errorHandler">
+          <img v-if="!isMaster" src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
+          <router-link :to="toConsoleUrl" v-if="isMaster">
+            <img
+            src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
+          </router-link>
+        </el-avatar>
+        <!-- <router-link :to="toConsoleUrl" v-if="isMaster">
           <img class='avatar'
           src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
-        </router-link>
+        </router-link> -->
         <p class="font-yahei">{{userInfo.username}}</p>
         <ul class="list-info font-yahei">
           <li>文章数：{{articleInfo.articleNums || 0}}</li>
@@ -24,7 +31,7 @@
           <router-link class="nav-link d-inline-block" :to="`/person/${uid}/articles/${item._id}`">
             <span data-feather="file-text">{{item.title}}</span>
             <div class="nav-item-time align-baseline">
-              <b-icon-calendar2-check></b-icon-calendar2-check>
+              <b-icon-calendar2-check class="mb-1"></b-icon-calendar2-check>
               {{formatTime(item.createdAt)}}</div>
           </router-link>
         </li>
@@ -38,7 +45,7 @@
           <router-link class="nav-link" :to="`/person/${uid}/articles/${item._id}`">
             <span data-feather="file-text">{{item.title}}</span>
             <div class="nav-item-time align-baseline">
-              <b-icon-calendar2-check></b-icon-calendar2-check>
+              <b-icon-calendar2-check class="mb-1"></b-icon-calendar2-check>
               {{formatTime(item.createdAt)}}
             </div>
           </router-link>

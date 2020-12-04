@@ -20,9 +20,9 @@
               <span class="d-block text-muted" >
                 {{ item.content && item.content.substr(0, 150) }}……
               </span>
-              <span class="d-block small text-muted">
+              <span class="d-block small text-muted mt-1">
                 <span class="align-middle">
-                  <b-icon-calendar2-check></b-icon-calendar2-check>
+                  <b-icon-calendar2-check class="mb-1"></b-icon-calendar2-check>
                   {{ formatTime(item.createdAt) }}
                 </span>
                 <span class="ml-2 align-middle">
@@ -34,7 +34,7 @@
                   {{ item.hasReads || 0 }}
                 </span>
                 <span class="ml-2 align-middle">
-                  <b-icon-hand-thumbs-up></b-icon-hand-thumbs-up>
+                  <b-icon-hand-thumbs-up class="mb-1"></b-icon-hand-thumbs-up>
                   {{ item.favorites || 0 }}
                 </span>
               </span>
@@ -134,5 +134,6 @@ export default {
   }
   .list-group-item {
     padding-left: 0;
+    padding-bottom: 0.3rem;
   }
 </style>

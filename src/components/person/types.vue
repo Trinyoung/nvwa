@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-23 16:22:22
- * @LastEditTime: 2020-12-02 19:14:13
+ * @LastEditTime: 2020-12-04 19:30:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\person\types.vue
@@ -13,15 +13,15 @@
         <li class="list-group-item list-group-item-action" v-for="item in list" :key="item._id" :to="{path:`/articles/${item._id}`}">
           <p class="mb-0 text-left">
             <router-link :to="{path:`/person/${uid}/articles?type=${item._id}`}">
-              <strong class="d-block text-gray-dark">
-                {{ item.title }}
+              <strong class="d-block text-muted">
+              <b-icon-folder class="mb-1 mr-1"></b-icon-folder> {{ item.title }}
               </strong>
               <span class="d-block text-muted" >
                 {{ item.description }}
               </span>
               <span class="d-block small text-muted">
                 <span class="align-middle">
-                  <b-icon-calendar2-check></b-icon-calendar2-check>
+                  <b-icon-calendar2-check class="mb-1"></b-icon-calendar2-check>
                   {{ formatTime(item.createdAt) }}
                 </span>
               </span>
@@ -90,5 +90,9 @@ export default {
   }
   .list-container {
     min-height: calc(100vh - 132px);
+  }
+  .list-group-item {
+    padding-left: 0;
+    padding-bottom: 0.3rem;
   }
 </style>

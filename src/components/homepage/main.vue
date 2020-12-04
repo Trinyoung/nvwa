@@ -1,15 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-19 15:06:21
- * @LastEditTime: 2020-12-02 14:58:05
+ * @LastEditTime: 2020-12-04 13:00:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\homepage\main.vue
 -->
 <template>
   <main role="main" class="container">
-    <!-- <div class="border justify-content-center d-flex align-items-center p-3 my-2 rounded shadow-sm"> -->
-     <div class="article-list border p-3 my-2 rounded shadow-sm">
+    <div class="article-list border p-3 my-2 rounded shadow-sm">
       <ul v-loading="loading" class="list-group list-group-flush">
         <li class="list-group-item pt-2 list-group-item-action" v-for="item in list" :key="item._id" :to="{path:`/articles/${item._id}`}">
           <p class="mb-0 text-left">
@@ -46,7 +45,6 @@
       </ul>
       <pagination :currentPage="currentPage" :pages="pages" :getList="getList"></pagination>
     </div>
-    <!-- </div> -->
   </main>
 </template>
 <script>
