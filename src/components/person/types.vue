@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-23 16:22:22
- * @LastEditTime: 2020-12-04 19:30:55
+ * @LastEditTime: 2020-12-04 19:37:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\person\types.vue
 -->
 <template>
   <div class="bg-white list-container shadow-sm p-3 rounded">
-    <div class="article-list">
+    <!-- <div class="article-list">
       <ul v-loading="loading" class="list-group list-group-flush">
         <li class="list-group-item list-group-item-action" v-for="item in list" :key="item._id" :to="{path:`/articles/${item._id}`}">
           <p class="mb-0 text-left">
@@ -30,7 +30,8 @@
         </li>
       </ul>
     </div>
-    <pagination :currentPage="page" :pages="pages" :getList="getList"></pagination>
+    <pagination :currentPage="page" :pages="pages" :getList="getList"></pagination> -->
+    <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
   </div>
 </template>
 <script>
