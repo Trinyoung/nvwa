@@ -57,8 +57,6 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
-import $ from 'jquery'
 export default {
   data: function () {
     return {
@@ -82,34 +80,22 @@ export default {
         return alert('请填写用户名或者邮箱！')
       }
       await this.$postAjax('/api/user/confirmCode', {username, email})
-      // axios.post('http://localhost:9220/api/user/confirmCode', { username, email }).then((res) => {
-      //   if (res.status !== 200 || res.data.code !== '000') {
-      //     return alert('请求失败, 请检查用户名和邮箱！')
-      //   } else {
-      //     $('.toast').toast('show')
-      //     this.$data.buttonInfo.confirmCodeDesc = --this.$data.buttonInfo.time + '秒'
-      //     setInterval(() => {
-      //       if (this.$data.buttonInfo.time > 0) {
-      //         this.$data.buttonInfo.time--
-      //         this.$data.buttonInfo.confirmCodeDesc = this.$data.buttonInfo.time + '秒'
-      //       } else {
-      //         this.$data.buttonInfo.confirmCodeDesc = '获取验证码'
-      //         clearInterval()
-      //       }
-      //     }, 1000)
-      //   }
-      // })
+      this.buttonInfo.confirmCodeDesc = --this.buttonInfo.time + '秒'
+      setInterval(() => {
+        if (this.buttonInfo.time > 0) {
+          this.buttonInfo.confirmCodeDesc = --this.buttonInfo.time + '秒'
+        } else {
+          this.buttonInfo.confirmCodeDesc = '获取验证码'
+          clearInterval()
+        }
+      }, 1000)
     },
-    next: function () {
+    async next () {
       const params = Object.assign({}, this.inputInfo)
       const username = this.inputInfo.username
       localStorage.setItem('confirmCode', this.inputInfo.confirmCode)
-      axios.put('http://localhost:9220/api/user/confirmCode', params).then((result) => {
-        if (result.status !== 200 || result.data.code !== '000') {
-          return alert('验证码、邮箱或者用户名输入错误')
-        }
-        this.$router.push(`/${username}/updatePassword`)
-      })
+      await this.$putAjax('/api/user/confirmCode', params)
+      this.$router.push(`/${username}/updatePassword`)
     }
   }
 }

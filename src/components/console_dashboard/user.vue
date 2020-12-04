@@ -113,7 +113,7 @@ export default {
       tagCount: 0,
       rules: {
         username: [
-          { required: true, message: '请填写正确的用户名', trigger: 'blur' },
+          { required: true, message: '请填写正确的用户名', trigger: 'blur' }
         ],
         mobile: [
           { required: true, message: '手机号不能为空', trigger: 'blur' }
