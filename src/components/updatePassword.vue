@@ -58,20 +58,15 @@ export default {
   created: function () {
   },
   methods: {
-    submit: function () {
+    async submit () {
       const { password, confirmPassword } = this.$data.inputInfo
       const username = this.username
       const confirmCode = localStorage.getItem('confirmCode')
       if (!password || !confirmPassword || password !== confirmPassword) {
         return alert('请填写用户名或者邮箱！')
       }
-      axios.put('http://localhost:9220/api/user/password', { password, username, confirmCode }).then((res) => {
-        if (res.status !== 200 || res.data.code !== '000') {
-          return alert('请求失败, 请检查用户名和邮箱！')
-        } else {
-          return this.$router.push('/login')
-        }
-      })
+      await this.$putAjax('/api/user/password', {password, username, confirmCode})
+      return this.$router.push('/login')
     }
   }
 }
