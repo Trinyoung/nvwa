@@ -53,10 +53,16 @@ export default {
     this.getList()
   },
   methods: {
-    async getList () {
-      const { page = 1 } = this.$data
+    async getList (parent) {
+      // const { page = 1 } = this.$data
       this.loading = true
-      const result = await this.$getAjax(`/myapi/articles/types/list?page=${page}&limit=${10}`)
+      // const result = await this.$getAjax(`/myapi/articles/types/list?page=${page}&limit=${10}`)
+      let queryString = ''
+      if (parent) {
+        queryString += `parent=${parent}`
+      }
+      const result = await this.$getAjax(`/myapi/articles/types/tree?${queryString}`)
+      console.log(result, 'result---------------<>=============>')
       this.list = result.docs
       this.loading = false
     },

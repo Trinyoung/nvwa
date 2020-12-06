@@ -43,7 +43,7 @@
     </div>
     <div class="my-0 p-3 shadow-sm" id="main-content">
       <div class="btn-toolbar my-1 pb-1" role="toolbar" aria-label="Toolbar with button groups">
-        <el-button type="primary" @click="dialogFormVisible=true">新 增</el-button>
+        <el-button type="primary" @click="openDialog">新 增</el-button>
         <el-dialog title="分类管理" :visible.sync="dialogFormVisible" class="dataForm-container">
           <el-form :model="dataForm" :rules="rules" ref="dataForm" label-width="80px">
             <el-form-item label="名称：" prop="title" >
@@ -56,7 +56,7 @@
                 :props="{ checkStrictly: true }"
                 clearable></el-cascader>
             </el-form-item>
-            <el-form-item label="标识码：" prop="typeCode">
+            <el-form-item label="标识码：" prop="typeCode" v-if="!dataForm.parent">
               <el-input v-model="dataForm.typeCode" placeholder="请输入标识码"></el-input>
             </el-form-item>
             <el-form-item label="标签：" >
@@ -103,9 +103,9 @@
             </td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
-                <el-button type="success" plain >详情</el-button>
-                <el-button type="primary" plain >编辑</el-button>
-                <el-button type="danger" plain >删除</el-button>
+                <el-button type="success" plain @click="getDetail(index)">详情</el-button>
+                <!-- <el-button type="primary" plain @click="edit()">编辑</el-button> -->
+                <el-button type="danger" plain @click="remove(index)">删除</el-button>
               </div>
             </td>
           </tr>
@@ -147,7 +147,8 @@ export default {
         parent: [],
         description: '',
         typeCode: '',
-        tags: []
+        tags: [],
+        _id: ''
       },
       rules: {
         title: [
@@ -182,7 +183,7 @@ export default {
     submitForm (formName) {
       this.$refs['dataForm'].validate(async (valid) => {
         if (valid) {
-          const id = this.typeId
+          const id = this.dataForm._id
           let { parent, title, description, tags, typeCode } = this.dataForm
           let typeParent
           if (parent && parent.length > 0) {
@@ -208,14 +209,12 @@ export default {
               }
             } else {
               result = await this.$putAjax(`/api/articles/types/${id}`, request, true)
-              this.list.splice()
             }
             this.dialogFormVisible = false
             this.$message.success('编辑成功！')
             localStorage.removeItem('types')
             this.getTypes()
           } catch (err) {
-            console.log(err, '++++++++++++++++++=')
             this.$message.error('创建分类出现错误', err.message)
           }
         }
@@ -223,6 +222,14 @@ export default {
     },
     resetForm (formName) {
       this.$refs[formName].restFields()
+    },
+    openDialog () {
+      this.dataForm = {}
+      this.dialogFormVisible = true
+    },
+    getDetail (index) {
+      this.dialogFormVisible = true
+      this.dataForm = Object.assign({}, this.list[index])
     },
     async getTypes () {
       let types = localStorage.getItem('types')
