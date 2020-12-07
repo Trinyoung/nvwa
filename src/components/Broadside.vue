@@ -4,7 +4,7 @@
       <div class="avatar-head">
         <!-- <img class='avatar' v-if="!isMaster"
           src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120"> -->
-        <el-avatar :size="60" src="https://empty" @error="errorHandler">
+        <el-avatar :size="60" src="https://empty" >
           <img v-if="!isMaster" src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
           <router-link :to="toConsoleUrl" v-if="isMaster">
             <img

@@ -200,7 +200,8 @@ export default {
         return
       }
       try {
-        const result = await this.$getAjax('/myapi/articles/types/all')
+        const queryString = `createdBy=${this.$route.params.uid}`
+        const result = await this.$getAjax(`/myapi/articles/types/all?${queryString}`)
         this.types = result
         localStorage.setItem('types', JSON.stringify(this.types))
       } catch (err) {
