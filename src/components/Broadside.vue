@@ -124,9 +124,14 @@ export default {
   margin-top: 20px;
 }
 .broadSide {
-  min-height: calc(100vh -48px);
+  height: calc(100vh -48px);
   border: 1px solid aliceblue;
   background: aliceblue;
+  overflow-y: scroll;
+  /* position: fixed; */
+}
+.broadSide::-webkit-scrollbar {
+  display: none;
 }
 .broadSide .text-muted {
   font-size: 1.1rem;
@@ -159,7 +164,7 @@ export default {
   border-radius: 1rem;
   left: 0;
   top: 60px;
-  min-height: calc(100vh - 48px);
+  /* min-height: calc(100vh - 48px); */
 }
 
 .list-info {

@@ -89,6 +89,6 @@ export default {
   .broadside {
     padding: 0;
     position: sticky;
-    top: 40px
+    /* top: 40px */
   }
 </style>

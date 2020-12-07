@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-07 13:27:20
- * @LastEditTime: 2020-12-07 16:30:56
+ * @LastEditTime: 2020-12-07 16:52:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\tools\tree.vue
@@ -14,6 +14,10 @@
       <b-icon-folder2-open v-if="item.type==1 && item.status" class="mb-1"></b-icon-folder2-open>
       <b-icon-file-richtext v-if="item.type==2" class="mb-1"></b-icon-file-richtext>
       {{item.label}}
+
+      <span class="text-muted" v-if="item.type==1">
+        (下属分类：{{item.children && item.children.filter(ele=> ele.type === 1).length || 0 }}, 下属文章：{{item.children && item.children.filter(ele=> ele.type==2).length}})
+      </span>
       <!-- <b-icon-chevron-right class="mr-1 mb-1" v-if="item.children && !item.status"></b-icon-chevron-right>
       <b-icon-chevron-down class="mr-1 mb-1" v-if="item.children && item.status"></b-icon-chevron-down> -->
       <div class="text-50 mt-1 d-inline-block width-auto align-right">
