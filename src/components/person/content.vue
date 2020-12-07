@@ -1,5 +1,5 @@
 <template>
-  <main role="main" class="main">
+  <main role="main" class="main bg-white">
     <v-rightside :articleId="articleId" :isAuthor="isAuthor" :isFavorited="isFavorited" @favoriteChange="favoriteChange"></v-rightside>
     <div class="my-1 pt-0 p-3 rounded shadow-sm border-aliceBlue">
       <nav aria-label="breadcrumb" class="breadcrumb-container rounded">

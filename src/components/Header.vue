@@ -8,7 +8,7 @@
       data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <form class="form-inline my-lg-0">
+    <!-- <form class="form-inline my-lg-0">
       <div class="input-group mr-sm-2">
         <input type="text" class="form-control border" id="search-input" placeholder="搜 索" >
         <div class="input-group-append">
@@ -17,7 +17,7 @@
           </button>
         </div>
       </div>
-    </form>
+    </form> -->
     <div class="dropdown">
       <el-button type="success" plain @click="jumpTo('/register')" v-if="!isLogin">注册</el-button>
       <el-button type="danger" plain @click="jumpTo('/login')" v-if="!isLogin">登录</el-button>

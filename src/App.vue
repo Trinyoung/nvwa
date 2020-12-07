@@ -2,7 +2,7 @@
  * @Author: Trinyoung.Lu
  * @Date: 2020-08-10 15:49:42
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-03 10:29:40
+ * @LastEditTime: 2020-12-07 18:00:43
  * @PageTitle: XXX页面
  * @Description: XXX
  * @FilePath: \nvwa\src\App.vue
@@ -35,7 +35,7 @@ export default {
 body {
   font-size: 0.95rem;
   height: 100%;
-  /* background: aliceblue; */
+  background: #f8f9fa!important;
 }
 * {
   margin: 0;

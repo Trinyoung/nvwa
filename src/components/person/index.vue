@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-13 08:44:15
- * @LastEditTime: 2020-11-18 14:51:33
+ * @LastEditTime: 2020-12-07 19:33:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\Home\index.vue
@@ -12,10 +12,9 @@
     <main role="main" class="container">
       <div class="row">
         <v-broadside class="col-md-2 broadside" :uid="uid" ref="broadSide" :hotArticles="hotArticles" :newArticles="newArticles"></v-broadside>
-        <v-main class="col-md-10" :uid="uid" @articleInfoChange="articleInfoChange"></v-main>
+        <v-main class="col-md-10 mt-2 main-container" :uid="uid" @articleInfoChange="articleInfoChange"></v-main>
       </div>
     </main>
-    <v-bottom></v-bottom>
   </div>
 </template>
 <script>
@@ -90,5 +89,9 @@ export default {
     padding: 0;
     position: sticky;
     /* top: 40px */
+  }
+  .main-container {
+    height: 100%;
+    position: sticky;
   }
 </style>

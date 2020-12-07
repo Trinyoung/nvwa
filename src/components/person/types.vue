@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-23 16:22:22
- * @LastEditTime: 2020-12-07 16:46:21
+ * @LastEditTime: 2020-12-07 19:27:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\person\types.vue
 -->
 <template>
-  <div class="list-container shadow-sm p-3 rounded text-left">
+  <div class="list-container p-3 bg-white text-left">
     <h1>分类</h1>
     <div class="text-muted">共 {{list.length}} 个一级分类</div>
     <tree :treeData="list" class="tree-container bg-light"></tree>
@@ -81,6 +81,6 @@ export default {
     padding-bottom: 0.3rem;
   }
   .tree-container {
-    min-height: 500px;
+    /* min-height: 500px; */
   }
 </style>

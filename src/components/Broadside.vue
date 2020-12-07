@@ -1,15 +1,15 @@
 <template>
-  <div class="broadSide my-2 shadow-sm">
-    <nav id="sidebarMenu" class="d-md-block sidebar collapse">
-      <div class="avatar-head">
+  <div class="broadSide">
+    <nav id="sidebarMenu" class="d-md-block sidebar collapse mt-2">
+      <div class="shadow-sm p-2 bg-white">
         <!-- <img class='avatar' v-if="!isMaster"
           src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120"> -->
         <el-avatar :size="60" src="https://empty" >
-          <img v-if="!isMaster" src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
+          <!-- <img v-if="!isMaster" src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
           <router-link :to="toConsoleUrl" v-if="isMaster">
             <img
             src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
-          </router-link>
+          </router-link> -->
         </el-avatar>
         <!-- <router-link :to="toConsoleUrl" v-if="isMaster">
           <img class='avatar'
@@ -22,35 +22,38 @@
           <li>点赞数：{{articleInfo.favoriteNums || 0}}</li>
         </ul>
       </div>
-      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-        <span>最新文章</span>
-      </h6>
+      <!-- <div class="bg-white shadow-sm pt-1 mt-1">
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>最新文章</span>
+        </h6>
 
-      <ul class="nav flex-column">
-        <li class="nav-item text-left" v-for="item in newArticles" :key="item._id">
-          <router-link class="nav-link d-inline-block" :to="`/person/${uid}/articles/${item._id}`">
-            <span data-feather="file-text">{{item.title}}</span>
-            <div class="nav-item-time align-baseline">
-              <b-icon-calendar2-check class="mb-1"></b-icon-calendar2-check>
-              {{formatTime(item.createdAt)}}</div>
-          </router-link>
-        </li>
-      </ul>
-
-      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-        热门文章
-      </h6>
-      <ul class="nav flex-column">
-        <li class="nav-item text-left" v-for="item in hotArticles" :key="item._id">
-          <router-link class="nav-link" :to="`/person/${uid}/articles/${item._id}`">
-            <span data-feather="file-text">{{item.title}}</span>
-            <div class="nav-item-time align-baseline">
-              <b-icon-calendar2-check class="mb-1"></b-icon-calendar2-check>
-              {{formatTime(item.createdAt)}}
-            </div>
-          </router-link>
-        </li>
-      </ul>
+        <ul class="nav flex-column">
+          <li class="nav-item text-left" v-for="item in newArticles" :key="item._id">
+            <router-link class="nav-link d-inline-block" :to="`/person/${uid}/articles/${item._id}`">
+              <span data-feather="file-text" class="text-break">{{item.title}}</span>
+              <div class="nav-item-time align-baseline">
+                <b-icon-calendar2-check class="mb-1"></b-icon-calendar2-check>
+                {{formatTime(item.createdAt)}}</div>
+            </router-link>
+          </li>
+        </ul>
+      </div> -->
+      <div class="bg-white shadow-sm pt-1 mt-1">
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          热门文章
+        </h6>
+        <ul class="nav flex-column">
+          <li class="nav-item text-left" v-for="item in hotArticles" :key="item._id">
+            <router-link class="nav-link" :to="`/person/${uid}/articles/${item._id}`">
+              <span data-feather="file-text">{{item.title}}</span>
+              <div class="nav-item-time align-baseline">
+                <b-icon-calendar2-check class="mb-1"></b-icon-calendar2-check>
+                {{formatTime(item.createdAt)}}
+              </div>
+            </router-link>
+          </li>
+        </ul>
+      </div>
     </nav>
   </div>
 </template>
@@ -121,14 +124,12 @@ export default {
 <style scoped>
 .broadSide .sidebar-heading {
   font-size: 1.5rem;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 .broadSide {
-  height: calc(100vh -48px);
-  border: 1px solid aliceblue;
-  background: aliceblue;
-  overflow-y: scroll;
-  /* position: fixed; */
+  max-height: calc(100vh -48px);
+  /* border: 1px solid aliceblue; */
+  /* background: aliceblue; */
 }
 .broadSide::-webkit-scrollbar {
   display: none;
@@ -140,9 +141,9 @@ export default {
   font-size: 0.8rem;
   color: darkgray;
 }
-.avatar-head {
+/* .avatar-head {
   margin-top: 2rem;
-}
+} */
 .avatar {
   padding: 0;
   border-radius: 50%;
@@ -157,7 +158,7 @@ export default {
   font-weight: 600;
 }
 #sidebarMenu {
-  padding-top: 1rem;
+  /* padding-top: 1rem; */
   background-repeat: no-repeat;
   background-size: 100% 100%;
   position: sticky;
