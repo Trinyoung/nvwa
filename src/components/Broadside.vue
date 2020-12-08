@@ -122,6 +122,9 @@ export default {
 }
 </script>
 <style scoped>
+.broadSide {
+  z-index: 100;
+}
 .broadSide .sidebar-heading {
   font-size: 1.5rem;
   /* margin-top: 20px; */
@@ -138,6 +141,9 @@ export default {
 .nav-item-time {
   font-size: 0.8rem;
   color: darkgray;
+}
+.bg-aliceblue {
+  background: aliceblue;
 }
 .avatar {
   padding: 0;
