@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-13 08:44:15
- * @LastEditTime: 2020-12-07 19:33:37
+ * @LastEditTime: 2020-12-08 09:14:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\Home\index.vue
@@ -88,10 +88,8 @@ export default {
   .broadside {
     padding: 0;
     position: sticky;
-    /* top: 40px */
   }
   .main-container {
-    height: 100%;
     position: sticky;
   }
 </style>

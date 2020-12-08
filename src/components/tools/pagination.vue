@@ -1,5 +1,13 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-11-23 16:22:12
+ * @LastEditTime: 2020-12-08 10:23:24
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \nvwa\src\components\tools\pagination.vue
+-->
 <template>
-  <nav aria-label="Page navigation example" id="page-list">
+  <nav aria-label="Page navigation example" id="page-list" class="mt-2 text-muted">
     <ul class="pagination justify-content-center">
       <li class="page-item" :class="currentPage === 1? 'disabled': ''">
         <a class="page-link" href="#" @click="pageDecline()">&laquo;</a>

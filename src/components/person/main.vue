@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-08-04 08:31:03
- * @LastEditTime: 2020-12-07 19:27:22
+ * @LastEditTime: 2020-12-08 10:10:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\Home\main.vue
@@ -99,13 +99,9 @@ export default {
 <style scoped>
   .container {
     position: relative;
-    /* top: 20px; */
-  }
-  .media-body {
-    text-align: left;
-  }
-  .col-title {
-    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
   }
 
   .justify-content-center {
@@ -116,7 +112,6 @@ export default {
     /* opacity: 0.5; */
   }
   .item-title {
-    /* color: white; */
     color: gray;
     font-size: 1.1rem;
   }
@@ -125,13 +120,7 @@ export default {
     cursor: pointer;
     color: blue;
   }
-  .container {
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 5px;
-  }
   .active {
     color: rgb(77, 77, 231);
   }
-  /* :active */
 </style>

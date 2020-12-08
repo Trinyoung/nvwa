@@ -22,7 +22,7 @@
           <li>点赞数：{{articleInfo.favoriteNums || 0}}</li>
         </ul>
       </div>
-      <!-- <div class="bg-white shadow-sm pt-1 mt-1">
+      <div class="bg-white shadow-sm pt-1 mt-1">
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
           <span>最新文章</span>
         </h6>
@@ -37,7 +37,7 @@
             </router-link>
           </li>
         </ul>
-      </div> -->
+      </div>
       <div class="bg-white shadow-sm pt-1 mt-1">
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
           热门文章
@@ -126,11 +126,9 @@ export default {
   font-size: 1.5rem;
   /* margin-top: 20px; */
 }
-.broadSide {
-  max-height: calc(100vh -48px);
-  /* border: 1px solid aliceblue; */
-  /* background: aliceblue; */
-}
+/* .broadSide {
+  height: calc(100vh -48px);
+} */
 .broadSide::-webkit-scrollbar {
   display: none;
 }
@@ -141,9 +139,6 @@ export default {
   font-size: 0.8rem;
   color: darkgray;
 }
-/* .avatar-head {
-  margin-top: 2rem;
-} */
 .avatar {
   padding: 0;
   border-radius: 50%;
@@ -158,14 +153,12 @@ export default {
   font-weight: 600;
 }
 #sidebarMenu {
-  /* padding-top: 1rem; */
   background-repeat: no-repeat;
   background-size: 100% 100%;
   position: sticky;
   border-radius: 1rem;
   left: 0;
   top: 60px;
-  /* min-height: calc(100vh - 48px); */
 }
 
 .list-info {
