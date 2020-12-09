@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-08-04 08:31:03
- * @LastEditTime: 2020-12-08 16:07:04
+ * @LastEditTime: 2020-12-09 09:46:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\Home\main.vue
@@ -22,7 +22,6 @@
 <script>
 import broadSide from '../Broadside'
 import bottom from '../bottom'
-// import menu from '/'
 export default {
   components: {
     'v-broadSide': broadSide,

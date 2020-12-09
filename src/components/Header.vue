@@ -50,7 +50,8 @@
       <span class="d-inline-block align-bottom home-title">Trinyoung</span>
     </router-link>
     <button class="navbar-toggler position-absolute d-md-none collapsed bg-aliceblue3" type="button" data-toggle="collapse"
-      data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"
+      @click="mainShow">
       <span class="navbar-toggler-icon"></span>
     </button>
     <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
@@ -117,6 +118,9 @@ export default {
       } catch (err) {
         this.$message.error(err.message)
       }
+    },
+    mainShow () {
+      this.$emit('change')
     }
   }
 }

@@ -1,18 +1,19 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-13 08:44:15
- * @LastEditTime: 2020-12-08 09:14:48
+ * @LastEditTime: 2020-12-09 09:54:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\Home\index.vue
 -->
 <template>
   <div>
-    <v-header :isLogin="isLogin"></v-header>
+    <v-header :isLogin="isLogin" @change="mainShowChange"></v-header>
     <main role="main" class="container">
       <div class="row">
         <v-broadside class="col-md-2 broadside" :uid="uid" ref="broadSide" :hotArticles="hotArticles" :newArticles="newArticles"></v-broadside>
-        <v-main class="col-md-10 mt-2 main-container" :uid="uid" @articleInfoChange="articleInfoChange"></v-main>
+        <v-main class="col-md-10 mt-2 main-container" :uid="uid" @articleInfoChange="articleInfoChange"
+        v-bind:class="{ mainHidden }"></v-main>
       </div>
     </main>
   </div>
@@ -34,7 +35,8 @@ export default {
     return {
       isLogin: false,
       hotArticles: [],
-      newArticles: []
+      newArticles: [],
+      mainHidden: false
     }
   },
   props: ['uid'],
@@ -69,6 +71,9 @@ export default {
       } catch (err) {
         this.$message(err.message)
       }
+    },
+    mainShowChange (val) {
+      this.mainHidden = !this.mainHidden
     }
   }
 }
@@ -91,5 +96,8 @@ export default {
   }
   .main-container {
     position: sticky;
+  }
+  .mainHidden {
+    display: none;
   }
 </style>
