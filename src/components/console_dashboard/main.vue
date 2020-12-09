@@ -2,7 +2,7 @@
  * @Author: Trinyoung.Lu
  * @Date: 2020-08-31 14:52:33
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-09 15:47:08
+ * @LastEditTime: 2020-12-09 17:58:31
  * @PageTitle: XXX页面
  * @Description: XXX
  * @FilePath: \nvwa\src\components\console_dashboard\main.vue
@@ -38,5 +38,10 @@ export default {
     padding-left:5px;
     padding-right: 5px;
     min-height: calc(100vh - 40px);
+  }
+  @media (min-width:768px) {
+    .console-container {
+      margin-left: 225px;
+    }
   }
 </style>

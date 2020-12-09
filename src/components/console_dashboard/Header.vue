@@ -1,15 +1,18 @@
 <template>
   <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow-sm">
     <router-link class="navbar-brand align-bottom d-inline-block mr-0 px-3" to="/home">
-    <!-- navbar-brand align-bottom bg-aliceblue2 col-md-3 col-lg-2 mr-0 px-3 -->
       <b-icon-house-fill class="icon" width="2rem" height="1.5rem"></b-icon-house-fill>
       <span class="d-inline-block align-bottom home-title text-transform">Trinyoung</span>
     </router-link>
-    <button class="navbar-toggler position-absolute d-md-none collapsed bg-aliceblue3" type="button" data-toggle="collapse"
+    <!-- <button class="navbar-toggler position-absolute d-md-none collapsed bg-aliceblue3" type="button" data-toggle="collapse"
       data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"
       @click="mainShow">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
+        data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
     <div class="dropdown">
       <button class="btn dropdown-toggle avatar text-transform" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
         {{userInfo.username.substr(0, 2)}}
@@ -89,13 +92,13 @@ export default {
   left: -60px;
   padding-left: -20px;
 }
-.navbar-brand {
+/* .navbar-brand {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   font-size: 1rem;
   font-family:Georgia, 'Times New Roman', Times, serif;
   height:100%
-}
+} */
 .home-title {
   margin-bottom: -3px;
 }
@@ -120,14 +123,28 @@ export default {
   text-transform: uppercase;
 }
 .navbar-brand {
+  /* padding-top: 0.75rem; */
+  /* padding-bottom: 0.75rem; */
+  /* font-size: 1rem; */
+  /* width: 220px; */
+  background-color: rgba(28, 12, 245, 0.25);
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25);
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   font-size: 1rem;
-  width: 220px;
-  background-color: rgba(28, 12, 245, 0.25);
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25);
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  height:100%
 }
-
+@media(min-width: 768px) {
+  .navbar-brand {
+    width: 220px;
+  }
+}
+@media(max-width:768px) {
+  .navbar-brand {
+    width: 100%
+  }
+}
 .navbar .form-control {
   padding: 0.75rem 1rem;
   border-width: 0;

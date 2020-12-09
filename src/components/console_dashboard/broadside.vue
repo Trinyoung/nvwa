@@ -193,6 +193,11 @@ export default {
       width: 220px;
     }
   }
+  @media(max-width:768px) {
+    .sidebar {
+      width: 100%;
+    }
+  }
   .sidebar-sticky::-webkit-scrollbar {
     display:none
   }
@@ -247,13 +252,13 @@ export default {
   margin-right: 0.2rem;
 }
 
-.navbar-brand {
+/* .navbar-brand {
   padding-top: .75rem;
   padding-bottom: .75rem;
   font-size: 1rem;
   background-color: rgba(0, 0, 0, .25);
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
-}
+} */
 
 .navbar .navbar-toggler {
   top: .25rem;
