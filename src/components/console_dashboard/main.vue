@@ -1,8 +1,8 @@
 <!--
  * @Author: Trinyoung.Lu
  * @Date: 2020-08-31 14:52:33
- * @LastEditors: Trinyoung.Lu
- * @LastEditTime: 2020-10-19 10:01:42
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-09 15:47:08
  * @PageTitle: XXX页面
  * @Description: XXX
  * @FilePath: \nvwa\src\components\console_dashboard\main.vue
@@ -34,9 +34,9 @@ export default {
 <style scoped>
   .console-container {
     position: relative;
-    margin-left: 225px;
+    /* margin-left: 225px; */
     padding-left:5px;
-    padding-right: 10px;
+    padding-right: 5px;
     min-height: calc(100vh - 40px);
   }
 </style>

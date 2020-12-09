@@ -49,6 +49,7 @@
       <b-icon-house-fill class="icon" width="2rem" height="1.5rem"></b-icon-house-fill>
       <span class="d-inline-block align-bottom home-title">Trinyoung</span>
     </router-link>
+    <span class="navbar-toggler"></span>
     <button class="navbar-toggler position-absolute d-md-none collapsed bg-aliceblue3" type="button" data-toggle="collapse"
       data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"
       @click="mainShow">
@@ -146,7 +147,12 @@ export default {
   font-weight: 500;
   color: #333;
 }
-
+.align-right {
+  align-items: right;
+}
+.d-float-right {
+  float: right;
+}
 .sidebar .nav-link .feather {
   margin-right: 4px;
   color: #999;

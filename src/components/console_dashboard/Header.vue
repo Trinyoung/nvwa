@@ -1,9 +1,15 @@
 <template>
   <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow-sm">
-    <router-link class="navbar-brand align-bottom d-inline-block" to="/home">
+    <router-link class="navbar-brand align-bottom d-inline-block mr-0 px-3" to="/home">
+    <!-- navbar-brand align-bottom bg-aliceblue2 col-md-3 col-lg-2 mr-0 px-3 -->
       <b-icon-house-fill class="icon" width="2rem" height="1.5rem"></b-icon-house-fill>
       <span class="d-inline-block align-bottom home-title text-transform">Trinyoung</span>
     </router-link>
+    <button class="navbar-toggler position-absolute d-md-none collapsed bg-aliceblue3" type="button" data-toggle="collapse"
+      data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"
+      @click="mainShow">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="dropdown">
       <button class="btn dropdown-toggle avatar text-transform" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
         {{userInfo.username.substr(0, 2)}}
