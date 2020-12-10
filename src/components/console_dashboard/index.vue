@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-11-23 16:22:22
+ * @LastEditTime: 2020-12-10 16:30:36
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \nvwa\src\components\console_dashboard\index.vue
+-->
 <template>
   <div class="dashboard-container">
     <v-header></v-header>

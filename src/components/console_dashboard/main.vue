@@ -2,16 +2,16 @@
  * @Author: Trinyoung.Lu
  * @Date: 2020-08-31 14:52:33
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-09 17:58:31
+ * @LastEditTime: 2020-12-10 17:54:38
  * @PageTitle: XXX页面
  * @Description: XXX
  * @FilePath: \nvwa\src\components\console_dashboard\main.vue
 -->
 <template>
-  <div role="main" class="container-fluid console-container">
+  <main role="main" class="console-container container-fluid">
     <router-view/>
     <v-bottom></v-bottom>
-  </div>
+  </main>
 </template>
 <script>
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css'
@@ -33,7 +33,7 @@ export default {
 </script>
 <style scoped>
   .console-container {
-    position: relative;
+    /* position: relative; */
     /* margin-left: 225px; */
     padding-left:5px;
     padding-right: 5px;

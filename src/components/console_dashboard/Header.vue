@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow-sm">
-    <router-link class="navbar-brand align-bottom d-inline-block mr-0 px-3" to="/home">
+    <router-link class="navbar-brand align-bottom d-inline-block mr-0 px-3 " to="/home">
       <b-icon-house-fill class="icon" width="2rem" height="1.5rem"></b-icon-house-fill>
       <span class="d-inline-block align-bottom home-title text-transform">Trinyoung</span>
     </router-link>
@@ -88,9 +88,14 @@ export default {
   width: 80px;
   margin-right: 10px;
 }
-#dropdownMenu2 {
+/* #dropdownMenu2 {
   left: -60px;
   padding-left: -20px;
+} */
+#dropdownMenu2 {
+  position: absolute;
+  right: 0!important;
+  left: auto;
 }
 /* .navbar-brand {
   padding-top: 0.75rem;
@@ -144,6 +149,11 @@ export default {
   .navbar-brand {
     width: 100%
   }
+  .dropdown {
+    position: absolute;
+    top: 0.25px;
+    right: 0.5rem;
+  }
 }
 .navbar .form-control {
   padding: 0.75rem 1rem;
@@ -162,5 +172,9 @@ export default {
 }
 .logout:hover {
   cursor: pointer;
+}
+.navbar .navbar-toggler {
+  top: .25rem;
+  left: 1rem;
 }
 </style>

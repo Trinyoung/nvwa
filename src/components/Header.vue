@@ -190,7 +190,7 @@ export default {
 }
 .navbar .navbar-toggler {
   top: 0.25rem;
-  right: 1rem;
+  left: 1rem;
 }
 
 .navbar .form-control {
@@ -200,11 +200,11 @@ export default {
 .icon {
   color: rgb(2, 13, 24);
 }
-#dropdownMenu2 {
+/* #dropdownMenu2 {
   position: absolute;
   right: 0!important;
   left: auto;
-}
+} */
 #search-input {
   border-radius: 0.5rem 0 0 0.5rem;
 }
