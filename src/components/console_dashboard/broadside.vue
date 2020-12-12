@@ -150,7 +150,7 @@
   </nav>
 </template>
 <script>
-import 'vue-feather-icons'
+// import 'vue-feather-icons'
 export default {
   data () {
     return {
@@ -177,19 +177,26 @@ export default {
 }
 </script>
 <style scoped>
-  #sidebarMenu {
-    background-color: #002338;
-  }
-
   .sidebar {
     position: fixed;
     top: 0;
+    background-color: #002338;
     bottom: 0;
     left: 0;
-    width: 220px;
+    /* width: 220px; */
     z-index: 100; /* Behind the navbar */
     padding: 48px 0 0; /* Height of navbar */
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  }
+  @media (min-width: 768px) {
+    .sidebar {
+      width: 220px;
+    }
+  }
+  @media(max-width:768px) {
+    .sidebar {
+      width: 100%;
+    }
   }
   .sidebar-sticky::-webkit-scrollbar {
     display:none
@@ -240,20 +247,18 @@ export default {
   font-size: .75rem;
   text-transform: uppercase;
 }
+
 .icon {
   margin-right: 0.2rem;
 }
-/*
- * Navbar
- */
 
-.navbar-brand {
+/* .navbar-brand {
   padding-top: .75rem;
   padding-bottom: .75rem;
   font-size: 1rem;
   background-color: rgba(0, 0, 0, .25);
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
-}
+} */
 
 .navbar .navbar-toggler {
   top: .25rem;

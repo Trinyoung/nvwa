@@ -122,7 +122,7 @@ export default {
     font-size: 0.5rem;
   }
   .list-container {
-    min-height: calc(100vh - 132px);
+    min-height: 100%;
     border: 1px solid aliceblue;
   }
   svg {

@@ -1,7 +1,7 @@
 <template>
-  <main role="main" class="main">
+  <main role="main" class="main bg-white">
     <v-rightside :articleId="articleId" :isAuthor="isAuthor" :isFavorited="isFavorited" @favoriteChange="favoriteChange"></v-rightside>
-    <div class="my-1 pt-0 p-3 rounded shadow-sm border-aliceBlue">
+    <div class="my-1 pt-0 p-3">
       <nav aria-label="breadcrumb" class="breadcrumb-container rounded">
         <ol class="breadcrumb">
           <li class="breadcrumb-item" v-for="type in article.types" :key="type._id">
@@ -217,10 +217,11 @@ export default {
 }
 </script>
 <style scoped>
-  .media-body {
-    text-align: left;
-  }
   .border-aliceBlue {
+    border: 1px solid aliceblue;
+  }
+  .main {
+    min-height: 100%;
     border: 1px solid aliceblue;
   }
   .breadcrumb-container {
@@ -240,7 +241,6 @@ export default {
     text-align: center;
   }
   .item-title {
-    /* color: white; */
     font-size: 1.1rem;
   }
   img {
@@ -342,6 +342,5 @@ export default {
   }
   .isFavorited:hover {
     cursor: pointer;
-    /* color: black */
   }
 </style>

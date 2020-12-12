@@ -1,11 +1,9 @@
 <template>
-  <!-- <div class="col-md-1 right-side my-3"> -->
   <div class="sidebar">
     <div class="my-3 sidebar-item shadow-sm tag-item">
       <b-icon-hand-thumbs-up width="1.8em" height="1.8em" class="tag"
         v-bind:class="{'isFavorited':isFavorited, 'favorite-icon':!isFavorited} "
-        @click="setFavorite"
-      >
+        @click="setFavorite">
       </b-icon-hand-thumbs-up>
       点 赞
     </div>
@@ -32,7 +30,6 @@
       删除
     </div>
   </div>
-  <!-- </div> -->
 </template>
 <script>
 export default {
@@ -50,7 +47,6 @@ export default {
   },
   methods: {
     async setFavorite () {
-      console.log('点赞开始了-----------------》')
       if (this.isFavorited) {
         return this.$message.success('已经点过赞了！')
       }
@@ -96,13 +92,11 @@ export default {
   border: 1px solid aliceblue;
 }
 .tag  {
-  /* color: red; */
   margin: 0 auto;
   display: block;
   color: darkgray;
 }
 .tag-item {
-  /* background: wheat; */
   width: 4rem;
   height: 4rem;
   border-radius: 50% 50% 50% 50%;
@@ -117,7 +111,6 @@ export default {
 #dropdownMenu2 :hover{
   cursor: pointer;
 }
-
 .reffer-container {
   background: cadetblue;
 }

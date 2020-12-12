@@ -1,44 +1,24 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-23 16:22:22
- * @LastEditTime: 2020-12-04 19:37:48
+ * @LastEditTime: 2020-12-07 19:27:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\person\types.vue
 -->
 <template>
-  <div class="bg-white list-container shadow-sm p-3 rounded">
-    <!-- <div class="article-list">
-      <ul v-loading="loading" class="list-group list-group-flush">
-        <li class="list-group-item list-group-item-action" v-for="item in list" :key="item._id" :to="{path:`/articles/${item._id}`}">
-          <p class="mb-0 text-left">
-            <router-link :to="{path:`/person/${uid}/articles?type=${item._id}`}">
-              <strong class="d-block text-muted">
-              <b-icon-folder class="mb-1 mr-1"></b-icon-folder> {{ item.title }}
-              </strong>
-              <span class="d-block text-muted" >
-                {{ item.description }}
-              </span>
-              <span class="d-block small text-muted">
-                <span class="align-middle">
-                  <b-icon-calendar2-check class="mb-1"></b-icon-calendar2-check>
-                  {{ formatTime(item.createdAt) }}
-                </span>
-              </span>
-            </router-link>
-          </p>
-        </li>
-      </ul>
-    </div>
-    <pagination :currentPage="page" :pages="pages" :getList="getList"></pagination> -->
-    <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+  <div class="list-container p-3 bg-white text-left">
+    <h1>分类</h1>
+    <div class="text-muted">共 {{list.length}} 个一级分类</div>
+    <tree :treeData="list" class="tree-container bg-light"></tree>
   </div>
 </template>
 <script>
-import moment from 'moment'
+// import moment from 'moment'
 import pagination from '../tools/pagination'
+import tree from '../tools/tree'
 export default {
-  components: { pagination },
+  components: { pagination, tree },
   data: function () {
     return {
       list: [],
@@ -46,7 +26,11 @@ export default {
       page: 1,
       pages: 1,
       loading: false,
-      uid: this.$route.params.uid
+      uid: this.$route.params.uid,
+      defaultProps: {
+        children: 'children',
+        label: 'label'
+      }
     }
   },
   created: function () {
@@ -54,20 +38,14 @@ export default {
   },
   methods: {
     async getList (parent) {
-      // const { page = 1 } = this.$data
       this.loading = true
-      // const result = await this.$getAjax(`/myapi/articles/types/list?page=${page}&limit=${10}`)
-      let queryString = ''
+      let queryString = `createdBy=${this.$route.params.uid}`
       if (parent) {
         queryString += `parent=${parent}`
       }
       const result = await this.$getAjax(`/myapi/articles/types/tree?${queryString}`)
-      console.log(result, 'result---------------<>=============>')
-      this.list = result.docs
+      this.list = result
       this.loading = false
-    },
-    formatTime (unix) {
-      return moment(unix * 1000).format('YYYY-MM-DD')
     }
   }
 }
@@ -101,5 +79,8 @@ export default {
   .list-group-item {
     padding-left: 0;
     padding-bottom: 0.3rem;
+  }
+  .tree-container {
+    /* min-height: 500px; */
   }
 </style>

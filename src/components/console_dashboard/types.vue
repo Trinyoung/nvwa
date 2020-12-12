@@ -104,7 +104,6 @@
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <el-button type="success" plain @click="getDetail(index)">详情</el-button>
-                <!-- <el-button type="primary" plain @click="edit()">编辑</el-button> -->
                 <el-button type="danger" plain @click="remove(index)">删除</el-button>
               </div>
             </td>
@@ -118,7 +117,6 @@
 <script>
 import datePicker from 'vue-bootstrap-datetimepicker'
 import '@fortawesome/fontawesome-free/css/all.css'
-// import Axios from 'axios'
 import pagination from '../tools/pagination'
 import moment from 'moment'
 export default {

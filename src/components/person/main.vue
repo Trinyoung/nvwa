@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2020-08-04 08:31:03
- * @LastEditTime: 2020-12-02 16:55:17
+ * @LastEditTime: 2020-12-09 09:46:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\Home\main.vue
 -->
 <template>
   <main role="main" class="container">
-    <ul class="nav justify-content-center d-flex align-items-center p-3 my-2 rounded shadow-sm">
+    <ul class="nav justify-content-center d-flex align-items-center p-3 my-1 shadow-sm">
       <li class="nav-item" v-for="item in activeMenus" :key="item.type"  @click="changeActive(item.type)">
         <router-link :to="`/person/${uid}/${item.value}`" class="nav-link" >
           <span class="item-title" v-bind:class="{active: isActive === item.type}">{{item.text}}</span>
@@ -16,14 +16,16 @@
       </li>
     </ul>
     <router-view @articleInfoChange="articleInfoChange"/>
+    <v-bottom></v-bottom>
   </main>
 </template>
 <script>
 import broadSide from '../Broadside'
-// import menu from '/'
+import bottom from '../bottom'
 export default {
   components: {
-    'v-broadSide': broadSide
+    'v-broadSide': broadSide,
+    'v-bottom': bottom
   },
   data () {
     return {
@@ -96,13 +98,9 @@ export default {
 <style scoped>
   .container {
     position: relative;
-    /* top: 20px; */
-  }
-  .media-body {
-    text-align: left;
-  }
-  .col-title {
-    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
   }
 
   .justify-content-center {
@@ -113,7 +111,6 @@ export default {
     /* opacity: 0.5; */
   }
   .item-title {
-    /* color: white; */
     color: gray;
     font-size: 1.1rem;
   }
@@ -122,13 +119,7 @@ export default {
     cursor: pointer;
     color: blue;
   }
-  .container {
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 5px;
-  }
   .active {
     color: rgb(77, 77, 231);
   }
-  /* :active */
 </style>
