@@ -106,7 +106,7 @@ export default {
   }
 
   .justify-content-center {
-    background-color: aliceblue;
+    background-color: #e9ecef;
     top: 50px;
     position: sticky;
     z-index: 10;
