@@ -64,8 +64,8 @@
     <div class="dropdown">
       <el-button type="success" plain @click="jumpTo('/register')" v-if="!isLogin">注册</el-button>
       <el-button type="danger" plain @click="jumpTo('/login')" v-if="!isLogin">登录</el-button>
-      <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-if="isLogin">
-        你好: {{userInfo.username}}
+      <button class="btn dropdown-toggle avatar text-transform" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-if="isLogin">
+        {{userInfo.username.substr(0, 2)}}
       </button>
       <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
         <router-link :to="`/person/${this.userInfo.uid}`" class="dropdown-item">
@@ -142,7 +142,15 @@ export default {
     position: sticky;
   }
 }
-
+.avatar {
+  border-radius: 50%;
+  background: rgb(118, 224, 207);
+  padding: 0;
+  width: 45px;
+  height: 45px;
+  font-size: 0.8rem;
+  color: #fff;
+}
 .sidebar .nav-link {
   font-weight: 500;
   color: #333;
@@ -152,6 +160,9 @@ export default {
 }
 .d-float-right {
   float: right;
+}
+.text-transform {
+  text-transform: uppercase;
 }
 .sidebar .nav-link .feather {
   margin-right: 4px;
@@ -200,11 +211,12 @@ export default {
 .icon {
   color: rgb(2, 13, 24);
 }
-/* #dropdownMenu2 {
+
+#dropdownMenu2 {
   position: absolute;
   right: 0!important;
   left: auto;
-} */
+}
 #search-input {
   border-radius: 0.5rem 0 0 0.5rem;
 }

@@ -4,11 +4,6 @@
       <b-icon-house-fill class="icon" width="2rem" height="1.5rem"></b-icon-house-fill>
       <span class="d-inline-block align-bottom home-title text-transform">Trinyoung</span>
     </router-link>
-    <!-- <button class="navbar-toggler position-absolute d-md-none collapsed bg-aliceblue3" type="button" data-toggle="collapse"
-      data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"
-      @click="mainShow">
-      <span class="navbar-toggler-icon"></span>
-    </button> -->
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
         data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

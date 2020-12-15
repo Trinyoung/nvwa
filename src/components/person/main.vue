@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2020-08-04 08:31:03
- * @LastEditTime: 2020-12-09 09:46:03
+ * @LastEditTime: 2020-12-15 09:15:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\Home\main.vue
 -->
 <template>
   <main role="main" class="container">
-    <ul class="nav justify-content-center d-flex align-items-center p-3 my-1 shadow-sm">
+    <ul class="nav justify-content-center d-flex align-items-center p-2 my-1 shadow-sm">
       <li class="nav-item" v-for="item in activeMenus" :key="item.type"  @click="changeActive(item.type)">
         <router-link :to="`/person/${uid}/${item.value}`" class="nav-link" >
           <span class="item-title" v-bind:class="{active: isActive === item.type}">{{item.text}}</span>
@@ -104,7 +104,7 @@ export default {
   }
 
   .justify-content-center {
-    background-color: #e9ecef;
+    background-color: rgb(199, 226, 250);
     top: 50px;
     position: sticky;
     z-index: 10;

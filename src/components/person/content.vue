@@ -221,7 +221,7 @@ export default {
     border: 1px solid aliceblue;
   }
   .main {
-    min-height: 100%;
+    /* min-height: 100%; */
     border: 1px solid aliceblue;
   }
   .breadcrumb-container {
