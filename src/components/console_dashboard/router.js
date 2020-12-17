@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-23 16:22:12
- * @LastEditTime: 2020-12-04 10:07:06
+ * @LastEditTime: 2020-12-17 10:40:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\console_dashboard\router.js
@@ -12,6 +12,7 @@ import console from '@/components/console_dashboard'
 import types from '@/components/console_dashboard/types'
 import tags from '@/components/console_dashboard/tags'
 import user from '@/components/console_dashboard/user'
+import stastic from '@/components/console_dashboard/stastic'
 const obj = {
   path: '/console/:uid',
   name: 'console',
@@ -45,6 +46,10 @@ const obj = {
     path: 'user',
     name: 'user',
     component: user
+  }, {
+    path: 'stastic',
+    name: 'stastic',
+    component: stastic
   }]
 }
 export default obj

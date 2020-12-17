@@ -130,21 +130,15 @@
         </a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="file-text">
-            <b-icon-shield-lock></b-icon-shield-lock>
-          </span>
-          权限管理
-        </a>
+          <a class="nav-link" href="#">
+            <span data-feather="file-text">
+              <b-icon-shield-lock></b-icon-shield-lock>
+            </span>
+            权限管理
+          </a>
         </li>
         <li class="nav-item">
-          <!-- <a class="nav-link" href="#">
-            <span data-feather="file-text">
-              <b-icon-graph-up></b-icon-graph-up>
-            </span>
-            统计信息
-          </a> -->
-          <router-link :to="`/console/${$route.params.uid}/stastics`" class="dropdown-item-link">
+          <router-link :to="`/console/${$route.params.uid}/stastic`" class="nav-link">
             <b-icon-graph-up></b-icon-graph-up>
             统计信息
           </router-link>
