@@ -138,12 +138,16 @@
         </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <!-- <a class="nav-link" href="#">
             <span data-feather="file-text">
               <b-icon-graph-up></b-icon-graph-up>
             </span>
             统计信息
-          </a>
+          </a> -->
+          <router-link :to="`/console/${$route.params.uid}/stastics`" class="dropdown-item-link">
+            <b-icon-graph-up></b-icon-graph-up>
+            统计信息
+          </router-link>
         </li>
       </ul>
     </div>

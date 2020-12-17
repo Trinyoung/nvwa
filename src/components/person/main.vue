@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-08-04 08:31:03
- * @LastEditTime: 2020-12-15 09:15:30
+ * @LastEditTime: 2020-12-16 08:56:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\Home\main.vue
@@ -112,7 +112,8 @@ export default {
   }
   .item-title {
     color: gray;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    font-weight: 540;
   }
 
   .item-title:hover {

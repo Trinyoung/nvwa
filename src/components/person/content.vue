@@ -230,6 +230,9 @@ export default {
   .breadcrumb {
     background: none;
   }
+  .breadcrumb-item {
+    font-size: 1.1rem;
+  }
   .left-5 {
     left: -5rem;
   }
