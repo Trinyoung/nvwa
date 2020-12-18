@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-07 13:27:20
- * @LastEditTime: 2020-12-07 16:52:52
+ * @LastEditTime: 2020-12-18 10:48:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\tools\tree.vue
@@ -21,7 +21,7 @@
       <!-- <b-icon-chevron-right class="mr-1 mb-1" v-if="item.children && !item.status"></b-icon-chevron-right>
       <b-icon-chevron-down class="mr-1 mb-1" v-if="item.children && item.status"></b-icon-chevron-down> -->
       <div class="text-50 mt-1 d-inline-block width-auto align-right">
-        <span class="text-muted">2020-12-06</span>
+        <span class="text-muted">{{formatTime(item.createdAt)}}</span>
       </div>
     </div>
     <div class="children" v-if ="item.children && item.status">
@@ -31,6 +31,7 @@
 </div>
 </template>
 <script>
+import moment from 'moment'
 export default {
   name: 'tree',
   props: ['treeData'],
@@ -47,6 +48,9 @@ export default {
       if (item.type === 2) {
         this.$router.push(`/person/${this.$route.params.uid}/articles/${item.value}`)
       }
+    },
+    formatTime (unix) {
+      return moment(unix * 1000).format('YYYY-MM-DD')
     }
   }
 }
