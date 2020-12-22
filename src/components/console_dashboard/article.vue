@@ -106,7 +106,6 @@
 </template>
 <script>
 // import '@fortawesome/fontawesome-free/css/all.css'
-import Axios from 'axios'
 import pagination from '../tools/pagination'
 import moment from 'moment'
 export default {
@@ -212,19 +211,13 @@ export default {
       this.$router.push(url)
     },
     deleteArticle (id) {
-      this.$confirm(`确定要删除该篇文章吗？`, {
+      this.$confirm('删除文章不可恢复， 确定要删除文章吗？', {
         confirmButtonText: '确认',
         cancelButtonText: '取消'
-      }).then(() => {
-        const Authorization = `Bearer ${localStorage.getItem('token')}`
-        Axios.delete(`/api/articles/${id}`, {headers: {Authorization}}).then(res => {
-          this.$message({
-            type: 'success',
-            message: '删除成功'
-          })
-        }).catch(err => {
-          this.$message.error(err.msg)
-        })
+      }).then(async () => {
+        await this.$deleteAjax(`/api/articles/${id}`, true)
+        this.$message.success('删除成功！')
+        this.getList()
       })
     }
   }

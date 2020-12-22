@@ -26,7 +26,7 @@
       返回
     </div>
     <div v-if="isAuthor" class="my-3 sidebar-item shadow-sm tag-item">
-      <b-icon-trash width="1.8em" height="1.8em" class="tag"></b-icon-trash>
+      <b-icon-trash width="1.8em" height="1.8em" class="tag" @click="deleteArticle"></b-icon-trash>
       删除
     </div>
   </div>
@@ -63,6 +63,11 @@ export default {
       } catch (err) {
         this.$message.error(err.message)
       }
+    },
+    async deleteArticle () {
+      await this.$deleteAjax(`/api/articles/${this.articleId}`, true)
+      this.$message.success('删除成功！')
+      this.$router.replace(`/person/${this.$route.params.uid}/articles`)
     }
   }
 }

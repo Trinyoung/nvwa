@@ -63,7 +63,7 @@
             保存
           </div>
           <div class="my-3 sidebar-item">
-            <b-icon-trash class="size-2"></b-icon-trash>
+            <b-icon-trash class="size-2" @click="deleteArticle()"></b-icon-trash>
             删除
           </div>
           <div class="my-3 sidebar-item">
@@ -162,6 +162,7 @@ export default {
         refferValue: '',
         refferLink: ''
       },
+      createdBy: '',
       tags: [],
       types: []
     }
@@ -212,11 +213,12 @@ export default {
       const id = this.articleId
       if (id !== 'new') {
         const result = await this.$getAjax(`/api/articles/${id}`)
-        const { content, title, isMarkdown, isPublic, subTitle, abstract, tags, refers, _id, type, typeCode } = result
+        const { content, title, isMarkdown, isPublic, subTitle, abstract, tags, refers, _id, type, typeCode, createdBy } = result
         this.articleObj = { title, content, isPublic, subTitle, abstract, tags, refers, type, typeCode }
         this.articleObj.articleId = _id
         this.articleObj.isPublic = !!isPublic
         this.articleObj.isMarkdown = !!isMarkdown
+        this.createdBy = createdBy
         if (typeCode) {
           this.getParentTypes(typeCode)
         }
@@ -277,6 +279,17 @@ export default {
       formData.append('img', file)
       const result = await this.$postAjax('/upload/upload/file', formData)
       this.$refs.md.$img2Url(pos, result)
+    },
+    deleteArticle () {
+      this.$confirm('删除文章不可恢复， 确定要删除文章吗？', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消'
+      }).then(async () => {
+        await this.$deleteAjax(`/api/articles/${this.$route.params.articleId}`, true)
+        this.$message.success('删除成功！')
+        this.$router.replace(`/console/${this.createdBy}/articles`)
+        // this.getList()
+      })
     }
   }
 }
