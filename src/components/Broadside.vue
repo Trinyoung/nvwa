@@ -1,6 +1,6 @@
 <template>
   <div class="broadSide">
-    <nav id="sidebarMenu" class="d-md-block sidebar collapse mt-2">
+    <nav id="sidebarMenu" class="d-md-block sidebar collapse mt-1">
       <div class="shadow-sm p-2 bg-white">
         <!-- <img class='avatar' v-if="!isMaster"
           src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120"> -->
@@ -38,7 +38,7 @@
           </li>
         </ul>
       </div>
-      <div class="bg-white shadow-sm pt-1 mt-1">
+      <div class="bg-white shadow-sm pt-1 mt-1 mb-1">
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
           热门文章
         </h6>

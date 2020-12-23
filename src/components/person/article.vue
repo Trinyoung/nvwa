@@ -3,8 +3,13 @@
     <div class="article-list">
       <nav aria-label="breadcrumb" class="breadcrumb-container rounded">
         <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <!-- <router-link :to="`/person/${$route.params.uid}/articles`">全部</router-link> -->
+            <span @click="getList()" class="type-item">全部</span>
+          </li>
           <li class="breadcrumb-item" v-for="type in types" :key="type._id">
-            <router-link :to="`/person/${$route.params.uid}/articles?type=${type._id}`">{{type.title}}</router-link>
+            <span @click="getList(type._id, 1)" class="type-item">{{type.title}}</span>
+            <!-- <router-link :to="`/person/${$route.params.uid}/articles?type=${type._id}`">{{type.title}}</router-link> -->
           </li>
         </ol>
       </nav>
@@ -63,21 +68,17 @@ export default {
       types: []
     }
   },
-  created: function () {
-    this.getList(1)
+  created () {
+    this.getList()
     if (this.$route.query.type) {
       this.getParentTypes(this.$route.query.type)
-    } else {
-      this.types = [{title: '全部', _id: ''}]
     }
   },
   methods: {
-    async getList (page) {
+    async getList (type, page) {
       this.loading = true
       if (page) this.currentPage = page || 1
-      let { keyword, type } = this.$data
-      let queryString = `page=${page}&createdBy=${this.uid}`
-      if (keyword) queryString += `&keyword=${keyword}`
+      let queryString = `page=${this.currentPage}&createdBy=${this.uid}`
       if (type) queryString += `&type=${type}`
       const result = await this.$getAjax(`/myapi/articles/list?${queryString}`)
       this.loading = false
@@ -94,6 +95,7 @@ export default {
     async getParentTypes (type) {
       try {
         const result = await this.$getAjax(`/myapi/articles/types/parent?id=${type}&withTitle=1`)
+        console.log(this.result, '-----------types------->')
         this.types = result
       } catch (err) {
         this.$message.error(err.message)
@@ -135,5 +137,11 @@ export default {
   .list-group-item {
     padding-left: 0;
     padding-bottom: 0.3rem;
+  }
+  .type-item {
+    color: rgb(62, 141, 245);
+  }
+  .type-item:hover {
+    cursor: pointer;
   }
 </style>
