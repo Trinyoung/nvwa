@@ -16,9 +16,13 @@
       data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"
       @click="mainShow">
       <span class="navbar-toggler-icon"></span>
-      </button>
-    <div class="dropdown">
-      <button class="btn dropdown-toggle avatar text-transform" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+    </button>
+    <div class="dropdown login-register" v-if="!isLogin">
+      <el-button type="success" plain @click="jumpTo('/register')" v-if="!isLogin">注册</el-button>
+      <el-button type="danger" plain @click="jumpTo('/login')" v-if="!isLogin">登录</el-button>
+    </div>
+    <div class="dropdown avatar-container" v-if="isLogin">
+      <button class="btn dropdown-toggle avatar text-transform" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {{userInfo.username.substr(0, 2)}}
       </button>
       <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
@@ -43,15 +47,19 @@
   </nav>
 </template>
 <script>
-import $ from 'jquery'
 export default {
   data () {
     return {
+      isLogin: false,
       userInfo: {}
     }
   },
   created () {
-    this.init()
+    this.isLogin = !!this.$cookie.get('isLogin')
+    console.log(this.isLogin)
+    if (this.isLogin) {
+      this.init()
+    }
   },
   methods: {
     init () {
@@ -65,16 +73,18 @@ export default {
         await this.$postAjax('/api/user/logout')
         localStorage.removeItem('userInfo')
         localStorage.removeItem('token')
+        localStorage.removeItem('tags')
+        localStorage.removeItem('types')
         this.$router.push('/login')
       } catch (err) {
         this.$message.error(err.message)
       }
     },
+    jumpTo (url) {
+      this.$router.push(url)
+    },
     mainShow () {
       this.$emit('change')
-    },
-    sideHide () {
-      $('#')
     }
   }
 }
@@ -96,7 +106,6 @@ export default {
   }
 }
 .dropdown {
-  width: 80px;
   margin-right: 10px;
 }
 
@@ -146,12 +155,16 @@ export default {
   .navbar-brand {
     width: 100%
   }
-  .dropdown {
+  .avatar-container {
     position: absolute;
-    top: 0.25px;
-    right: 0.5rem;
+    right: 0;
+  }
+  .login-register {
+    width: 100%;
+    text-align: right;
   }
 }
+
 .navbar .form-control {
   padding: 0.75rem 1rem;
   border-width: 0;
