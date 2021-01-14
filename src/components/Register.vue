@@ -1,154 +1,5 @@
 <template>
-  <!-- <form class="loginForm">
-    <div class="container border">
-      <div class="form-group row loginHead pd-3">
-        <div class="col-sm-12">
-          <span class="loginTitle">用户注册</span>
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-3 line-text-right">
-          <label for="email" class="line-text-middle labeltitle">邮箱</label>
-        </div>
-        <div class="col-sm-7">
-          <input
-            class="form-control line-input-middle"
-            type="text"
-            id="email"
-            placeholder="Enter email"
-            v-model="userInfo.email"/>
-        </div>
-        <div class="col-sm-1">
-          <span class="line-text-middle labeltitle text-warning">*</span>
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-3 line-text-right">
-          <label for="mobile" class="line-text-middle labeltitle">手机</label>
-        </div>
-        <div class="col-sm-7">
-          <input
-            class="form-control line-input-middle"
-            type="text"
-            v-model="userInfo.mobile"
-            id="mobile"
-            placeholder="Enter Your Mobile"
-          />
-        </div>
-        <div class="col-sm-1">
-          <span class="line-text-middle labeltitle text-warning">*</span>
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-3 line-text-right">
-          <label for="username" class="line-text-middle labeltitle">账号</label>
-        </div>
-        <div class="col-sm-7">
-          <input
-            class="form-control line-input-middle"
-            type="text"
-            id="username"
-            v-model="userInfo.username"
-            placeholder="Enter account"
-          />
-        </div>
-        <div class="col-sm-1">
-          <span class="line-text-middle labeltitle text-warning">*</span>
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-3 line-text-right">
-          <label for="realName" class="line-text-middle labeltitle">真实姓名</label>
-        </div>
-        <div class="col-sm-7">
-          <input
-            class="form-control line-input-middle"
-            type="text"
-            v-model="userInfo.realName"
-            id="realName"
-            placeholder="Enter real name"
-          />
-        </div>
-        <div class="col-sm-1">
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-3 line-text-right">
-          <label for="password" class="line-text-middle labeltitle">密码</label>
-        </div>
-        <div class="col-sm-7">
-          <input
-            class="form-control line-input-middle"
-            type="password"
-            v-model="userInfo.password"
-            id="password"
-            placeholder="Enter password"
-          />
-        </div>
-        <div class="col-sm-1">
-          <span class="line-text-middle labeltitle text-warning">*</span>
-        </div>
-      </div>
-      <div class="row form-group">
-        <div class="col-sm-3 line-text-right">
-          <label for="confirm-password" class="line-text-middle labeltitle">确认密码</label>
-        </div>
-        <div class="col-sm-7">
-          <input
-            class="form-control line-input-middle"
-            type="password"
-            id="confirm-password"
-            v-model="userInfo.confirmPassword"
-            placeholder="Enter password again"
-          />
-        </div>
-        <div class="col-sm-1">
-          <span class="line-text-middle labeltitle text-warning">*</span>
-        </div>
-      </div>
-      <div class="row form-group">
-        <div class="col-sm-3 line-text-right">
-          <label for="gender" class="labeltitle text-font">性别</label>
-        </div>
-        <div class="col-sm-3">
-          <input type="radio" name="gender" id="gender" v-model="userInfo.gender" value="1"/> male
-        </div>
-        <div class="col-sm-3">
-          <input type="radio" name="gender" id="gender" v-model="userInfo.gender" value="2"/> female
-        </div>
-      </div>
-      <div class="row form-group">
-        <div class="col-sm-3 line-text-right">
-          <label for="job" class="line-text-middle labeltitle">工作</label>
-        </div>
-        <div class="col-sm-7">
-          <input
-            class="form-control line-input-middle"
-            type="text"
-            id="job"
-            v-model="userInfo.job"
-            placeholder="Enter Your Job"
-          />
-        </div>
-      </div>
-      <div class="row form-group">
-        <div class="col-sm-3 line-text-right">
-          <label for="birthday" class="line-text-middle labeltitle">生日</label>
-        </div>
-        <div class="col-sm-7">
-          <date-picker v-model="userInfo.birthday" :config="options" id="birthday"></date-picker>
-        </div>
-      </div>
-      <div class="row form-group">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-6">
-          <Button type="submit" class="button-right btn-primary btn line-input-button" @click="register">注 册</Button>
-        </div>
-        <div class="col-sm-3"></div>
-      </div>
-    </div>
-  </form> -->
-  <el-form class="border loginForm" label-width="100px" label-color="" :model="userInfo" :rules="rules" ref="userInfo">
+  <el-form class="loginForm" label-width="100px" label-color="" :model="userInfo" :rules="rules" ref="userInfo">
     <div class="form-group loginHead pd-3">
       <span class="loginTitle">用户注册</span>
     </div>
@@ -273,23 +124,29 @@ export default {
   margin: auto;
   margin-top: 60px;
   position: relative;
-  width: 40rem;
-  padding-bottom: 2rem;
-  background: white;
-}
 
+  width: 100%;
+  padding-bottom: 2rem;
+  /* background: white; */
+}
+@media (min-width:30rem) {
+  .loginForm {
+    background-color: white;
+    border: 1px solid rgb(202, 201, 201);
+    border-radius: 0.5rem;
+    max-width: 30rem;
+    box-shadow: rgb(243, 239, 239);
+  }
+}
 .loginHead {
   text-align: center;
-  color: blue;
-  background: wheat;
-  border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .loginTitle {
-  font-size: 40px;
+  font-size: 1.5rem;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  line-height: 4rem;
-  height: 100%;
+  display: inline-block;
+  line-height: 3.2rem;
 }
 
 .line-input-button {
