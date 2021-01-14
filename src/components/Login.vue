@@ -111,6 +111,8 @@ export default {
 .input-group-text {
   color: #41b904;
   font-size:1.1rem;
+  background-color: white;
+  border-right:none
 }
 .link {
   outline: none;
@@ -136,10 +138,6 @@ export default {
 .width-8 {
   width: 80%;
   margin: 0 auto;
-}
-.input-group-text {
-  background-color: white;
-  border-right:none
 }
 .outline-none {
   border-left: none;
@@ -172,28 +170,20 @@ export default {
 #rememberMe {
   margin-top: 2px;
 }
-@media (max-width: 30rem) {
-  .loginForm {
-    border-radius: 0.5rem;
+.loginForm {
     margin: auto;
     top: 50%;
     position: relative;
     width: 100%;
     margin-top: -10rem;
     padding-bottom: 0.5rem;
-  }
 }
 @media (min-width:30rem) {
   .loginForm {
     background-color: white;
     border: 1px solid rgb(202, 201, 201);
     border-radius: 0.5rem;
-    margin: auto;
-    top: 50%;
-    position: relative;
     max-width: 30rem;
-    margin-top: -10rem;
-    padding-bottom: 0.5rem;
     box-shadow: rgb(243, 239, 239);
   }
 }

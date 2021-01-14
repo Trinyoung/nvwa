@@ -19,7 +19,7 @@
                 <b-icon-person-fill></b-icon-person-fill>
               </span>
               </div>
-              <input type="text" class="form-control" placeholder="请输入用户名" aria-label="Username" aria-describedby="basic-addon1" v-model="inputInfo.username">
+              <input type="text" class="form-control outline-none" placeholder="请输入用户名" aria-label="Username" aria-describedby="basic-addon1" v-model="inputInfo.username">
           </div>
         </div>
         <div class=" form-group login-item">
@@ -29,7 +29,7 @@
                 <b-icon-envelope-fill></b-icon-envelope-fill>
               </span>
             </div>
-            <input type="text" class="form-control" placeholder="邮箱" aria-label="password" aria-describedby="basic-addon1" v-model="inputInfo.email">
+            <input type="text" class="form-control outline-none" placeholder="邮箱" aria-label="password" aria-describedby="basic-addon1" v-model="inputInfo.email">
           </div>
         </div>
         <div class=" form-group login-item">
@@ -39,7 +39,7 @@
                   <b-icon-lock-fill></b-icon-lock-fill>
                 </span>
               </div>
-              <input type="text" class="form-control" placeholder="请输入验证码" aria-label="confirmCode" aria-describedby="basic-addon1" v-model="inputInfo.confirmCode">
+              <input type="text" class="form-control outline-none" placeholder="请输入验证码" aria-label="confirmCode" aria-describedby="basic-addon1" v-model="inputInfo.confirmCode">
               <div class="input-group-append">
                 <button class="btn btn-outline-success" id="basic-addon2" @click="cutdown">{{buttonInfo.confirmCodeDesc}}</button>
               </div>
@@ -149,11 +149,15 @@ export default {
 .width-8 {
   width: 80%;
   margin: 0 auto;
-  /* font-size: 0.8rem; */
 }
 .input-group-text {
   background-color: white;
   color: #41b904;
+  background-color: white;
+  border-right:none
+}
+.outline-none {
+  border-left: none;
 }
 .line-text-middle {
   display: inline-block;

@@ -1,42 +1,35 @@
 <template>
   <div class="forget-container">
-    <div class="toast-container">
-      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-body">
-      验证码邮件已发送，请注意查收邮件！
-    </div>
-      </div>
-    </div>
-    <form class="loginForm border">
+    <form class="loginForm">
       <div class="container">
-        <div class="form-group row loginHead pd-3">
-          <div class="col-sm-12"><span class="loginTitle">找回密码</span></div>
+        <div class="form-group loginHead">
+          <span class="loginTitle">找回密码</span>
         </div>
         <div class="form-group row login-item">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">
-                <b-icon-lock></b-icon-lock>
+                <b-icon-lock-fill></b-icon-lock-fill>
               </span>
             </div>
-            <input type="password" class="form-control" placeholder="请输入密码" aria-label="password" aria-describedby="basic-addon1" v-model="inputInfo.password">
+            <input type="password" class="form-control outline-none" placeholder="请输入新密码" aria-label="password" aria-describedby="basic-addon1" v-model="inputInfo.password">
           </div>
         </div>
         <div class="row form-group login-item">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">
-                <b-icon-lock></b-icon-lock>
+                <b-icon-lock-fill></b-icon-lock-fill>
               </span>
             </div>
-            <input type="password" class="form-control" placeholder="请确认密码" aria-label="password" aria-describedby="basic-addon1" v-model="inputInfo.confirmPassword">
+            <input type="password" class="form-control outline-none" placeholder="请确认密码" aria-label="password" aria-describedby="basic-addon1" v-model="inputInfo.confirmPassword">
           </div>
         </div>
         <div class="row form-group">
           <div class="col-sm-4">
           </div>
           <div class="col-sm-4">
-            <Button  type="submit" class="button-right btn-primary btn line-input-button" @click="submit">确认</Button>
+            <Button  type="submit" class="btn-success btn line-input-button" @click="submit">确 认</Button>
           </div>
         </div>
       </div>
@@ -75,19 +68,15 @@ export default {
   position: relative;
   height: 100%;
 }
-.loginForm {
-  background-color: white;
-  border-radius: .5rem;
-  margin:auto;
-  top: 30%;
-  position: relative;
-  width: 30rem;
-  padding-bottom: 0.5rem;
+.outline-none {
+  border-left: none;
 }
-.toast-container {
-  position: absolute;
-  width: 100%;
-  text-align: center;
+
+.input-group-text {
+  color: #41b904;
+  font-size:1.1rem;
+  background-color: white;
+  border-right:none
 }
 .toast {
   margin: auto;
@@ -99,9 +88,6 @@ export default {
 }
 .loginHead {
   text-align: center;
-  color: blue;
-  background: wheat;
-  border-radius: 0.5rem 0.5rem 0 0;
 }
 .button-left {
   margin-right: 0.5rem;
@@ -155,5 +141,27 @@ export default {
 #rememberMe {
   border: 1px solid green;
   margin-bottom: 2px;
+}
+
+.outline-none {
+  border-left: none;
+}
+
+.loginForm {
+    margin: auto;
+    top: 50%;
+    position: relative;
+    width: 100%;
+    margin-top: -10rem;
+    padding-bottom: 0.5rem;
+}
+@media (min-width:30rem) {
+  .loginForm {
+    background-color: white;
+    border: 1px solid rgb(202, 201, 201);
+    border-radius: 0.5rem;
+    max-width: 30rem;
+    box-shadow: rgb(243, 239, 239);
+  }
 }
 </style>
