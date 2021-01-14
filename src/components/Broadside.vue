@@ -1,6 +1,6 @@
 <template>
   <div class="broadSide">
-    <nav id="sidebarMenu" class="d-md-block sidebar collapse mt-1">
+    <nav id="sidebarMenu" class="d-md-block sidebar collapse mt-1" >
       <div class="shadow-sm p-2 bg-white">
         <!-- <img class='avatar' v-if="!isMaster"
           src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120"> -->
@@ -28,8 +28,8 @@
         </h6>
 
         <ul class="nav flex-column">
-          <li class="nav-item text-left" v-for="item in newArticles" :key="item._id">
-            <router-link class="nav-link d-inline-block" :to="`/person/${uid}/articles/${item._id}`">
+          <li class="nav-item text-left list-group-item-action" v-for="item in newArticles" :key="item._id" @click="sidebarCollapse">
+            <router-link class="nav-link d-inline-block" :to="`/person/${uid}/articles/${item._id}`" >
               <span data-feather="file-text" class="text-break">{{item.title}}</span>
               <div class="nav-item-time align-baseline">
                 <b-icon-calendar2-check class="mb-1"></b-icon-calendar2-check>
@@ -43,7 +43,7 @@
           热门文章
         </h6>
         <ul class="nav flex-column">
-          <li class="nav-item text-left" v-for="item in hotArticles" :key="item._id">
+          <li class="nav-item text-left list-group-item-action" v-for="item in hotArticles" :key="item._id">
             <router-link class="nav-link" :to="`/person/${uid}/articles/${item._id}`">
               <span data-feather="file-text">{{item.title}}</span>
               <div class="nav-item-time align-baseline">
@@ -59,6 +59,7 @@
 </template>
 <script>
 import moment from 'moment'
+import $ from 'jquery'
 export default {
   data: function () {
     return {
@@ -112,11 +113,15 @@ export default {
       this.articleInfo = result
     },
     async getHotArticles () {
-      const result = await this.$getAjax(`/myapi/articles/list/hot?authonUid=${this.$route.params.uid}`)
-      console.log(result, '------------------>')
+      await this.$getAjax(`/myapi/articles/list/hot?authonUid=${this.$route.params.uid}`)
     },
     formatTime (time) {
       return moment(time * 1000).format('YYYY-MM-DD')
+    },
+    sidebarCollapse () {
+      console.log('--------------------->')
+      $('#sidebarMenu').collapse('hide')
+      this.$emit('mainShow')
     }
   }
 }
@@ -127,11 +132,8 @@ export default {
 }
 .broadSide .sidebar-heading {
   font-size: 1.5rem;
-  /* margin-top: 20px; */
 }
-/* .broadSide {
-  height: calc(100vh -48px);
-} */
+
 .broadSide::-webkit-scrollbar {
   display: none;
 }

@@ -83,22 +83,12 @@ export default {
   width: 80px;
   margin-right: 10px;
 }
-/* #dropdownMenu2 {
-  left: -60px;
-  padding-left: -20px;
-} */
+
 #dropdownMenu2 {
   position: absolute;
   right: 0!important;
   left: auto;
 }
-/* .navbar-brand {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  font-size: 1rem;
-  font-family:Georgia, 'Times New Roman', Times, serif;
-  height:100%
-} */
 .home-title {
   margin-bottom: -3px;
 }
@@ -123,10 +113,6 @@ export default {
   text-transform: uppercase;
 }
 .navbar-brand {
-  /* padding-top: 0.75rem; */
-  /* padding-bottom: 0.75rem; */
-  /* font-size: 1rem; */
-  /* width: 220px; */
   background-color: rgba(28, 12, 245, 0.25);
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25);
   padding-top: 0.75rem;
