@@ -9,34 +9,34 @@
     </div>
     <form class="loginForm">
       <div class="container">
-        <div class="form-group row loginHead pd-3">
-          <div class="col-sm-12"><span class="loginTitle">找回密码</span></div>
+        <div class="form-group loginHead pd-3">
+          <span class="loginTitle">找回密码</span>
         </div>
-        <div class="form-group row login-item">
+        <div class="form-group  login-item">
           <div class="input-group mb-3">
               <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">
-                <b-icon-person></b-icon-person>
+                <b-icon-person-fill></b-icon-person-fill>
               </span>
               </div>
               <input type="text" class="form-control" placeholder="请输入用户名" aria-label="Username" aria-describedby="basic-addon1" v-model="inputInfo.username">
           </div>
         </div>
-        <div class="row form-group login-item">
+        <div class=" form-group login-item">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">
-                <b-icon-envelope></b-icon-envelope>
+                <b-icon-envelope-fill></b-icon-envelope-fill>
               </span>
             </div>
             <input type="text" class="form-control" placeholder="邮箱" aria-label="password" aria-describedby="basic-addon1" v-model="inputInfo.email">
           </div>
         </div>
-        <div class="row form-group login-item">
+        <div class=" form-group login-item">
           <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">
-                  <b-icon-lock></b-icon-lock>
+                  <b-icon-lock-fill></b-icon-lock-fill>
                 </span>
               </div>
               <input type="text" class="form-control" placeholder="请输入验证码" aria-label="confirmCode" aria-describedby="basic-addon1" v-model="inputInfo.confirmCode">
@@ -45,12 +45,10 @@
               </div>
           </div>
         </div>
-        <div class="row form-group">
-          <div class="col-sm-4">
-          </div>
-          <div class="col-sm-4">
-            <Button  type="submit" class="button-right btn-primary btn line-input-button" @click="next">下一步</Button>
-          </div>
+        <div class=" form-group">
+          <!-- <div class="col-sm-4"> -->
+          <Button  type="submit" class="btn-success btn line-input-button" @click="next">下一步</Button>
+          <!-- </div> -->
         </div>
       </div>
     </form>
@@ -79,7 +77,12 @@ export default {
       if (!username || !email) {
         return alert('请填写用户名或者邮箱！')
       }
-      await this.$postAjax('/api/user/confirmCode', {username, email})
+      try {
+        await this.$postAjax('/api/user/confirmCode', {username, email})
+      } catch (err) {
+        return this.$message.error(err.message)
+      }
+
       this.buttonInfo.confirmCodeDesc = --this.buttonInfo.time + '秒'
       setInterval(() => {
         if (this.buttonInfo.time > 0) {
@@ -94,8 +97,12 @@ export default {
       const params = Object.assign({}, this.inputInfo)
       const username = this.inputInfo.username
       localStorage.setItem('confirmCode', this.inputInfo.confirmCode)
-      await this.$putAjax('/api/user/confirmCode', params)
-      this.$router.push(`/${username}/updatePassword`)
+      try {
+        await this.$putAjax('/api/user/confirmCode', params)
+        this.$router.push(`/${username}/updatePassword`)
+      } catch (err) {
+        return this.$message.error(err.message)
+      }
     }
   }
 }
@@ -105,15 +112,7 @@ export default {
   position: relative;
   height: 100%;
 }
-.loginForm {
-  background-color: white;
-  border-radius: .5rem;
-  margin:auto;
-  top: 30%;
-  position: relative;
-  width: 30rem;
-  padding-bottom: 0.5rem;
-}
+
 .toast-container {
   position: absolute;
   width: 100%;
@@ -129,9 +128,6 @@ export default {
 }
 .loginHead {
   text-align: center;
-  color: blue;
-  background: wheat;
-  border-radius: 0.5rem 0.5rem 0 0;
 }
 .button-left {
   margin-right: 0.5rem;
@@ -156,7 +152,8 @@ export default {
   /* font-size: 0.8rem; */
 }
 .input-group-text {
-  background-color: none;
+  background-color: white;
+  color: #41b904;
 }
 .line-text-middle {
   display: inline-block;
@@ -188,5 +185,30 @@ export default {
 #rememberMe {
   border: 1px solid green;
   margin-bottom: 2px;
+}
+@media (max-width: 30rem) {
+  .loginForm {
+    border-radius: 0.5rem;
+    margin: auto;
+    top: 50%;
+    position: relative;
+    width: 100%;
+    margin-top: -10rem;
+    padding-bottom: 0.5rem;
+  }
+}
+@media (min-width:30rem) {
+  .loginForm {
+    background-color: white;
+    border: 1px solid rgb(202, 201, 201);
+    border-radius: 0.5rem;
+    margin: auto;
+    top: 50%;
+    position: relative;
+    max-width: 30rem;
+    margin-top: -10rem;
+    padding-bottom: 0.5rem;
+    box-shadow: rgb(243, 239, 239);
+  }
 }
 </style>

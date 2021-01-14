@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-08-04 08:31:03
- * @LastEditTime: 2020-12-16 08:56:44
+ * @LastEditTime: 2021-01-14 13:26:56
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\Home\main.vue
@@ -16,7 +16,7 @@
       </li>
     </ul>
     <router-view @articleInfoChange="articleInfoChange"/>
-    <v-bottom></v-bottom>
+    <!-- <v-bottom></v-bottom> -->
   </main>
 </template>
 <script>

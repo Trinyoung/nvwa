@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-13 08:44:15
- * @LastEditTime: 2020-12-15 09:16:50
+ * @LastEditTime: 2021-01-14 13:26:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\Home\index.vue
@@ -16,6 +16,7 @@
         v-bind:class="{ mainHidden }"></v-main>
       </div>
     </main>
+    <v-bottom></v-bottom>
   </div>
 </template>
 <script>

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-11-23 16:22:12
- * @LastEditTime: 2020-12-03 08:58:36
+ * @LastEditTime: 2021-01-14 16:13:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\api\request.js
@@ -34,7 +34,7 @@ async function handleRequest ({method, url, body, withCredential}) {
       router.push('/login')
     }
     if (res.data && res.data.code !== '000') {
-      throw new Error(res.data.err)
+      throw new Error(res.data.err || res.data.message)
     }
     return res.data.result
   } catch (error) {

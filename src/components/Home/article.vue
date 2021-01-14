@@ -61,12 +61,11 @@ export default {
       pages: 1,
       loading: false,
       uid: this.$route.params.uid,
-      types:[]
+      types: []
     }
   },
   created: function () {
     this.getList(1)
-    console.log(this.$route.query.type, 'type-------------------->')
     if (this.$route.query.type) {
       this.getParentTypes(this.$route.query.type)
     } else {
