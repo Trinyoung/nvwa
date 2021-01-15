@@ -66,12 +66,13 @@ export default {
       types: []
     }
   },
-  created () {
+  async created () {
     let type = ''
     if (this.$route.query.type) {
       this.getParentTypes(this.$route.query.type)
     }
-    if (this.types.length > 0) type = this.types[this.types.length - 1].type || this.$route.query.type
+    if (this.types.length > 0) type = this.types[this.types.length - 1].type
+    if (this.$route.query.type) type = this.$route.query.type
     this.getList(type)
   },
   methods: {
