@@ -179,12 +179,12 @@ export default {
   methods: {
     async getList (n = 1, parent) {
       let queryString = `page=${n}&limit=10&createdBy=${this.$route.params.uid}`
-      if (parent._id) {
+      if (parent && parent._id) {
         queryString += `&parent=${parent._id}`
       } else {
         queryString += `&isTop=${1}`
       }
-      const result = await this.$getAjax(`/api/articles/types/list?${queryString}`)
+      const result = await this.$getAjax(`/myapi/articles/types/list?${queryString}`)
       const {docs, pages, total, page} = result
       this.list = docs
       this.pages = pages
