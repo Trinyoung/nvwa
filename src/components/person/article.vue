@@ -4,12 +4,10 @@
       <nav aria-label="breadcrumb" class="breadcrumb-container rounded">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <!-- <router-link :to="`/person/${$route.params.uid}/articles`">全部</router-link> -->
-            <span @click="getList()" class="type-item">全部</span>
+            <span @click="typeNav({}, 1)" class="type-item">全部</span>
           </li>
           <li class="breadcrumb-item" v-for="type in types" :key="type._id">
-            <span @click="getList(type._id, 1)" class="type-item">{{type.title}}</span>
-            <!-- <router-link :to="`/person/${$route.params.uid}/articles?type=${type._id}`">{{type.title}}</router-link> -->
+            <span @click="typeNav(type, 1)" class="type-item">{{type.title}}</span>
           </li>
         </ol>
       </nav>
@@ -69,10 +67,12 @@ export default {
     }
   },
   created () {
-    this.getList()
+    let type = ''
     if (this.$route.query.type) {
       this.getParentTypes(this.$route.query.type)
     }
+    if (this.types.length > 0) type = this.types[this.types.length - 1].type || this.$route.query.type
+    this.getList(type)
   },
   methods: {
     async getList (type, page) {
@@ -95,11 +95,24 @@ export default {
     async getParentTypes (type) {
       try {
         const result = await this.$getAjax(`/myapi/articles/types/parent?id=${type}&withTitle=1`)
-        console.log(this.result, '-----------types------->')
         this.types = result
       } catch (err) {
         this.$message.error(err.message)
       }
+    },
+    typeNav (type, n) {
+      for (let i = 0; i < this.types.length; i++) {
+        if (this.types[i]._id === type._id) {
+          this.types.splice(i, this.types.length, type)
+          return this.getList(type._id, n)
+        }
+      }
+      if (type._id) {
+        this.types.push(type)
+      } else {
+        this.types = []
+      }
+      this.getList(type._id, n)
     }
   }
 }
@@ -116,6 +129,12 @@ export default {
     padding: 0 3px 0 3px;
     font-size: 0.5rem;
   }
+  .breadcrumb-container {
+    background: aliceblue;
+  }
+  .breadcrumb {
+    background: none;
+  }
   .hot-icon {
     border: 1px solid red;
     color: red;
@@ -124,7 +143,6 @@ export default {
     font-size: 0.5rem;
   }
   .list-container {
-    /* min-height: 100%; */
     border: 1px solid aliceblue;
   }
   svg {
@@ -143,5 +161,8 @@ export default {
   }
   .type-item:hover {
     cursor: pointer;
+  }
+  .breadcrumb-item {
+    font-size: 1.1rem;
   }
 </style>

@@ -4,8 +4,12 @@
     <div class="my-1 pt-0 p-3">
       <nav aria-label="breadcrumb" class="breadcrumb-container rounded">
         <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <router-link :to="{path: `/person/${$route.params.uid}/articles`}"
+            >全部</router-link>
+          </li>
           <li class="breadcrumb-item" v-for="type in article.types" :key="type._id">
-            <router-link :to="`/person/${$route.params.uid}/articles?type=${type._id}`"
+            <router-link :to="{path: `/person/${$route.params.uid}/articles?type=${type._id}`}"
             >{{type.title}}</router-link>
           </li>
         </ol>
@@ -183,7 +187,6 @@ export default {
         this.isFavorited = true
         this.favoriteNum++
         sessionStorage.setItem(`favorite_${this.articleId}`, 1)
-        // console.log('点赞开始了')
         this.$emit('articleInfoChange', false, true)
       } catch (err) {
         this.$message.error(err.message)
