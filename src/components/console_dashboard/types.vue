@@ -1,5 +1,5 @@
 <template>
-  <main class="my-1 shadow-sm border">
+  <main class="my-1 shadow-sm border console-type-container">
     <nav aria-label="breadcrumb" class="title-nav">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -42,8 +42,13 @@
       </el-form>
     </div>
     <div class="my-0 p-3 shadow-sm" id="main-content">
-      <div class="btn-toolbar my-1 pb-1" role="toolbar" aria-label="Toolbar with button groups">
-        <el-button type="primary" @click="openDialog">新 增</el-button>
+      <div class="btn-toolbar mb-3 pb-1 pl-1" role="toolbar" aria-label="Toolbar with button groups">
+        <el-breadcrumb class="ml-2">
+          <el-breadcrumb-item v-for="type in typeTitles" :key="type._id">
+            <span class="type-title" @click="typeNav(1, type)">{{type.title}}</span>
+          </el-breadcrumb-item>
+        </el-breadcrumb>
+        <el-button type="primary" @click="openDialog" class="add-btn">新 增</el-button>
         <el-dialog title="分类管理" :visible.sync="dialogFormVisible" class="dataForm-container">
           <el-form :model="dataForm" :rules="rules" ref="dataForm" label-width="80px">
             <el-form-item label="名称：" prop="title" >
@@ -84,9 +89,9 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">标题</th>
-            <th scope="col">分类</th>
-            <th scope="col">创建时间</th>
             <th scope="col">标签</th>
+            <th scope="col">下属目录</th>
+            <th scope="col">创建时间</th>
             <th scope="col">操作</th>
           </tr>
         </thead>
@@ -94,13 +99,18 @@
           <tr v-for="(item, index) in list" :key="index">
             <th scope="row">{{index + 1}}</th>
             <td>{{item.title}}</td>
-            <td>{{item.types}}</td>
-            <td>{{formatTime(item.createdAt)}}</td>
             <td>
               <el-tag v-for="tag in item.tags" :key="tag._id">
                 {{tag.name}}
               </el-tag>
             </td>
+            <td>
+              <el-button type="warning" plain @click="typeNav(1, item)">
+                <b-icon-file-earmark-text class="file-type-icon"></b-icon-file-earmark-text>
+                查看
+              </el-button>
+            </td>
+            <td>{{formatTime(item.createdAt)}}</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <el-button type="success" plain @click="getDetail(index)">详情</el-button>
@@ -140,6 +150,7 @@ export default {
         published: '',
         keyword: ''
       },
+      typeTitles: [{title: '全部'}],
       dataForm: {
         title: '',
         parent: [],
@@ -166,14 +177,31 @@ export default {
     this.getTypes()
   },
   methods: {
-    async getList (n = 1) {
+    async getList (n = 1, parent) {
       let queryString = `page=${n}&limit=10&createdBy=${this.$route.params.uid}`
-      const result = await this.$getAjax(`/myapi/articles/types/list?${queryString}`)
+      if (parent._id) {
+        queryString += `&parent=${parent._id}`
+      } else {
+        queryString += `&isTop=${1}`
+      }
+      const result = await this.$getAjax(`/api/articles/types/list?${queryString}`)
       const {docs, pages, total, page} = result
       this.list = docs
       this.pages = pages
       this.page = page
       this.toal = total
+    },
+    typeNav (n = 1, type) {
+      console.log(type, 'type=================>')
+      for (let i = 0; i < this.typeTitles.length; i++) {
+        if (this.typeTitles[i]._id === type._id) {
+          // console.log(type._id, '------------>')
+          this.typeTitles.splice(i, this.typeTitles.length, type)
+          return this.getList(1, type)
+        }
+      }
+      this.typeTitles.push(type)
+      this.getList(1, type)
     },
     formatTime (time) {
       return moment(time * 1000).format('YYYY-MM-DD')
@@ -372,5 +400,29 @@ export default {
 }
 .el-tag {
   margin-left:5px;
+}
+.btn-toolbar {
+  position: relative;
+  height: 25px;
+  border-left: 5px solid #002338;
+}
+.add-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: -5px;
+}
+.el-breadcrumb {
+  line-height:25px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.bg-aliceblue {
+  background: rgba(6, 6, 10, 0.25);
+}
+.file-type-icon {
+  margin-bottom: 3px;
+}
+.type-title:hover {
+  cursor: pointer;
 }
 </style>
