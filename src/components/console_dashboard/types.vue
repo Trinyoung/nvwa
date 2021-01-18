@@ -91,6 +91,7 @@
             <th scope="col">标题</th>
             <th scope="col">标签</th>
             <th scope="col">下属目录</th>
+            <th scope="col">下属文章</th>
             <th scope="col">创建时间</th>
             <th scope="col">操作</th>
           </tr>
@@ -105,16 +106,19 @@
               </el-tag>
             </td>
             <td>
-              <el-button type="warning" plain @click="typeNav(1, item)">
+              <el-button type="warning" plain @click="typeNav(1, item)" :disabled="!Boolean(item.subTypesNums)">
                 <b-icon-file-earmark-text class="file-type-icon"></b-icon-file-earmark-text>
-                查看
+                查看({{item.subTypesNums}})
               </el-button>
+            </td>
+            <td>
+              {{item.subArticleNums}}
             </td>
             <td>{{formatTime(item.createdAt)}}</td>
             <td class="handle-cell">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <el-button type="success" plain @click="getDetail(index)">详情</el-button>
-                <el-button type="danger" plain @click="remove(index)">删除</el-button>
+                <el-button type="danger" plain @click="remove(item._id)">删除</el-button>
               </div>
             </td>
           </tr>
@@ -184,7 +188,7 @@ export default {
       } else {
         queryString += `&isTop=${1}`
       }
-      const result = await this.$getAjax(`/myapi/articles/types/list?${queryString}`)
+      const result = await this.$getAjax(`/api/articles/types/list?${queryString}`)
       const {docs, pages, total, page} = result
       this.list = docs
       this.pages = pages
@@ -192,10 +196,8 @@ export default {
       this.toal = total
     },
     typeNav (n = 1, type) {
-      console.log(type, 'type=================>')
       for (let i = 0; i < this.typeTitles.length; i++) {
         if (this.typeTitles[i]._id === type._id) {
-          // console.log(type._id, '------------>')
           this.typeTitles.splice(i, this.typeTitles.length, type)
           return this.getList(1, type)
         }
@@ -213,7 +215,7 @@ export default {
           let { parent, title, description, tags, typeCode } = this.dataForm
           let typeParent
           if (parent && parent.length > 0) {
-            [ typeCode, typeParent ] = parent[0] && parent[0].split('_')
+            [ typeCode, typeParent ] = parent[parent.length - 1] && parent[parent.length - 1].split('_')
           }
           const request = {
             isTop: 1,
@@ -279,6 +281,16 @@ export default {
       try {
         this.tags = await this.$getAjax(`/myapi/tags?createdBy=${this.$route.params.uid}`)
         localStorage.setItem('tags', JSON.stringify(this.tags))
+      } catch (err) {
+        this.$message.error(err.message)
+      }
+    },
+    remove (id) {
+      try {
+        this.$confirm('删除后不可恢复， 确认要执行删除操作吗？').then(async (res) => {
+          await this.$deleteAjax(`/api/articles/types/${id}`, true)
+          this.getList()
+        })
       } catch (err) {
         this.$message.error(err.message)
       }
