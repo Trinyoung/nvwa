@@ -4,7 +4,7 @@
       <div class="dropdown">
         <button data-toggle="dropdown" class="btn btn-primary add-button rounded-pill">+ 新建</button>
         <div class="dropdown-menu" id="dropdownMenu2" aria-labelledby="dropdown02">
-          <ul>
+          <ul class="width-100">
             <li class="dropdown-item">
               <router-link to="/console/editor/new">
                 <b-icon-file-text class="icon"></b-icon-file-text>
@@ -48,13 +48,13 @@
         </a>
       </h6>
       <ul class="nav flex-column">
-        <li class="nav-item">
+        <li class="nav-item item-action">
           <el-collapse class="nav-link" :accordion="false">
             <el-collapse-item title="Consistency" icon-file-richtext>
               <template slot="title">
                 <b-icon-file-richtext class="collapse-icon"></b-icon-file-richtext> 文档管理
               </template>
-              <ul>
+              <ul class="width-100">
                 <li class="dropdown-item">
                   <router-link :to="`/console/${$route.params.uid}/articles`" class="dropdown-item-link">
                     <b-icon-file-text class="icon"></b-icon-file-text>
@@ -77,31 +77,31 @@
             </el-collapse-item>
           </el-collapse>
         </li>
-        <li class="nav-item">
+        <li class="nav-item item-action">
           <router-link class="nav-link" :to="`/console/${$route.params.uid}/types`">
             <b-icon-folder2 class="icon"></b-icon-folder2>
             分类管理
           </router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item item-action">
           <router-link class="nav-link" :to="`/console/${$route.params.uid}/tags`">
             <b-icon-tags class="icon"></b-icon-tags>
             标签管理
           </router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item item-action">
           <router-link class="nav-link" :to="`/console/${$route.params.uid}/`">
             <b-icon-images class="icon"></b-icon-images>
             相册管理
           </router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item item-action">
           <router-link class="nav-link" :to="`/console/${$route.params.uid}/`">
             <b-icon-file-earmark-zip class="icon"></b-icon-file-earmark-zip>
             资源文件
           </router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item item-action">
           <router-link class="nav-link" :to="`/console/${$route.params.uid}/`">
             <b-icon-trash class="icon"></b-icon-trash>
             归档管理
@@ -115,21 +115,21 @@
         </span>
       </h6>
       <ul class="nav flex-column mb-2">
-        <li class="nav-item">
+        <li class="nav-item list-group-item-action">
           <router-link class="nav-link" :to="`/console/${$route.params.uid}/user`">
             <b-icon-person class="icon"></b-icon-person>
             个人信息
           </router-link>
         </li>
-        <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="file-text">
-            <b-icon-people></b-icon-people>
-          </span>
-          用户管理
-        </a>
+        <li class="nav-item list-group-item-action">
+          <a class="nav-link" href="#">
+            <span data-feather="file-text">
+              <b-icon-people></b-icon-people>
+            </span>
+            用户管理
+          </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item list-group-item-action">
           <a class="nav-link" href="#">
             <span data-feather="file-text">
               <b-icon-shield-lock></b-icon-shield-lock>
@@ -137,7 +137,7 @@
             权限管理
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item list-group-item-action">
           <router-link :to="`/console/${$route.params.uid}/stastic`" class="nav-link">
             <b-icon-graph-up></b-icon-graph-up>
             统计信息
@@ -249,7 +249,9 @@ export default {
 .icon {
   margin-right: 0.2rem;
 }
-
+.item-action:hover {
+  background: #01385a!important;
+}
 /* .navbar-brand {
   padding-top: .75rem;
   padding-bottom: .75rem;
@@ -282,20 +284,28 @@ export default {
 .add-button {
   width: 80%;
 }
-
+.width-100 {
+  width:100%;
+}
 </style>
 <style >
 .el-collapse {
   border: none!important;
 }
+/* .el-collapse-item {
+  width: 100%;
+} */
 .el-collapse-item__header {
   font-size: 0.95rem!important;
   font-weight: 500!important;
   color: #bbbbbb!important;
-  background-color: #002338!important;
+  background-color: inherit!important;
   border: none!important;
   line-height: unset!important;
   height: unset!important;
+}
+.el-collapse-item__header:hover {
+  background-color:inherit!important;
 }
 .el-collapse-item__content {
   font-size: 0.95rem!important;
@@ -303,6 +313,7 @@ export default {
   color: #bbbbbb!important;
   border:none!important;
   padding-bottom: 13px!important;
+  width: 100%;
 }
 .el-collapse-item__wrap {
   border: none!important;
