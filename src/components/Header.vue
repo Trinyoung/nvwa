@@ -71,10 +71,7 @@ export default {
     async logout () {
       try {
         await this.$postAjax('/api/user/logout')
-        localStorage.removeItem('userInfo')
-        localStorage.removeItem('token')
-        localStorage.removeItem('tags')
-        localStorage.removeItem('types')
+        localStorage.clear()
         this.$router.push('/login')
       } catch (err) {
         this.$message.error(err.message)

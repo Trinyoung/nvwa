@@ -38,8 +38,7 @@ router.beforeEach((from, to, next) => {
   const regex = new RegExp('/console')
   const cookie = Vue.cookie.get('isLogin')
   if (!cookie) {
-    localStorage.removeItem('token')
-    localStorage.removeItem('userInfo')
+    localStorage.clear()
   }
   if (regex.test(from.path)) {
     if (cookie) {
