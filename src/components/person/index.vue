@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-13 08:44:15
- * @LastEditTime: 2021-01-14 22:07:44
+ * @LastEditTime: 2021-01-25 16:30:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\Home\index.vue
@@ -18,6 +18,7 @@
         v-bind:class="{ mainHidden }"></v-main>
       </div>
     </main>
+    <el-backtop target=".page-component__scroll .el-scrollbar__wrap" :bottom="100"></el-backtop>
     <v-bottom></v-bottom>
   </div>
 </template>
