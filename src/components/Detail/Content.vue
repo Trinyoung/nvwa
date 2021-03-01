@@ -32,7 +32,7 @@
           </li>
         </ul>
       </div>
-      <div class="content-container text-left markdown-body" v-html="article.contentHtml" >
+      <div class="content-container text-left" v-html="article.contentHtml" >
       </div>
       (完)
       <div class="reffer-container pt-3">
@@ -150,9 +150,7 @@ export default {
     background-repeat: no-repeat;
     background-size: 100% 100%;
   }
-  .item-title {
-    font-size: 1.1rem;
-  }
+
   img {
     max-width: 100%;
   }
@@ -188,11 +186,8 @@ export default {
     cursor: pointer;
     color: red;
   }
-  /* .main {
-    padding-left: 10px;
-  } */
   .content-container {
-    font-size: 0.9rem;
+    font-size: 1.5rem!important;
   }
   .tag-icon {
     padding: 2px 15px 2px 15px;
@@ -207,8 +202,7 @@ export default {
   .content-container >>> pre {
     background: rgb(246,248,250);
     padding: 1rem 1rem 1rem 1rem;
-    font-size: 85%;
-
+    font-size: 90%;
   }
   .content-container >>> h1 {
     font-size: 1.6rem!important;
@@ -259,7 +253,7 @@ export default {
     max-width: 100%;
   }
   .isFavorited {
-    color: red
+    color: red;
   }
   .isFavorited:hover {
     cursor: pointer;

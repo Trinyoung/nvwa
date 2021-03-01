@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-13 08:44:15
- * @LastEditTime: 2021-01-25 16:30:02
+ * @LastEditTime: 2021-03-01 17:30:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\Home\index.vue
@@ -14,11 +14,11 @@
         <v-broadside class="col-md-2 broadside" :uid="uid" ref="broadSide" :hotArticles="hotArticles" :newArticles="newArticles"
         @change="mainShowChange"
         @mainShow="detailChange"></v-broadside>
-        <v-main class="col-md-10 mt-1 main-container" :uid="uid" @articleInfoChange="articleInfoChange"
+        <v-main class="mt-1 col-md-10 main-container" :uid="uid" @articleInfoChange="articleInfoChange"
         v-bind:class="{ mainHidden }"></v-main>
       </div>
     </main>
-    <el-backtop target=".page-component__scroll .el-scrollbar__wrap" :bottom="100"></el-backtop>
+    <!-- <el-backtop target=".page-component__scroll .el-scrollbar__wrap" :bottom="100"></el-backtop> -->
     <v-bottom></v-bottom>
   </div>
 </template>
@@ -86,11 +86,6 @@ export default {
 }
 </script>
 <style scoped>
-  @media (min-width: 1600px) {
-    .main-container：{
-      width: 1500px;
-    }
-  }
   @media (min-width: 1400px) {
     .container {
       max-width: 1300px;
