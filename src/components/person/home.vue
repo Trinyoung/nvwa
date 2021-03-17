@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-23 16:22:22
- * @LastEditTime: 2021-03-13 21:14:03
+ * @LastEditTime: 2021-03-17 16:13:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\person\home.vue
@@ -25,7 +25,7 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary" @click="jumpTo(item.detail)">查看</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary" 
+                  <button type="button" class="btn btn-sm btn-outline-secondary"
                     @click="jumpTo(item.new)"
                     v-if="isMaster"
                   >新建</button>
@@ -120,9 +120,6 @@ export default {
 <style scoped>
   .container {
     min-height: calc(100vh - 132px);
-  }
-  .v-height {
-    /* height: 100%; */
   }
   .image-container {
     height: 200px;
