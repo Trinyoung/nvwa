@@ -25,7 +25,7 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary" @click="jumpTo(item.detail)">查看</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary" 
+                  <button type="button" class="btn btn-sm btn-outline-secondary"
                     @click="jumpTo(item.new)"
                     v-if="isMaster"
                   >新建</button>
