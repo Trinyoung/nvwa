@@ -63,24 +63,24 @@ export default {
       pages: 1,
       loading: false,
       uid: this.$route.params.uid,
-      types: []
+      types: [],
+      queryType: this.$route.query.type
     }
   },
   async created () {
-    let type = ''
     if (this.$route.query.type) {
       this.getParentTypes(this.$route.query.type)
     }
-    if (this.types.length > 0) type = this.types[this.types.length - 1].type
-    if (this.$route.query.type) type = this.$route.query.type
-    this.getList(type)
+    if (this.types.length > 0) this.queryType = this.types[this.types.length - 1].type
+    if (this.$route.query.type) this.queryType = this.$route.query.type
+    this.getList(1)
   },
   methods: {
-    async getList (type, page) {
+    async getList (page) {
       this.loading = true
       if (page) this.currentPage = page || 1
       let queryString = `page=${this.currentPage}&createdBy=${this.uid}`
-      if (type) queryString += `&type=${type}`
+      if (this.queryType) queryString += `&type=${this.queryType}`
       const result = await this.$getAjax(`/myapi/articles/list?${queryString}`)
       this.loading = false
       this.list = result.docs
@@ -105,15 +105,18 @@ export default {
       for (let i = 0; i < this.types.length; i++) {
         if (this.types[i]._id === type._id) {
           this.types.splice(i, this.types.length, type)
-          return this.getList(type._id, n)
+          this.queryType = type._id
+          return this.getList(n)
         }
       }
       if (type._id) {
         this.types.push(type)
+        this.queryType = type._id
       } else {
+        this.queryType = ''
         this.types = []
       }
-      this.getList(type._id, n)
+      this.getList(n)
     }
   }
 }

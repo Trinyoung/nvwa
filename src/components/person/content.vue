@@ -1,7 +1,7 @@
 <template>
-  <main role="main" class="main bg-white">
+  <main role="main" class=" bg-white">
     <v-rightside :articleId="articleId" :isAuthor="isAuthor" :isFavorited="isFavorited" @favoriteChange="favoriteChange"></v-rightside>
-    <div class="my-1 pt-0 p-3">
+    <div class="my-1 pt-0 p-3 main-container">
       <nav aria-label="breadcrumb" class="breadcrumb-container rounded">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
@@ -277,7 +277,7 @@ export default {
   }
   .content-container {
     text-align: left;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
   .tag-icon {
     padding: 2px 15px 2px 15px;
@@ -292,8 +292,9 @@ export default {
   .content-container >>> pre {
     background: rgb(246,248,250);
     padding: 1rem 1rem 1rem 1rem;
-    font-size: 85%;
-
+    font-size: 95%;
+    /* width: 90%; */
+    display: block;
   }
   .content-container >>> h1 {
     font-size: 1.6rem!important;

@@ -129,6 +129,7 @@ export default {
 <style scoped>
 .broadSide {
   z-index: 100;
+  font-size: 1rem;
 }
 .broadSide .sidebar-heading {
   font-size: 1.5rem;

@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2020-08-04 08:31:03
- * @LastEditTime: 2021-01-14 13:26:56
+ * @LastEditTime: 2021-03-01 17:27:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\Home\main.vue
 -->
 <template>
-  <main role="main" class="container">
+  <main role="main">
     <ul class="nav justify-content-center d-flex align-items-center p-2 my-1 shadow-sm">
       <li class="nav-item" v-for="item in activeMenus" :key="item.type"  @click="changeActive(item.type)">
         <router-link :to="`/person/${uid}/${item.value}`" class="nav-link" >
