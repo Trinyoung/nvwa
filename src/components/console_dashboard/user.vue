@@ -2,19 +2,14 @@
   <main class="my-1 shadow-sm bg-white border height-100">
     <div class="container text-left">
       <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="" alt="" width="72" height="72">
-        <!-- <el-badge :value="12">
-          <el-avatar class="avatar"></el-avatar>
-        </el-badge> -->
-        <!-- <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group
-          has a validation state that can be triggered by attempting to submit the form without completing it.</p> -->
+        <img class="d-block mx-auto mb-4" :src="avatarUrl" alt="" width="100" height="100" v-if="!isEditing">
+        <uplodFile v-if="isEditing" :avatar="dataForm.avatar" @picUrlChange="picUrlChange"></uplodFile>
       </div>
 
       <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">创作信息</span>
-            <!-- <span class="badge badge-secondary badge-pill">3</span> -->
           </h4>
           <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between list-group-item-action" @click="$router.push(`/console/${$route.params.uid}/articles`)">
@@ -95,7 +90,11 @@
 </template>
 <script>
 import moment from 'moment'
+import uplodFile from '../tools/uploadFile'
 export default {
+  components: {
+    uplodFile
+  },
   data () {
     return {
       dataForm: {
@@ -105,12 +104,14 @@ export default {
         gender: '',
         mobile: '',
         email: [],
-        desc: ''
+        desc: '',
+        avatar: ''
       },
       initData: {},
       isEditing: false,
       articleCount: 0,
       tagCount: 0,
+      avatarUrl: '',
       rules: {
         username: [
           { required: true, message: '请填写正确的用户名', trigger: 'blur' }
@@ -143,8 +144,10 @@ export default {
             realName: userInfo.realName,
             birthday: moment(userInfo.birthday * 1000).format('YYYY-MM-DD'),
             gender: Number(userInfo.gender),
-            job: userInfo.job
+            job: userInfo.job,
+            avatar: userInfo.avatar
           }
+          this.avatarUrl = this.dataForm.avatar
           this.initData = Object.assign({}, this.dataForm)
           this.isEditing = false
           this.$message.success('修改成功')
@@ -164,12 +167,17 @@ export default {
         realName: userInfo.realName,
         birthday: moment(userInfo.birthday * 1000).format('YYYY-MM-DD'),
         gender: Number(userInfo.gender),
-        job: userInfo.job
+        job: userInfo.job,
+        avatar: userInfo.avatar
       }
+      this.avatarUrl = this.dataForm.avatar
       this.initData = Object.assign(this.initData, this.dataForm)
     },
     changeFormStatus () {
       this.isEditing = true
+    },
+    picUrlChange (url) {
+      this.dataForm.avatar = url
     },
     async getArticleCount () {
       const result = await this.$getAjax(`/api/articles/${this.$route.params.uid}/count`, true)

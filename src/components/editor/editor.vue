@@ -182,7 +182,16 @@ export default {
       let [ typeCode, typeId ] = (type[type.length - 1] && type[type.length - 1].split('_')) || [undefined, undefined]
       console.log(typeId, typeCode, '类型相关的的字段')
       data = Object.assign(data, {
-        content, category, title, subTitle, tags, refers, isMarkdown: Number(isMarkdown), isPublic: Number(isPublic), type: typeId, typeCode
+        content,
+        category,
+        title,
+        subTitle,
+        tags,
+        refers,
+        isMarkdown: Number(isMarkdown),
+        isPublic: Number(isPublic),
+        type: typeId,
+        typeCode
       })
       if (articleId && articleId !== 'new') {
         data.articleId = articleId
