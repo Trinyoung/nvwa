@@ -9,8 +9,10 @@
         <span class="navbar-toggler-icon"></span>
       </button>
     <div class="dropdown">
-      <button class="btn dropdown-toggle avatar text-transform" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-        {{userInfo.username.substr(0, 2)}}
+      <button class="btn dropdown-toggle avatar text-transform" type="button" data-toggle="dropdown"  aria-expanded="false" >
+        <!-- {{userInfo.username.substr(0, 2)}} -->
+        <img :src="userInfo.avatar" alt="" v-if="userInfo.avatar" class="avatar">
+        <span v-if="!userInfo.avatar">{{userInfo.username.substr(0, 2)}}</span>
       </button>
       <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
         <router-link :to="`/person/${this.userInfo.uid}`" class="dropdown-item">

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-14 19:58:49
- * @LastEditTime: 2021-01-14 20:59:01
+ * @LastEditTime: 2021-03-29 15:28:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\Header.vue
@@ -23,7 +23,8 @@
     </div>
     <div class="dropdown avatar-container" v-if="isLogin">
       <button class="btn dropdown-toggle avatar text-transform" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{userInfo.username.substr(0, 2)}}
+        <img :src="userInfo.avatar" alt="" v-if="userInfo.avatar" class="avatar">
+        <span v-if="!userInfo.avatar">{{userInfo.username.substr(0, 2)}}</span>
       </button>
       <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
         <router-link :to="`/person/${this.userInfo.uid}`" class="dropdown-item">
@@ -67,6 +68,7 @@ export default {
     },
     getUserInfo () {
       this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+      console.log(this.userInfo.avatar, '头像')
     },
     async logout () {
       try {
@@ -120,7 +122,7 @@ export default {
 }
 .avatar {
   border-radius: 50%;
-  background: rgb(118, 224, 207);
+  /* background: rgb(118, 224, 207); */
   padding: 0;
   width: 45px;
   height: 45px;

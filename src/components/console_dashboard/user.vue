@@ -147,6 +147,7 @@ export default {
             job: userInfo.job,
             avatar: userInfo.avatar
           }
+          localStorage.setItem('userInfo', JSON.stringify(userInfo))
           this.avatarUrl = this.dataForm.avatar
           this.initData = Object.assign({}, this.dataForm)
           this.isEditing = false

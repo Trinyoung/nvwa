@@ -2,19 +2,8 @@
   <div class="broadSide">
     <nav id="sidebarMenu" class="d-md-block sidebar collapse mt-1" >
       <div class="shadow-sm p-2 bg-white">
-        <!-- <img class='avatar' v-if="!isMaster"
-          src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120"> -->
-        <el-avatar :size="60" src="https://empty" >
-          <!-- <img v-if="!isMaster" src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
-          <router-link :to="toConsoleUrl" v-if="isMaster">
-            <img
-            src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
-          </router-link> -->
+        <el-avatar :size="60" :src="userInfo.avatar" >
         </el-avatar>
-        <!-- <router-link :to="toConsoleUrl" v-if="isMaster">
-          <img class='avatar'
-          src="https://upload.jianshu.io/users/upload_avatars/7137229/dc133847-5398-42c5-96f3-5ce9828e4b47?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
-        </router-link> -->
         <p class="font-yahei">{{userInfo.username}}</p>
         <ul class="list-info font-yahei">
           <li>文章数：{{articleInfo.articleNums || 0}}</li>
@@ -65,7 +54,8 @@ export default {
     return {
       userId: '',
       userInfo: {
-        username: ''
+        username: '',
+        avatar: ''
       },
       articleInfo: {
         articleNums: 0,
@@ -106,6 +96,8 @@ export default {
       if (self && JSON.parse(self).uid === this.$route.params.uid) {
         this.isMaster = true
       }
+      console.log(this.userInfo, '--------------->')
+      console.log(this.isMaster, '是否为主人？-------------》')
       this.getArticleNums()
     },
     async getArticleNums () {
