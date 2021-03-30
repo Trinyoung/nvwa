@@ -1,18 +1,18 @@
 <!--
  * @Author: your name
  * @Date: 2020-11-23 16:22:22
- * @LastEditTime: 2020-12-10 16:30:36
+ * @LastEditTime: 2021-03-30 14:55:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\console_dashboard\index.vue
 -->
 <template>
   <div class="dashboard-container">
-    <v-header></v-header>
+    <v-header :avatarUrl="avatarUrl"></v-header>
     <main role="main" class="container-fluid">
       <div class="row">
         <v-broadside></v-broadside>
-        <v-main :tags= tags></v-main>
+        <v-main @avatarChange="avatarChange"></v-main>
       </div>
     </main>
   </div>
@@ -32,7 +32,8 @@ export default {
   },
   data () {
     return {
-      tags: []
+      tags: [],
+      avatarUrl: ''
     }
   },
   props: ['uid'],
@@ -45,16 +46,21 @@ export default {
       if (!token) {
         this.$router.push('/login')
       }
-      this.getTags()
+      // this.getTags()
     },
-    async getTags () {
-      try {
-        const result = await this.$getAjax(`/myapi/tags?createdBy=${this.uid}`)
-        console.log(result, 'result------------------->')
-      } catch (err) {
-        this.$message.error(err.messag)
-      }
+    avatarChange (url) {
+      console.log('index--------------avatarChange', url)
+      this.avatarUrl = url
     }
+    // async getTags () {
+    //   try {
+    //     const result = await this.$getAjax(`/myapi/tags?createdBy=${this.uid}`)
+    //     this.tags = result
+    //     console.log(result, 'result------------------->')
+    //   } catch (err) {
+    //     this.$message.error(err.messag)
+    //   }
+    // }
   }
 }
 </script>

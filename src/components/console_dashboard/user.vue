@@ -148,7 +148,9 @@ export default {
             avatar: userInfo.avatar
           }
           localStorage.setItem('userInfo', JSON.stringify(userInfo))
+          console.log(userInfo.avatar, 'avatar')
           this.avatarUrl = this.dataForm.avatar
+          this.$emit('avatarChange', this.avatarUrl)
           this.initData = Object.assign({}, this.dataForm)
           this.isEditing = false
           this.$message.success('修改成功')
@@ -178,6 +180,7 @@ export default {
       this.isEditing = true
     },
     picUrlChange (url) {
+      console.log(url, 'url is here---------->')
       this.dataForm.avatar = url
     },
     async getArticleCount () {

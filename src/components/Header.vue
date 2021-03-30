@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-14 19:58:49
- * @LastEditTime: 2021-03-29 15:28:14
+ * @LastEditTime: 2021-03-30 13:50:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\Header.vue
@@ -22,9 +22,13 @@
       <el-button type="danger" plain @click="jumpTo('/login')" v-if="!isLogin">登录</el-button>
     </div>
     <div class="dropdown avatar-container" v-if="isLogin">
-      <button class="btn dropdown-toggle avatar text-transform" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <img :src="userInfo.avatar" alt="" v-if="userInfo.avatar" class="avatar">
-        <span v-if="!userInfo.avatar">{{userInfo.username.substr(0, 2)}}</span>
+      <button class="btn dropdown-toggle avatar text-transform" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-if="userInfo.avatar">
+        <img :src="userInfo.avatar" alt="" class="avatar">
+        <!-- <span v-if="!userInfo.avatar">{{userInfo.username.substr(0, 2)}}</span> -->
+      </button>
+      <button class="btn dropdown-toggle avatar-text text-transform" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-if="!userInfo.avatar">
+        <!-- <img :src="userInfo.avatar" alt="" v-if="userInfo.avatar" class="avatar"> -->
+        <span>{{userInfo.username.substr(0, 2)}}</span>
       </button>
       <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
         <router-link :to="`/person/${this.userInfo.uid}`" class="dropdown-item">
@@ -59,6 +63,7 @@ export default {
     this.isLogin = !!this.$cookie.get('isLogin')
     console.log(this.isLogin)
     if (this.isLogin) {
+      console.log('---------login--------->')
       this.init()
     }
   },
@@ -106,6 +111,7 @@ export default {
 }
 .dropdown {
   margin-right: 10px;
+  width: 80px;
 }
 
 #dropdownMenu2 {
@@ -123,6 +129,15 @@ export default {
 .avatar {
   border-radius: 50%;
   /* background: rgb(118, 224, 207); */
+  padding: 0;
+  width: 45px;
+  height: 45px;
+  font-size: 0.8rem;
+  color: #fff;
+}
+.avatar-text {
+  border-radius: 50%;
+  background: rgb(118, 224, 207);
   padding: 0;
   width: 45px;
   height: 45px;

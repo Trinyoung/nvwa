@@ -94,6 +94,10 @@ export default {
       }
       try {
         const result = await this.$postAjax('/api/user/login', request)
+        this.userInfo = {
+          username: result.userInfo.username,
+          avatar: result.userInfo.avatar
+        }
         localStorage.setItem('userInfo', JSON.stringify(result.userInfo))
         localStorage.setItem('token', result.token)
         this.$router.push(`/person/${result.userInfo.uid}`)

@@ -2,14 +2,14 @@
  * @Author: Trinyoung.Lu
  * @Date: 2020-08-31 14:52:33
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-12-10 17:54:38
+ * @LastEditTime: 2021-03-30 14:50:29
  * @PageTitle: XXX页面
  * @Description: XXX
  * @FilePath: \nvwa\src\components\console_dashboard\main.vue
 -->
 <template>
   <main role="main" class="console-container container-fluid">
-    <router-view/>
+    <router-view @avatarChange="avatarChange"/>
     <v-bottom></v-bottom>
   </main>
 </template>
@@ -28,6 +28,10 @@ export default {
   created: function () {
   },
   methods: {
+    avatarChange (url) {
+      console.log(url, '----------------?avatarChange')
+      this.$emit('avatarChange', url)
+    }
   }
 }
 </script>

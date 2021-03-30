@@ -9,10 +9,11 @@
         <span class="navbar-toggler-icon"></span>
       </button>
     <div class="dropdown">
-      <button class="btn dropdown-toggle avatar text-transform" type="button" data-toggle="dropdown"  aria-expanded="false" >
-        <!-- {{userInfo.username.substr(0, 2)}} -->
-        <img :src="userInfo.avatar" alt="" v-if="userInfo.avatar" class="avatar">
-        <span v-if="!userInfo.avatar">{{userInfo.username.substr(0, 2)}}</span>
+      <button class="btn dropdown-toggle avatar text-transform" type="button" data-toggle="dropdown"  aria-expanded="false" aria-haspopup="true" v-if="userInfo.avatar">
+        <img :src="userInfo.avatar" alt=""  class="avatar">
+      </button>
+      <button class="btn dropdown-toggle text-transform avatar-text" type="button" data-toggle="dropdown"  aria-expanded="false" aria-haspopup="true" v-if="!userInfo.avatar">
+        <span >{{userInfo.username.substr(0, 2)}}</span>
       </button>
       <div class="dropdown-menu" id='dropdownMenu2' aria-labelledby="dropdown02">
         <router-link :to="`/person/${this.userInfo.uid}`" class="dropdown-item">
@@ -43,7 +44,14 @@ export default {
     }
   },
   created () {
+    console.log(this.avatarUrl)
     this.init()
+  },
+  props: ['avatarUrl'],
+  watch: {
+    'avatarUrl' () {
+      this.userInfo.avatar = this.avatarUrl
+    }
   },
   methods: {
     init () {
@@ -99,6 +107,13 @@ export default {
   color: #007bff;
 }
 .avatar {
+  border-radius: 50%;
+  padding: 0;
+  width: 45px;
+  height: 45px;
+  color: #fff;
+}
+.avatar-text {
   border-radius: 50%;
   background: rgb(118, 224, 207);
   padding: 0;
