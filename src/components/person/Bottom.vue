@@ -116,7 +116,6 @@
   </div>
 </template>
 <script>
-import Axios from 'axios'
 import moment from 'moment'
 import $ from 'jquery'
 export default {
@@ -181,7 +180,7 @@ export default {
         submitForm.email = this.visitInfo.email
       }
       try {
-        await this.$postAjax('/myapi/comments', submitForm)
+        await this.$postAjax('/capi/comments', submitForm)
         $(`#collapseReply${reply}`).collapse(false)
         this.$message.success('发表成功')
         this.dataForm = {}
@@ -194,7 +193,7 @@ export default {
       }
     },
     async getComments () {
-      let url = `/myapi/comments/${this.articleId}/list`
+      let url = `/capi/comments/${this.articleId}/list`
       if (this.uid) {
         url += `?uid=${this.uid}`
       }
@@ -225,7 +224,7 @@ export default {
       if (!comment.isFavorited && !isFavorited) {
         try {
           const request = {commentId: comment._id, createdBy: this.uid, authorUid: this.uid}
-          const result = await this.$postAjax('/myapi/comments/favorites', request)
+          const result = await this.$postAjax('/capi/comments/favorites', request)
           comment.favoriteNum = result
           comment.isFavorited = true
           if (!this.uid) {
@@ -235,9 +234,6 @@ export default {
           this.$message.error(err.message)
         }
       }
-    },
-    getCommentFavorites () {
-      Axios.get('/myapi/comments/favorites', {})
     },
     formatTime (unix) {
       return moment(unix * 1000).format('YYYY-MM-DD HH:mm:ss')
