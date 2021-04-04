@@ -17,7 +17,7 @@
       @click="mainShow">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="dropdown login-register" v-if="!isLogin">
+    <div class="login-register" v-if="!isLogin">
       <el-button type="success" plain @click="jumpTo('/register')" v-if="!isLogin">注册</el-button>
       <el-button type="danger" plain @click="jumpTo('/login')" v-if="!isLogin">登录</el-button>
     </div>
@@ -113,7 +113,11 @@ export default {
   margin-right: 10px;
   width: 80px;
 }
+.login-register {
+  width: 180px;
 
+  margin-right: 10px;
+}
 #dropdownMenu2 {
   position: absolute;
   right: 0!important;
