@@ -7,8 +7,8 @@
         <p class="font-yahei">{{userInfo.username}}</p>
         <ul class="list-info font-yahei">
           <li>文章数：{{articleInfo.articleNums || 0}}</li>
-          <li>浏览量：{{articleInfo.readsNums || 0}}</li>
-          <li>点赞数：{{articleInfo.favoriteNums || 0}}</li>
+          <li>浏览量：{{readsNums || 0}}</li>
+          <li>点赞数：{{favoriteNums || 0}}</li>
         </ul>
       </div>
       <div class="bg-white shadow-sm pt-1 mt-1">
@@ -58,9 +58,7 @@ export default {
         avatar: ''
       },
       articleInfo: {
-        articleNums: 0,
-        readsNums: 0,
-        favoriteNums: 0
+        articleNums: 0
       },
       isMaster: false,
       toConsoleUrl: `/console/${this.$route.params.uid}`
@@ -73,6 +71,16 @@ export default {
   watch: {
     'userId' (val) {
       this.init()
+    }
+  },
+  computed: {
+    'readsNums' () {
+      console.log('阅读量')
+      return this.$store.state.readsNums
+    },
+    'favoriteNums' () {
+      console.log('界面中，监听点赞数')
+      return this.$store.state.favoriteNums
     }
   },
   methods: {
@@ -96,13 +104,13 @@ export default {
       if (self && JSON.parse(self).uid === this.$route.params.uid) {
         this.isMaster = true
       }
-      console.log(this.userInfo, '--------------->')
-      console.log(this.isMaster, '是否为主人？-------------》')
       this.getArticleNums()
     },
     async getArticleNums () {
       const result = await this.$getAjax(`/myapi/articles/nums?createdBy=${this.$route.params.uid}`)
       this.articleInfo = result
+      const {readsNums, favoriteNums} = result
+      this.$store.commit('getStateChange', {readsNums, favoriteNums})
     },
     async getHotArticles () {
       await this.$getAjax(`/myapi/articles/list/hot?authonUid=${this.$route.params.uid}`)
@@ -111,7 +119,6 @@ export default {
       return moment(time * 1000).format('YYYY-MM-DD')
     },
     sidebarCollapse () {
-      console.log('--------------------->')
       $('#sidebarMenu').collapse('hide')
       this.$emit('mainShow')
     }

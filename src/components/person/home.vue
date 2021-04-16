@@ -108,12 +108,11 @@ export default {
       if (self && JSON.parse(self).uid === this.$route.params.uid) {
         this.isMaster = true
       }
-      this.getArticleNums()
-    },
-    async getArticleNums () {
-      const result = await this.$getAjax(`/myapi/articles/nums?createdBy=${this.$route.params.uid}`)
-      this.articleInfo = result
     }
+    // async getArticleNums () {
+    //   const result = await this.$getAjax(`/myapi/articles/nums?createdBy=${this.$route.params.uid}`)
+    //   this.articleInfo = result
+    // }
   }
 }
 </script>

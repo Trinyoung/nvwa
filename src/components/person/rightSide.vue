@@ -59,7 +59,8 @@ export default {
         await this.$postAjax('/myapi/articles/favorites', request)
         this.$parent.isFavorited = true
         // console.log('点赞开始了')
-        this.$emit('favoriteChange', false, true)
+        // this.$emit('favoriteChange', false, true)
+        this.$store.commit('favoriteIncrement')
       } catch (err) {
         this.$message.error(err.message)
       }

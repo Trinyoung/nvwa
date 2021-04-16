@@ -164,7 +164,8 @@ export default {
           await this.$postAjax(`/myapi/articles/reads`, request)
           sessionStorage.setItem(`read_${this.articleId}`, 1)
           this.article.hasReads++
-          this.$emit('articleInfoChange', true)
+          // this.$emit('articleInfoChange', true)
+          this.$store.commit('readIncrement')
         } catch (err) {
           this.$message.error(err.message)
         }
@@ -187,7 +188,8 @@ export default {
         this.isFavorited = true
         this.favoriteNum++
         sessionStorage.setItem(`favorite_${this.articleId}`, 1)
-        this.$emit('articleInfoChange', false, true)
+        // this.$emit('articleInfoChange', false, true)
+        this.$store.commit('favoriteIncrement')
       } catch (err) {
         this.$message.error(err.message)
       }
