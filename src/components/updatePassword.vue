@@ -53,11 +53,11 @@ export default {
   methods: {
     async submit () {
       const { password, confirmPassword } = this.$data.inputInfo
-      const username = this.username
+      const username = this.$route.params.username
       console.log(this.$route.query.code, '------------query.code')
       const confirmCode = this.code
       if (!password || !confirmPassword || password !== confirmPassword) {
-        return alert('请填写用户名或者邮箱！')
+        return this.$message.error('请输入用户名或者邮箱！')
       }
       await this.$putAjax('/api/user/password', {password, username, confirmCode})
       return this.$router.push('/login')

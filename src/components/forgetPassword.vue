@@ -90,6 +90,7 @@ export default {
           this.buttonInfo.confirmCodeDesc = --this.buttonInfo.time + '秒'
         } else {
           this.buttonInfo.confirmCodeDesc = '获取验证码'
+          this.buttonInfo.time = 60
           clearInterval()
         }
       }, 1000)
