@@ -41,13 +41,13 @@
               </div>
               <input type="text" class="form-control outline-none" placeholder="请输入验证码" aria-label="confirmCode" aria-describedby="basic-addon1" v-model="inputInfo.confirmCode">
               <div class="input-group-append">
-                <button class="btn btn-outline-success" id="basic-addon2" @click="cutdown">{{buttonInfo.confirmCodeDesc}}</button>
+                <button class="btn btn-outline-success" id="basic-addon2" @click.prevent="cutdown">{{buttonInfo.confirmCodeDesc}}</button>
               </div>
           </div>
         </div>
         <div class=" form-group">
           <!-- <div class="col-sm-4"> -->
-          <Button  type="submit" class="btn-success btn line-input-button" @click="next">下一步</Button>
+          <Button  type="submit" class="btn-success btn line-input-button" @click.prevent="next">下一步</Button>
           <!-- </div> -->
         </div>
       </div>
@@ -73,12 +73,13 @@ export default {
   },
   methods: {
     async cutdown () {
-      const { username, email } = this.$data.inputInfo
+      const { username, email } = this.inputInfo
       if (!username || !email) {
         return alert('请填写用户名或者邮箱！')
       }
       try {
         await this.$postAjax('/api/user/confirmCode', {username, email})
+        this.$message.success('验证码发送成功，打开邮箱，注意查收！')
       } catch (err) {
         return this.$message.error(err.message)
       }
@@ -99,7 +100,7 @@ export default {
       localStorage.setItem('confirmCode', this.inputInfo.confirmCode)
       try {
         await this.$putAjax('/api/user/confirmCode', params)
-        this.$router.push(`/${username}/updatePassword`)
+        this.$router.push(`/${username}/updatePassword?code=${this.inputInfo.confirmCode}`)
       } catch (err) {
         return this.$message.error(err.message)
       }

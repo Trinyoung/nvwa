@@ -16,10 +16,10 @@
       <el-input v-model="userInfo.realName"></el-input>
     </el-form-item>
     <el-form-item label="密码" prop="password">
-      <el-input v-model="userInfo.password"></el-input>
+      <el-input v-model="userInfo.password" show-password></el-input>
     </el-form-item>
     <el-form-item label="确认密码" prop="confirmPassword">
-      <el-input v-model="userInfo.confirmPassword"></el-input>
+      <el-input v-model="userInfo.confirmPassword" show-password></el-input>
     </el-form-item>
     <el-form-item label="性别">
       <el-radio-group v-model="userInfo.gender">

@@ -29,7 +29,7 @@
           <div class="col-sm-4">
           </div>
           <div class="col-sm-4">
-            <Button  type="submit" class="btn-success btn line-input-button" @click="submit">确 认</Button>
+            <Button  type="submit" class="btn-success btn line-input-button" @click.prevent="submit">确 认</Button>
           </div>
         </div>
       </div>
@@ -46,14 +46,16 @@ export default {
       }
     }
   },
-  props: ['username'],
+  props: ['username', 'code'],
   created: function () {
+    console.log(this.code, '------------------->')
   },
   methods: {
     async submit () {
       const { password, confirmPassword } = this.$data.inputInfo
       const username = this.username
-      const confirmCode = localStorage.getItem('confirmCode')
+      console.log(this.$route.query.code, '------------query.code')
+      const confirmCode = this.code
       if (!password || !confirmPassword || password !== confirmPassword) {
         return alert('请填写用户名或者邮箱！')
       }

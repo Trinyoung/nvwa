@@ -1,3 +1,4 @@
+// @ts-nocheck
 /*
  * @Author: your name
  * @Date: 2020-11-11 18:05:23
@@ -62,7 +63,7 @@ export default new Router({
       path: '/:username/updatePassword',
       name: 'updatePassword',
       component: updatePassword,
-      props: true
+      props: (route) => ({code: route.query.code})
     }
   ]
 })
