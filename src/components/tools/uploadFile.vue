@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-29 09:54:59
- * @LastEditTime: 2021-03-29 14:19:25
+ * @LastEditTime: 2021-04-25 13:40:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\tools\uploadFile.vue
@@ -14,6 +14,9 @@
       accept="image/jpeg,image/png"
       name= 'img'
       :file-list="fileList"
+      :headers="{
+        authorization
+      }"
       :data="uploadObj"
       :limit="2"
       :show-file-list="true"
@@ -44,7 +47,8 @@ export default {
       fileList: [],
       uploadUrl: '/upload/upload/file',
       picUrl: '',
-      dialogVisible: false
+      dialogVisible: false,
+      authorization: `Bearer ${localStorage.getItem('token')}`
     }
   },
   props: ['avatar'],
