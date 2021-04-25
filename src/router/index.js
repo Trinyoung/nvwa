@@ -12,7 +12,7 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
 import editorRouter from '@/components/editor/router'
-import Detail from '@/components/Detail'
+// import Detail from '@/components/Detail'
 import homeRouter from '@/components/person/router'
 import consoleRouter from '@/components/console_dashboard/router'
 import ForgetPassword from '@/components/forgetPassword'
@@ -49,12 +49,6 @@ export default new Router({
     homeRouter,
     editorRouter,
     consoleRouter,
-    {
-      path: '/articles/:articleId',
-      name: 'Article',
-      component: Detail,
-      props: true
-    },
     {
       path: '/forgetPassword',
       name: 'ForgetPassword',
