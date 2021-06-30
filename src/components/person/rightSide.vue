@@ -11,7 +11,7 @@
       <b-icon-share width="1.8em" height="1.8em" class="tag"></b-icon-share>
       分享
     </div>
-    <div class="my-3 sidebar-item shadow-sm tag-item" v-if="canCollect" 
+    <div class="my-3 sidebar-item shadow-sm tag-item" v-if="canCollect"
       @click="websocketTest">
       <b-icon-star width="1.8em" height="1.8em" class="tag"></b-icon-star>
       收藏
