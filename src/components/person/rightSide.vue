@@ -72,12 +72,12 @@ export default {
       this.$router.replace(`/person/${this.$route.params.uid}/articles`)
     },
     async websocketTest () {
-      const websocket = new WebSocket('/websocket_server/bookdownload');
+      const websocket = new WebSocket('/websocket_server/bookdownload')
         websocket.onopen = function (ws) {
-            websocket.send('建立连接成功！');
-        };
+          websocket.send('建立连接成功！')
+        }
         websocket.onmessage = function ({data}) {
-            console.log(data, 'data ------------->');
+          console.log(data, 'data ------------->')
         }
     }
   }
