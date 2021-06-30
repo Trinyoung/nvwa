@@ -11,7 +11,8 @@
       <b-icon-share width="1.8em" height="1.8em" class="tag"></b-icon-share>
       分享
     </div>
-    <div class="my-3 sidebar-item shadow-sm tag-item" v-if="canCollect">
+    <div class="my-3 sidebar-item shadow-sm tag-item" v-if="canCollect" 
+      @click="websocketTest">
       <b-icon-star width="1.8em" height="1.8em" class="tag"></b-icon-star>
       收藏
     </div>
@@ -69,6 +70,15 @@ export default {
       await this.$deleteAjax(`/api/articles/${this.articleId}`, true)
       this.$message.success('删除成功！')
       this.$router.replace(`/person/${this.$route.params.uid}/articles`)
+    },
+    async websocketTest () {
+      const websocket = new WebSocket('/websocket_server/bookdownload');
+        websocket.onopen = function (ws) {
+            websocket.send('建立连接成功！');
+        };
+        websocket.onmessage = function ({data}) {
+            console.log(data, 'data ------------->');
+        }
     }
   }
 }
