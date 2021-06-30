@@ -72,7 +72,7 @@ export default {
       this.$router.replace(`/person/${this.$route.params.uid}/articles`)
     },
     async websocketTest () {
-      const websocket = new WebSocket('wss://localhost/websocket_server/bookdownload')
+      const websocket = new WebSocket('wss://www.trinyoung.cn/websocket_server/bookdownload')
       websocket.onopen = function () {
         websocket.send('建立连接成功！')
       }
