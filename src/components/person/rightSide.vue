@@ -73,12 +73,12 @@ export default {
     },
     async websocketTest () {
       const websocket = new WebSocket('wss://localhost/websocket_server/bookdownload')
-        websocket.onopen = function (ws) {
-          websocket.send('建立连接成功！')
-        }
-        websocket.onmessage = function ({data}) {
-          console.log(data, 'data ------------->')
-        }
+      websocket.onopen = function () {
+        websocket.send('建立连接成功！')
+      }
+      websocket.onmessage = function ({data}) {
+        console.log(data, 'data ------------->')
+      }
     }
   }
 }
