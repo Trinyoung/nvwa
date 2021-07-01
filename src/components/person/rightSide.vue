@@ -13,7 +13,7 @@
       分享
     </div>
     <div class="my-3 sidebar-item shadow-sm tag-item" v-if="canCollect"
-      @click="websocketTest">
+      @click="websocket2">
       <b-icon-star width="1.8em" height="1.8em" class="tag"></b-icon-star>
       收藏
     </div>
@@ -93,6 +93,15 @@ export default {
     async getHehe () {
       const data = await this.$getAjax(`/websocket_server/bookdownload/hehe`)
       console.log(data)
+    },
+    async websocket2 () {
+      const ws = new WebSocket('ws://www.trinyoung.cn/websocket_server/')
+      ws.onopen = function () {
+        ws.send('建立连接1')
+      }
+      ws.onmessage = function ({data}) {
+        console.log(data, 'ws 建立的连接')
+      }
     }
   }
 }
