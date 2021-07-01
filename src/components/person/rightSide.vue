@@ -90,9 +90,9 @@ export default {
       const data = await this.$getAjax(`/websocket_server/bookdownload/haha`)
       console.log(data)
     },
-    async getHehe() {
+    async getHehe () {
       const data = await this.$getAjax(`/websocket_server/bookdownload/hehe`)
-      console.log(hehe)
+      console.log(data)
     }
   }
 }
