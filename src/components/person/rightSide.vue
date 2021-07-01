@@ -89,7 +89,7 @@ export default {
     async getHaha () {
       const data = await this.$getAjax(`/websocket_server/bookdownload/haha`)
       console.log(data)
-    }
+    },
     async getHehe() {
       const data = await this.$getAjax(`/websocket_server/bookdownload/hehe`)
       console.log(hehe)
