@@ -8,13 +8,19 @@
       点 赞
     </div>
     <div class="my-3 sidebar-item shadow-sm tag-item">
-      <b-icon-share width="1.8em" height="1.8em" class="tag"></b-icon-share>
+      <b-icon-share width="1.8em" height="1.8em" class="tag"
+       @click="getHaha"></b-icon-share>
       分享
     </div>
     <div class="my-3 sidebar-item shadow-sm tag-item" v-if="canCollect"
       @click="websocketTest">
       <b-icon-star width="1.8em" height="1.8em" class="tag"></b-icon-star>
       收藏
+    </div>
+    <div class="my-3 sidebar-item shadow-sm tag-item" v-if="canCollect"
+      @click="getHehe">
+      <b-icon-star width="1.8em" height="1.8em" class="tag"></b-icon-star>
+      呵呵
     </div>
     <div class="my-3 sidebar-item shadow-sm tag-item" v-if="isAuthor">
       <router-link :to="{name: 'Editor', params: { articleId }}">
@@ -72,13 +78,21 @@ export default {
       this.$router.replace(`/person/${this.$route.params.uid}/articles`)
     },
     async websocketTest () {
-      const websocket = new WebSocket('wss://www.trinyoung.cn/websocket_server/bookdownload')
+      const websocket = new WebSocket('wss://www.trinyoung.cn/websocket_server/bookgenerate')
       websocket.onopen = function () {
         websocket.send('建立连接成功！')
       }
       websocket.onmessage = function ({data}) {
         console.log(data, 'data ------------->')
       }
+    },
+    async getHaha () {
+      const data = await this.$getAjax(`/websocket_server/bookdownload/haha`)
+      console.log(data)
+    }
+    async getHehe() {
+      const data = await this.$getAjax(`/websocket_server/bookdownload/hehe`)
+      console.log(hehe)
     }
   }
 }
