@@ -102,6 +102,9 @@ export default {
       ws.onmessage = function ({data}) {
         console.log(data, 'ws 建立的连接')
       }
+      ws.onclose = function (event) {
+        console.log('连接关闭')
+      }
     }
   }
 }
