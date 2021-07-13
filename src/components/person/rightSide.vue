@@ -80,6 +80,7 @@ export default {
     async websocketTest () {
       const websocket = new WebSocket('wss://www.trinyoung.cn/websocket_server/bookgenerate')
       websocket.onopen = function () {
+        console.log(new Date(), '建立连接时间')
         websocket.send('建立连接成功！')
       }
       websocket.onmessage = function ({data}) {
@@ -87,7 +88,7 @@ export default {
       }
       websocket.onclose = function ({data}) {
         console.log(data)
-        console.log('连接关闭')
+        console.log(new Date(), '连接关闭')
       }
     },
     async getHaha () {
