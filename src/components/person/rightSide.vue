@@ -85,6 +85,10 @@ export default {
       websocket.onmessage = function ({data}) {
         console.log(data, 'data ------------->')
       }
+      websocket.onclose = function ({data}) {
+        console.log(data)
+        console.log('连接关闭')
+      }
     },
     async getHaha () {
       const data = await this.$getAjax(`/websocket_server/bookdownload/haha`)
