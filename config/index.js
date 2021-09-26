@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target:'http://localhost:9220',
+        target:'http://www.trinyoung.cn:9220',
         changeOrigin:true,
         secure: true, // 必要参数， 不设置的话，不生效
         pathRewrite: {
@@ -20,7 +20,7 @@ module.exports = {
         }
       },
       '/myapi': {
-        target: 'http://localhost:9221',
+        target: 'http://www.trinyoung.cn:9221',
         changeOrigin: true,
         secure: true,
         pathRewrite: {
@@ -28,7 +28,7 @@ module.exports = {
         }
       },
       '/upload': {
-        target: 'http://localhost:3000',
+        target: 'http://www.trinyoung.cn:3000',
         changeOrigin: true,
         secure: true,
         pathRewrite: {
@@ -36,7 +36,7 @@ module.exports = {
         }
       },
       '/capi': {
-        target: 'http://localhost:9222',
+        target: 'http://www.trinyoung.cn:9222',
         changeOrigin: true,
         secure: true,
         pathRewrite: {
@@ -51,7 +51,7 @@ module.exports = {
     autoOpenBrowser: true,
     errorOverlay: true,
     notifyOnErrors: true,
-    poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
+    poll: false, // http://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
     // Use Eslint Loader?
     // If true, your code will be linted during bundling and
@@ -65,12 +65,12 @@ module.exports = {
      * Source Maps
      */
 
-    // https://webpack.js.org/configuration/devtool/#development
+    // http://webpack.js.org/configuration/devtool/#development
     devtool: 'cheap-module-eval-source-map',
 
     // If you have problems debugging vue-files in devtools,
     // set this to false - it *may* help
-    // https://vue-loader.vuejs.org/en/options.html#cachebusting
+    // http://vue-loader.vuejs.org/en/options.html#cachebusting
     cacheBusting: true,
 
     cssSourceMap: true
@@ -92,7 +92,7 @@ module.exports = {
      */
 
     productionSourceMap: true,
-    // https://webpack.js.org/configuration/devtool/#production
+    // http://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 
     // Gzip off by default as many popular static hosts such as

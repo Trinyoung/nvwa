@@ -69,6 +69,12 @@ export default {
           text: '相册',
           value: 'albumn',
           active: false
+        },
+        {
+          type: 7,
+          text: '收藏',
+          value: 'collection',
+          active: true
         }
       ]
     }

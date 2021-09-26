@@ -1,5 +1,5 @@
 <template>
-  <main class="my-1 shadow-sm bg-white border height-100 console_article_container">
+  <main class="shadow-sm bg-white border height-100 console_article_container">
     <nav aria-label="breadcrumb" class="title-nav">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -54,52 +54,6 @@
       <div class="btn-toolbar my-1 pb-1" role="toolbar" aria-label="Toolbar with button groups">
         <el-button type="primary" @click="jumpTo('/console/editor/new')">新 增</el-button>
       </div>
-      <!-- <table class="table table-bordered">
-        <thead class="thead-light">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">标题</th>
-            <th scope="col">分类</th>
-            <th scope="col">作者</th>
-            <th scope="col">发布时间</th>
-            <th scope="col">标签</th>
-            <th scope="col">是否公开</th>
-            <th scope="col">发布状态</th>
-            <th scope="col">操作</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(item, index) in list" :key="index">
-            <th scope="row">{{index + 1}}</th>
-            <td>{{item.title}}</td>
-            <td>{{item.type && item.type.title}}</td>
-            <td>{{item.author.username}}</td>
-            <td>{{item.createdAt}}</td>
-            <td>
-              <el-tag v-for="tag in item.tags" :key="tag._id" class="tag">
-                {{tag.name}}
-              </el-tag>
-            </td>
-            <td>
-              <el-tag>
-                {{item.isPublic? '是': '否'}}
-              </el-tag>
-            </td>
-            <td>
-              <el-tag>
-                {{item.published?'已发布': '未发布'}}
-              </el-tag>
-            </td>
-            <td class="handle-cell">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <el-button type="success" plain @click="jumpTo(`/person/${$route.params.uid}/articles/${item._id}`)">详情</el-button>
-                <el-button type="primary" plain @click="jumpTo(`/console/editor/${item._id}`)">编辑</el-button>
-                <el-button type="danger" plain @click="deleteArticle(item._id)">删除</el-button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table> -->
       <el-table :data="list" border>
         <el-table-column type="index" label="#" align="center"></el-table-column>
         <el-table-column label="标题" prop="title" align="center"></el-table-column>
@@ -129,16 +83,16 @@
         </el-table-column>
       </el-table>
     </div>
-    <pagination :pages = pages :getList = getList :currentPage = currentPage></pagination>
+    <!-- <pagination :pages = pages :getList = getList :currentPage = currentPage></pagination> -->
   </main>
 </template>
 <script>
 // import '@fortawesome/fontawesome-free/css/all.css'
-import pagination from '../tools/pagination'
+// import pagination from '../tools/pagination'
 import moment from 'moment'
 export default {
   components: {
-    pagination
+    // pagination
   },
   data: function () {
     return {
@@ -155,24 +109,7 @@ export default {
       },
       options: [],
       tags: [],
-      types: [],
-      tableData: [{
-        date: '2016-05-03',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
-      }, {
-        date: '2016-05-02',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
-      }, {
-        date: '2016-05-04',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
-      }, {
-        date: '2016-05-01',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
-      }]
+      types: []
     }
   },
   mounted () {
