@@ -4,7 +4,7 @@
  * @LastEditTime: 2020-12-10 13:46:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \nvwa\src\components\homepage\index.vue
+ * @FilePath: \nvwa\src\views\homepage\index.vue
 -->
 <template>
   <div>
@@ -19,10 +19,10 @@
   </div>
 </template>
 <script>
-import header from '@/components/Header'
-import broadside from '@/components/homepage/broadside'
-import main from '@/components/homepage/main'
-import bottom from '@/components/bottom'
+import header from '@/views/Header'
+import broadside from '@/views/homepage/broadside'
+import main from '@/views/homepage/main'
+import bottom from '@/views/bottom'
 export default {
   components: {
     'v-header': header,

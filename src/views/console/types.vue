@@ -37,7 +37,7 @@
           <el-input v-model="searchInfo.keyword"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="success" plain>搜索</el-button>
+          <el-button type="success" plain @click="handleSizeChange(pageSize)">搜索</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -45,7 +45,7 @@
       <div class="btn-toolbar mb-3 pb-1 pl-1" role="toolbar" aria-label="Toolbar with button groups">
         <el-breadcrumb class="ml-2">
           <el-breadcrumb-item v-for="type in typeTitles" :key="type._id">
-            <span class="type-title" @click="typeNav(1, type)">{{type.title}}</span>
+            <span class="type-title" @click="typeNav(type)">{{type.title}}</span>
           </el-breadcrumb-item>
         </el-breadcrumb>
         <el-button type="primary" @click="openDialog" class="add-btn">新 增</el-button>
@@ -84,7 +84,7 @@
           </el-form>
         </el-dialog>
       </div>
-      <table class="table table-bordered">
+      <!-- <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
             <th scope="col">#</th>
@@ -106,7 +106,7 @@
               </el-tag>
             </td>
             <td>
-              <el-button type="warning" plain @click="typeNav(1, item)" :disabled="!Boolean(item.subTypesNums)">
+              <el-button type="warning" plain @click="typeNav(item)" :disabled="!Boolean(item.subTypesNums)">
                 <b-icon-file-earmark-text class="file-type-icon"></b-icon-file-earmark-text>
                 查看({{item.subTypesNums}})
               </el-button>
@@ -123,8 +123,44 @@
             </td>
           </tr>
         </tbody>
-      </table>
-      <pagination :pages="pages" :currentPage="currentPage" :getList="getList"></pagination>
+      </table> -->
+      <el-table
+      border
+      :data="list">
+        <el-table-column label="#" type="index" align="center"></el-table-column>
+        <el-table-column prop="title" label="标题" align="center">
+        </el-table-column>
+        <el-table-column prop="tags" label="标签" align="center">
+          <template slot-scope="scope">
+            <el-tag v-for="tag in scope.row.tags" :key="tag._id">
+              {{tag.name}}
+            </el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column prop="" label="下属目录" align="center" width="160px">
+          <template slot-scope="scope">
+            <el-button type="warning" plain @click="typeNav(scope.row)" :disabled="!Boolean(scope.row.subTypesNums)">
+              <b-icon-file-earmark-text class="file-type-icon"></b-icon-file-earmark-text>
+              查看({{scope.row.subTypesNums}})
+            </el-button>
+          </template>
+        </el-table-column>
+        <el-table-column prop="subArticleNums" label="下属文章" align="center" width="80px"></el-table-column>
+        <el-table-column prop="" label="创建时间" align="center" width="160px">
+          <template slot-scope="scope">
+            {{formatTime(scope.row.createdAt)}}
+          </template>
+        </el-table-column>
+      </el-table>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="pageIndex"
+        :page-sizes="[10, 20, 30, 50]"
+        :page-size="10"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total">
+      </el-pagination>
     </div>
   </main>
 </template>
@@ -141,8 +177,8 @@ export default {
   data: function () {
     return {
       list: [],
-      pages: 1,
-      currentPage: 1,
+      pageSize: 10,
+      pageIndex: 1,
       total: 0,
       dialogFormVisible: false,
       types: [],
@@ -181,21 +217,23 @@ export default {
     this.getTypes()
   },
   methods: {
-    async getList (n = 1, parent) {
-      let queryString = `page=${n}&limit=10&createdBy=${this.$route.params.uid}`
+    async getList (parent) {
+      let queryString = `page=${this.pageIndex}&limit=10&createdBy=${this.$route.params.uid}`
       if (parent && parent._id) {
         queryString += `&parent=${parent._id}`
       } else {
         queryString += `&isTop=${1}`
       }
+      queryString = Object.entries(this.searchInfo).reduce((x, y) => {
+        if (y[1]) x += `&${y[0]}=${y[1]}`
+        return x
+      }, queryString)
       const result = await this.$getAjax(`/api/articles/types/list?${queryString}`)
-      const {docs, pages, total, page} = result
+      const { docs, total } = result
       this.list = docs
-      this.pages = pages
-      this.page = page
       this.toal = total
     },
-    typeNav (n = 1, type) {
+    typeNav (type) {
       for (let i = 0; i < this.typeTitles.length; i++) {
         if (this.typeTitles[i]._id === type._id) {
           this.typeTitles.splice(i, this.typeTitles.length, type)
@@ -203,7 +241,7 @@ export default {
         }
       }
       this.typeTitles.push(type)
-      this.getList(1, type)
+      this.getList(type)
     },
     formatTime (time) {
       return moment(time * 1000).format('YYYY-MM-DD')
@@ -294,6 +332,15 @@ export default {
       } catch (err) {
         this.$message.error(err.message)
       }
+    },
+    handleSizeChange (val) {
+      this.pageSize = val
+      this.pageIndex = 1
+      this.getList()
+    },
+    handleCurrentChange (val) {
+      this.pageIndex = val
+      this.getList()
     }
   }
 }
@@ -319,6 +366,7 @@ export default {
 }
 .form-container {
   padding: 5px;
+  text-align: left;
 }
 .media-body {
   text-align: left;
@@ -396,7 +444,7 @@ export default {
   width: 200px;
 }
 .el-form-item {
-  margin-bottom: 0;
+  margin-bottom: 0.5rem;
 }
 
 .dataForm-container .el-form-item {

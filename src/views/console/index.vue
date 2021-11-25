@@ -1,5 +1,6 @@
 <template>
-  <el-container class="console-container">
+<div class="console-container">
+  <el-container >
     <el-header>
       <v-header></v-header>
     </el-header>
@@ -17,6 +18,7 @@
       </el-container>
     </el-container>
   </el-container>
+</div>
 </template>
 <script>
 import header from './Header'
@@ -51,24 +53,25 @@ export default {
     avatarChange (url) {
       console.log('index--------------avatarChange', url)
       this.avatarUrl = url
+    },
+    async getTags () {
+      try {
+        const result = await this.$getAjax(`/myapi/tags?createdBy=${this.uid}`)
+        this.tags = result
+        console.log(result, 'result------------------->')
+      } catch (err) {
+        this.$message.error(err.messag)
+      }
     }
-    // async getTags () {
-    //   try {
-    //     const result = await this.$getAjax(`/myapi/tags?createdBy=${this.uid}`)
-    //     this.tags = result
-    //     console.log(result, 'result------------------->')
-    //   } catch (err) {
-    //     this.$message.error(err.messag)
-    //   }
-    // }
   }
 }
 </script>
 <style lang="scss" scoped>
 .console-container {
   height: 100%;
+  position: fixed;
+  width: 100%;
   .el-header {
-    // background: #CCCCCC;
     padding: 0;
   }
   .el-main {

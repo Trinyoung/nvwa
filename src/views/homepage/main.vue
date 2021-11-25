@@ -4,7 +4,7 @@
  * @LastEditTime: 2020-12-04 13:00:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \nvwa\src\components\homepage\main.vue
+ * @FilePath: \nvwa\src\views\homepage\main.vue
 -->
 <template>
   <main role="main" class="container">
@@ -49,9 +49,9 @@
 </template>
 <script>
 import moment from 'moment'
-import pagination from '@/components/tools/pagination'
+import pagination from '@/views/tools/pagination'
 export default {
-  components: {
+  views: {
     pagination
   },
   data () {

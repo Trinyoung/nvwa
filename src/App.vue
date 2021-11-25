@@ -47,4 +47,7 @@ a:hover {
 label {
   margin-bottom: 0!important;
 }
+a {
+  color: #2c3e50;
+}
 </style>

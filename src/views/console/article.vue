@@ -46,7 +46,7 @@
           <el-input v-model="searchInfo.keyword"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="success" plain>搜索</el-button>
+          <el-button type="success" plain @click="handleSizeChange(pageSize)">搜索</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -83,12 +83,18 @@
         </el-table-column>
       </el-table>
     </div>
-    <!-- <pagination :pages = pages :getList = getList :currentPage = currentPage></pagination> -->
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="pageIndex"
+      :page-sizes="[10, 20, 30, 50]"
+      :page-size="pageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total">
+    </el-pagination>
   </main>
 </template>
 <script>
-// import '@fortawesome/fontawesome-free/css/all.css'
-// import pagination from '../tools/pagination'
 import moment from 'moment'
 export default {
   components: {
@@ -109,7 +115,10 @@ export default {
       },
       options: [],
       tags: [],
-      types: []
+      types: [],
+      total: 0,
+      pageIndex: 1,
+      pageSize: 10
     }
   },
   mounted () {
@@ -124,18 +133,21 @@ export default {
     getHotList: function () {
       return ''
     },
-    async getList (page) {
-      let queryString = `page=${page}&createdBy=${this.$route.params.uid}`
-      if (page) {
-        this.currentPage = page
-      }
-      const { keyword, type } = this.$data
-      if (keyword) queryString += `&keyword=${keyword}`
-      if (type) queryString += `&type=${keyword}`
+    async getList () {
+      let queryString = `page=${this.pageIndex}&pageSize=${this.pageSize}&createdBy=${this.$route.params.uid}`
+      console.log(Object.entries(this.searchInfo, '================='))
+      Object.entries(this.searchInfo).reduce((x, y) => {
+        if (y[1]) {
+          queryString += `&${y[0]}=${y[1]}`
+        }
+        return x
+      }, queryString)
+      console.log(queryString, 'queryString is here ================>')
       try {
         const result = await this.$getAjax(`/api/articles/list?${queryString}`)
         this.list = result.docs
         this.pages = result.pages
+        this.total = result.total
         this.list.forEach(item => {
           item.createdAt = moment(item.createdAt * 1000).format('YYYY-MM-DD HH:mm:ss')
         })
@@ -184,6 +196,15 @@ export default {
         this.$message.success('删除成功！')
         this.getList()
       })
+    },
+    handleSizeChange (val) {
+      this.pageIndex = 1
+      this.pageSize = val
+      this.getList()
+    },
+    handleCurrentChange (val) {
+      this.pageIndex = val
+      this.getList()
     }
   }
 }

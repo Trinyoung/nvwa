@@ -1,4 +1,4 @@
-import editor from '@/components/editor'
+import editor from '@/views/editor'
 const obj = {
   path: '/console/editor/:articleId',
   name: 'Editor',

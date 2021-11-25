@@ -9,8 +9,14 @@
     </nav>
     <form class="pb-2 pr-3 pl-3 pt-0 form-container border-bottom">
       <div class="form-row my-2">
-        <input class="form-control search-input" type="search" placeholder="Search" aria-label="Search" v-model="searchInfo.keyword">
-        <button class="ml-2 btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
+        <el-form :inline="true">
+          <el-form-item label="关键字:">
+            <el-input placeholder="请填入搜索信息" v-model="searchInfo.keyword"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="success" plain @click="handleSizeChange(pageSize)">搜索</el-button>
+          </el-form-item>
+        </el-form>
       </div>
     </form>
     <div class="my-0 p-3 shadow-sm" id="main-content">
@@ -40,7 +46,16 @@
           </tr>
         </tbody>
       </table>
-      <pagination :getList="getList" :currentPage="currentPage" :pages ="pages"></pagination>
+      <!-- <pagination :getList="getList" :currentPage="currentPage" :pages ="pages"></pagination> -->
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="pageIndex"
+        :page-sizes="[10, 20, 30, 50]"
+        :page-size="10"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total">
+      </el-pagination>
     </div>
     <el-dialog title="标签设置" :visible.sync="dialogFormVisible">
       <el-form :model="condition">
@@ -59,11 +74,10 @@
 import datePicker from 'vue-bootstrap-datetimepicker'
 import Axios from 'axios'
 import moment from 'moment'
-import pagination from '../tools/pagination'
 export default {
   components: {
-    datePicker,
-    pagination
+    datePicker
+    // pagination
   },
   data: function () {
     return {
@@ -81,19 +95,16 @@ export default {
         name: ''
       },
       total: 0,
-      currentPage: 1,
-      pages: 1
+      pageIndex: 1,
+      pageSize: 10
     }
   },
   created () {
     this.getList(1)
   },
   methods: {
-    async getList (page) {
-      if (page) {
-        this.currentPage = page
-      }
-      let queryString = `page=${this.currentPage}&createdBy=${this.$route.params.uid}`
+    async getList () {
+      let queryString = `page=${this.pageIndex}&createdBy=${this.$route.params.uid}`
       if (this.searchInfo.keyword) {
         queryString += `&keyword=${this.searchInfo.keyword}`
       }
@@ -149,6 +160,15 @@ export default {
     openDialog (index) {
       this.dialogFormVisible = true
       this.condition = Object.assign({}, this.dataList[index])
+    },
+    handleSizeChange (val) {
+      this.pageSize = val
+      this.pageIndex = 1
+      this.getList()
+    },
+    handleCurrentChange (val) {
+      this.pageIndex = val
+      this.getList()
     }
   }
 }

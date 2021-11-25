@@ -4,14 +4,14 @@
  * @LastEditTime: 2020-11-23 09:30:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \nvwa\src\components\Home\router.js
+ * @FilePath: \nvwa\src\views\Home\router.js
  */
-import person from '@/components/person'
-import article from '@/components/person/article'
-import personPage from '@/components/person/home'
-import Loggers from '@/components/person/Loggers'
-import types from '@/components/person/types'
-import detail from '@/components/person/content'
+import person from '@/views/person'
+import article from '@/views/person/article'
+import personPage from '@/views/person/home'
+import Loggers from '@/views/person/Loggers'
+import types from '@/views/person/types'
+import detail from '@/views/person/content'
 const obj = {
   path: '/person/:uid',
   name: 'person',

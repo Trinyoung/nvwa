@@ -1,14 +1,5 @@
-<!--
- * @Author: Trinyoung.Lu
- * @Date: 2020-08-31 14:52:33
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-03-30 14:50:29
- * @PageTitle: XXX页面
- * @Description: XXX
- * @FilePath: \nvwa\src\components\console_dashboard\main.vue
--->
 <template>
-  <main role="main" class="console-container">
+  <main role="main" class="main-container">
     <router-view @avatarChange="avatarChange"/>
   </main>
 </template>
@@ -28,12 +19,13 @@ export default {
   },
   methods: {
     avatarChange (url) {
-      console.log(url, '----------------?avatarChange')
       this.$emit('avatarChange', url)
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-
+  .main-container {
+    height: calc(100vh - 120px);
+  }
 </style>

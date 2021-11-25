@@ -1,7 +1,7 @@
 <template>
   <div class="editor-container container col-md-9  p-1 bg-white" id="main-content">
     <div class="header-container">
-      <el-form :inline="true" class="header-form">
+      <el-form :inline="true">
         <el-form-item label="分类: ">
           <el-cascader
           v-model="articleObj.type"
@@ -27,20 +27,11 @@
         </el-form-item>
       </el-form>
     </div>
-    <div class="row my-2">
+    <div class="row my-1">
       <div class="col-md-10 col-lg-10 col-sm-10 titileInput">
-        <div class="input-group flex-nowrap">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="addon-wrapping">标 题</span>
-          </div>
-          <input type="text" class="form-control"
-            placeholder="请输入标题" v-model="articleObj.title" aria-label="title" aria-describedby="addon-wrapping">
-          <div class="input-group-append">
-            <button class="btn btn-secondary">
-              添加副标题
-            </button>
-          </div>
-        </div>
+        <el-input placeholder="请输入标题" v-model="articleObj.title">
+          <template slot="prepend">标题</template>
+        </el-input>
       </div>
       <div class="col-md-2 col-lg-2 col-sm-2">
         <button class="btn btn-primary publish-button" @click="save(1)">
@@ -347,9 +338,6 @@ export default {
   border-radius: 1rem;
   background: #e9ecef;
 }
-.header-container {
-  background: #e9ecef;
-}
 .sidebar-item {
   color: green;
   width: 3rem;
@@ -428,10 +416,10 @@ export default {
   border: 1px solid #b6d3f0!important;
 }
 .header-container {
-    text-align: left;
-    padding:3px 15px;
-    border-radius: 5px;
-  }
+  text-align: left;
+  padding:3px 15px;
+  border-radius: 5px;
+}
 .header-container .el-form-item {
   margin-bottom: 0;
   margin-top: 8px;

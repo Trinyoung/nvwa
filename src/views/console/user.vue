@@ -180,7 +180,6 @@ export default {
       this.isEditing = true
     },
     picUrlChange (url) {
-      console.log(url, 'url is here---------->')
       this.dataForm.avatar = url
     },
     async getArticleCount () {
@@ -196,7 +195,7 @@ export default {
 </script>
 <style scoped>
   .height-100 {
-    min-height: calc(100vh - 100px);
+    min-height: calc(100vh - 120px);
   }
   .avatar {
     width: 60px;
