@@ -23,7 +23,7 @@
       <div class="btn-toolbar my-1 pb-1" role="toolbar" aria-label="Toolbar with button groups">
         <el-button type="primary" @click="openDialog">新增</el-button>
       </div>
-      <table class="table table-bordered">
+      <!-- <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
             <th scope="col">#</th>
@@ -45,8 +45,20 @@
             </td>
           </tr>
         </tbody>
-      </table>
-      <!-- <pagination :getList="getList" :currentPage="currentPage" :pages ="pages"></pagination> -->
+      </table> -->
+      <el-table v-model="dataList" border>
+        <el-table-column type="index" label="序号"></el-table-column>
+        <el-table-column prop="name" label="名称"></el-table-column>
+        <el-table-column prop="createdAt" label="创建日期"></el-table-column>
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <el-button @click="openDialog(scope.index)" type="primary" plain>编辑</el-button>
+                <el-button type="danger" plain @click="remove(scope.row._id)">删除</el-button>
+              </div>
+          </template>
+        </el-table-column>
+      </el-table>
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"

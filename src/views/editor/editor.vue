@@ -1,5 +1,5 @@
 <template>
-  <div class="editor-container container col-md-9  p-1 bg-white" id="main-content">
+  <div class="container col-md-9  p-1 bg-white">
     <div class="header-container">
       <el-form :inline="true">
         <el-form-item label="分类: ">
@@ -25,6 +25,9 @@
         <el-form-item label="Markdown: ">
           <el-switch v-model="articleObj.isMarkdown"></el-switch>
         </el-form-item>
+        <el-form-item>
+          <el-button type="success" @click="dialogFormVisible = true">添加引用</el-button>
+        </el-form-item>
       </el-form>
     </div>
     <div class="row my-1">
@@ -39,7 +42,7 @@
         </button>
       </div>
     </div>
-    <div class="row row-container">
+    <div class="row">
       <div class="col-md-11 col-lg-11 col-sm-11">
         <v-markdownEditor v-if="articleObj.isMarkdown" class='mavonEditor'
         v-model="articleObj.content" @save="save(0)"
@@ -72,15 +75,15 @@
         </div>
       </div>
     </div>
-    <form class="form row text-sm-left text-md-center other-set my-2">
-      <div class="col-sm-12 col-md-10 col-lg-10 my-2 d-flex">
-      </div>
-      <div class="col-md-2">
+    <!-- <form class="form row text-sm-left text-md-center other-set my-2"> -->
+      <!-- <div class="col-sm-12 col-md-10 col-lg-10 my-2 d-flex">
+      </div> -->
+      <!-- <div class="col-md-2">
         <div class="form-check-inline">
           <el-button type="success" @click="dialogFormVisible = true">添加引用</el-button>
         </div>
-      </div>
-    </form>
+      </div> -->
+    <!-- </form> -->
     <el-dialog title="文献引用" :visible.sync="dialogFormVisible">
       <el-form :model="refferEdit">
         <el-form-item label="文献名称" :label-width="formLabelWidth">
@@ -127,7 +130,6 @@
 import { quillEditor } from 'vue-quill-editor'
 import { mavonEditor } from 'mavon-editor'
 import axios from 'axios'
-import $ from 'jquery'
 export default {
   components: {
     'v-markdownEditor': mavonEditor,
@@ -166,7 +168,9 @@ export default {
   props: ['articleId'],
   methods: {
     async save (published) {
-      const contentHtml = $('.v-note-read-content').html()
+      const contentDom = document.getElementsByClassName('v-note-read-content')[0]
+      const contentHtml = contentDom.innerHTML
+      const contentTxt = contentDom.textContent.trim().replace(/[\r\n]/g, '').substring(0, 100)
       const articleId = this.articleId
       const {content, category, title, subTitle, tags, refers, isMarkdown, isPublic, type = []} = this.articleObj
       let data = Object.assign({published, content_html: contentHtml})
@@ -182,7 +186,8 @@ export default {
         isMarkdown: Number(isMarkdown),
         isPublic: Number(isPublic),
         type: typeId,
-        typeCode
+        typeCode,
+        description: contentTxt
       })
       if (articleId && articleId !== 'new') {
         data.articleId = articleId
@@ -300,9 +305,6 @@ export default {
 }
 #tags-picker {
   width: auto;
-}
-#main-content {
-  min-height: calc(100vh - 48px);
 }
 .size-2 {
   width: 2em;
