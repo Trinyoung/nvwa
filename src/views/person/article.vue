@@ -7,21 +7,28 @@
             <span @click="typeNav({}, 1)" class="type-item">全部</span>
           </li>
           <li class="breadcrumb-item" v-for="type in types" :key="type._id">
-            <span @click="typeNav(type, 1)" class="type-item">{{type.title}}</span>
+            <span @click="typeNav(type, 1)" class="type-item">{{
+              type.title
+            }}</span>
           </li>
         </ol>
       </nav>
       <ul v-loading="loading" class="list-group list-group-flush">
-        <li class="list-group-item list-group-item-action" v-for="item in list" :key="item._id" :to="{path:`/articles/${item._id}`}">
+        <li
+          class="list-group-item list-group-item-action"
+          v-for="item in list"
+          :key="item._id"
+          :to="{ path: `/articles/${item._id}` }"
+        >
           <p class="mb-0 text-left">
-            <router-link :to="{path:`/person/${uid}/articles/${item._id}`}">
+            <router-link :to="{ path: `/person/${uid}/articles/${item._id}` }">
               <strong class="d-block text-gray-dark">
                 <div class="d-inline-block new-icon" v-if="item.isNew">新</div>
                 <div class="d-inline-block hot-icon" v-if="item.isHot">热</div>
                 {{ item.title }}
               </strong>
-              <span class="d-block text-muted" >
-                {{ item.content && item.content.substr(0, 150) }}……
+              <span class="d-block text-muted">
+                {{ item.abstract || item.content.substr(0, 150) }}……
               </span>
               <span class="d-block small text-muted mt-1">
                 <span class="align-middle">
@@ -46,15 +53,19 @@
         </li>
       </ul>
     </div>
-    <pagination :currentPage="currentPage" :pages="pages" :getList="getList"></pagination>
+    <pagination
+      :currentPage="currentPage"
+      :pages="pages"
+      :getList="getList"
+    ></pagination>
   </div>
 </template>
 <script>
-import pagination from '../tools/pagination'
-import moment from 'moment'
+import pagination from "../tools/pagination";
+import moment from "moment";
 export default {
   components: {
-    pagination
+    pagination,
   },
   data: function () {
     return {
@@ -64,109 +75,112 @@ export default {
       loading: false,
       uid: this.$route.params.uid,
       types: [],
-      queryType: this.$route.query.type
-    }
+      queryType: this.$route.query.type,
+    };
   },
-  async created () {
+  async created() {
     if (this.$route.query.type) {
-      this.getParentTypes(this.$route.query.type)
+      this.getParentTypes(this.$route.query.type);
     }
-    if (this.types.length > 0) this.queryType = this.types[this.types.length - 1].type
-    if (this.$route.query.type) this.queryType = this.$route.query.type
-    this.getList(1)
+    if (this.types.length > 0)
+      this.queryType = this.types[this.types.length - 1].type;
+    if (this.$route.query.type) this.queryType = this.$route.query.type;
+    this.getList(1);
   },
   methods: {
-    async getList (page) {
-      this.loading = true
-      if (page) this.currentPage = page || 1
-      let queryString = `page=${this.currentPage}&createdBy=${this.uid}`
-      if (this.queryType) queryString += `&type=${this.queryType}`
-      const result = await this.$getAjax(`/myapi/articles/list?${queryString}`)
-      this.loading = false
-      this.list = result.docs
-      this.pages = result.pages
+    async getList(page) {
+      this.loading = true;
+      if (page) this.currentPage = page || 1;
+      let queryString = `page=${this.currentPage}&createdBy=${this.uid}`;
+      if (this.queryType) queryString += `&type=${this.queryType}`;
+      const result = await this.$getAjax(`/myapi/articles/list?${queryString}`);
+      this.loading = false;
+      this.list = result.docs;
+      this.pages = result.pages;
     },
-    formatTime (time) {
+    formatTime(time) {
       if (time) {
-        return moment(time * 1000).format('YYYY-MM-DD')
+        return moment(time * 1000).format("YYYY-MM-DD");
       } else {
-        return moment().format('YYYY-MM-DD')
+        return moment().format("YYYY-MM-DD");
       }
     },
-    async getParentTypes (type) {
+    async getParentTypes(type) {
       try {
-        const result = await this.$getAjax(`/myapi/articles/types/parent?id=${type}&withTitle=1`)
-        this.types = result
+        const result = await this.$getAjax(
+          `/myapi/articles/types/parent?id=${type}&withTitle=1`
+        );
+        this.types = result;
       } catch (err) {
-        this.$message.error(err.message)
+        this.$message.error(err.message);
       }
     },
-    typeNav (type, n) {
+    typeNav(type, n) {
       for (let i = 0; i < this.types.length; i++) {
         if (this.types[i]._id === type._id) {
-          this.types.splice(i, this.types.length, type)
-          this.queryType = type._id
-          return this.getList(n)
+          this.types.splice(i, this.types.length, type);
+          this.queryType = type._id;
+          return this.getList(n);
         }
       }
       if (type._id) {
-        this.types.push(type)
-        this.queryType = type._id
+        this.types.push(type);
+        this.queryType = type._id;
       } else {
-        this.queryType = ''
-        this.types = []
+        this.queryType = "";
+        this.types = [];
       }
-      this.getList(n)
-    }
-  }
-}
+      this.getList(n);
+    },
+  },
+};
 </script>
 <style scoped>
-  .item-title {
-    color: white;
-    font-size: 1.1rem;
-  }
-  .new-icon {
-    border:1px solid green;
-    color: green;
-    font-weight: 100;
-    padding: 0 3px 0 3px;
-    font-size: 0.5rem;
-  }
-  .breadcrumb-container {
-    background: aliceblue;
-  }
-  .breadcrumb {
-    background: none;
-  }
-  .hot-icon {
-    border: 1px solid red;
-    color: red;
-    font-weight: 100;
-    padding: 0 3px 0 3px;
-    font-size: 0.5rem;
-  }
-  .list-container {
-    border: 1px solid aliceblue;
-  }
-  svg {
-    margin-bottom: 1.5px;
-  }
-  .favorite-icon:hover {
-    color: red;
-    cursor: pointer;
-  }
-  .list-group-item {
-    padding-left: 0;
-    padding-bottom: 0.3rem;
-  }
-  .type-item {
-    color: rgb(62, 141, 245);
-  }
-  .type-item:hover {
-    cursor: pointer;
-  }
-  .breadcrumb-item {
-    font-size: 1.1rem;
-  }
+.item-title {
+  color: white;
+  font-size: 1.1rem;
+}
+.new-icon {
+  border: 1px solid green;
+  color: green;
+  font-weight: 100;
+  padding: 0 3px 0 3px;
+  font-size: 0.5rem;
+}
+.breadcrumb-container {
+  background: aliceblue;
+}
+.breadcrumb {
+  background: none;
+}
+.hot-icon {
+  border: 1px solid red;
+  color: red;
+  font-weight: 100;
+  padding: 0 3px 0 3px;
+  font-size: 0.5rem;
+}
+.list-container {
+  border: 1px solid aliceblue;
+}
+svg {
+  margin-bottom: 1.5px;
+}
+.favorite-icon:hover {
+  color: red;
+  cursor: pointer;
+}
+.list-group-item {
+  padding-left: 0;
+  padding-bottom: 0.3rem;
+}
+.type-item {
+  color: rgb(62, 141, 245);
+}
+.type-item:hover {
+  cursor: pointer;
+}
+.breadcrumb-item {
+  font-size: 1.1rem;
+}
 </style>
