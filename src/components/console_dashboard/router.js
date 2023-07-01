@@ -6,13 +6,6 @@
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\console_dashboard\router.js
  */
-import article from '@/components/console_dashboard/article'
-import logger from '@/components/console_dashboard/logger'
-import console from '@/components/console_dashboard'
-import types from '@/components/console_dashboard/types'
-import tags from '@/components/console_dashboard/tags'
-import user from '@/components/console_dashboard/user'
-import stastic from '@/components/console_dashboard/stastic'
 const obj = {
   path: '/console/:uid',
   name: 'console',
@@ -24,32 +17,32 @@ const obj = {
   }, {
     path: 'articles',
     name: 'console_article',
-    component: article
+    component: () => import('@/components/console_dashboard/article')
   }, {
     path: 'logger',
     name: 'console_logger',
-    component: logger
+    component: () => import('@/components/console_dashboard/logger')
   }, {
     path: 'types',
     name: 'types',
-    component: types
+    component: () => import('@/components/console_dashboard/types')
   }, {
     path: ':types/articles',
     name: 'console_article',
-    component: article,
+    component: () => import('@/components/console_dashboard/article'),
     props: true
   }, {
     path: 'tags',
     name: 'tags',
-    component: tags
+    component: () => import('@/components/console_dashboard/tags')
   }, {
     path: 'user',
     name: 'user',
-    component: user
+    component: () => import('@/components/console_dashboard/user')
   }, {
     path: 'stastic',
     name: 'stastic',
-    component: stastic
+    component: () => import('@/components/console_dashboard/stastic')
   }]
 }
 export default obj
