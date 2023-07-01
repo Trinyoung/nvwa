@@ -8,6 +8,6 @@
 -->
 <template>
   <footer class="container mt-1 border-top">
-    <p class="my-3 text-muted">&copy; Trinyoung</p>
+    <p class="my-3 text-muted">&copy; Trinyoung2</p>
   </footer>
 </template>
