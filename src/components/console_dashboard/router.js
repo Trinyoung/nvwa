@@ -6,10 +6,11 @@
  * @Description: In User Settings Edit
  * @FilePath: \nvwa\src\components\console_dashboard\router.js
  */
+
 const obj = {
   path: '/console/:uid',
   name: 'console',
-  component: console,
+  component: () => import('@/components/console_dashboard/index'),
   props: true,
   children: [{
     path: '/',
