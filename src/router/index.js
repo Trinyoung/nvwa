@@ -31,17 +31,17 @@ export default new Router({
     {
       path: '/login',
       name: 'Login',
-      component: import('@/components/Login')
+      component: () => import('@/components/Login')
     },
     {
       path: '/home',
       name: 'homepage',
-      component: import('@/components/homepage')
+      component: () => import('@/components/homepage')
     },
     {
       path: '/register',
       name: 'Register',
-      component: import('@/components/Register')
+      component: () => import('@/components/Register')
     },
     homeRouter,
     editorRouter,
@@ -49,11 +49,11 @@ export default new Router({
     {
       path: '/forgetPassword',
       name: 'ForgetPassword',
-      component: import('@/components/forgetPassword')
+      component: () => import('@/components/forgetPassword')
     }, {
       path: '/:username/updatePassword',
       name: 'updatePassword',
-      component: import('@/components/updatePassword'),
+      component: () => import('@/components/updatePassword'),
       props: (route) => ({code: route.query.code})
     }
   ]
